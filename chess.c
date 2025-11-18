@@ -1,26 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
-#define WHITE 1
-#define BLACK 0
-
-#define Q 9
-#define K 1000
-#define R 5
-#define N 3
-#define B 3
-#define P 1
-
-#define PINDEX 0
-#define NINDEX 1
-#define BINDEX 2
-#define RINDEX 3
-#define QINDEX 4
-#define KINDEX 5
-
-#define MAXMOVEHIST 1024
-
+#include "chessStructs.h"
 
 void sendError(char errorMsg[]){
 
@@ -28,38 +9,6 @@ void sendError(char errorMsg[]){
     exit(1);
 }
 
-typedef struct move{
-
-    int fromX;
-    int fromY;
-    int toX;
-    int toY;
-    int captured;
-    char piece;
-
-}move;
-
-typedef struct chessPiece{
-
-    char piece;
-    int color;
-    int value;
-    int x;
-    int y;
-
-}chessPiece;
-
-
-typedef struct chessBoard{
-
-    chessPiece position[8][8];
-    int turnPlayer;
-    move *whitePossibleMoves[6];
-    move *blackPossibleMoves[6];
-    move moveHistory[MAXMOVEHIST];
-    int moveHistoryCounter;
-
-}chessBoard;
 
 void showPosition(chessBoard board){
 
@@ -134,14 +83,16 @@ void setPiece(chessBoard *board, char name, int color, int value, int x, int y){
     board->position[y][x].y = y;
 }
 
-void initializeMovesArrays(chessBoard board){
+move **initializeMovesArrays(chessBoard board){
+
+    move **playableMoves = malloc(sizeof(move*) * 6);
     
     int pawnMaxMoves = 12;
     int knightMaxMoves = 8;
     int bishopMaxMoves = 13;
     int rookMaxMoves = 14;
     int queenMaxMoves = 27;
-    int kingMaxMoves = 9;
+    int kingMaxMoves = 8;
 
     int numOfPawns = 8;
     int numOfKnights = 2;
@@ -150,19 +101,15 @@ void initializeMovesArrays(chessBoard board){
     int numOfQueens = 1;
     int numOfKings = 1;
 
-    board.whitePossibleMoves[PINDEX] = malloc(sizeof(move) * pawnMaxMoves * numOfPawns + 1);
-    board.whitePossibleMoves[NINDEX] = malloc(sizeof(move) * knightMaxMoves * numOfKnights + 1);
-    board.whitePossibleMoves[BINDEX] = malloc(sizeof(move) * bishopMaxMoves * numOfBishops + 1);
-    board.whitePossibleMoves[RINDEX] = malloc(sizeof(move) * rookMaxMoves * numOfRooks + 1);
-    board.whitePossibleMoves[QINDEX] = malloc(sizeof(move) * queenMaxMoves * numOfQueens + 1);
-    board.whitePossibleMoves[KINDEX] = malloc(sizeof(move) * kingMaxMoves * numOfKings + 1);
+    playableMoves[PINDEX] = malloc(sizeof(move) * pawnMaxMoves * numOfPawns + 1);
+    playableMoves[NINDEX] = malloc(sizeof(move) * knightMaxMoves * numOfKnights + 1);
+    playableMoves[BINDEX] = malloc(sizeof(move) * bishopMaxMoves * numOfBishops + 1);
+    playableMoves[RINDEX] = malloc(sizeof(move) * rookMaxMoves * numOfRooks + 1);
+    playableMoves[QINDEX] = malloc(sizeof(move) * queenMaxMoves * numOfQueens + 1);
+    playableMoves[KINDEX] = malloc(sizeof(move) * kingMaxMoves * numOfKings + 1);
 
-    board.blackPossibleMoves[PINDEX] = malloc(sizeof(move) * pawnMaxMoves * numOfPawns + 1);
-    board.blackPossibleMoves[NINDEX] = malloc(sizeof(move) * knightMaxMoves * numOfKnights + 1);
-    board.blackPossibleMoves[BINDEX] = malloc(sizeof(move) * bishopMaxMoves * numOfBishops + 1);
-    board.blackPossibleMoves[RINDEX] = malloc(sizeof(move) * rookMaxMoves * numOfRooks + 1);
-    board.blackPossibleMoves[QINDEX] = malloc(sizeof(move) * queenMaxMoves * numOfQueens + 1);
-    board.blackPossibleMoves[KINDEX] = malloc(sizeof(move) * kingMaxMoves * numOfKings + 1);
+    return playableMoves;
+
 
 }
 
@@ -244,20 +191,8 @@ chessBoard createPosition(char fileName[]){
         pieceCounter++;
 
     }
-    
-    initializeMovesArrays(board);
 
     return board;
     
 }
 
-int main(int argc, char const *argv[]){
-
-    chessBoard startingPosition = createPosition("startingPosition.txt");
-
-    showPosition(startingPosition);
-    showMoveHistory(startingPosition);
-    
-
-    return 0;
-}
