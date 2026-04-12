@@ -21,6 +21,7 @@ void ASSERT_BIT_TABLE(uint64_t acctual, uint64_t expected)
 {
     if (acctual != expected)
     {
+        printf("ASSERT FAILED acctual: %llu == %llu :expected\n", acctual, expected);
         printf("GOT: \n");
         showBitBoard(acctual);
         printf("EXPECTED: \n");
@@ -124,7 +125,223 @@ void runAttackTablesTests()
     0b00000000ULL << 8  |
     0b00000000ULL);
 
-    printf("ALL KING ATTACK TESTS PASSED\n");
+    printf("[PASS] ALL KING ATTACK TESTS PASSED\n");
+
+    ASSERT_BIT_TABLE(attackTables->whitePanwsAttacks[8],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000010ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->whitePanwsAttacks[15],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b01000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->whitePanwsAttacks[9],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000101ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->whitePanwsAttacks[56],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->whitePanwsAttacks[63],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->whitePanwsAttacks[57],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    printf("[PASS] ALL WHITE PAWN ATTACK TESTS PASSED\n");
+
+    ASSERT_BIT_TABLE(attackTables->blackPanwsAttacks[48],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000010ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->blackPanwsAttacks[55],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b01000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->blackPanwsAttacks[49],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000101ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->blackPanwsAttacks[0],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->blackPanwsAttacks[7],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->blackPanwsAttacks[1],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    printf("[PASS] ALL BLACK PAWN ATTACK TESTS PASSED\n");
+
+    ASSERT_BIT_TABLE(attackTables->knightAttacks[27],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00010100ULL << 40 |
+    0b00100010ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00100010ULL << 16 |
+    0b00010100ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->knightAttacks[0],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000010ULL << 16 |
+    0b00000100ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->knightAttacks[7],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b01000000ULL << 16 |
+    0b00100000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->knightAttacks[56],
+    0b00000000ULL << 56 |
+    0b00000100ULL << 48 |
+    0b00000010ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->knightAttacks[63],
+    0b00000000ULL << 56 |
+    0b00100000ULL << 48 |
+    0b01000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->knightAttacks[46],
+    0b10100000ULL << 56 |
+    0b00010000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00010000ULL << 32 |
+    0b10100000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->knightAttacks[48],
+    0b00000100ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000100ULL << 40 |
+    0b00000010ULL << 32 |
+    0b00000000ULL << 24 |
+    0b00000000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->knightAttacks[8],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00000010ULL << 24 |
+    0b00000100ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00000100ULL);
+
+    ASSERT_BIT_TABLE(attackTables->knightAttacks[14],
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b10100000ULL << 24 |
+    0b00010000ULL << 16 |
+    0b00000000ULL << 8  |
+    0b00010000ULL);
+
+    printf("[PASS] ALL KNIGHT ATTACK TESTS PASSED\n");
 
     free(attackTables);
 

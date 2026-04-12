@@ -12,8 +12,6 @@ int main()
 
     createPosition(fileName, chessBoard);
 
-    printf("%llu \n", chessBoard->whiteRooks);
-
     runAllTests();
 
     return 0;
