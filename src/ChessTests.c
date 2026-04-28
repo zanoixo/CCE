@@ -1,27 +1,12 @@
 #include "stdio.h"
 #include "ChessMoveGenerator.h"
-
-void showBitBoard(uint64_t bitBoard)
-{
-    for (int rank = 7; rank >= 0; rank--)
-    {
-        for (int file = 0; file < 8; file++)
-        {
-            int square = rank * 8 + file;
-            uint64_t mask = 1ULL << square;
-
-            printf("%d ", (bitBoard & mask) ? 1 : 0);
-        }
-
-        printf("\n");
-    }
-}
+#include "ChessUtils.h"
 
 void ASSERT_BIT_TABLE(uint64_t acctual, uint64_t expected)
 {
     if (acctual != expected)
     {
-        printf("ASSERT FAILED acctual: %llu == %llu :expected\n", acctual, expected);
+        printf("ASSERT FAILED acctual: %llu == %llu :expected\n", (unsigned long long)acctual, (unsigned long long)expected);
         printf("GOT: \n");
         showBitBoard(acctual);
         printf("EXPECTED: \n");
@@ -342,6 +327,48 @@ void runAttackTablesTests()
     0b00010000ULL);
 
     printf("[PASS] ALL KNIGHT ATTACK TESTS PASSED\n");
+
+    ASSERT_BIT_TABLE(attackTables->rookMagicHashTable[0].mask,
+    0b00000000ULL << 56 |
+    0b00000001ULL << 48 |
+    0b00000001ULL << 40 |
+    0b00000001ULL << 32 |
+    0b00000001ULL << 24 |
+    0b00000001ULL << 16 |
+    0b00000001ULL << 8  |
+    0b01111110ULL);
+
+    ASSERT_BIT_TABLE(attackTables->rookMagicHashTable[7].mask,
+    0b00000000ULL << 56 |
+    0b10000000ULL << 48 |
+    0b10000000ULL << 40 |
+    0b10000000ULL << 32 |
+    0b10000000ULL << 24 |
+    0b10000000ULL << 16 |
+    0b10000000ULL << 8  |
+    0b01111110ULL);
+
+    ASSERT_BIT_TABLE(attackTables->rookMagicHashTable[27].mask,
+    0b00000000ULL << 56 |
+    0b00001000ULL << 48 |
+    0b00001000ULL << 40 |
+    0b00001000ULL << 32 |
+    0b01110110ULL << 24 |
+    0b00001000ULL << 16 |
+    0b00001000ULL << 8  |
+    0b00000000ULL);
+
+    ASSERT_BIT_TABLE(attackTables->rookMagicHashTable[24].mask,
+    0b00000000ULL << 56 |
+    0b00000001ULL << 48 |
+    0b00000001ULL << 40 |
+    0b00000001ULL << 32 |
+    0b01111110ULL << 24 |
+    0b00000001ULL << 16 |
+    0b00000001ULL << 8  |
+    0b00000000ULL);
+
+    printf("[PASS] ALL ROOK MASK TESTS PASSED\n");
 
     free(attackTables);
 

@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include "ChessMoveGenerator.h"
+#include "ChessUtils.h"
 
 const uint64_t hFile = 0b10000000ULL << 56 |
                        0b10000000ULL << 48 |
@@ -38,41 +40,41 @@ const uint64_t bFile = 0b00000010ULL << 56 |
 
 void initBlackPawnAttacks(AttackTables* attackTables)
 {
-    for (int i = 0; i < 64; i++)
+    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
     {
         uint64_t attackBitTable = 0;
 
-        uint64_t pawnPosition = 1ULL << i; 
+        uint64_t pawnPosition = 1ULL << sqInd; 
 
         attackBitTable |= (pawnPosition >> 7) & ~aFile; //bottom left
         attackBitTable |= (pawnPosition >> 9) & ~hFile; //bottom right
 
-        attackTables->blackPanwsAttacks[i] = attackBitTable;
+        attackTables->blackPanwsAttacks[sqInd] = attackBitTable;
     }
 }
 
 void initWhitePawnAttacks(AttackTables* attackTables)
 {
-    for (int i = 0; i < 64; i++)
+    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
     {
         uint64_t attackBitTable = 0;
 
-        uint64_t pawnPosition = 1ULL << i;
+        uint64_t pawnPosition = 1ULL << sqInd;
 
         attackBitTable |= (pawnPosition << 9) & ~aFile; //top left
         attackBitTable |= (pawnPosition << 7) & ~hFile; //top right
 
-        attackTables->whitePanwsAttacks[i] = attackBitTable;
+        attackTables->whitePanwsAttacks[sqInd] = attackBitTable;
     }
 }
 
 void initKnightAttacks(AttackTables* attackTables)
 {
-    for (int i = 0; i < 64; i++)
+    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
     {
         uint64_t attackBitTable = 0;
 
-        uint64_t knightPosition = 1ULL << i;
+        uint64_t knightPosition = 1ULL << sqInd;
 
         attackBitTable |= (knightPosition << 10) & ~(aFile | bFile); //top left corner
         attackBitTable |= (knightPosition << 17) & ~aFile;
@@ -86,15 +88,15 @@ void initKnightAttacks(AttackTables* attackTables)
         attackBitTable |= (knightPosition >> 10) & ~(hFile | gFile); //bottom right corner
         attackBitTable |= (knightPosition >> 17) & ~hFile;
 
-        attackTables->knightAttacks[i] = attackBitTable;
+        attackTables->knightAttacks[sqInd] = attackBitTable;
     } 
 }
 
 void initKingAttacks(AttackTables* attackTables)
 {
-    for (int i = 0; i < 64; i++)
+    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
     {
-        uint64_t kingPosition = 1ULL << i;  
+        uint64_t kingPosition = 1ULL << sqInd;  
 
         uint64_t attackBitTable = 0;
         
@@ -110,8 +112,55 @@ void initKingAttacks(AttackTables* attackTables)
         attackBitTable |= (kingPosition >> 7) & ~aFile; //bottom left
         attackBitTable |= (kingPosition >> 9) & ~hFile; //bottom right
 
-        attackTables->kingAttacks[i] = attackBitTable;
+        attackTables->kingAttacks[sqInd] = attackBitTable;
     }
+}
+
+void generateRookAttackMasks(AttackTables* attackTables)
+{
+    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
+    {
+        uint64_t rookPosition = 1ULL << sqInd;
+        uint64_t mask = 0;
+
+        int column = sqInd % 8;
+        int row = sqInd / 8;
+        int numOfBits = 0; 
+        
+        for (int l = 1; l < column; l++)
+        {
+            mask |= rookPosition >> l;
+            numOfBits++;
+        }
+
+        for (int r = 1; r < 7 - column; r++)
+        {
+            mask |= rookPosition << r;
+            numOfBits++;
+        }
+
+        for (int u = 1; u < row; u++)
+        {
+            mask |= rookPosition >> (u * 8);
+            numOfBits++;
+        }
+
+        for (int d = 1; d < 7 - row; d++)
+        {
+            mask |= rookPosition << (d * 8);
+            numOfBits++;
+        }
+
+        attackTables->rookMagicHashTable[sqInd].mask = mask;
+        attackTables->rookMagicHashTable[sqInd].shift = BOARD_SIZE - numOfBits;
+        
+    }
+    
+}
+
+void initRookAttacks(AttackTables* attackTables)
+{
+    generateRookAttackMasks(attackTables);
 }
 
 AttackTables* initAttackTables()
@@ -122,6 +171,7 @@ AttackTables* initAttackTables()
     initWhitePawnAttacks(attackTables);
     initKnightAttacks(attackTables);
     initKingAttacks(attackTables);
+    initRookAttacks(attackTables);
     
     return attackTables;
 }

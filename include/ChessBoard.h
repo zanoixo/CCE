@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#define BOARD_SIZE 64
+
 typedef struct ChessBoard
 {
     uint64_t whitePawns;

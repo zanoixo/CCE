@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include "ChessBoard.h"
-
-void sendError(char errorMsg[]){
-
-    printf("[ERROR]: %s\n", errorMsg);
-    exit(1);
-}
+#include "ChessUtils.h"
 
 void showPosition(const ChessBoard* chessBoard)
 {
