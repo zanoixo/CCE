@@ -40,6 +40,8 @@ const uint64_t bFile = 0b00000010ULL << 56 |
                        0b00000010ULL << 8  |
                        0b00000010ULL;
 
+uint64_t MAX_NUMBER_OF_MAGICS = 10000000;
+
 int attackPatternCounter = 0;
 BlockerAttackPattern attackPatterns[64][4096];
 
@@ -350,20 +352,23 @@ int isMagicNumberValid(int sqInd, uint64_t magicNumber, int numOfIndexBits)
 {
     int numberOfBits = numberOfRookMovementBits(sqInd);
     uint64_t tempHashTable[1 << numOfIndexBits];
+    uint64_t usedIndexes[1 << numOfIndexBits];
 
     memset(tempHashTable, 0, sizeof(tempHashTable));
+    memset(usedIndexes, 0, sizeof(usedIndexes));
     
 
     for (int variation = 0; variation < 1 << numberOfBits; variation++)
     {
         BlockerAttackPattern blockerAttackPattern = attackPatterns[sqInd][variation];
         uint64_t newInd = (blockerAttackPattern.blockerPattern * magicNumber) >> (64 - numOfIndexBits);
-        if (tempHashTable[newInd] != 0 && tempHashTable[newInd] != blockerAttackPattern.attackPattern)
+        if (usedIndexes[newInd] != 0 && tempHashTable[newInd] != blockerAttackPattern.attackPattern)
         {
             return 0;
         }else
         {
             tempHashTable[newInd] = blockerAttackPattern.attackPattern;
+            usedIndexes[newInd] = 1;
         }
     }
 
@@ -384,6 +389,50 @@ void saveRookMagics(uint64_t validMagicNumbers[], int numberOfBits[])
         fprintf(file, "%d,%d,%llu\n", sqInd, numberOfBits[sqInd],(unsigned long long)validMagicNumbers[sqInd]);
     }
 
+    fclose(file);
+}
+
+void loadRookAttacks(AttackTables* attackTables)
+{
+    uint64_t magicNumbers[64];
+    int numOfBits[64];
+    unsigned long long magicNumber;
+    int nBits;
+    int sq;
+
+    FILE* file = fopen("magics/rookMagics.csv", "r");
+    if (!file)
+    {
+        printf("Failed to open file\n");
+        return;
+    }
+
+    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
+    {
+        fscanf(file, "%d,%d,%llu\n", &sq, &nBits, &magicNumber);
+        magicNumbers[sq] = (uint64_t)magicNumber;
+        numOfBits[sq] = nBits;
+    }
+
+    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
+    {
+        int shift = 64 - numOfBits[sqInd];
+        magicNumber = magicNumbers[sqInd];
+        attackTables->rookAttacks[sqInd] = malloc(sizeof(uint64_t) * (1 << numOfBits[sqInd]));
+        attackTables->rookMagicHashTable[sqInd].magicNumber = magicNumber;
+        attackTables->rookMagicHashTable[sqInd].shift = shift;
+
+        for (int variation = 0; variation < 1 << numOfBits[sqInd]; variation++)
+        {
+            BlockerAttackPattern pattern = attackPatterns[sqInd][variation];
+            uint64_t attackPattern = pattern.attackPattern;
+            uint64_t newIndex = (pattern.blockerPattern * magicNumber) >> shift;
+
+            attackTables->rookAttacks[sqInd][newIndex] = attackPattern;
+        }
+        
+    }
+    
     fclose(file);
 }
 
@@ -440,21 +489,21 @@ void generateRookAttackPatterns()
     }
 }
 
-void initRookAttacksTable(AttackTables* attackTables)
-{
-    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
-    {
-        attackTables->rookAttacks[sqInd] = malloc(sizeof(uint64_t) * 4096);
-    }
-   
-}
-
 void initRookAttacks(AttackTables* attackTables)
 {
-    //initRookAttacksTable(attackTables);
     generateRookAttackMasks(attackTables);
     generateRookAttackPatterns();
     //findAndSaveRookMagics();
+    loadRookAttacks(attackTables);
+}
+
+uint64_t getRookAttackPattern(int sqInd, uint64_t position, AttackTables *attackTables)
+{
+    MagicTableHash magicTableHash = attackTables->rookMagicHashTable[sqInd];
+    uint64_t index = (position & magicTableHash.mask) * magicTableHash.magicNumber;                 
+    index = index >> magicTableHash.shift;
+
+    return attackTables->rookAttacks[sqInd][index];
 }
 
 AttackTables* initAttackTables()

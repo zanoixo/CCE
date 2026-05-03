@@ -12,7 +12,7 @@ int main()
 
     createPosition(fileName, chessBoard);
 
-    //runAllTests();
+    runAllTests();
 
     return 0;
 }

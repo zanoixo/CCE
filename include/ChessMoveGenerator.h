@@ -2,8 +2,6 @@
 
 #include "ChessBoard.h"
 
-uint64_t MAX_NUMBER_OF_MAGICS = 10000000;
-
 typedef struct MagicTableHash
 {
     uint64_t mask;
@@ -30,5 +28,6 @@ typedef struct AttackTables
 }AttackTables;
 
 AttackTables* initAttackTables();
+uint64_t getRookAttackPattern(int sqInd, uint64_t position, AttackTables *attackTables);
 
 #endif

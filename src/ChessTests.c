@@ -16,20 +16,6 @@ void ASSERT_BIT_TABLE(uint64_t acctual, uint64_t expected)
     
 }
 
-void ASSERT_BIT_TABLE_EXISTS(uint64_t acctual, uint64_t expected)
-{
-    if (acctual != expected)
-    {
-        printf("ASSERT FAILED acctual: %llu == %llu :expected\n", (unsigned long long)acctual, (unsigned long long)expected);
-        printf("GOT: \n");
-        showBitBoard(acctual);
-        printf("EXPECTED: \n");
-        showBitBoard(expected);
-        exit(1);
-    }
-    
-}
-
 void runAttackTablesTests()
 {
     AttackTables* attackTables = initAttackTables();
@@ -383,6 +369,98 @@ void runAttackTablesTests()
     0b00000000ULL);
 
     printf("[PASS] ALL ROOK MASK TESTS PASSED\n");
+
+    uint64_t emptyBlockers = 0;
+    uint64_t blockers = 0b00000000ULL << 56 |
+                        0b00100100ULL << 48 |
+                        0b01000000ULL << 40 |
+                        0b00000100ULL << 32 |
+                        0b00100000ULL << 24 |
+                        0b00000000ULL << 16 |
+                        0b01010000ULL << 8  |
+                        0b00001000ULL;
+
+    ASSERT_BIT_TABLE(getRookAttackPattern(0, emptyBlockers, attackTables),
+    0b00000001ULL << 56 |
+    0b00000001ULL << 48 |
+    0b00000001ULL << 40 |
+    0b00000001ULL << 32 |
+    0b00000001ULL << 24 |
+    0b00000001ULL << 16 |
+    0b00000001ULL << 8  |
+    0b11111110ULL);
+
+    ASSERT_BIT_TABLE(getRookAttackPattern(7, emptyBlockers, attackTables),
+    0b10000000ULL << 56 |
+    0b10000000ULL << 48 |
+    0b10000000ULL << 40 |
+    0b10000000ULL << 32 |
+    0b10000000ULL << 24 |
+    0b10000000ULL << 16 |
+    0b10000000ULL << 8  |
+    0b01111111ULL);
+
+    ASSERT_BIT_TABLE(getRookAttackPattern(56, emptyBlockers, attackTables),
+    0b11111110ULL << 56 |
+    0b00000001ULL << 48 |
+    0b00000001ULL << 40 |
+    0b00000001ULL << 32 |
+    0b00000001ULL << 24 |
+    0b00000001ULL << 16 |
+    0b00000001ULL << 8  |
+    0b00000001ULL);
+
+    ASSERT_BIT_TABLE(getRookAttackPattern(27, emptyBlockers, attackTables),
+    0b00001000ULL << 56 |
+    0b00001000ULL << 48 |
+    0b00001000ULL << 40 |
+    0b00001000ULL << 32 |
+    0b11110111ULL << 24 |
+    0b00001000ULL << 16 |
+    0b00001000ULL << 8  |
+    0b00001000ULL);
+
+    ASSERT_BIT_TABLE(getRookAttackPattern(12, emptyBlockers, attackTables),
+    0b00010000ULL << 56 |
+    0b00010000ULL << 48 |
+    0b00010000ULL << 40 |
+    0b00010000ULL << 32 |
+    0b00010000ULL << 24 |
+    0b00010000ULL << 16 |
+    0b11101111ULL << 8  |
+    0b00010000ULL);
+
+    ASSERT_BIT_TABLE(getRookAttackPattern(7, blockers, attackTables),
+    0b10000000ULL << 56 |
+    0b10000000ULL << 48 |
+    0b10000000ULL << 40 |
+    0b10000000ULL << 32 |
+    0b10000000ULL << 24 |
+    0b10000000ULL << 16 |
+    0b10000000ULL << 8  |
+    0b01111000ULL);
+
+    ASSERT_BIT_TABLE(getRookAttackPattern(49, blockers, attackTables),
+    0b00000010ULL << 56 |
+    0b00000101ULL << 48 |
+    0b00000010ULL << 40 |
+    0b00000010ULL << 32 |
+    0b00000010ULL << 24 |
+    0b00000010ULL << 16 |
+    0b00000010ULL << 8  |
+    0b00000010ULL);
+
+    ASSERT_BIT_TABLE(getRookAttackPattern(13, blockers, attackTables),
+    0b00000000ULL << 56 |
+    0b00000000ULL << 48 |
+    0b00000000ULL << 40 |
+    0b00000000ULL << 32 |
+    0b00100000ULL << 24 |
+    0b00100000ULL << 16 |
+    0b01010000ULL << 8  |
+    0b00100000ULL);
+
+    printf("[PASS] ALL ROOK ATTACK TESTS PASSED\n");
 
     free(attackTables);
 
