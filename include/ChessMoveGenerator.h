@@ -10,6 +10,12 @@ typedef struct MagicTableHash
 
 }MagicTableHash;
 
+typedef struct BlockerAttackPattern
+{
+    uint64_t attackPattern;
+    uint64_t blockerPattern;
+}BlockerAttackPattern;
+
 typedef struct AttackTables
 {
     uint64_t whitePanwsAttacks[BOARD_SIZE];
