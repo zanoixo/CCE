@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <time.h>
+#include <string.h>
 #include "ChessMoveGenerator.h"
 #include "ChessUtils.h"
 
@@ -40,6 +42,40 @@ const uint64_t bFile = 0b00000010ULL << 56 |
 
 int attackPatternCounter = 0;
 BlockerAttackPattern attackPatterns[64][4096];
+
+uint64_t randomState;
+
+int numberOfRookMovementBits(int rookSqInd)
+{
+    int column = rookSqInd % 8;
+    int row = rookSqInd / 8;
+
+    int left  = column - 1;
+    int right = 7 - column - 1;
+    int up    = 7 - row - 1;
+    int down  = row - 1;
+
+    int bits = 0;
+
+    if (left  > 0)
+    {
+        bits += left;
+    } 
+    if (right > 0)
+    {
+        bits += right;
+    } 
+    if (up    > 0)
+    {
+        bits += up;
+    } 
+    if (down  > 0)
+    {
+        bits += down;
+    } 
+
+    return bits;
+}
 
 void initBlackPawnAttacks(AttackTables* attackTables)
 {
@@ -128,34 +164,29 @@ void generateRookAttackMasks(AttackTables* attackTables)
 
         int column = sqInd % 8;
         int row = sqInd / 8;
-        int numOfBits = 0; 
         
         for (int l = 1; l < column; l++)
         {
             mask |= rookPosition >> l;
-            numOfBits++;
         }
 
         for (int r = 1; r < 7 - column; r++)
         {
             mask |= rookPosition << r;
-            numOfBits++;
         }
 
         for (int u = 1; u < row; u++)
         {
             mask |= rookPosition >> (u * 8);
-            numOfBits++;
         }
 
         for (int d = 1; d < 7 - row; d++)
         {
             mask |= rookPosition << (d * 8);
-            numOfBits++;
         }
 
         attackTables->rookMagicHashTable[sqInd].mask = mask;
-        attackTables->rookMagicHashTable[sqInd].shift = BOARD_SIZE - numOfBits;
+        attackTables->rookMagicHashTable[sqInd].shift = BOARD_SIZE - numberOfRookMovementBits(sqInd);
         
     }
     
@@ -292,12 +323,103 @@ void generateLeftRookBlockers(uint64_t blockers, int sqInd, int blockerInd, int 
 
 }
 
-void findAndSaveRookMagics()
+uint64_t generateRandomMagic()
 {
+    randomState ^= randomState << 13;
+    randomState ^= randomState >> 7;
+    randomState ^= randomState << 17;
+
+    uint64_t firstRandomPart = randomState;
+
+    randomState ^= randomState << 13;
+    randomState ^= randomState >> 7;
+    randomState ^= randomState << 17;
+
+    uint64_t secondRandomPart = randomState;
+
+    randomState ^= randomState << 13;
+    randomState ^= randomState >> 7;
+    randomState ^= randomState << 17;
+
+    uint64_t thirdRandomPart = randomState;
+ 
+    return firstRandomPart & secondRandomPart & thirdRandomPart;
+}
+
+int isMagicNumberValid(int sqInd, uint64_t magicNumber, int numOfIndexBits)
+{
+    int numberOfBits = numberOfRookMovementBits(sqInd);
+    uint64_t tempHashTable[1 << numOfIndexBits];
+
+    memset(tempHashTable, 0, sizeof(tempHashTable));
+    
+
+    for (int variation = 0; variation < 1 << numberOfBits; variation++)
+    {
+        BlockerAttackPattern blockerAttackPattern = attackPatterns[sqInd][variation];
+        uint64_t newInd = (blockerAttackPattern.blockerPattern * magicNumber) >> (64 - numOfIndexBits);
+        if (tempHashTable[newInd] != 0 && tempHashTable[newInd] != blockerAttackPattern.attackPattern)
+        {
+            return 0;
+        }else
+        {
+            tempHashTable[newInd] = blockerAttackPattern.attackPattern;
+        }
+    }
+
+    return 1;
+}
+
+void saveRookMagics(uint64_t validMagicNumbers[], int numberOfBits[])
+{
+    FILE* file = fopen("magics/rookMagics.csv", "w");
+    if (!file)
+    {
+        printf("Failed to open file\n");
+        return;
+    }
+
     for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
     {
-
+        fprintf(file, "%d,%d,%llu\n", sqInd, numberOfBits[sqInd],(unsigned long long)validMagicNumbers[sqInd]);
     }
+
+    fclose(file);
+}
+
+void findAndSaveRookMagics()
+{
+    uint64_t validMagicNumbers[64] = {0};
+    int numberOfBits[64] = {0};
+    uint64_t magicNumber;
+    randomState = time(NULL);
+    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
+    {
+        for (int nBits = 12; nBits > 0; nBits--)
+        {
+            int wasMagicFound = 0;
+            for (uint64_t magicAttempt = 0; magicAttempt < MAX_NUMBER_OF_MAGICS; magicAttempt++)
+            {
+                magicNumber = generateRandomMagic();
+                if (isMagicNumberValid(sqInd, magicNumber, nBits))
+                {
+                    validMagicNumbers[sqInd] = magicNumber;
+                    numberOfBits[sqInd] = nBits;
+                    wasMagicFound = 1;
+                    break;
+                }
+            }
+            if (!wasMagicFound)
+            {
+                printf("%d magic not found\n", nBits);
+                break;
+            }
+             
+        }
+       
+    }
+
+    saveRookMagics(validMagicNumbers, numberOfBits);
 }
 
 void generateRookAttackPatterns()
@@ -314,8 +436,7 @@ void generateRookAttackPatterns()
 
         attackPatternCounter = 0;
 
-        generateLeftRookBlockers(0, sqInd, sqInd, left, right, up, down);
-        
+        generateLeftRookBlockers(0, sqInd, sqInd, left, right, up, down);   
     }
 }
 
@@ -333,7 +454,7 @@ void initRookAttacks(AttackTables* attackTables)
     //initRookAttacksTable(attackTables);
     generateRookAttackMasks(attackTables);
     generateRookAttackPatterns();
-    findAndSaveRookMagics();
+    //findAndSaveRookMagics();
 }
 
 AttackTables* initAttackTables()

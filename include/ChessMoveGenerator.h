@@ -2,6 +2,8 @@
 
 #include "ChessBoard.h"
 
+uint64_t MAX_NUMBER_OF_MAGICS = 10000000;
+
 typedef struct MagicTableHash
 {
     uint64_t mask;

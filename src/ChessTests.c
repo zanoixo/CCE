@@ -1,8 +1,22 @@
-#include "stdio.h"
+#include <stdio.h>
 #include "ChessMoveGenerator.h"
 #include "ChessUtils.h"
 
 void ASSERT_BIT_TABLE(uint64_t acctual, uint64_t expected)
+{
+    if (acctual != expected)
+    {
+        printf("ASSERT FAILED acctual: %llu == %llu :expected\n", (unsigned long long)acctual, (unsigned long long)expected);
+        printf("GOT: \n");
+        showBitBoard(acctual);
+        printf("EXPECTED: \n");
+        showBitBoard(expected);
+        exit(1);
+    }
+    
+}
+
+void ASSERT_BIT_TABLE_EXISTS(uint64_t acctual, uint64_t expected)
 {
     if (acctual != expected)
     {
