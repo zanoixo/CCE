@@ -50,13 +50,15 @@ enum CapturedPiece
 enum MoveFlags
 {
     promotionPieceMask = 0b00000011,
-    capturePieceMask =   0b00011100
+    capturePieceMask =   0b00011100,
+    castleMask =         0b00100000
 };
 
 enum MoveFlagsPosition
 {
     promotionFlagPosition = 0,
-    captureFlagPostion = 2
+    captureFlagPostion = 2,
+    castleFlagPostion = 5,
 };
 
 typedef struct Move
@@ -84,5 +86,6 @@ void generateQueenMoves(ChessBoard *chessBoard, AttackTables *attackTables, Move
 void generateBishopMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList);
 void generateRookMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList);
 void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList);
+void generateCastleMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList);
 
 #endif

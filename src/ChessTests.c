@@ -1586,6 +1586,112 @@ void runPseudeLegalMovesTests()
 
     printf("[PASS] ALL NORMAL PAWN PSEUDO MOVE TESTS PASSED\n");
 
+    resetPiecePositions(chessBoard);
+
+    moveList->nextIndex = 0;
+
+    chessBoard->whiteKing = 0b00000000ULL << 56 |
+                            0b00000000ULL << 48 |
+                            0b00000000ULL << 40 |
+                            0b00000000ULL << 32 |
+                            0b00000000ULL << 24 |
+                            0b00000000ULL << 16 |
+                            0b00000000ULL << 8  |
+                            0b00010000ULL;
+    
+    chessBoard->whiteRooks = 0b00000000ULL << 56 |
+                             0b00000000ULL << 48 |
+                             0b00000000ULL << 40 |
+                             0b00000000ULL << 32 |
+                             0b00000000ULL << 24 |
+                             0b00000000ULL << 16 |
+                             0b00000000ULL << 8  |
+                             0b10000001ULL;
+    
+    generateCastleMoves(chessBoard, attackTables, moveList);
+
+    ASSERT(moveList->nextIndex, 0);
+
+    chessBoard->flags = whiteShortCastleMask;
+
+    generateCastleMoves(chessBoard, attackTables, moveList);
+
+    ASSERT(moveList->nextIndex, 1);
+
+    moveList->nextIndex = 0;
+
+    chessBoard->flags = whiteShortCastleMask + whiteLongCastleMask;
+
+    generateCastleMoves(chessBoard, attackTables, moveList);
+
+    ASSERT(moveList->nextIndex, 2);
+
+    moveList->nextIndex = 0;
+
+    chessBoard->allPieces = 0b00000000ULL << 56 |
+                            0b00000000ULL << 48 |
+                            0b00000000ULL << 40 |
+                            0b00000000ULL << 32 |
+                            0b00000000ULL << 24 |
+                            0b00000000ULL << 16 |
+                            0b00000000ULL << 8  |
+                            0b00000010ULL;
+    
+    generateCastleMoves(chessBoard, attackTables, moveList);
+
+    ASSERT(moveList->nextIndex, 1);
+
+    moveList->nextIndex = 0;
+
+    chessBoard->allPieces = 0;
+
+    chessBoard->blackKnights = 0b00000000ULL << 56 |
+                               0b00000000ULL << 48 |
+                               0b00000000ULL << 40 |
+                               0b00000000ULL << 32 |
+                               0b00000000ULL << 24 |
+                               0b00000010ULL << 16 |
+                               0b00000000ULL << 8  |
+                               0b00000000ULL;
+    
+    generateCastleMoves(chessBoard, attackTables, moveList);
+
+    ASSERT(moveList->nextIndex, 1);
+
+    moveList->nextIndex = 0;
+
+    chessBoard->blackRooks = 0b00100000ULL << 56 |
+                             0b00000000ULL << 48 |
+                             0b00000000ULL << 40 |
+                             0b00000000ULL << 32 |
+                             0b00000000ULL << 24 |
+                             0b00000000ULL << 16 |
+                             0b00000000ULL << 8  |
+                             0b00000000ULL;
+    
+    generateCastleMoves(chessBoard, attackTables, moveList);
+
+    ASSERT(moveList->nextIndex, 0);
+
+    moveList->nextIndex = 0;
+
+    chessBoard->blackRooks = 0b00000010ULL << 56 |
+                             0b00000000ULL << 48 |
+                             0b00000000ULL << 40 |
+                             0b00000000ULL << 32 |
+                             0b00000000ULL << 24 |
+                             0b00000000ULL << 16 |
+                             0b00000000ULL << 8  |
+                             0b00000000ULL;
+    
+    chessBoard->blackKnights = 0;
+    
+    generateCastleMoves(chessBoard, attackTables, moveList);
+
+    ASSERT(moveList->nextIndex, 2);
+
+    printf("[PASS] ALL CASTLE PSEUDO MOVE TESTS PASSED\n");
+
     free(moveList);
     free(attackTables);
     free(chessBoard);

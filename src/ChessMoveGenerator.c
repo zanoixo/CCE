@@ -76,6 +76,115 @@ const uint64_t line1 = 0b00000000ULL << 56 |
                        0b00000000ULL << 8  |
                        0b11111111ULL;
 
+const uint64_t e1 = 0b00000000ULL << 56 |
+                    0b00000000ULL << 48 |
+                    0b00000000ULL << 40 |
+                    0b00000000ULL << 32 |
+                    0b00000000ULL << 24 |
+                    0b00000000ULL << 16 |
+                    0b00000000ULL << 8  |
+                    0b00010000ULL; 
+
+const uint64_t e8 = 0b00010000ULL << 56 |
+                    0b00000000ULL << 48 |
+                    0b00000000ULL << 40 |
+                    0b00000000ULL << 32 |
+                    0b00000000ULL << 24 |
+                    0b00000000ULL << 16 |
+                    0b00000000ULL << 8  |
+                    0b00000000ULL;
+
+const uint64_t b1 = 0b00000000ULL << 56 |
+                    0b00000000ULL << 48 |
+                    0b00000000ULL << 40 |
+                    0b00000000ULL << 32 |
+                    0b00000000ULL << 24 |
+                    0b00000000ULL << 16 |
+                    0b00000000ULL << 8  |
+                    0b00000010ULL; 
+
+const uint64_t c1 = 0b00000000ULL << 56 |
+                    0b00000000ULL << 48 |
+                    0b00000000ULL << 40 |
+                    0b00000000ULL << 32 |
+                    0b00000000ULL << 24 |
+                    0b00000000ULL << 16 |
+                    0b00000000ULL << 8  |
+                    0b00000100ULL; 
+
+const uint64_t d1 = 0b00000000ULL << 56 |
+                    0b00000000ULL << 48 |
+                    0b00000000ULL << 40 |
+                    0b00000000ULL << 32 |
+                    0b00000000ULL << 24 |
+                    0b00000000ULL << 16 |
+                    0b00000000ULL << 8  |
+                    0b00001000ULL; 
+
+const uint64_t f1 = 0b00000000ULL << 56 |
+                    0b00000000ULL << 48 |
+                    0b00000000ULL << 40 |
+                    0b00000000ULL << 32 |
+                    0b00000000ULL << 24 |
+                    0b00000000ULL << 16 |
+                    0b00000000ULL << 8  |
+                    0b00100000ULL; 
+
+const uint64_t g1 = 0b00000000ULL << 56 |
+                    0b00000000ULL << 48 |
+                    0b00000000ULL << 40 |
+                    0b00000000ULL << 32 |
+                    0b00000000ULL << 24 |
+                    0b00000000ULL << 16 |
+                    0b00000000ULL << 8  |
+                    0b01000000ULL; 
+
+const uint64_t b8 = 0b00000010ULL << 56 |
+                    0b00000000ULL << 48 |
+                    0b00000000ULL << 40 |
+                    0b00000000ULL << 32 |
+                    0b00000000ULL << 24 |
+                    0b00000000ULL << 16 |
+                    0b00000000ULL << 8  |
+                    0b00000000ULL; 
+
+const uint64_t c8 = 0b00000100ULL << 56 |
+                    0b00000000ULL << 48 |
+                    0b00000000ULL << 40 |
+                    0b00000000ULL << 32 |
+                    0b00000000ULL << 24 |
+                    0b00000000ULL << 16 |
+                    0b00000000ULL << 8  |
+                    0b00000000ULL; 
+
+const uint64_t d8 = 0b00001000ULL << 56 |
+                    0b00000000ULL << 48 |
+                    0b00000000ULL << 40 |
+                    0b00000000ULL << 32 |
+                    0b00000000ULL << 24 |
+                    0b00000000ULL << 16 |
+                    0b00000000ULL << 8  |
+                    0b00000000ULL; 
+
+const uint64_t f8 = 0b00100000ULL << 56 |
+                    0b00000000ULL << 48 |
+                    0b00000000ULL << 40 |
+                    0b00000000ULL << 32 |
+                    0b00000000ULL << 24 |
+                    0b00000000ULL << 16 |
+                    0b00000000ULL << 8  |
+                    0b00000000ULL; 
+
+const uint64_t g8 = 0b01000000ULL << 56 |
+                    0b00000000ULL << 48 |
+                    0b00000000ULL << 40 |
+                    0b00000000ULL << 32 |
+                    0b00000000ULL << 24 |
+                    0b00000000ULL << 16 |
+                    0b00000000ULL << 8  |
+                    0b00000000ULL; 
+
+
 uint64_t MAX_NUMBER_OF_MAGICS = 10000000;
 
 int attackPatternCounter = 0;
@@ -882,7 +991,7 @@ uint64_t getQueenAttackPattern(int sqInd, uint64_t position, AttackTables *attac
     return lineAttacks | diagonalAttacks;
 }
 
-int getNextSq(uint64_t sq)
+uint8_t getSqInd(uint64_t sq)
 {
     return __builtin_ctzll(sq);
 }
@@ -890,6 +999,80 @@ int getNextSq(uint64_t sq)
 uint8_t isBlack(ChessBoard *chessBoard)
 {
     return chessBoard->flags & colorMask;
+}
+
+uint8_t canWhiteShortCastle(ChessBoard *chessBoard)
+{
+    return chessBoard->flags & whiteShortCastleMask;
+}
+
+uint8_t canWhiteLongCastle(ChessBoard *chessBoard)
+{
+    return chessBoard->flags & whiteLongCastleMask;
+}
+
+uint8_t canBlackShortCastle(ChessBoard *chessBoard)
+{
+    return chessBoard->flags & blackShortCastleMask;
+}
+
+uint8_t canBlackLongCastle(ChessBoard *chessBoard)
+{
+    return chessBoard->flags & blackLongCastleMask;
+}
+
+int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attackTables, int isAttackedByWhite)
+{
+    uint64_t enemyKnights = chessBoard->blackKnights;
+    uint64_t enemyBishops = chessBoard->blackBishops;
+    uint64_t enemyRooks = chessBoard->blackRooks;
+    uint64_t enemyQueens = chessBoard->blackQueens;
+    uint64_t enemyPawns = chessBoard->blackPawns;
+    uint64_t enemyKing = chessBoard->blackKing;
+    uint64_t *friendlyPawnAttacks = attackTables->whitePanwsAttacks;
+
+    if (isAttackedByWhite)
+    {
+        enemyKnights = chessBoard->whiteKnights;
+        enemyBishops = chessBoard->whiteBishops;
+        enemyRooks = chessBoard->whiteRooks;
+        enemyQueens = chessBoard->whiteQueens;
+        enemyPawns = chessBoard->whitePawns;
+        enemyKing = chessBoard->whiteKing;
+        friendlyPawnAttacks = attackTables->blackPanwsAttacks;
+
+    }
+    
+    if (attackTables->knightAttacks[sqInd] & enemyKnights)
+    {
+        return 1;
+    }
+
+    if (attackTables->kingAttacks[sqInd] & enemyKing)
+    {
+        return 1;
+    }
+
+    uint64_t bishopAndQueenAttacks = getBishopAttackPattern(sqInd, chessBoard->allPieces, attackTables);
+
+    if ((bishopAndQueenAttacks & enemyBishops) || (bishopAndQueenAttacks & enemyQueens))
+    {
+        return 1;
+    }
+
+    uint64_t rookAndQueenAttacks = getRookAttackPattern(sqInd, chessBoard->allPieces, attackTables);
+    
+    if ((rookAndQueenAttacks & enemyRooks) || (rookAndQueenAttacks & enemyQueens))
+    {
+        return 1;
+    }
+
+    if (friendlyPawnAttacks[sqInd] & enemyPawns)
+    {
+        return 1;
+    }
+
+    return 0;
 }
 
 void addMove(uint8_t from, uint8_t to, uint8_t flags, MoveList* moveList)
@@ -918,13 +1101,13 @@ void generateKingMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
         friendlyPieces = chessBoard->blackPieces;
     }  
     
-    uint8_t fromSq =  getNextSq(kingPositions & -kingPositions);
+    uint8_t fromSq =  getSqInd(kingPositions & -kingPositions);
     uint64_t kingAttacks = attackTables->kingAttacks[fromSq];
     kingAttacks &= ~friendlyPieces;
 
     while (kingAttacks != 0)
     {
-        uint8_t toSq = getNextSq(kingAttacks & -kingAttacks);
+        uint8_t toSq = getSqInd(kingAttacks & -kingAttacks);
         addMove(fromSq, toSq, 0, moveList);
         kingAttacks &= kingAttacks - 1;
     }
@@ -943,13 +1126,13 @@ void generateKnightMoves(ChessBoard *chessBoard, AttackTables *attackTables, Mov
     
     while (knightPositions != 0)
     {
-        uint8_t fromSq =  getNextSq(knightPositions & -knightPositions);
+        uint8_t fromSq =  getSqInd(knightPositions & -knightPositions);
         uint64_t knightAttacks = attackTables->knightAttacks[fromSq];
         knightAttacks &= ~friendlyPieces;
 
         while (knightAttacks != 0)
         {
-            uint8_t toSq = getNextSq(knightAttacks & -knightAttacks);
+            uint8_t toSq = getSqInd(knightAttacks & -knightAttacks);
             addMove(fromSq, toSq, 0, moveList);
             knightAttacks &= knightAttacks - 1;
         }
@@ -971,13 +1154,13 @@ void generateBishopMoves(ChessBoard *chessBoard, AttackTables *attackTables, Mov
     
     while (bishopPositions != 0)
     {
-        uint8_t fromSq = getNextSq(bishopPositions & -bishopPositions);
+        uint8_t fromSq = getSqInd(bishopPositions & -bishopPositions);
         uint64_t bishopAttacks = getBishopAttackPattern(fromSq, chessBoard->allPieces, attackTables);
         bishopAttacks &= ~friendlyPieces;
 
         while (bishopAttacks != 0)
         {
-            uint8_t toSq = getNextSq(bishopAttacks & -bishopAttacks);
+            uint8_t toSq = getSqInd(bishopAttacks & -bishopAttacks);
             addMove(fromSq, toSq, 0, moveList);
             bishopAttacks &= bishopAttacks - 1;
         }
@@ -999,13 +1182,13 @@ void generateQueenMoves(ChessBoard *chessBoard, AttackTables *attackTables, Move
     
     while (queenPositions != 0)
     {
-        uint8_t fromSq = getNextSq(queenPositions & -queenPositions);
+        uint8_t fromSq = getSqInd(queenPositions & -queenPositions);
         uint64_t queenAttacks = getQueenAttackPattern(fromSq, chessBoard->allPieces, attackTables);
         queenAttacks &= ~friendlyPieces;
 
         while (queenAttacks != 0)
         {
-            uint8_t toSq = getNextSq(queenAttacks & -queenAttacks);
+            uint8_t toSq = getSqInd(queenAttacks & -queenAttacks);
             addMove(fromSq, toSq, 0, moveList);
             queenAttacks &= queenAttacks - 1;
         }
@@ -1032,7 +1215,7 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
     while (pawnPositions != 0)
     {   
         uint64_t fromBitBoard = pawnPositions & -pawnPositions;
-        uint64_t fromSq = getNextSq(fromBitBoard);
+        uint64_t fromSq = getSqInd(fromBitBoard);
         uint64_t pawnAttacks = pawnAttackTable[fromSq];
 
         if (isBlack(chessBoard))
@@ -1042,15 +1225,15 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
             {
                 if (nextSq & promotionLine)
                 {
-                    generatePawnPromotionMoves(fromSq, getNextSq(nextSq), 0, moveList);
+                    generatePawnPromotionMoves(fromSq, getSqInd(nextSq), 0, moveList);
                 }else
                 {
-                    addMove(fromSq, getNextSq(nextSq), 0, moveList);
+                    addMove(fromSq, getSqInd(nextSq), 0, moveList);
                 }
 
                 if (fromBitBoard & line7 && ((fromBitBoard >> 16) & (~chessBoard->allPieces)))
                 {
-                    addMove(fromSq, getNextSq(fromBitBoard >> 16), 0, moveList);
+                    addMove(fromSq, getSqInd(fromBitBoard >> 16), 0, moveList);
                 }
             }
                     
@@ -1061,15 +1244,15 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
             {
                 if (nextSq & promotionLine)
                 {
-                    generatePawnPromotionMoves(fromSq, getNextSq(nextSq), 0, moveList);
+                    generatePawnPromotionMoves(fromSq, getSqInd(nextSq), 0, moveList);
                 }else
                 {
-                    addMove(fromSq, getNextSq(nextSq), 0, moveList);
+                    addMove(fromSq, getSqInd(nextSq), 0, moveList);
                 }
 
                 if (fromBitBoard & line2 && ((fromBitBoard << 16) & (~chessBoard->allPieces)))
                 {
-                    addMove(fromSq, getNextSq(fromBitBoard << 16), 0, moveList);
+                    addMove(fromSq, getSqInd(fromBitBoard << 16), 0, moveList);
                 }
             } 
         }
@@ -1082,10 +1265,10 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
             {
                 if (toSq & promotionLine)
                 {
-                    generatePawnPromotionMoves(fromSq, getNextSq(toSq), 0, moveList);
+                    generatePawnPromotionMoves(fromSq, getSqInd(toSq), 0, moveList);
                 }else
                 {
-                    addMove(fromSq, getNextSq(toSq), 0, moveList);
+                    addMove(fromSq, getSqInd(toSq), 0, moveList);
                 }
                 
             }
@@ -1110,19 +1293,76 @@ void generateRookMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
     
     while (rookPositions != 0)
     {
-        uint8_t fromSq = getNextSq(rookPositions & -rookPositions);
+        uint8_t fromSq = getSqInd(rookPositions & -rookPositions);
         uint64_t rookAttacks = getRookAttackPattern(fromSq, chessBoard->allPieces, attackTables);
         rookAttacks &= ~friendlyPieces;
 
         while (rookAttacks != 0)
         {
-            uint8_t toSq = getNextSq(rookAttacks & -rookAttacks);
+            uint8_t toSq = getSqInd(rookAttacks & -rookAttacks);
             addMove(fromSq, toSq, 0, moveList);
             rookAttacks &= rookAttacks - 1;
         }
 
         rookPositions &= rookPositions - 1;
     }
+}
+
+void generateCastleMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
+{
+    if (isBlack(chessBoard))
+    {
+        uint8_t kingSqInd = getSqInd(e8);
+
+        if (canBlackShortCastle(chessBoard))
+        {
+            if (!(chessBoard->allPieces & f8) && !(chessBoard->allPieces & g8) && 
+                !isSquareAttacked(kingSqInd, chessBoard, attackTables, 1) && 
+                !isSquareAttacked(getSqInd(f8), chessBoard, attackTables, 1) && 
+                !isSquareAttacked(getSqInd(g8), chessBoard, attackTables, 1))
+            {
+                addMove(kingSqInd, getSqInd(g8), 1 << castleFlagPostion, moveList);
+            }
+                
+        }
+
+        if (canBlackLongCastle(chessBoard))
+        {
+            if (!(chessBoard->allPieces & b8) && !(chessBoard->allPieces & c8) && !(chessBoard->allPieces & d8) && 
+                !isSquareAttacked(kingSqInd, chessBoard, attackTables, 1) && 
+                !isSquareAttacked(getSqInd(c8), chessBoard, attackTables, 1) &&  
+                !isSquareAttacked(getSqInd(d8), chessBoard, attackTables, 1)) 
+            {
+                addMove(kingSqInd, getSqInd(c8), 1 << castleFlagPostion, moveList);
+            }    
+        }
+    }else
+    {
+        uint8_t kingSqInd = getSqInd(e1);
+        
+        if (canWhiteShortCastle(chessBoard))
+        {
+            if (!(chessBoard->allPieces & f1) && !(chessBoard->allPieces & g1) && 
+                !isSquareAttacked(kingSqInd, chessBoard, attackTables, 0) && 
+                !isSquareAttacked(getSqInd(f1), chessBoard, attackTables, 0) && 
+                !isSquareAttacked(getSqInd(g1), chessBoard, attackTables, 0))
+            {
+                addMove(kingSqInd, getSqInd(g1), 1 << castleFlagPostion, moveList);
+            }    
+        }
+
+        if (canWhiteLongCastle(chessBoard))
+        {
+            if (!(chessBoard->allPieces & b1) && !(chessBoard->allPieces & c1) && !(chessBoard->allPieces & d1) && 
+                !isSquareAttacked(kingSqInd, chessBoard, attackTables, 0) && 
+                !isSquareAttacked(getSqInd(c1), chessBoard, attackTables, 0) &&  
+                !isSquareAttacked(getSqInd(d1), chessBoard, attackTables, 0)) 
+            {
+                addMove(kingSqInd, getSqInd(c1), 1 << castleFlagPostion, moveList);
+            } 
+        }
+    }
+    
 }
 
 void generateMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
@@ -1133,6 +1373,7 @@ void generateMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList 
     generateRookMoves(chessBoard, attackTables, moveList);
     generateQueenMoves(chessBoard, attackTables, moveList);
     generatePawnMoves(chessBoard, attackTables, moveList);
+    generateCastleMoves(chessBoard, attackTables, moveList);
 }
 
 AttackTables* initAttackTables()
