@@ -30,11 +30,11 @@ typedef struct ChessBoard
 
 enum boardFlags
 {
-    colorMask = 0b00000001,
+    colorMask =            0b00000001,
     whiteShortCastleMask = 0b00000010,
-    whiteLongCastleMask = 0b00000100,
+    whiteLongCastleMask  = 0b00000100,
     blackShortCastleMask = 0b00001000,
-    blackLongCastleMask = 0b00010000
+    blackLongCastleMask  = 0b00010000
 };
 
 void showPosition(const ChessBoard* chessBoard);
