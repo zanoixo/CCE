@@ -1912,6 +1912,8 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, int d
     moveList->moves = malloc(sizeof(Move) * 256);
     moveList->nextIndex = 0;
 
+    uint8_t color = isBlack(chessBoard);
+
     ChessBoard* chessBoardOriginal = malloc(sizeof(ChessBoard));
 
     memcpy(chessBoardOriginal, chessBoard, sizeof(ChessBoard));
@@ -1921,7 +1923,20 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, int d
     for (int i = 0; i < moveList->nextIndex; i++)
     {
         makeMove(chessBoard, &moveList->moves[i]);
-        generatePositions(chessBoard, attackTables, depth - 1);
+
+        uint64_t kingPosition = chessBoard->whiteKing;
+
+        if (color == black)
+        {
+            kingPosition = chessBoard->blackKing;
+        }
+
+        if (!isSquareAttacked(getSqInd(kingPosition), chessBoard, attackTables, color))
+        {
+            generatePositions(chessBoard, attackTables, depth - 1);
+        }
+        
+        
         unMakeMove(chessBoard, &moveList->moves[i]);
 
         ASSERT_CHESS_BOARD(chessBoardOriginal, chessBoard);
@@ -1940,10 +1955,22 @@ void runMakeMoveTests()
     createPosition("startingPosition.txt", chessBoard);
     chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
 
-    generatePositions(chessBoard, attackTables, 5);
+    generatePositions(chessBoard, attackTables, 6);
 
     free(attackTables);
     free(chessBoard);
+
+    chessBoard = initChessBoard();
+    attackTables = initAttackTables();
+    createPosition("castellingPosition.txt", chessBoard);
+    chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
+
+    generatePositions(chessBoard, attackTables, 6);
+
+    free(attackTables);
+    free(chessBoard);
+
+    printf("[PASS] ALL MAKE AND UNMAKE MOVE TESTS PASSED\n");
 }
 
 void runAllTests()

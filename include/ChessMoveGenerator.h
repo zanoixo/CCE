@@ -88,5 +88,8 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
 void generateCastleMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList);
 void makeMove(ChessBoard *chessBoard, Move *move);
 void unMakeMove(ChessBoard *chessBoard, Move *move);
+int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attackTables, int isAttackedByWhite);
+uint8_t isBlack(ChessBoard *chessBoard);
+uint8_t getSqInd(uint64_t sq);
 
 #endif

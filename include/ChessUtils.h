@@ -14,6 +14,12 @@ enum Piece
     king = 6
 };
 
+enum color
+{
+    white = 0,
+    black = 1
+};
+
 void showBitBoard(uint64_t bitBoard);
 void sendError(char errorMsg[]);
 
