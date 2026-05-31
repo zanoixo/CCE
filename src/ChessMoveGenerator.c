@@ -2149,7 +2149,7 @@ void makePawnMove(ChessBoard *chessBoard, Move *move)
 
         if (move->flags & enPassantMask)
         {
-            moveTo = move->to >> 8;
+            moveTo = move->to << 8;
             chessBoard->allPieces &= ~moveTo;
         }
 
@@ -2230,7 +2230,7 @@ void makePawnMove(ChessBoard *chessBoard, Move *move)
 
         if (move->flags & enPassantMask)
         {
-            moveTo = move->to << 8;
+            moveTo = move->to >> 8;
             chessBoard->allPieces &= ~moveTo;
         }
 
@@ -2973,7 +2973,7 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move)
 
         if (move->flags & enPassantMask)
         {
-            moveTo = move->to >> 8;
+            moveTo = move->to << 8;
             chessBoard->allPieces |= moveTo;
         }
 
@@ -3052,7 +3052,7 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move)
 
         if (move->flags & enPassantMask)
         {
-            moveTo = move->to << 8;
+            moveTo = move->to >> 8;
             chessBoard->allPieces |= moveTo;
         }
 
