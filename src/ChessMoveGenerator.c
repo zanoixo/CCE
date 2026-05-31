@@ -1080,9 +1080,14 @@ uint8_t getPieceFromSquare(uint64_t sq, uint8_t isBlack, ChessBoard *chessBoard)
     return 0;
 }
 
-uint8_t getCapturedPiece(uint8_t flags)
+uint8_t getCapturedPiece(uint16_t flags)
 {
     return (flags & capturePieceMask) >> captureFlagPostion;
+}
+
+uint8_t getPromotionPiece(uint16_t flags)
+{
+    return (flags & promotionPieceMask) >> promotionFlagPosition;
 }
 
 uint8_t getSqInd(uint64_t sq)
@@ -1177,7 +1182,7 @@ void addMove(uint64_t from, uint64_t to, uint8_t flags, MoveList* moveList)
 
 void generatePawnPromotionMoves(uint64_t from, uint64_t to, uint8_t flags, MoveList* moveList)
 {
-    for (int i = 0; i < numOfPromotionPieces; i++)
+    for (int i = 1; i < numOfPromotionPieces; i++)
     {
         addMove(from, to, flags + i, moveList);
     }
@@ -2099,6 +2104,7 @@ void makePawnMove(ChessBoard *chessBoard, Move *move)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
+    uint8_t promotion = getPromotionPiece(move->flags);
     uint64_t moveTo = move->to;
 
     if (isBlacksMove)
@@ -2150,6 +2156,29 @@ void makePawnMove(ChessBoard *chessBoard, Move *move)
         }
 
         chessBoard->whitePieces &= ~moveTo;
+
+        switch (promotion)
+        {
+            case knightPromotion:
+                chessBoard->blackPawns &= ~move->to;
+                chessBoard->blackKnights |= move->to;
+                break;
+            case bishopPromotion:
+                chessBoard->blackPawns &= ~move->to;
+                chessBoard->blackBishops |= move->to;
+                break;
+            case rookPromotion:
+                chessBoard->blackPawns &= ~move->to;
+                chessBoard->blackRooks |= move->to;
+                break;
+            case queenPromotion:
+                chessBoard->blackPawns &= ~move->to;
+                chessBoard->blackQueens |= move->to;
+                break;
+            case 0:
+                break;
+        }
+        
         
     }else
     {
@@ -2200,6 +2229,28 @@ void makePawnMove(ChessBoard *chessBoard, Move *move)
         }
 
         chessBoard->blackPieces &= ~moveTo;
+
+        switch (promotion)
+        {
+            case knightPromotion:
+                chessBoard->whitePawns &= ~move->to;
+                chessBoard->whiteKnights |= move->to;
+                break;
+            case bishopPromotion:
+                chessBoard->whitePawns &= ~move->to;
+                chessBoard->whiteBishops |= move->to;
+                break;
+            case rookPromotion:
+                chessBoard->whitePawns &= ~move->to;
+                chessBoard->whiteRooks |= move->to;
+                break;
+            case queenPromotion:
+                chessBoard->whitePawns &= ~move->to;
+                chessBoard->whiteQueens |= move->to;
+                break;
+            case 0:
+                break;
+        }
     }
 }
 
@@ -2758,10 +2809,33 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
+    uint8_t promotion = getPromotionPiece(move->flags);
     uint64_t moveTo = move->to;
 
     if (isBlacksMove)
     {
+        switch (promotion)
+        {
+            case knightPromotion:
+                chessBoard->blackPawns |= move->to;
+                chessBoard->blackKnights &= ~move->to;
+                break;
+            case bishopPromotion:
+                chessBoard->blackPawns |= move->to;
+                chessBoard->blackBishops &= ~move->to;
+                break;
+            case rookPromotion:
+                chessBoard->blackPawns |= move->to;
+                chessBoard->blackRooks &= ~move->to;
+                break;
+            case queenPromotion:
+                chessBoard->blackPawns |= move->to;
+                chessBoard->blackQueens &= ~move->to;
+                break;
+            case 0:
+                break;
+        }
+
         chessBoard->blackPawns &= ~move->to;
         chessBoard->blackPawns |= move->from;
         chessBoard->blackPieces &= ~move->to;
@@ -2811,6 +2885,28 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move)
     }
     else
     {
+        switch (promotion)
+        {
+            case knightPromotion:
+                chessBoard->whitePawns |= move->to;
+                chessBoard->whiteKnights &= ~move->to;
+                break;
+            case bishopPromotion:
+                chessBoard->whitePawns |= move->to;
+                chessBoard->whiteBishops &= ~move->to;
+                break;
+            case rookPromotion:
+                chessBoard->whitePawns |= move->to;
+                chessBoard->whiteRooks &= ~move->to;
+                break;
+            case queenPromotion:
+                chessBoard->whitePawns |= move->to;
+                chessBoard->whiteQueens &= ~move->to;
+                break;
+            case 0:
+                break;
+        }
+
         chessBoard->whitePawns &= ~move->to;
         chessBoard->whitePawns |= move->from;
         chessBoard->whitePieces &= ~move->to;
@@ -2862,6 +2958,8 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move)
 
 void unMakeMove(ChessBoard *chessBoard, Move *move)
 {
+    chessBoard->flags ^= colorMask;
+
     uint8_t piece = getPieceFromSquare(move->to, isBlack(chessBoard), chessBoard);
 
     switch (piece)
@@ -2912,6 +3010,8 @@ void makeMove(ChessBoard *chessBoard, Move *move)
             makeKingMove(chessBoard, move);
             break;
     }
+
+    chessBoard->flags ^= colorMask;
 }
 
 AttackTables* initAttackTables()

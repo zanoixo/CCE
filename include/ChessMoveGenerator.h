@@ -31,33 +31,33 @@ typedef struct AttackTables
 
 enum PromotionPieces
 {
-    queenPromotion = 0,
-    rookPromotion = 1,
-    bishopPromotion = 2,
-    knightPromotion = 3,
-    numOfPromotionPieces = 4
+    queenPromotion = 1,
+    rookPromotion = 2,
+    bishopPromotion = 3,
+    knightPromotion = 4,
+    numOfPromotionPieces = 5
 };
 
 enum MoveFlags
 {
-    promotionPieceMask         = 0b0000000011,
-    capturePieceMask           = 0b0000011100,
-    enPassantMask              = 0b0000100000,
-    removeWhiteShortCastleFlag = 0b0001000000,
-    removeWhiteLongCastleFlag  = 0b0010000000,
-    removeBlackShortCastleFlag = 0b0100000000,
-    removeBlackLongCastleFlag  = 0b1000000000
+    promotionPieceMask         = 0b00000000111,
+    capturePieceMask           = 0b00000111000,
+    enPassantMask              = 0b00001000000,
+    removeWhiteShortCastleFlag = 0b00010000000,
+    removeWhiteLongCastleFlag  = 0b00100000000,
+    removeBlackShortCastleFlag = 0b01000000000,
+    removeBlackLongCastleFlag  = 0b10000000000
 };
 
 enum MoveFlagsPosition
 {
     promotionFlagPosition = 0,
-    captureFlagPostion = 2,
-    enPassantFlagPosition = 5,
-    removeWhiteShortCastleFlagPosition = 6,
-    removeWhiteLongCastleFlagPosition = 7,
-    removeBlackShortCastleFlagPosition = 8,
-    removeBlackLongCastleFlagPosition = 9
+    captureFlagPostion = 3,
+    enPassantFlagPosition = 6,
+    removeWhiteShortCastleFlagPosition = 7,
+    removeWhiteLongCastleFlagPosition = 8,
+    removeBlackShortCastleFlagPosition = 9,
+    removeBlackLongCastleFlagPosition = 10
 };
 
 typedef struct Move
