@@ -1,0 +1,13 @@
+#ifndef CHESS_EVAL_H
+
+
+#define MAX_INT 1000000000
+#define MIN_INT -1000000000
+
+#define PAWN_VALUE   100
+#define KNIGHT_VALUE 330
+#define BISHOP_VALUE 320
+#define ROOK_VALUE   500
+#define QUEEN_VALUE  900
+
+#endif
