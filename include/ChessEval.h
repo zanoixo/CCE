@@ -1,5 +1,6 @@
 #ifndef CHESS_EVAL_H
 
+#include "ChessMoveGenerator.h"
 
 #define MAX_INT 1000000000
 #define MIN_INT -1000000000
@@ -11,8 +12,14 @@
 #define BISHOP_VALUE 320
 #define ROOK_VALUE   500
 #define QUEEN_VALUE  900
+#define KING_VALUE  2000
+#define QUEEN_PROMOTION_VALUE 500000
+#define ROOK_PROMOTION_VALUE 400000
+#define KNIGHT_PROMOTION_VALUE 300000
+#define BISHOP_PROMOTION_VALUE 200000
 #define INNER_CENTER_VALUE 20
 #define OUTER_CENTER_VALUE 10
+
 
 typedef struct MoveScore
 {

@@ -58,6 +58,24 @@ int evaluatePosition(ChessBoard *chessBoard)
     return score;
 }
 
+void setBestMoveFirst(MoveList* moveList, int moveCount)
+{
+    Move bestMove = moveList->moves[moveCount];
+    int moveInd = moveCount;
+    for (int i = moveCount + 1; i < moveList->nextIndex; i++)
+    {
+        if (moveList->moves[i].score > bestMove.score)
+        {
+            bestMove = moveList->moves[i];
+            moveInd = i;
+        }
+        
+    }
+    Move tmp = moveList->moves[moveInd];
+    moveList->moves[moveCount] = bestMove;
+    moveList->moves[moveInd] = tmp;
+}
+
 MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int depth, int alpha, int beta)
 {
     MoveScore bestMove;
@@ -74,6 +92,8 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
+        //setBestMoveFirst(&moveList, i);
+
         makeMove(chessBoard, &moveList.moves[i]);
 
         if (!isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1))
@@ -143,6 +163,8 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
+        //setBestMoveFirst(&moveList, i);
+
         makeMove(chessBoard, &moveList.moves[i]);
 
         if (!isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0))
