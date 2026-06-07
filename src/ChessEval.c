@@ -60,19 +60,17 @@ int evaluatePosition(ChessBoard *chessBoard)
 
 void setBestMoveFirst(MoveList* moveList, int moveCount)
 {
-    Move bestMove = moveList->moves[moveCount];
     int moveInd = moveCount;
     for (int i = moveCount + 1; i < moveList->nextIndex; i++)
     {
-        if (moveList->moves[i].score > bestMove.score)
+        if (moveList->moves[i].score > moveList->moves[moveInd].score)
         {
-            bestMove = moveList->moves[i];
             moveInd = i;
         }
         
     }
-    Move tmp = moveList->moves[moveInd];
-    moveList->moves[moveCount] = bestMove;
+    Move tmp = moveList->moves[moveCount];
+    moveList->moves[moveCount] = moveList->moves[moveInd];
     moveList->moves[moveInd] = tmp;
 }
 
@@ -92,7 +90,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
-        //setBestMoveFirst(&moveList, i);
+        setBestMoveFirst(&moveList, i);
 
         makeMove(chessBoard, &moveList.moves[i]);
 
@@ -163,7 +161,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
-        //setBestMoveFirst(&moveList, i);
+        setBestMoveFirst(&moveList, i);
 
         makeMove(chessBoard, &moveList.moves[i]);
 
@@ -222,10 +220,10 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables)
     MoveScore bestMove;
     if (isBlack(chessBoard))
     {
-        bestMove = blackMove(chessBoard, attackTables, 7, MIN_INT, MAX_INT);
+        bestMove = blackMove(chessBoard, attackTables, 6, MIN_INT, MAX_INT);
     }else
     {
-        bestMove = whiteMove(chessBoard, attackTables, 7, MIN_INT, MAX_INT);
+        bestMove = whiteMove(chessBoard, attackTables, 6, MIN_INT, MAX_INT);
     }
     return bestMove;
 }
