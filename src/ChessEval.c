@@ -205,20 +205,21 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
 
     MoveScore moveScore;
     int legalMoves = 0;
-
+    
     generateMoves(chessBoard, attackTables, &moveList);
-
+    
     findKillerMoves(&moveList, depth);
-
+    
     for (int i = 0; i < moveList.nextIndex; i++)
     {
         //MOVE_COUNTER++;
         setBestMoveFirst(&moveList, i);
-
+        
         makeMove(chessBoard, &moveList.moves[i]);
-
+        
         if (!isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0))
         {
+            
             legalMoves++;
             if (depth > 0)
             {
@@ -269,7 +270,6 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables)
 {
     MoveScore bestMove;
     initKillerMoves();
-
     if (isBlack(chessBoard))
     {
         bestMove = blackMove(chessBoard, attackTables, MAX_DEPTH, MIN_INT, MAX_INT);

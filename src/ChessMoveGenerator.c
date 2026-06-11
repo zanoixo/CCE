@@ -1151,6 +1151,7 @@ uint8_t canBlackLongCastle(ChessBoard *chessBoard)
 
 int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attackTables, int isAttackedByWhite)
 {
+    
     uint64_t enemyKnights = chessBoard->blackKnights;
     uint64_t enemyBishops = chessBoard->blackBishops;
     uint64_t enemyRooks = chessBoard->blackRooks;
@@ -1158,7 +1159,7 @@ int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attack
     uint64_t enemyPawns = chessBoard->blackPawns;
     uint64_t enemyKing = chessBoard->blackKing;
     uint64_t *friendlyPawnAttacks = attackTables->whitePanwsAttacks;
-
+    
     if (isAttackedByWhite)
     {
         enemyKnights = chessBoard->whiteKnights;
@@ -1180,14 +1181,14 @@ int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attack
     {
         return 1;
     }
-
+    
     uint64_t bishopAndQueenAttacks = getBishopAttackPattern(sqInd, chessBoard->allPieces, attackTables);
-
+    
     if ((bishopAndQueenAttacks & enemyBishops) || (bishopAndQueenAttacks & enemyQueens))
     {
         return 1;
     }
-
+    
     uint64_t rookAndQueenAttacks = getRookAttackPattern(sqInd, chessBoard->allPieces, attackTables);
     
     if ((rookAndQueenAttacks & enemyRooks) || (rookAndQueenAttacks & enemyQueens))

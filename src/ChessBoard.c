@@ -65,6 +65,147 @@ ChessBoard* initChessBoard()
     return chessBoard;
 }
 
+void initStartingPosition(ChessBoard *chessBoard)
+{
+    chessBoard->whitePawns = 0b00000000ULL << 56 |
+                             0b00000000ULL << 48 |
+                             0b00000000ULL << 40 |
+                             0b00000000ULL << 32 |
+                             0b00000000ULL << 24 |
+                             0b00000000ULL << 16 |
+                             0b11111111ULL << 8  |
+                             0b00000000ULL;
+
+    chessBoard->whiteKnights = 0b00000000ULL << 56 |
+                               0b00000000ULL << 48 |
+                               0b00000000ULL << 40 |
+                               0b00000000ULL << 32 |
+                               0b00000000ULL << 24 |
+                               0b00000000ULL << 16 |
+                               0b00000000ULL << 8  |
+                               0b01000010ULL;
+
+    chessBoard->whiteBishops = 0b00000000ULL << 56 |
+                               0b00000000ULL << 48 |
+                               0b00000000ULL << 40 |
+                               0b00000000ULL << 32 |
+                               0b00000000ULL << 24 |
+                               0b00000000ULL << 16 |
+                               0b00000000ULL << 8  |
+                               0b00100100ULL;
+
+    chessBoard->whiteRooks = 0b00000000ULL << 56 |
+                             0b00000000ULL << 48 |
+                             0b00000000ULL << 40 |
+                             0b00000000ULL << 32 |
+                             0b00000000ULL << 24 |
+                             0b00000000ULL << 16 |
+                             0b00000000ULL << 8  |
+                             0b10000001ULL;
+
+    chessBoard->whiteQueens = 0b00000000ULL << 56 |
+                              0b00000000ULL << 48 |
+                              0b00000000ULL << 40 |
+                              0b00000000ULL << 32 |
+                              0b00000000ULL << 24 |
+                              0b00000000ULL << 16 |
+                              0b00000000ULL << 8  |
+                              0b00001000ULL;
+
+    chessBoard->whiteKing = 0b00000000ULL << 56 |
+                            0b00000000ULL << 48 |
+                            0b00000000ULL << 40 |
+                            0b00000000ULL << 32 |
+                            0b00000000ULL << 24 |
+                            0b00000000ULL << 16 |
+                            0b00000000ULL << 8  |
+                            0b00010000ULL;
+
+    chessBoard->blackPawns = 0b00000000ULL << 56 |
+                             0b11111111ULL << 48 |
+                             0b00000000ULL << 40 |
+                             0b00000000ULL << 32 |
+                             0b00000000ULL << 24 |
+                             0b00000000ULL << 16 |
+                             0b00000000ULL << 8  |
+                             0b00000000ULL;
+
+    chessBoard->blackKnights = 0b01000010ULL << 56 |
+                               0b00000000ULL << 48 |
+                               0b00000000ULL << 40 |
+                               0b00000000ULL << 32 |
+                               0b00000000ULL << 24 |
+                               0b00000000ULL << 16 |
+                               0b00000000ULL << 8  |
+                               0b00000000ULL;
+
+    chessBoard->blackBishops = 0b00100100ULL << 56 |
+                               0b00000000ULL << 48 |
+                               0b00000000ULL << 40 |
+                               0b00000000ULL << 32 |
+                               0b00000000ULL << 24 |
+                               0b00000000ULL << 16 |
+                               0b00000000ULL << 8  |
+                               0b00000000ULL;
+
+    chessBoard->blackRooks = 0b10000001ULL << 56 |
+                             0b00000000ULL << 48 |
+                             0b00000000ULL << 40 |
+                             0b00000000ULL << 32 |
+                             0b00000000ULL << 24 |
+                             0b00000000ULL << 16 |
+                             0b00000000ULL << 8  |
+                             0b00000000ULL;
+
+    chessBoard->blackQueens = 0b00001000ULL << 56 |
+                              0b00000000ULL << 48 |
+                              0b00000000ULL << 40 |
+                              0b00000000ULL << 32 |
+                              0b00000000ULL << 24 |
+                              0b00000000ULL << 16 |
+                              0b00000000ULL << 8  |
+                              0b00000000ULL;
+
+    chessBoard->blackKing = 0b00010000ULL << 56 |
+                            0b00000000ULL << 48 |
+                            0b00000000ULL << 40 |
+                            0b00000000ULL << 32 |
+                            0b00000000ULL << 24 |
+                            0b00000000ULL << 16 |
+                            0b00000000ULL << 8  |
+                            0b00000000ULL;
+
+    chessBoard->blackPieces = 0b11111111ULL << 56 |
+                              0b11111111ULL << 48 |
+                              0b00000000ULL << 40 |
+                              0b00000000ULL << 32 |
+                              0b00000000ULL << 24 |
+                              0b00000000ULL << 16 |
+                              0b00000000ULL << 8  |
+                              0b00000000ULL;
+
+    chessBoard->whitePieces = 0b00000000ULL << 56 |
+                              0b00000000ULL << 48 |
+                              0b00000000ULL << 40 |
+                              0b00000000ULL << 32 |
+                              0b00000000ULL << 24 |
+                              0b00000000ULL << 16 |
+                              0b11111111ULL << 8  |
+                              0b11111111ULL;
+
+    chessBoard->allPieces = 0b11111111ULL << 56 |
+                            0b11111111ULL << 48 |
+                            0b00000000ULL << 40 |
+                            0b00000000ULL << 32 |
+                            0b00000000ULL << 24 |
+                            0b00000000ULL << 16 |
+                            0b11111111ULL << 8  |
+                            0b11111111ULL;
+
+    chessBoard->enPassantSq = 0;
+    chessBoard->flags = whiteShortCastleMask | whiteLongCastleMask | blackShortCastleMask | blackLongCastleMask;     
+}
+
 void createPosition(char fileName[], ChessBoard *chessBoard)
 {
     int squareIndex = 0;
