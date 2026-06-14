@@ -22,3 +22,4 @@ enum color
 
 void showBitBoard(uint64_t bitBoard);
 void sendError(char errorMsg[]);
+uint64_t getTimeMs();

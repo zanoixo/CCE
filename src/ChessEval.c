@@ -21,13 +21,14 @@ uint64_t outerCenterEval = 0b00000000ULL << 56 |
                            0b00000000ULL << 8  |
                            0b00000000ULL;
 
-Move killerMoves[MAX_DEPTH + 1][2];
-uint64_t LEGAL_MOVES = 84998978956;
-uint64_t MOVE_COUNTER = 0;
+Move killerMoves[KILLER_MOVE_DEPTH][2];
+uint64_t stopTime = 0;
+int timeCheckCounter = 1;
+int timeLimitReached = 0;
 
 void initKillerMoves()
 {
-    for (int i = 0; i < MAX_DEPTH + 1; i++)
+    for (int i = 0; i < KILLER_MOVE_DEPTH; i++)
     {
         killerMoves[i][0] = (Move){0, 0, 0, 0};
         killerMoves[i][1] = (Move){0, 0, 0, 0};
@@ -199,6 +200,24 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
+        timeCheckCounter++;
+        
+        if ((timeCheckCounter & TIME_CHECK) == 0)
+        {
+            timeCheckCounter = 1;
+            
+            if (stopTime < getTimeMs())
+            {
+                timeLimitReached = 1;
+            }
+            
+        }
+
+        if (timeLimitReached)
+        {
+            return 0;
+        }
+
         setBestMoveFirst(&moveList, i);
 
         if (!getCapturedPiece(moveList.moves[i].flags) && !getPromotionPiece(moveList.moves[i].flags))
@@ -256,6 +275,24 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
+        timeCheckCounter++;
+        
+        if ((timeCheckCounter & TIME_CHECK) == 0)
+        {
+            timeCheckCounter = 1;
+            
+            if (stopTime < getTimeMs())
+            {
+                timeLimitReached = 1;
+            }
+            
+        }
+
+        if (timeLimitReached)
+        {
+            return 0;
+        }
+
         setBestMoveFirst(&moveList, i);
 
         if (!getCapturedPiece(moveList.moves[i].flags) && !getPromotionPiece(moveList.moves[i].flags))
@@ -314,7 +351,25 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
-        //MOVE_COUNTER++;
+        timeCheckCounter++;
+
+        if ((timeCheckCounter & TIME_CHECK) == 0)
+        {
+            timeCheckCounter = 1;
+            
+            if (stopTime < getTimeMs())
+            {
+                timeLimitReached = 1;
+            }
+            
+        }
+
+        if (timeLimitReached)
+        {
+            return bestMove;
+        }
+        
+        
         setBestMoveFirst(&moveList, i);
 
         makeMove(chessBoard, &moveList.moves[i]);
@@ -388,7 +443,24 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
     
     for (int i = 0; i < moveList.nextIndex; i++)
     {
-        //MOVE_COUNTER++;
+        timeCheckCounter++;
+        
+        if ((timeCheckCounter & TIME_CHECK) == 0)
+        {
+            timeCheckCounter = 1;
+            
+            if (stopTime < getTimeMs())
+            {
+                timeLimitReached = 1;
+            }
+            
+        }
+
+        if (timeLimitReached)
+        {
+            return bestMove;
+        }
+
         setBestMoveFirst(&moveList, i);
         
         makeMove(chessBoard, &moveList.moves[i]);
@@ -437,17 +509,42 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
     return bestMove;
 }
 
-MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables)
+MoveScore iterativeSearch(ChessBoard *chessBoard, AttackTables *attackTables, int depth)
 {
     MoveScore bestMove;
     initKillerMoves();
     if (isBlack(chessBoard))
     {
-        bestMove = blackMove(chessBoard, attackTables, MAX_DEPTH, MIN_INT, MAX_INT);
+        bestMove = blackMove(chessBoard, attackTables, depth, MIN_INT, MAX_INT);
     }else
     {
-        bestMove = whiteMove(chessBoard, attackTables, MAX_DEPTH, MIN_INT, MAX_INT);
+        bestMove = whiteMove(chessBoard, attackTables, depth, MIN_INT, MAX_INT);
     }
-    //printf("Moves cut: %llu\n", LEGAL_MOVES - MOVE_COUNTER);
     return bestMove;
+}
+
+MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables)
+{
+    MoveScore currentBestMove;
+    MoveScore depthBestMove;
+
+    timeLimitReached = 0;
+    timeCheckCounter = 1;
+    stopTime = getTimeMs() + 9900;
+
+    uint32_t depth = 1;
+
+    while (!timeLimitReached)
+    {
+        printf("Started searching depth: %d\n", depth);
+        depthBestMove = iterativeSearch(chessBoard, attackTables, depth);
+
+        if (!timeLimitReached)
+        {
+            currentBestMove = depthBestMove;
+        }
+        
+        depth++;
+    }
+    return currentBestMove;
 }
