@@ -77,6 +77,24 @@ const uint64_t line1 = 0b00000000ULL << 56 |
                        0b00000000ULL << 8  |
                        0b11111111ULL;
 
+const uint64_t line6 = 0b00000000ULL << 56 |
+                       0b00000000ULL << 48 |
+                       0b11111111ULL << 40 |
+                       0b00000000ULL << 32 |
+                       0b00000000ULL << 24 |
+                       0b00000000ULL << 16 |
+                       0b00000000ULL << 8  |
+                       0b00000000ULL;
+
+const uint64_t line3 = 0b00000000ULL << 56 |
+                       0b00000000ULL << 48 |
+                       0b00000000ULL << 40 |
+                       0b00000000ULL << 32 |
+                       0b00000000ULL << 24 |
+                       0b11111111ULL << 16 |
+                       0b00000000ULL << 8  |
+                       0b00000000ULL;
+
 const uint64_t e1 = 0b00000000ULL << 56 |
                     0b00000000ULL << 48 |
                     0b00000000ULL << 40 |
@@ -1380,6 +1398,7 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
     uint64_t enemyPieces = chessBoard->blackPieces;
     uint64_t *pawnAttackTable = attackTables->whitePanwsAttacks;
     uint64_t promotionLine = line8;
+    uint64_t enpassantLine = line6;
 
     if (isBlack(chessBoard))
     {
@@ -1387,6 +1406,7 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
         enemyPieces = chessBoard->whitePieces;
         pawnAttackTable = attackTables->blackPanwsAttacks;
         promotionLine = line1;
+        enpassantLine = line3;
     }  
     
     while (pawnPositions != 0)
@@ -1453,7 +1473,7 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
                  
             }
 
-            if (chessBoard->enPassantSq & toSq)
+            if ((chessBoard->enPassantSq & toSq) && (chessBoard->enPassantSq & enpassantLine))
             {
                 uint8_t flags = (pawn << captureFlagPostion) | (1 << enPassantFlagPosition);
                 addMove(fromSq, toSq, flags, moveList, calculateCaptureMoveScore(pawn, pawn));

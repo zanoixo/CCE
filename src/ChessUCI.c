@@ -5,6 +5,7 @@
 #include <ChessEval.h>
 #include <ChessMoveGenerator.h>
 #include <ChessUtils.h>
+#include<ChessTests.h>
 
 #define MAX_LINE 2048
 
@@ -192,7 +193,8 @@ void uci_loop()
             char *moves = strstr(line, "moves"); 
             if (moves)
             { 
-                moves += 6; applyUCIMoves(moves, chessBoard, attackTables); 
+                moves += 6; 
+                applyUCIMoves(moves, chessBoard, attackTables); 
             } 
         } 
         

@@ -2,8 +2,6 @@
 #include "ChessMoveGenerator.h"
 #include "ChessUtils.h"
 #include "ChessEval.h"
-#include "ChessTests.h"
-#include <string.h>
 
 uint64_t innerCenterEval = 0b00000000ULL << 56 |
                            0b00000000ULL << 48 |
@@ -466,7 +464,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
         setBestMoveFirst(&moveList, i);
         
         makeMove(chessBoard, &moveList.moves[i]);
-        
+
         int isChecked = isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0);
 
         if (!isChecked)
@@ -529,21 +527,15 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, uint64_t 
 {
     MoveScore currentBestMove;
     MoveScore depthBestMove;
-    ChessBoard* chessBoardOriginal = malloc(sizeof(ChessBoard));
     timeLimitReached = 0;
     timeCheckCounter = 1;
     stopTime = getTimeMs() + timePerMove - 100;
 
     uint32_t depth = 1;
-
     while (!timeLimitReached)
     {
-        
-        memcpy(chessBoardOriginal, chessBoard, sizeof(ChessBoard));
-
         depthBestMove = iterativeSearch(chessBoard, attackTables, depth);
-        ASSERT_CHESS_BOARD(chessBoardOriginal, chessBoard);
-
+        
         if (!timeLimitReached)
         {
             currentBestMove = depthBestMove;
