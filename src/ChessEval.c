@@ -80,8 +80,62 @@ int countPieces(uint64_t bitboard)
     return count;
 }
 
+int evaluateMobility(ChessBoard* chessBoard, AttackTables* attackTables, int isBlack)
+{
+    int mobility = 0;
 
-int evaluatePosition(ChessBoard *chessBoard)
+    uint64_t knights = chessBoard->whiteKnights;
+    uint64_t bishops = chessBoard->whiteBishops;
+    uint64_t rooks = chessBoard->whiteRooks;
+    uint64_t queens = chessBoard->whiteQueens;
+    uint64_t friendlyPieces = chessBoard->whitePieces;
+
+    if (isBlack)
+    {
+        knights = chessBoard->blackKnights;
+        bishops = chessBoard->blackBishops;
+        rooks = chessBoard->blackRooks;
+        queens = chessBoard->blackQueens;
+        friendlyPieces = chessBoard->blackPieces;
+    }
+    
+    while (knights)
+    {
+        int sq = getSqInd(knights);
+        uint64_t attacks = attackTables->knightAttacks[sq] & ~friendlyPieces;
+        mobility += countPieces(attacks) * KNIGHT_MOBILITY_VALUE;
+        knights &= knights - 1;
+    }
+
+    while (bishops)
+    {
+        int sq = getSqInd(bishops);
+        uint64_t attacks = getBishopAttackPattern(sq, chessBoard->allPieces, attackTables) & ~friendlyPieces;
+        mobility += countPieces(attacks) * BISHOP_MOBILITY_VALUE;
+        bishops &= bishops - 1;
+    }
+
+    while (rooks)
+    {
+        int sq = getSqInd(rooks);
+        uint64_t attacks = getRookAttackPattern(sq, chessBoard->allPieces, attackTables) & ~friendlyPieces;
+        mobility += countPieces(attacks) * ROOK_MOBILITY_VALUE;
+        rooks &= rooks - 1;
+    }
+
+    while (queens)
+    {
+        int sq = getSqInd(queens);
+        uint64_t attacks = getQueenAttackPattern(sq, chessBoard->allPieces, attackTables) & ~friendlyPieces;
+        mobility += countPieces(attacks) * QUEEN_MOBILITY_VALUE;
+        queens &= queens - 1;
+    }
+
+    return mobility;
+}
+
+
+int evaluatePosition(ChessBoard *chessBoard, AttackTables* attackTables)
 {
     int score = 0;
 
@@ -92,6 +146,7 @@ int evaluatePosition(ChessBoard *chessBoard)
     score += countPieces(chessBoard->whiteQueens)  * QUEEN_VALUE;
     score += countPieces(chessBoard->whitePieces & innerCenterEval) * INNER_CENTER_VALUE;
     score += countPieces(chessBoard->whitePieces & outerCenterEval) * OUTER_CENTER_VALUE;
+    score += evaluateMobility(chessBoard, attackTables, white);
 
     score -= countPieces(chessBoard->blackPawns)   * PAWN_VALUE;
     score -= countPieces(chessBoard->blackKnights) * KNIGHT_VALUE;
@@ -100,6 +155,7 @@ int evaluatePosition(ChessBoard *chessBoard)
     score -= countPieces(chessBoard->blackQueens)  * QUEEN_VALUE;
     score -= countPieces(chessBoard->blackPieces & innerCenterEval) * INNER_CENTER_VALUE;
     score -= countPieces(chessBoard->blackPieces & outerCenterEval) * OUTER_CENTER_VALUE;
+    score -= evaluateMobility(chessBoard, attackTables, black);
 
     return score;
 }
@@ -122,7 +178,7 @@ void setBestMoveFirst(MoveList* moveList, int moveCount)
 
 int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, int beta)
 {
-    int score = evaluatePosition(chessBoard);
+    int score = evaluatePosition(chessBoard, attackTables);
 
     if (score >= beta)
     {
@@ -179,7 +235,7 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
 
 int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, int beta)
 {
-    int score = evaluatePosition(chessBoard);
+    int score = evaluatePosition(chessBoard, attackTables);
 
     if (score <= alpha)
     {
