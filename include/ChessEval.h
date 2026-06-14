@@ -2,7 +2,7 @@
 
 #include "ChessMoveGenerator.h"
 
-#define MAX_DEPTH 7
+#define MAX_DEPTH 8
 
 #define MAX_INT 1000000000
 #define MIN_INT -1000000000
@@ -33,3 +33,5 @@ typedef struct MoveScore
 MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables);
 MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int depth, int alpha, int beta);
 MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int depth, int alpha, int beta);
+int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, int beta);
+int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, int beta);
