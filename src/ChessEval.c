@@ -409,7 +409,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
     if (legalMoves == 0)
     {
         if (isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1))
-            bestMove.score = BLACK_MATED - depthSearched;
+            bestMove.score = BLACK_MATED;
         else
             bestMove.score = 0;
 
@@ -500,7 +500,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
     if (legalMoves == 0)
     {
         if (isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0))
-            bestMove.score = WHITE_MATED - depthSearched;
+            bestMove.score = WHITE_MATED;
         else
             bestMove.score = 0;
 
@@ -535,13 +535,19 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, uint64_t 
     currentDepth = 1;
     while (!timeLimitReached)
     {
-        printf("depth searched:%d\n", currentDepth);
+        printf("Current search depth: %d\n", currentDepth);
         depthBestMove = iterativeSearch(chessBoard, attackTables);
         
         if (!timeLimitReached)
         {
             currentBestMove = depthBestMove;
         }
+
+        if (currentBestMove.score == BLACK_MATED || currentBestMove.score == WHITE_MATED)
+        {
+            break;
+        }
+        
         
         currentDepth++;  
     }
