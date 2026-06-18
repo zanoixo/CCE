@@ -34,6 +34,7 @@ void ASSERT(int acctual, int expected)
 
 void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
 {
+    int isSame = 1;
     if (original->allPieces != modified->allPieces)
     {
         printf("ALL PIECES ASSERT FAILED\n");
@@ -41,7 +42,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->allPieces);
         printf("GOT: \n");
         showBitBoard(modified->allPieces);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->blackPieces != modified->blackPieces)
@@ -51,7 +52,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->blackPieces);
         printf("GOT: \n");
         showBitBoard(modified->blackPieces);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->blackPawns != modified->blackPawns)
@@ -61,7 +62,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->blackPawns);
         printf("GOT: \n");
         showBitBoard(modified->blackPawns);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->blackKnights != modified->blackKnights)
@@ -71,7 +72,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->blackKnights);
         printf("GOT: \n");
         showBitBoard(modified->blackKnights);
-        exit(1);
+        isSame = 0;
     }
     
     if (original->blackBishops != modified->blackBishops)
@@ -81,7 +82,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->blackBishops);
         printf("GOT: \n");
         showBitBoard(modified->blackBishops);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->blackRooks != modified->blackRooks)
@@ -91,7 +92,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->blackRooks);
         printf("GOT: \n");
         showBitBoard(modified->blackRooks);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->blackQueens != modified->blackQueens)
@@ -101,7 +102,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->blackQueens);
         printf("GOT: \n");
         showBitBoard(modified->blackQueens);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->blackKing != modified->blackKing)
@@ -111,7 +112,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->blackKing);
         printf("GOT: \n");
         showBitBoard(modified->blackKing);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->whitePieces != modified->whitePieces)
@@ -121,7 +122,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->whitePieces);
         printf("GOT: \n");
         showBitBoard(modified->whitePieces);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->whitePawns != modified->whitePawns)
@@ -131,7 +132,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->whitePawns);
         printf("GOT: \n");
         showBitBoard(modified->whitePawns);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->whiteKnights != modified->whiteKnights)
@@ -141,7 +142,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->whiteKnights);
         printf("GOT: \n");
         showBitBoard(modified->whiteKnights);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->whiteBishops != modified->whiteBishops)
@@ -151,7 +152,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->whiteBishops);
         printf("GOT: \n");
         showBitBoard(modified->whiteBishops);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->whiteRooks != modified->whiteRooks)
@@ -161,7 +162,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->whiteRooks);
         printf("GOT: \n");
         showBitBoard(modified->whiteRooks);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->whiteQueens != modified->whiteQueens)
@@ -171,7 +172,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->whiteQueens);
         printf("GOT: \n");
         showBitBoard(modified->whiteQueens);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->whiteKing != modified->whiteKing)
@@ -181,7 +182,7 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->whiteKing);
         printf("GOT: \n");
         showBitBoard(modified->whiteKing);
-        exit(1);
+        isSame = 0;
     }
 
     if (original->flags != modified->flags)
@@ -191,6 +192,22 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         showBitBoard(original->whiteKing);
         printf("GOT: \n");
         showBitBoard(modified->whiteKing);
+        isSame = 0;
+    }
+
+    if (original->enPassantSq != modified->enPassantSq)
+    {
+        printf("ENPASSANTSQ ASSERT FAILED\n");
+        printf("EXPECTED: \n");
+        showBitBoard(original->enPassantSq);
+        printf("GOT: \n");
+        showBitBoard(modified->enPassantSq);
+        isSame = 0;
+    }
+    
+
+    if (!isSame)
+    {
         exit(1);
     }
 }
@@ -1932,6 +1949,8 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, int d
 
     memcpy(chessBoardOriginal, chessBoard, sizeof(ChessBoard));
 
+    uint64_t originalEnPassantSq = chessBoard->enPassantSq;
+
     generateMoves(chessBoard, attackTables, moveList);
     
     for (int i = 0; i < moveList->nextIndex; i++)
@@ -1952,6 +1971,7 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, int d
         
         
         unMakeMove(chessBoard, &moveList->moves[i]);
+        chessBoard->enPassantSq = originalEnPassantSq;
 
         ASSERT_CHESS_BOARD(chessBoardOriginal, chessBoard);
 

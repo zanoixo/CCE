@@ -2,6 +2,8 @@
 #include "ChessMoveGenerator.h"
 #include "ChessUtils.h"
 #include "ChessEval.h"
+#include "ChessTests.h"
+#include <string.h>
 
 uint64_t innerCenterEval = 0b00000000ULL << 56 |
                            0b00000000ULL << 48 |
@@ -197,7 +199,13 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
     moveList.moves = moves;
     moveList.nextIndex = 0;
 
+    //ChessBoard* original = malloc(sizeof(ChessBoard));
+    //memcpy(original, chessBoard, sizeof(ChessBoard));
+
+    uint64_t originalEnPassantSq = chessBoard->enPassantSq;
+
     generateMoves(chessBoard, attackTables, &moveList);
+    
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
@@ -216,6 +224,7 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
 
         if (timeLimitReached)
         {
+            //free(original);
             return 0;
         }
 
@@ -243,13 +252,17 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
             if (alpha >= beta)
             {
                 unMakeMove(chessBoard, &moveList.moves[i]);
+                chessBoard->enPassantSq = originalEnPassantSq;
+                //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
         }
 
         unMakeMove(chessBoard, &moveList.moves[i]);
+        chessBoard->enPassantSq = originalEnPassantSq;
+        //ASSERT_CHESS_BOARD(original, chessBoard);
     }
-
+    //free(original);
     return alpha;
 }
 
@@ -272,6 +285,11 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
     moveList.moves = moves;
     moveList.nextIndex = 0;
 
+    //ChessBoard* original = malloc(sizeof(ChessBoard));
+    //memcpy(original, chessBoard, sizeof(ChessBoard));
+
+    uint64_t originalEnPassantSq = chessBoard->enPassantSq;
+
     generateMoves(chessBoard, attackTables, &moveList);
 
     for (int i = 0; i < moveList.nextIndex; i++)
@@ -291,6 +309,7 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
 
         if (timeLimitReached)
         {
+            //free(original);
             return 0;
         }
 
@@ -317,13 +336,17 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
             if (alpha >= beta)
             {
                 unMakeMove(chessBoard, &moveList.moves[i]);
+                chessBoard->enPassantSq = originalEnPassantSq;
+                //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
         }
 
         unMakeMove(chessBoard, &moveList.moves[i]);
+        chessBoard->enPassantSq = originalEnPassantSq;
+        //ASSERT_CHESS_BOARD(original, chessBoard);
     }
-
+    //free(original);
     return beta;
 }
 
@@ -346,6 +369,11 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
     MoveScore moveScore;
     int legalMoves = 0;
 
+    //ChessBoard* original = malloc(sizeof(ChessBoard));
+    //memcpy(original, chessBoard, sizeof(ChessBoard));
+
+    uint64_t originalEnPassantSq = chessBoard->enPassantSq;
+
     generateMoves(chessBoard, attackTables, &moveList);
 
     findKillerMoves(&moveList, depthSearched);
@@ -367,6 +395,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
 
         if (timeLimitReached)
         {
+            //free(original);
             return bestMove;
         }
         
@@ -398,14 +427,18 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
             {
                 setKillerMove(moveList.moves[i], depthSearched);
                 unMakeMove(chessBoard, &moveList.moves[i]);
+                chessBoard->enPassantSq = originalEnPassantSq;
+                //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
             
         }
 
         unMakeMove(chessBoard, &moveList.moves[i]);
+        chessBoard->enPassantSq = originalEnPassantSq;
+        //ASSERT_CHESS_BOARD(original, chessBoard);
     }
-
+    //free(original);
     if (legalMoves == 0)
     {
         if (isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1))
@@ -437,10 +470,17 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
 
     MoveScore moveScore;
     int legalMoves = 0;
+
+    //ChessBoard* original = malloc(sizeof(ChessBoard));
+    //memcpy(original, chessBoard, sizeof(ChessBoard));
+
+    uint64_t originalEnPassantSq = chessBoard->enPassantSq;
     
     generateMoves(chessBoard, attackTables, &moveList);
     
     findKillerMoves(&moveList, depthSearched);
+
+    
     
     for (int i = 0; i < moveList.nextIndex; i++)
     {
@@ -459,6 +499,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
 
         if (timeLimitReached)
         {
+            //free(original);
             return bestMove;
         }
 
@@ -489,14 +530,17 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
             {
                 setKillerMove(moveList.moves[i], depthSearched);
                 unMakeMove(chessBoard, &moveList.moves[i]);
+                chessBoard->enPassantSq = originalEnPassantSq;
+                //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
             
         }
-
         unMakeMove(chessBoard, &moveList.moves[i]);
+        chessBoard->enPassantSq = originalEnPassantSq;
+        //ASSERT_CHESS_BOARD(original, chessBoard);
     }
-
+    //free(original);
     if (legalMoves == 0)
     {
         if (isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0))

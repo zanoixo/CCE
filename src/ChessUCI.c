@@ -9,7 +9,7 @@
 
 #define MAX_LINE 2048
 
-int userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, AttackTables* attackTables)
+Move userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, AttackTables* attackTables)
 {
     uint16_t promotionFlag = 0;
 
@@ -65,7 +65,7 @@ int userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Attac
     {
         free(moveList->moves);
         free(moveList);
-        return 0;   
+        return *playedMove;   
     }
     
 
@@ -74,7 +74,7 @@ int userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Attac
     free(moveList->moves);
     free(moveList);
 
-    return 1;
+    return *playedMove;
 }
 
 void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables, uint64_t timePerMove)
@@ -129,37 +129,44 @@ void applyUCIMoves(char *moves, ChessBoard *chessBoard, AttackTables *attackTabl
 {
     char *token = strtok(moves, " ");
 
+    char from[1024][3];
+    char to[1024][3];
+    char promotion[1024];
+
+    int count = 0;
+
     while (token)
     {
         if (strlen(token) >= 4)
         {
-            char from[3];
-            char to[3];
+            from[count][0] = token[0];
+            from[count][1] = token[1];
+            from[count][2] = '\0';
 
-            from[0] = token[0];
-            from[1] = token[1];
-            from[2] = '\0';
+            to[count][0] = token[2];
+            to[count][1] = token[3];
+            to[count][2] = '\0';
 
-            to[0] = token[2];
-            to[1] = token[3];
-            to[2] = '\0';
-
-            char promotion = 0;
+            promotion[count] = 0;
 
             if (strlen(token) == 5)
-            {
-                promotion = token[4];
-            }
+                promotion[count] = token[4];
 
-            userMove(from, to, promotion, chessBoard,attackTables);
+            count++;
         }
 
         token = strtok(NULL, " ");
+    }
+
+    for (int i = 0; i < count; i++)
+    {
+        userMove(from[i], to[i], promotion[i], chessBoard, attackTables);
     }
 }
 
 void uci_loop()
 {
+    runAllTests();
     char line[MAX_LINE];
     uint64_t timePerMove = 10000;
 
