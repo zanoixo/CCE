@@ -166,7 +166,6 @@ void applyUCIMoves(char *moves, ChessBoard *chessBoard, AttackTables *attackTabl
 
 void uci_loop()
 {
-    runAllTests();
     char line[MAX_LINE];
     uint64_t timePerMove = 10000;
 

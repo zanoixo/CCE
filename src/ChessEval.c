@@ -33,8 +33,8 @@ void initKillerMoves()
 {
     for (int i = 0; i < currentDepth; i++)
     {
-        killerMoves[i][0] = (Move){0, 0, 0, 0};
-        killerMoves[i][1] = (Move){0, 0, 0, 0};
+        killerMoves[i][0] = (Move){0, 0, 0, 0, 0};
+        killerMoves[i][1] = (Move){0, 0, 0, 0, 0};
     }
 }
 
@@ -202,8 +202,6 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
     //ChessBoard* original = malloc(sizeof(ChessBoard));
     //memcpy(original, chessBoard, sizeof(ChessBoard));
 
-    uint64_t originalEnPassantSq = chessBoard->enPassantSq;
-
     generateMoves(chessBoard, attackTables, &moveList);
     
 
@@ -252,14 +250,12 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
             if (alpha >= beta)
             {
                 unMakeMove(chessBoard, &moveList.moves[i]);
-                chessBoard->enPassantSq = originalEnPassantSq;
                 //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
         }
 
         unMakeMove(chessBoard, &moveList.moves[i]);
-        chessBoard->enPassantSq = originalEnPassantSq;
         //ASSERT_CHESS_BOARD(original, chessBoard);
     }
     //free(original);
@@ -288,7 +284,6 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
     //ChessBoard* original = malloc(sizeof(ChessBoard));
     //memcpy(original, chessBoard, sizeof(ChessBoard));
 
-    uint64_t originalEnPassantSq = chessBoard->enPassantSq;
 
     generateMoves(chessBoard, attackTables, &moveList);
 
@@ -336,14 +331,12 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
             if (alpha >= beta)
             {
                 unMakeMove(chessBoard, &moveList.moves[i]);
-                chessBoard->enPassantSq = originalEnPassantSq;
                 //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
         }
 
         unMakeMove(chessBoard, &moveList.moves[i]);
-        chessBoard->enPassantSq = originalEnPassantSq;
         //ASSERT_CHESS_BOARD(original, chessBoard);
     }
     //free(original);
@@ -371,8 +364,6 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
 
     //ChessBoard* original = malloc(sizeof(ChessBoard));
     //memcpy(original, chessBoard, sizeof(ChessBoard));
-
-    uint64_t originalEnPassantSq = chessBoard->enPassantSq;
 
     generateMoves(chessBoard, attackTables, &moveList);
 
@@ -427,7 +418,6 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
             {
                 setKillerMove(moveList.moves[i], depthSearched);
                 unMakeMove(chessBoard, &moveList.moves[i]);
-                chessBoard->enPassantSq = originalEnPassantSq;
                 //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
@@ -435,7 +425,6 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
         }
 
         unMakeMove(chessBoard, &moveList.moves[i]);
-        chessBoard->enPassantSq = originalEnPassantSq;
         //ASSERT_CHESS_BOARD(original, chessBoard);
     }
     //free(original);
@@ -473,8 +462,6 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
 
     //ChessBoard* original = malloc(sizeof(ChessBoard));
     //memcpy(original, chessBoard, sizeof(ChessBoard));
-
-    uint64_t originalEnPassantSq = chessBoard->enPassantSq;
     
     generateMoves(chessBoard, attackTables, &moveList);
     
@@ -530,14 +517,12 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
             {
                 setKillerMove(moveList.moves[i], depthSearched);
                 unMakeMove(chessBoard, &moveList.moves[i]);
-                chessBoard->enPassantSq = originalEnPassantSq;
                 //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
             
         }
         unMakeMove(chessBoard, &moveList.moves[i]);
-        chessBoard->enPassantSq = originalEnPassantSq;
         //ASSERT_CHESS_BOARD(original, chessBoard);
     }
     //free(original);
