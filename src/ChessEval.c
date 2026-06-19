@@ -3,6 +3,7 @@
 #include "ChessUtils.h"
 #include "ChessEval.h"
 #include "ChessTests.h"
+#include "ChessTranspositionTables.h"
 #include <string.h>
 
 uint64_t innerCenterEval = 0b00000000ULL << 56 |
@@ -180,7 +181,7 @@ void setBestMoveFirst(MoveList* moveList, int moveCount)
     moveList->moves[moveInd] = tmp;
 }
 
-int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, int beta)
+int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, int alpha, int beta)
 {
     int score = evaluatePosition(chessBoard, attackTables);
 
@@ -233,14 +234,14 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
             break;
         }
 
-        makeMove(chessBoard, &moveList.moves[i]);
+        makeMove(chessBoard, &moveList.moves[i], hashes);
 
         int isChecked = isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0);
 
         if (!isChecked)
         {
 
-            int moveScore = qsearchBlack(chessBoard, attackTables, alpha, beta);
+            int moveScore = qsearchBlack(chessBoard, attackTables, hashes, alpha, beta);
 
             if (moveScore > alpha)
             {
@@ -249,20 +250,20 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
 
             if (alpha >= beta)
             {
-                unMakeMove(chessBoard, &moveList.moves[i]);
+                unMakeMove(chessBoard, &moveList.moves[i], hashes);
                 //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
         }
 
-        unMakeMove(chessBoard, &moveList.moves[i]);
+        unMakeMove(chessBoard, &moveList.moves[i], hashes);
         //ASSERT_CHESS_BOARD(original, chessBoard);
     }
     //free(original);
     return alpha;
 }
 
-int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, int beta)
+int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, int alpha, int beta)
 {
     int score = evaluatePosition(chessBoard, attackTables);
 
@@ -315,13 +316,13 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
             break;
         }
 
-        makeMove(chessBoard, &moveList.moves[i]);
+        makeMove(chessBoard, &moveList.moves[i], hashes);
 
         int isChecked = isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1);
 
         if (!isChecked)
         {
-            int moveScore = qsearchWhite(chessBoard, attackTables, alpha, beta);
+            int moveScore = qsearchWhite(chessBoard, attackTables, hashes, alpha, beta);
 
             if (moveScore < beta)
             {
@@ -330,27 +331,27 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, int alpha, 
 
             if (alpha >= beta)
             {
-                unMakeMove(chessBoard, &moveList.moves[i]);
+                unMakeMove(chessBoard, &moveList.moves[i], hashes);
                 //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
         }
 
-        unMakeMove(chessBoard, &moveList.moves[i]);
+        unMakeMove(chessBoard, &moveList.moves[i], hashes);
         //ASSERT_CHESS_BOARD(original, chessBoard);
     }
     //free(original);
     return beta;
 }
 
-MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int depthSearched, int alpha, int beta)
+MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, int depthSearched, int alpha, int beta)
 {
     MoveScore bestMove;
     bestMove.score = MAX_INT;
 
     if (depthSearched == currentDepth)
     {
-        bestMove.score = qsearchBlack(chessBoard, attackTables, alpha, beta);
+        bestMove.score = qsearchBlack(chessBoard, attackTables, hashes, alpha, beta);
         return bestMove;
     }
 
@@ -393,7 +394,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
         
         setBestMoveFirst(&moveList, i);
 
-        makeMove(chessBoard, &moveList.moves[i]);
+        makeMove(chessBoard, &moveList.moves[i], hashes);
 
         int isChecked = isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1);
 
@@ -401,7 +402,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
         {
             legalMoves++;
 
-            moveScore = whiteMove(chessBoard, attackTables, depthSearched + 1, alpha, beta);
+            moveScore = whiteMove(chessBoard, attackTables, hashes, depthSearched + 1, alpha, beta);
 
             if (moveScore.score < bestMove.score)
             {
@@ -417,14 +418,14 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
             if (alpha >= beta)
             {
                 setKillerMove(moveList.moves[i], depthSearched);
-                unMakeMove(chessBoard, &moveList.moves[i]);
+                unMakeMove(chessBoard, &moveList.moves[i], hashes);
                 //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
             
         }
 
-        unMakeMove(chessBoard, &moveList.moves[i]);
+        unMakeMove(chessBoard, &moveList.moves[i], hashes);
         //ASSERT_CHESS_BOARD(original, chessBoard);
     }
     //free(original);
@@ -441,14 +442,14 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
     return bestMove;
 }
 
-MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int depthSearched, int alpha, int beta)
+MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, int depthSearched, int alpha, int beta)
 {
     MoveScore bestMove;
     bestMove.score = MIN_INT - 1;
 
     if (depthSearched == currentDepth)
     {
-        bestMove.score = qsearchWhite(chessBoard, attackTables, alpha, beta);
+        bestMove.score = qsearchWhite(chessBoard, attackTables, hashes, alpha, beta);
         return bestMove;
     }
 
@@ -492,7 +493,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
 
         setBestMoveFirst(&moveList, i);
         
-        makeMove(chessBoard, &moveList.moves[i]);
+        makeMove(chessBoard, &moveList.moves[i], hashes);
 
         int isChecked = isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0);
 
@@ -500,7 +501,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
         {
             legalMoves++;
             
-            moveScore = blackMove(chessBoard, attackTables, depthSearched + 1, alpha, beta);
+            moveScore = blackMove(chessBoard, attackTables, hashes, depthSearched + 1, alpha, beta);
 
             if (moveScore.score > bestMove.score)
             {
@@ -516,13 +517,13 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
             if (alpha >= beta)
             {
                 setKillerMove(moveList.moves[i], depthSearched);
-                unMakeMove(chessBoard, &moveList.moves[i]);
+                unMakeMove(chessBoard, &moveList.moves[i], hashes);
                 //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
             
         }
-        unMakeMove(chessBoard, &moveList.moves[i]);
+        unMakeMove(chessBoard, &moveList.moves[i], hashes);
         //ASSERT_CHESS_BOARD(original, chessBoard);
     }
     //free(original);
@@ -539,21 +540,21 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, int dept
     return bestMove;
 }
 
-MoveScore iterativeSearch(ChessBoard *chessBoard, AttackTables *attackTables)
+MoveScore iterativeSearch(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes)
 {
     MoveScore bestMove;
     initKillerMoves();
     if (isBlack(chessBoard))
     {
-        bestMove = blackMove(chessBoard, attackTables, 0, MIN_INT, MAX_INT);
+        bestMove = blackMove(chessBoard, attackTables, hashes, 0, MIN_INT, MAX_INT);
     }else
     {
-        bestMove = whiteMove(chessBoard, attackTables, 0, MIN_INT, MAX_INT);
+        bestMove = whiteMove(chessBoard, attackTables, hashes, 0, MIN_INT, MAX_INT);
     }
     return bestMove;
 }
 
-MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, uint64_t timePerMove)
+MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, uint64_t timePerMove)
 {
     MoveScore currentBestMove;
     MoveScore depthBestMove;
@@ -565,7 +566,7 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, uint64_t 
     while (!timeLimitReached)
     {
         printf("Current search depth: %d\n", currentDepth);
-        depthBestMove = iterativeSearch(chessBoard, attackTables);
+        depthBestMove = iterativeSearch(chessBoard, attackTables, hashes);
         
         if (!timeLimitReached)
         {

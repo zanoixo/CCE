@@ -11,28 +11,28 @@ uint64_t getRandomHash()
     return randomHash;
 }
 
-TranspositionTableHashes initTranpositionTableHashes()
+TranspositionTableHashes* initTranpositionTableHashes()
 {
-    TranspositionTableHashes hashes;
-    hashes.colorHash = getRandomHash();
+    TranspositionTableHashes* hashes = malloc(sizeof(TranspositionTableHashes));
+    hashes->colorHash = getRandomHash();
 
     for (int piece = 0; piece < PIECE_COUNT; piece++)
     {
         for (int sq = 0; sq < BOARD_SIZE; sq++)
         {
-            hashes.pieceHashes[piece][sq] = getRandomHash();
+            hashes->pieceHashes[piece][sq] = getRandomHash();
         }
         
     }
 
     for (int right = 0; right < CASTLE_RIGHT_COUNT; right++)
     {
-        hashes.castellingHashes[right] = getRandomHash();
+        hashes->castellingHashes[right] = getRandomHash();
     }
 
     for (int file = 0; file < ENPASSANT_FILES_COUNT; file++)
     {
-        hashes.enPassantHashes[file] = getRandomHash();
+        hashes->enPassantHashes[file] = getRandomHash();
     }
     
     return hashes;

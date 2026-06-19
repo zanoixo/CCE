@@ -4,6 +4,7 @@
 #include "ChessEval.h"
 #include "ChessMoveGenerator.h"
 #include "ChessUtils.h"
+#include "ChessTranspositionTables.h"
 
 const uint64_t hFile = 0b10000000ULL << 56 |
                        0b10000000ULL << 48 |
@@ -1590,7 +1591,7 @@ void generateMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList 
     generateCastleMoves(chessBoard, attackTables, moveList);
 }
 
-void makeKnightMove(ChessBoard *chessBoard, Move *move)
+void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
@@ -1691,7 +1692,7 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void makeBishopMove(ChessBoard *chessBoard, Move *move)
+void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
@@ -1791,7 +1792,7 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void makeRookMove(ChessBoard *chessBoard, Move *move)
+void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
@@ -1915,7 +1916,7 @@ void makeRookMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void makeQueenMove(ChessBoard *chessBoard, Move *move)
+void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
@@ -2015,7 +2016,7 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void makeKingMove(ChessBoard *chessBoard, Move *move)
+void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
@@ -2186,7 +2187,7 @@ void makeKingMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void makePawnMove(ChessBoard *chessBoard, Move *move)
+void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
@@ -2356,7 +2357,7 @@ void makePawnMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void unMakeKnightMove(ChessBoard *chessBoard, Move *move)
+void unMakeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
@@ -2466,7 +2467,7 @@ void unMakeKnightMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void unMakeBishopMove(ChessBoard *chessBoard, Move *move)
+void unMakeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
@@ -2575,7 +2576,7 @@ void unMakeBishopMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void unMakeRookMove(ChessBoard *chessBoard, Move *move)
+void unMakeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
@@ -2704,7 +2705,7 @@ void unMakeRookMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void unMakeQueenMove(ChessBoard *chessBoard, Move *move)
+void unMakeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
@@ -2813,7 +2814,7 @@ void unMakeQueenMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void unMakeKingMove(ChessBoard *chessBoard, Move *move)
+void unMakeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
@@ -2988,7 +2989,7 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void unMakePawnMove(ChessBoard *chessBoard, Move *move)
+void unMakePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
     uint8_t capture = getCapturedPiece(move->flags);
@@ -3155,7 +3156,7 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void unMakeMove(ChessBoard *chessBoard, Move *move)
+void unMakeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     chessBoard->flags ^= colorMask;
 
@@ -3170,29 +3171,29 @@ void unMakeMove(ChessBoard *chessBoard, Move *move)
     switch (piece)
     {
         case pawn:
-            unMakePawnMove(chessBoard, move);
+            unMakePawnMove(chessBoard, move, hashes);
             break;
         case knight:
-            unMakeKnightMove(chessBoard, move);
+            unMakeKnightMove(chessBoard, move, hashes);
             break;
         case bishop:
-            unMakeBishopMove(chessBoard, move);
+            unMakeBishopMove(chessBoard, move, hashes);
             break;
         case rook:
-            unMakeRookMove(chessBoard, move);
+            unMakeRookMove(chessBoard, move, hashes);
             break;
         case queen:
-            unMakeQueenMove(chessBoard, move);
+            unMakeQueenMove(chessBoard, move, hashes);
             break;
         case king:
-            unMakeKingMove(chessBoard, move);
+            unMakeKingMove(chessBoard, move, hashes);
             break;
     }
 
     chessBoard->enPassantSq = move->prevEnPassantSq;
 }
 
-void makeMove(ChessBoard *chessBoard, Move *move)
+void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t piece = getPieceFromSquare(move->from, isBlack(chessBoard), chessBoard);
     chessBoard->enPassantSq = 0;
@@ -3200,22 +3201,22 @@ void makeMove(ChessBoard *chessBoard, Move *move)
     switch (piece)
     {
         case pawn:
-            makePawnMove(chessBoard, move);
+            makePawnMove(chessBoard, move, hashes);
             break;
         case knight:
-            makeKnightMove(chessBoard, move);
+            makeKnightMove(chessBoard, move, hashes);
             break;
         case bishop:
-            makeBishopMove(chessBoard, move);
+            makeBishopMove(chessBoard, move, hashes);
             break;
         case rook:
-            makeRookMove(chessBoard, move);
+            makeRookMove(chessBoard, move, hashes);
             break;
         case queen:
-            makeQueenMove(chessBoard, move);
+            makeQueenMove(chessBoard, move, hashes);
             break;
         case king:
-            makeKingMove(chessBoard, move);
+            makeKingMove(chessBoard, move, hashes);
             break;
     }
 

@@ -32,4 +32,4 @@ typedef struct TranspositionTableHashes
     uint64_t enPassantHashes[ENPASSANT_FILES_COUNT];
 }TranspositionTableHashes;
 
-TranspositionTableHashes initTranpositionTableHashes();
+TranspositionTableHashes* initTranpositionTableHashes();

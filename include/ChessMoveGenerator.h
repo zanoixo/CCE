@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ChessBoard.h"
+#include "ChessTranspositionTables.h"
 
 typedef struct MagicTableHash
 {
@@ -88,8 +89,8 @@ void generateBishopMoves(ChessBoard *chessBoard, AttackTables *attackTables, Mov
 void generateRookMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList);
 void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList);
 void generateCastleMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList);
-void makeMove(ChessBoard *chessBoard, Move *move);
-void unMakeMove(ChessBoard *chessBoard, Move *move);
+void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes);
+void unMakeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes);
 int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attackTables, int isAttackedByWhite);
 uint8_t isBlack(ChessBoard *chessBoard);
 uint8_t getSqInd(uint64_t sq);

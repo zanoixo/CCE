@@ -5,11 +5,12 @@
 #include <ChessEval.h>
 #include <ChessMoveGenerator.h>
 #include <ChessUtils.h>
-#include<ChessTests.h>
+#include <ChessTests.h>
+#include <ChessTranspositionTables.h>
 
 #define MAX_LINE 2048
 
-Move userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, AttackTables* attackTables)
+Move userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, AttackTables* attackTables, TranspositionTableHashes* hashes)
 {
     uint16_t promotionFlag = 0;
 
@@ -69,7 +70,7 @@ Move userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
     }
     
 
-    makeMove(chessBoard, playedMove);
+    makeMove(chessBoard, playedMove, hashes);
 
     free(moveList->moves);
     free(moveList);
@@ -77,10 +78,10 @@ Move userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
     return *playedMove;
 }
 
-void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables, uint64_t timePerMove)
+void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, uint64_t timePerMove)
 {
     
-    MoveScore best = evaluate(ChessBoard, attackTables, timePerMove);
+    MoveScore best = evaluate(ChessBoard, attackTables, hashes, timePerMove);
 
     int fromSq = getSqInd(best.move.from);
     int toSq   = getSqInd(best.move.to);
@@ -125,7 +126,7 @@ void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables,
         
 }
 
-void applyUCIMoves(char *moves, ChessBoard *chessBoard, AttackTables *attackTables)
+void applyUCIMoves(char *moves, ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes)
 {
     char *token = strtok(moves, " ");
 
@@ -160,7 +161,7 @@ void applyUCIMoves(char *moves, ChessBoard *chessBoard, AttackTables *attackTabl
 
     for (int i = 0; i < count; i++)
     {
-        userMove(from[i], to[i], promotion[i], chessBoard, attackTables);
+        userMove(from[i], to[i], promotion[i], chessBoard, attackTables, hashes);
     }
 }
 
@@ -171,6 +172,7 @@ void uci_loop()
 
     ChessBoard* chessBoard = initChessBoard();
     AttackTables* attackTables = initAttackTables();
+    TranspositionTableHashes* hashes = initTranpositionTableHashes();
 
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
@@ -200,7 +202,7 @@ void uci_loop()
             if (moves)
             { 
                 moves += 6; 
-                applyUCIMoves(moves, chessBoard, attackTables); 
+                applyUCIMoves(moves, chessBoard, attackTables, hashes); 
             } 
         } 
         
@@ -214,7 +216,7 @@ void uci_loop()
             }
                 
             char moveStr[6];
-            bestMove(moveStr, chessBoard, attackTables, timePerMove);
+            bestMove(moveStr, chessBoard, attackTables, hashes, timePerMove);
             printf("bestmove %s\n", moveStr);
             fflush(stdout); 
         }
