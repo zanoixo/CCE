@@ -26,6 +26,7 @@ typedef struct ChessBoard
     uint64_t allPieces;
     uint64_t enPassantSq;
     uint8_t flags;
+    uint64_t positionHash;
 }ChessBoard;
 
 enum boardFlags
