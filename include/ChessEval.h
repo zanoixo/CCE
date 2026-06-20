@@ -15,8 +15,8 @@ typedef struct TranspositionTableEntry TranspositionTableEntry;
 #define WHITE_MATED -1000000 
 
 #define PAWN_VALUE   100
-#define KNIGHT_VALUE 330
-#define BISHOP_VALUE 320
+#define KNIGHT_VALUE 310
+#define BISHOP_VALUE 330
 #define ROOK_VALUE   500
 #define QUEEN_VALUE  900
 #define KING_VALUE  2000
@@ -26,8 +26,8 @@ typedef struct TranspositionTableEntry TranspositionTableEntry;
 #define BISHOP_PROMOTION_VALUE 200000
 #define INNER_CENTER_VALUE 20
 #define OUTER_CENTER_VALUE 10
-#define KNIGHT_MOBILITY_VALUE 2
-#define BISHOP_MOBILITY_VALUE 2
+#define KNIGHT_MOBILITY_VALUE 3
+#define BISHOP_MOBILITY_VALUE 3
 #define ROOK_MOBILITY_VALUE 2
 #define QUEEN_MOBILITY_VALUE 1
 
@@ -42,5 +42,5 @@ typedef struct MoveScore
 MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, uint64_t timePerMove);
 MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta);
 MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta);
-int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int alpha, int beta);
-int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int alpha, int beta);
+int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta);
+int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta);

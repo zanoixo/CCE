@@ -29,8 +29,10 @@ uint64_t outerCenterEval = 0b00000000ULL << 56 |
 Move killerMoves[KILLER_MOVE_DEPTH][2];
 uint64_t stopTime = 0;
 int currentDepth;
+int qSearchDepthReached;
 int timeCheckCounter = 1;
 int timeLimitReached = 0;
+
 
 void initKillerMoves()
 {
@@ -134,35 +136,92 @@ int evaluateMobility(ChessBoard* chessBoard, AttackTables* attackTables, int isB
     {
         int sq = getSqInd(queens);
         uint64_t attacks = getQueenAttackPattern(sq, chessBoard->allPieces, attackTables) & ~friendlyPieces;
-        mobility += countPieces(attacks) * QUEEN_MOBILITY_VALUE;
+        mobility += (countPieces(attacks) * QUEEN_MOBILITY_VALUE) / 2;
         queens &= queens - 1;
     }
 
     return mobility;
 }
 
-
-int evaluatePosition(ChessBoard *chessBoard, AttackTables* attackTables)
+int evaluateMaterial(ChessBoard *chessBoard, int isBlack)
 {
     int score = 0;
 
-    score += countPieces(chessBoard->whitePawns)   * PAWN_VALUE;
-    score += countPieces(chessBoard->whiteKnights) * KNIGHT_VALUE;
-    score += countPieces(chessBoard->whiteBishops) * BISHOP_VALUE;
-    score += countPieces(chessBoard->whiteRooks)   * ROOK_VALUE;
-    score += countPieces(chessBoard->whiteQueens)  * QUEEN_VALUE;
-    score += countPieces(chessBoard->whitePieces & innerCenterEval) * INNER_CENTER_VALUE;
-    score += countPieces(chessBoard->whitePieces & outerCenterEval) * OUTER_CENTER_VALUE;
-    score += evaluateMobility(chessBoard, attackTables, white);
+    if (isBlack)
+    {
+        score += countPieces(chessBoard->blackPawns)   * PAWN_VALUE;
+        score += countPieces(chessBoard->blackKnights) * KNIGHT_VALUE;
+        score += countPieces(chessBoard->blackBishops) * BISHOP_VALUE;
+        score += countPieces(chessBoard->blackRooks)   * ROOK_VALUE;
+        score += countPieces(chessBoard->blackQueens)  * QUEEN_VALUE;
+    }
+    else
+    {
+        score += countPieces(chessBoard->whitePawns)   * PAWN_VALUE;
+        score += countPieces(chessBoard->whiteKnights) * KNIGHT_VALUE;
+        score += countPieces(chessBoard->whiteBishops) * BISHOP_VALUE;
+        score += countPieces(chessBoard->whiteRooks)   * ROOK_VALUE;
+        score += countPieces(chessBoard->whiteQueens)  * QUEEN_VALUE;    
+    }
+    return score;
+}
 
-    score -= countPieces(chessBoard->blackPawns)   * PAWN_VALUE;
-    score -= countPieces(chessBoard->blackKnights) * KNIGHT_VALUE;
-    score -= countPieces(chessBoard->blackBishops) * BISHOP_VALUE;
-    score -= countPieces(chessBoard->blackRooks)   * ROOK_VALUE;
-    score -= countPieces(chessBoard->blackQueens)  * QUEEN_VALUE;
-    score -= countPieces(chessBoard->blackPieces & innerCenterEval) * INNER_CENTER_VALUE;
-    score -= countPieces(chessBoard->blackPieces & outerCenterEval) * OUTER_CENTER_VALUE;
+int evaluateCenter(ChessBoard* chessBoard, int isBlack)
+{
+    int score = 0;
+
+    if (isBlack)
+    {
+        score += countPieces(chessBoard->blackPieces & innerCenterEval) * INNER_CENTER_VALUE;
+        score += countPieces(chessBoard->blackPieces & outerCenterEval) * OUTER_CENTER_VALUE;
+    }
+    else
+    {
+        score += countPieces(chessBoard->whitePieces & innerCenterEval) * INNER_CENTER_VALUE;
+        score += countPieces(chessBoard->whitePieces & outerCenterEval) * OUTER_CENTER_VALUE;    
+    }
+    return score;
+}
+
+int evaluateBishopPair(ChessBoard* chessBoard, int isBlack)
+{
+    int score = 0;
+
+    if (isBlack)
+    {
+       int numberOfBishops = countPieces(chessBoard->blackBishops);
+
+       if (numberOfBishops == 2)
+       {
+            score += 25;
+       }
+       
+    }
+    else
+    {
+        int numberOfBishops = countPieces(chessBoard->whiteBishops);
+
+       if (numberOfBishops == 2)
+       {
+            score += 25;
+       }    
+    }
+    return score;
+}
+
+int evaluatePosition(ChessBoard* chessBoard, AttackTables* attackTables)
+{
+    int score = 0;
+
+    score += evaluateMaterial(chessBoard, white);
+    score += evaluateCenter(chessBoard, white);
+    score += evaluateMobility(chessBoard, attackTables, white);
+    score += evaluateBishopPair(chessBoard, white);
+
+    score -= evaluateMaterial(chessBoard, black);
+    score -= evaluateCenter(chessBoard, black);
     score -= evaluateMobility(chessBoard, attackTables, black);
+    score -= evaluateBishopPair(chessBoard, black);
 
     return score;
 }
@@ -191,7 +250,7 @@ void setBestMoveFirst(MoveList* moveList, ChessBoard* chessBoard, TranspositionT
     moveList->moves[moveInd] = tmp;
 }
 
-int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int alpha, int beta)
+int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta)
 {
     int score = evaluatePosition(chessBoard, attackTables);
 
@@ -204,6 +263,13 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
     {
         alpha = score;
     }
+
+    if (depth > qSearchDepthReached)
+    {
+        qSearchDepthReached = depth;
+        //printf("qSearch max depth reached: %d\n", qSearchDepthReached);
+    }
+    
 
     MoveList moveList;
     Move moves[256];
@@ -252,7 +318,7 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
 
         if (!isChecked)
         {
-            moveScore = qsearchBlack(chessBoard, attackTables, hashes, transpositionTable, alpha, beta);
+            moveScore = qsearchBlack(chessBoard, attackTables, hashes, transpositionTable, depth + 1, alpha, beta);
 
             if (moveScore > alpha)
             {
@@ -274,7 +340,7 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
     return alpha;
 }
 
-int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int alpha, int beta)
+int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta)
 {
     int score = evaluatePosition(chessBoard, attackTables);
 
@@ -286,6 +352,12 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
     if (score < beta)
     {
         beta = score;
+    }
+
+    if (depth > qSearchDepthReached)
+    {
+        qSearchDepthReached = depth;
+        //printf("qSearch max depth reached: %d\n", qSearchDepthReached);
     }
 
     MoveList moveList;
@@ -335,7 +407,7 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
 
         if (!isChecked)
         {
-            moveScore = qsearchWhite(chessBoard, attackTables, hashes, transpositionTable, alpha, beta);
+            moveScore = qsearchWhite(chessBoard, attackTables, hashes, transpositionTable, depth + 1, alpha, beta);
             
             if (moveScore < beta)
             {
@@ -364,7 +436,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
 
     if (depthSearched == currentDepth)
     {
-        bestMove.eval = qsearchBlack(chessBoard, attackTables, hashes, transpositionTable, alpha, beta);
+        bestMove.eval = qsearchBlack(chessBoard, attackTables, hashes, transpositionTable, depthSearched, alpha, beta);
         return bestMove;
     }
 
@@ -461,7 +533,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
 
     if (depthSearched == currentDepth)
     {
-        bestMove.eval = qsearchWhite(chessBoard, attackTables, hashes, transpositionTable, alpha, beta);
+        bestMove.eval = qsearchWhite(chessBoard, attackTables, hashes, transpositionTable, depthSearched, alpha, beta);
         return bestMove;
     }
 
@@ -576,6 +648,7 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
     currentDepth = 1;
     while (!timeLimitReached)
     {
+        qSearchDepthReached = currentDepth;
         printf("Current search depth: %d\n", currentDepth);
         depthBestMove = iterativeSearch(chessBoard, attackTables, transpositionTable, hashes);
         
