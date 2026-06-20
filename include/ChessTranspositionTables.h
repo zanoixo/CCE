@@ -51,3 +51,6 @@ typedef struct TranspositionTableEntry
 }TranspositionTableEntry;
 
 TranspositionTableHashes* initTranpositionTableHashes();
+TranspositionTableEntry* initTranpositionTable();
+MoveScore* getTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth);
+void setTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth, MoveScore* move);

@@ -1,7 +1,11 @@
-#include "ChessTranspositionTables.h"
 #include <stdint.h>
 
+#include "ChessTranspositionTables.h"
+#include "ChessBoard.h"
+
 uint64_t randomHash = 12121212121212121212ULL;
+uint64_t transpositionTableSize = 1 << TRANSPOSITION_TABLE_NUM_OF_BITS;
+uint64_t transpositionTableMask = (1 << TRANSPOSITION_TABLE_NUM_OF_BITS) - 1;
 
 uint64_t getRandomHash()
 {
@@ -36,4 +40,40 @@ TranspositionTableHashes* initTranpositionTableHashes()
     }
     
     return hashes;
+}
+
+TranspositionTableEntry* initTranpositionTable()
+{
+    TranspositionTableEntry* transpositionTable = malloc(sizeof(TranspositionTableEntry) * transpositionTableSize);
+
+    for (uint64_t i = 0; i < transpositionTableSize; i++)
+    {
+        transpositionTable->depth = 0;
+    }
+    
+    return transpositionTable;
+}
+
+MoveScore* getTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth)
+{
+    uint64_t index = chessBoard->positionHash & transpositionTableMask;
+
+    if (transpositionTable[index].depth < remainingDepth || transpositionTable[index].hash != chessBoard->positionHash)
+    {
+        return NULL;
+    }
+        
+    return &transpositionTable[index].move;
+}
+
+void setTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth, MoveScore* move)
+{
+    uint64_t index = chessBoard->positionHash & transpositionTableMask;
+
+    if (transpositionTable[index].depth < remainingDepth)
+    {
+        transpositionTable[index].move = *move;
+        transpositionTable[index].depth = remainingDepth;
+        transpositionTable[index].hash = chessBoard->positionHash;
+    }
 }

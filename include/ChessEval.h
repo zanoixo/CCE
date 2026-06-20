@@ -4,6 +4,7 @@
 
 typedef struct ChessBoard ChessBoard;
 typedef struct TranspositionTableHashes TranspositionTableHashes;
+typedef struct TranspositionTableEntry TranspositionTableEntry;
 
 #define KILLER_MOVE_DEPTH 128
 #define TIME_CHECK 2047
@@ -38,8 +39,8 @@ typedef struct MoveScore
 }MoveScore;
 
 
-MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, uint64_t timePerMove);
-MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, int depth, int alpha, int beta);
-MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, int depth, int alpha, int beta);
+MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, uint64_t timePerMove);
+MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta);
+MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta);
 int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, int alpha, int beta);
 int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, int alpha, int beta);

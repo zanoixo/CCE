@@ -79,10 +79,10 @@ Move userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
     return *playedMove;
 }
 
-void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, uint64_t timePerMove)
+void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, uint64_t timePerMove)
 {
     
-    MoveScore best = evaluate(ChessBoard, attackTables, hashes, timePerMove);
+    MoveScore best = evaluate(ChessBoard, attackTables, hashes, transpositionTable, timePerMove);
 
     int fromSq = getSqInd(best.move.from);
     int toSq   = getSqInd(best.move.to);
@@ -174,6 +174,7 @@ void uci_loop()
     ChessBoard* chessBoard = initChessBoard();
     AttackTables* attackTables = initAttackTables();
     TranspositionTableHashes* hashes = initTranpositionTableHashes();
+    TranspositionTableEntry* transpositionTable = initTranpositionTable();
 
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
@@ -217,7 +218,7 @@ void uci_loop()
             }
                 
             char moveStr[6];
-            bestMove(moveStr, chessBoard, attackTables, hashes, timePerMove);
+            bestMove(moveStr, chessBoard, attackTables, hashes, transpositionTable, timePerMove);
             printf("bestmove %s\n", moveStr);
             fflush(stdout); 
         }
@@ -228,6 +229,7 @@ void uci_loop()
         }
     }
 
+    free(transpositionTable);
     free(chessBoard);
     free(attackTables);
 }
