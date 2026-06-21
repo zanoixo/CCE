@@ -12,13 +12,14 @@ typedef struct TranspositionTableEntry TranspositionTableEntry;
 #define MAX_INT 1000000000
 #define MIN_INT -1000000000
 #define BLACK_MATED 1000000
-#define WHITE_MATED -1000000 
+#define WHITE_MATED -1000000
+#define DRAW 0 
 
 #define PAWN_VALUE   100
 #define KNIGHT_VALUE 310
 #define BISHOP_VALUE 330
 #define ROOK_VALUE   500
-#define QUEEN_VALUE  900
+#define QUEEN_VALUE  1000
 #define KING_VALUE  2000
 #define QUEEN_PROMOTION_VALUE 500000
 #define ROOK_PROMOTION_VALUE 400000
@@ -30,6 +31,7 @@ typedef struct TranspositionTableEntry TranspositionTableEntry;
 #define BISHOP_MOBILITY_VALUE 3
 #define ROOK_MOBILITY_VALUE 2
 #define QUEEN_MOBILITY_VALUE 1
+#define BISHOP_PAIR_VALUE 40
 
 
 typedef struct MoveScore

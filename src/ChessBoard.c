@@ -63,6 +63,8 @@ ChessBoard* initChessBoard()
     chessBoard->allPieces = 0;
     chessBoard->enPassantSq = 0;
     chessBoard->flags = 0;
+
+    chessBoard->history.size = 0;
     
     return chessBoard;
 }
@@ -248,7 +250,9 @@ void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hash
     chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
 
     chessBoard->enPassantSq = 0;
-    chessBoard->flags = whiteShortCastleMask | whiteLongCastleMask | blackShortCastleMask | blackLongCastleMask;     
+    chessBoard->flags = whiteShortCastleMask | whiteLongCastleMask | blackShortCastleMask | blackLongCastleMask;
+    
+    chessBoard->history.size = 0;
 }
 
 void createPosition(char fileName[], ChessBoard *chessBoard)

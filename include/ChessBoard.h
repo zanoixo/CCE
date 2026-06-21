@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include "ChessMoveHistory.h"
+
 typedef struct TranspositionTableHashes TranspositionTableHashes;
 
 typedef struct ChessBoard
@@ -27,6 +29,8 @@ typedef struct ChessBoard
     uint64_t enPassantSq;
     uint8_t flags;
     uint64_t positionHash;
+
+    MoveHistory history;
 }ChessBoard;
 
 enum boardFlags
