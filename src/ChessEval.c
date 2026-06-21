@@ -250,6 +250,23 @@ void setBestMoveFirst(MoveList* moveList, ChessBoard* chessBoard, TranspositionT
     moveList->moves[moveInd] = tmp;
 }
 
+int isValidQSearchMove(ChessBoard* chessBoard, AttackTables* attackTables, uint16_t moveFlags)
+{
+    int color = isBlack(chessBoard);
+    uint64_t kingPos = chessBoard->blackKing;
+    int isAttackedByWhite = 1;
+
+    if (color == white)
+    {
+        kingPos = chessBoard->whiteKing;
+        isAttackedByWhite = 0;
+    }
+     
+    return getCapturedPiece(moveFlags)  ||
+           getPromotionPiece(moveFlags) ||
+           isSquareAttacked(getSqInd(kingPos), chessBoard, attackTables, isAttackedByWhite);
+}
+
 int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta)
 {
     int score = evaluatePosition(chessBoard, attackTables);
@@ -267,7 +284,7 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
     if (depth > qSearchDepthReached)
     {
         qSearchDepthReached = depth;
-        //printf("qSearch max depth reached: %d\n", qSearchDepthReached);
+        printf("selective search max depth reached: %d\n", qSearchDepthReached);
     }
     
 
@@ -275,6 +292,8 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
     Move moves[256];
     moveList.moves = moves;
     moveList.nextIndex = 0;
+
+    int gotChecked = isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0);
 
     int moveScore;
 
@@ -307,10 +326,11 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
 
         setBestMoveFirst(&moveList,chessBoard, transpositionTable, i);
 
-        if (!getCapturedPiece(moveList.moves[i].flags) && !getPromotionPiece(moveList.moves[i].flags))
+        if (!gotChecked && !isValidQSearchMove(chessBoard, attackTables, moveList.moves[i].flags))
         {
-            break;
+            continue;
         }
+        
 
         makeMove(chessBoard, &moveList.moves[i], hashes);
         addMoveToHistory(chessBoard);
@@ -367,13 +387,15 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
     if (depth > qSearchDepthReached)
     {
         qSearchDepthReached = depth;
-        //printf("qSearch max depth reached: %d\n", qSearchDepthReached);
+        printf("selective search max depth reached: %d\n", qSearchDepthReached);
     }
 
     MoveList moveList;
     Move moves[256];
     moveList.moves = moves;
     moveList.nextIndex = 0;
+
+    int gotChecked = isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1);
 
     int moveScore;
 
@@ -406,17 +428,17 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
 
         setBestMoveFirst(&moveList, chessBoard, transpositionTable, i);
 
-        if (!getCapturedPiece(moveList.moves[i].flags) && !getPromotionPiece(moveList.moves[i].flags))
+        if (!gotChecked && !isValidQSearchMove(chessBoard, attackTables, moveList.moves[i].flags))
         {
-            break;
+            continue;
         }
 
         makeMove(chessBoard, &moveList.moves[i], hashes);
         addMoveToHistory(chessBoard);
 
-        int isChecked = isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1);
+        int isLegalMove = isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1);
 
-        if (!isChecked)
+        if (!isLegalMove)
         {
             if (isThreeFoldRepetition(chessBoard))
             {
@@ -688,9 +710,9 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
     stopTime = getTimeMs() + timePerMove - 100;
 
     currentDepth = 1;
+    qSearchDepthReached = 1;
     while (!timeLimitReached)
     {
-        qSearchDepthReached = currentDepth;
         printf("Current search depth: %d\n", currentDepth);
         depthBestMove = iterativeSearch(chessBoard, attackTables, transpositionTable, hashes);
         
