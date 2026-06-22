@@ -34,6 +34,13 @@ enum castellingHashes
     blackLongCastleHash = 3
 };
 
+enum flags
+{
+    alphaCutoff = 0,
+    betaCutoff = 1,
+    exactCutoff = 2
+};
+
 typedef struct TranspositionTableHashes
 {
     uint64_t colorHash;
@@ -46,11 +53,12 @@ typedef struct TranspositionTableEntry
 {
     uint64_t hash;
     uint8_t depth;
-    MoveScore move;
+    uint8_t flag;
+    MoveScore moveScore;
     
 }TranspositionTableEntry;
 
 TranspositionTableHashes* initTranpositionTableHashes();
 TranspositionTableEntry* initTranpositionTable();
-MoveScore* getTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth, int isEvalOnly);
-void setTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth, MoveScore* move);
+TranspositionTableEntry* getTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth, int isEvalOnly);
+void setTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth, int flag, MoveScore* move);

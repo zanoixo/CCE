@@ -338,11 +338,11 @@ int evaluatePosition(ChessBoard* chessBoard, AttackTables* attackTables)
 void setBestMoveFirst(MoveList* moveList, ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int moveCount)
 {
     int moveInd = moveCount;
-    MoveScore* transpositionMove = getTransposition(chessBoard, transpositionTable, 0, 1);
+    TranspositionTableEntry* transposition = getTransposition(chessBoard, transpositionTable, 0, 1);
 
     for (int i = moveCount + 1; i < moveList->nextIndex; i++)
     {   
-        if (transpositionMove != NULL && transpositionMove->move.from == moveList->moves[i].from && transpositionMove->move.to == moveList->moves[i].to)
+        if (transposition != NULL && transposition->moveScore.move.from == moveList->moves[i].from && transposition->moveScore.move.to == moveList->moves[i].to)
         {
             moveInd = i;
             break;
@@ -602,13 +602,38 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
         return bestMove;
     }
 
+    int originalAlpha = alpha;
+    int originalBeta = beta;
+
+    int transpositionFlag;
+
     MoveList moveList;
     Move moves[256];
     moveList.moves = moves;
     moveList.nextIndex = 0;
 
     MoveScore moveScore;
+    TranspositionTableEntry* transpositionScore;
     int legalMoves = 0;
+
+    transpositionScore = getTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, 0);
+
+    if (transpositionScore != NULL)
+    {
+        if (transpositionScore->flag == alphaCutoff && transpositionScore->moveScore.eval <= alpha)
+        {
+            return transpositionScore->moveScore;
+        }
+        else if (transpositionScore->flag == betaCutoff && transpositionScore->moveScore.eval >= beta)
+        {
+            return transpositionScore->moveScore;
+        }
+        else if (transpositionScore->flag == exactCutoff)
+        {
+            return transpositionScore->moveScore;
+        }
+        
+    }
 
     //ChessBoard* original = malloc(sizeof(ChessBoard));
     //memcpy(original, chessBoard, sizeof(ChessBoard));
@@ -692,7 +717,20 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
             bestMove.eval = DRAW;
     }
 
-    setTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, &bestMove);
+    if (bestMove.eval >= originalBeta)
+    {
+        transpositionFlag = betaCutoff;
+    }
+    else if (bestMove.eval <= originalAlpha)
+    {
+        transpositionFlag = alphaCutoff;
+    }
+    else
+    {
+        transpositionFlag = exactCutoff;
+    }
+
+    setTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, transpositionFlag, &bestMove);
     return bestMove;
 }
 
@@ -707,13 +745,39 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
         return bestMove;
     }
 
+    int originalAlpha = alpha;
+    int originalBeta = beta;
+
+    int transpositionFlag;
+
     MoveList moveList;
     Move moves[256];
     moveList.moves = moves;
     moveList.nextIndex = 0;
 
     MoveScore moveScore;
+    TranspositionTableEntry* transpositionScore;
     int legalMoves = 0;
+
+    transpositionScore = getTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, 0);
+
+    if (transpositionScore != NULL)
+    {
+        if (transpositionScore->flag == alphaCutoff && transpositionScore->moveScore.eval <= alpha)
+        {
+            return transpositionScore->moveScore;
+        }
+        else if (transpositionScore->flag == betaCutoff && transpositionScore->moveScore.eval >= beta)
+        {
+            return transpositionScore->moveScore;
+        }
+        else if (transpositionScore->flag == exactCutoff)
+        {
+            return transpositionScore->moveScore;
+        }
+        
+    }
+    
 
     //ChessBoard* original = malloc(sizeof(ChessBoard));
     //memcpy(original, chessBoard, sizeof(ChessBoard));
@@ -721,8 +785,6 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
     generateMoves(chessBoard, attackTables, &moveList);
     
     findKillerMoves(&moveList, depthSearched);
-
-    
     
     for (int i = 0; i < moveList.nextIndex; i++)
     {
@@ -798,7 +860,20 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
             bestMove.eval = DRAW;
     }
 
-    setTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, &bestMove);
+    if (bestMove.eval >= originalBeta)
+    {
+        transpositionFlag = betaCutoff;
+    }
+    else if (bestMove.eval <= originalAlpha)
+    {
+        transpositionFlag = alphaCutoff;
+    }
+    else
+    {
+        transpositionFlag = exactCutoff;
+    }
+
+    setTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, transpositionFlag, &bestMove);
     return bestMove;
 }
 
