@@ -48,7 +48,7 @@ TranspositionTableEntry* initTranpositionTable()
 
     for (uint64_t i = 0; i < transpositionTableSize; i++)
     {
-        transpositionTable->depth = 0;
+        transpositionTable->depth = -1;
     }
     
     return transpositionTable;

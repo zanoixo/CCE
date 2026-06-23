@@ -102,6 +102,10 @@ Move killerMoves[KILLER_MOVE_DEPTH][2];
 uint64_t stopTime = 0;
 int currentDepth;
 int qSearchDepthReached;
+int nodesSearched;
+int transpositionSearches;
+int transpositionHits;
+int transpositionCutoffs;
 int timeCheckCounter = 1;
 int timeLimitReached = 0;
 
@@ -376,18 +380,51 @@ int isValidQSearchMove(ChessBoard* chessBoard, AttackTables* attackTables, uint1
            isSquareAttacked(getSqInd(kingPos), chessBoard, attackTables, isAttackedByWhite);
 }
 
-int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta)
+MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta)
 {
-    int score = evaluatePosition(chessBoard, attackTables);
+    nodesSearched++;
 
-    if (score >= beta)
+    TranspositionTableEntry* transpositionScore;
+    transpositionScore = getTransposition(chessBoard, transpositionTable, 0, 1);
+    transpositionSearches++;
+
+    int originalBeta = beta;
+    int originalAlpha = alpha;
+    int transpositionFlag;
+
+    if (transpositionScore != NULL)
     {
-        return beta;
+        transpositionHits++;
+        if (transpositionScore->flag == alphaCutoff && transpositionScore->moveScore.eval <= alpha)
+        {
+            transpositionCutoffs++;
+            return transpositionScore->moveScore;
+        }
+        else if (transpositionScore->flag == betaCutoff && transpositionScore->moveScore.eval >= beta)
+        {
+            transpositionCutoffs++;
+            return transpositionScore->moveScore;
+        }
+        else if (transpositionScore->flag == exactCutoff)
+        {
+            transpositionCutoffs++;
+            return transpositionScore->moveScore;
+        }
+        
     }
 
-    if (score > alpha)
+    MoveScore bestMove;
+    bestMove.eval = evaluatePosition(chessBoard, attackTables);
+
+    if (bestMove.eval >= beta)
     {
-        alpha = score;
+        bestMove.eval = beta;
+        return bestMove;
+    }
+
+    if (bestMove.eval > alpha)
+    {
+        alpha = bestMove.eval;
     }
 
     if (depth > qSearchDepthReached)
@@ -406,7 +443,7 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
 
     int gotChecked = isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0);
 
-    int moveScore;
+    MoveScore moveScore;
 
     //ChessBoard* original = malloc(sizeof(ChessBoard));
     //memcpy(original, chessBoard, sizeof(ChessBoard));
@@ -432,7 +469,7 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
         if (timeLimitReached)
         {
             //free(original);
-            return 0;
+            return bestMove;
         }
 
         setBestMoveFirst(&moveList,chessBoard, transpositionTable, i);
@@ -445,24 +482,25 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
 
         makeMove(chessBoard, &moveList.moves[i], hashes);
 
-        int isChecked = isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0);
+        int isNotLegalMove = isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0);
 
-        if (!isChecked)
+        if (!isNotLegalMove)
         {
             legalMoves++;
 
             if (isThreeFoldRepetition(chessBoard))
             {
-                moveScore = DRAW;    
+                moveScore.eval = DRAW;    
             }
             else
             {
                 moveScore = qsearchBlack(chessBoard, attackTables, hashes, transpositionTable, depth + 1, alpha, beta);
             }
             
-            if (moveScore > alpha)
+            if (moveScore.eval > alpha)
             {
-                alpha = moveScore;
+                bestMove = moveScore;
+                alpha = moveScore.eval;
             }
 
             if (alpha >= beta)
@@ -479,23 +517,65 @@ int qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
     //free(original);
     if (gotChecked && legalMoves == 0)
     {
-        alpha = BLACK_MATED;
+        bestMove.eval = BLACK_MATED;
     }
-    return alpha;
+
+    if (bestMove.eval >= originalBeta)
+    {
+        transpositionFlag = betaCutoff;
+    }
+    else if (bestMove.eval <= originalAlpha)
+    {
+        transpositionFlag = alphaCutoff;
+    }
+    else
+    {
+        transpositionFlag = exactCutoff;
+    }
+
+    setTransposition(chessBoard, transpositionTable, 0, transpositionFlag, &bestMove);
+
+    return bestMove;
 }
 
-int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta)
+MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta)
 {
-    int score = evaluatePosition(chessBoard, attackTables);
+    TranspositionTableEntry* transpositionScore;
+    transpositionScore = getTransposition(chessBoard, transpositionTable, 0, 1);
+    
+    int originalBeta = beta;
+    int originalAlpha = alpha;
+    int transpositionFlag;
 
-    if (score <= alpha)
+    if (transpositionScore != NULL)
     {
-        return alpha;
+        if (transpositionScore->flag == alphaCutoff && transpositionScore->moveScore.eval <= alpha)
+        {
+            return transpositionScore->moveScore;
+        }
+        else if (transpositionScore->flag == betaCutoff && transpositionScore->moveScore.eval >= beta)
+        {
+            return transpositionScore->moveScore;
+        }
+        else if (transpositionScore->flag == exactCutoff)
+        {
+            return transpositionScore->moveScore;
+        }
+        
     }
 
-    if (score < beta)
+    MoveScore bestMove;
+    bestMove.eval = evaluatePosition(chessBoard, attackTables);
+
+    if (bestMove.eval <= alpha)
     {
-        beta = score;
+        bestMove.eval = alpha;
+        return bestMove;
+    }
+
+    if (bestMove.eval < beta)
+    {
+        beta = bestMove.eval;
     }
 
     if (depth > qSearchDepthReached)
@@ -513,7 +593,7 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
 
     int gotChecked = isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1);
 
-    int moveScore;
+    MoveScore moveScore;
 
     //ChessBoard* original = malloc(sizeof(ChessBoard));
     //memcpy(original, chessBoard, sizeof(ChessBoard));
@@ -539,7 +619,7 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
         if (timeLimitReached)
         {
             //free(original);
-            return 0;
+            return bestMove;
         }
 
         setBestMoveFirst(&moveList, chessBoard, transpositionTable, i);
@@ -551,24 +631,24 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
 
         makeMove(chessBoard, &moveList.moves[i], hashes);
 
-        int isLegalMove = isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1);
+        int isNotLegalMove = isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1);
 
-        if (!isLegalMove)
+        if (!isNotLegalMove)
         {
             legalMoves++;
 
             if (isThreeFoldRepetition(chessBoard))
             {
-                moveScore = DRAW;    
+                moveScore.eval = DRAW;    
             }
             else
             {
                 moveScore = qsearchWhite(chessBoard, attackTables, hashes, transpositionTable, depth + 1, alpha, beta);
             }
             
-            if (moveScore < beta)
+            if (moveScore.eval < beta)
             {
-                beta = moveScore;
+                beta = moveScore.eval;
             }
 
             if (alpha >= beta)
@@ -585,10 +665,25 @@ int qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Transpositi
     //free(original);
     if (gotChecked && legalMoves == 0)
     {
-        beta = WHITE_MATED;
+        bestMove.eval = WHITE_MATED;
     }
+
+    if (bestMove.eval >= originalBeta)
+    {
+        transpositionFlag = betaCutoff;
+    }
+    else if (bestMove.eval <= originalAlpha)
+    {
+        transpositionFlag = alphaCutoff;
+    }
+    else
+    {
+        transpositionFlag = exactCutoff;
+    }
+
+    setTransposition(chessBoard, transpositionTable, 0, transpositionFlag, &bestMove);
     
-    return beta;
+    return bestMove;
 }
 
 MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depthSearched, int alpha, int beta)
@@ -598,7 +693,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
 
     if (depthSearched == currentDepth)
     {
-        bestMove.eval = qsearchBlack(chessBoard, attackTables, hashes, transpositionTable, depthSearched, alpha, beta);
+        bestMove = qsearchBlack(chessBoard, attackTables, hashes, transpositionTable, depthSearched, alpha, beta);
         return bestMove;
     }
 
@@ -683,7 +778,6 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
             {
                 moveScore = whiteMove(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1, alpha, beta);
             }
-
             if (moveScore.eval < bestMove.eval)
             {
                 bestMove = moveScore;
@@ -741,7 +835,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
 
     if (depthSearched == currentDepth)
     {
-        bestMove.eval = qsearchWhite(chessBoard, attackTables, hashes, transpositionTable, depthSearched, alpha, beta);
+        bestMove = qsearchWhite(chessBoard, attackTables, hashes, transpositionTable, depthSearched, alpha, beta);
         return bestMove;
     }
 
@@ -903,9 +997,15 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
     qSearchDepthReached = 1;
     while (!timeLimitReached)
     {
+        nodesSearched = 0;
+        transpositionSearches = 0;
+        transpositionHits = 0;
+        transpositionCutoffs = 0;
+
         printf("Current search depth: %d\n", currentDepth);
         depthBestMove = iterativeSearch(chessBoard, attackTables, transpositionTable, hashes);
         
+        printf("Nodes: %d, Transposition searches: %d, hits: %d, Cutoffs: %d\n", nodesSearched, transpositionSearches, transpositionHits, transpositionCutoffs);
         if (!timeLimitReached)
         {
             currentBestMove = depthBestMove;
