@@ -417,17 +417,24 @@ MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Trans
     */
 
     MoveScore bestMove;
-    bestMove.eval = evaluatePosition(chessBoard, attackTables);
+    bestMove.eval = MIN_INT;
 
-    if (bestMove.eval >= beta)
-    {
-        bestMove.eval = beta;
-        return bestMove;
-    }
+    int gotChecked = isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0);
 
-    if (bestMove.eval > alpha)
+    if (!gotChecked)
     {
-        alpha = bestMove.eval;
+        bestMove.eval = evaluatePosition(chessBoard, attackTables);
+
+        if (bestMove.eval >= beta)
+        {
+            bestMove.eval = beta;
+            return bestMove;
+        }
+
+        if (bestMove.eval > alpha)
+        {
+            alpha = bestMove.eval;
+        }
     }
 
     if (depth > qSearchDepthReached)
@@ -443,8 +450,6 @@ MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Trans
     moveList.nextIndex = 0;
 
     int legalMoves = 0;
-
-    int gotChecked = isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0);
 
     MoveScore moveScore;
 
@@ -499,10 +504,14 @@ MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Trans
             {
                 moveScore = qsearchBlack(chessBoard, attackTables, hashes, transpositionTable, depth + 1, alpha, beta);
             }
+
+            if (moveScore.eval > bestMove.eval)
+            {
+                bestMove = moveScore;
+            }
             
             if (moveScore.eval > alpha)
             {
-                bestMove = moveScore;
                 alpha = moveScore.eval;
             }
 
@@ -575,18 +584,26 @@ MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Trans
     */
 
     MoveScore bestMove;
-    bestMove.eval = evaluatePosition(chessBoard, attackTables);
+    bestMove.eval = MAX_INT;
 
-    if (bestMove.eval <= alpha)
-    {
-        bestMove.eval = alpha;
-        return bestMove;
-    }
+    int gotChecked = isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1);
 
-    if (bestMove.eval < beta)
+    if (!gotChecked)
     {
-        beta = bestMove.eval;
+        bestMove.eval = evaluatePosition(chessBoard, attackTables);
+
+        if (bestMove.eval <= alpha)
+        {
+            bestMove.eval = alpha;
+            return bestMove;
+        }
+
+        if (bestMove.eval < beta)
+        {
+            beta = bestMove.eval;
+        }
     }
+    
 
     if (depth > qSearchDepthReached)
     {
@@ -600,8 +617,6 @@ MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Trans
     moveList.nextIndex = 0;
 
     int legalMoves = 0;
-
-    int gotChecked = isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1);
 
     MoveScore moveScore;
 
@@ -654,6 +669,11 @@ MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Trans
             else
             {
                 moveScore = qsearchWhite(chessBoard, attackTables, hashes, transpositionTable, depth + 1, alpha, beta);
+            }
+
+            if (moveScore.eval < bestMove.eval)
+            {
+                bestMove = moveScore;
             }
             
             if (moveScore.eval < beta)
