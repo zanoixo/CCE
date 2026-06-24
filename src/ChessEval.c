@@ -382,12 +382,11 @@ int isValidQSearchMove(ChessBoard* chessBoard, AttackTables* attackTables, uint1
 
 MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta)
 {
-    /*
-    nodesSearched++;
+    //nodesSearched++;
 
     TranspositionTableEntry* transpositionScore;
     transpositionScore = getTransposition(chessBoard, transpositionTable, 0, 1);
-    transpositionSearches++;
+    //transpositionSearches++;
 
     int originalBeta = beta;
     int originalAlpha = alpha;
@@ -398,23 +397,22 @@ MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Trans
         transpositionHits++;
         if (transpositionScore->flag == alphaCutoff && transpositionScore->moveScore.eval <= alpha)
         {
-            transpositionCutoffs++;
+            //transpositionCutoffs++;
             return transpositionScore->moveScore;
         }
         else if (transpositionScore->flag == betaCutoff && transpositionScore->moveScore.eval >= beta)
         {
-            transpositionCutoffs++;
+            //transpositionCutoffs++;
             return transpositionScore->moveScore;
         }
         else if (transpositionScore->flag == exactCutoff)
         {
-            transpositionCutoffs++;
+            //transpositionCutoffs++;
             return transpositionScore->moveScore;
         }
         
     }
 
-    */
 
     MoveScore bestMove;
     bestMove.eval = MIN_INT;
@@ -534,7 +532,7 @@ MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Trans
         bestMove.eval = BLACK_MATED;
     }
 
-    /*
+    
     if (bestMove.eval >= originalBeta)
     {
         transpositionFlag = betaCutoff;
@@ -550,14 +548,12 @@ MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Trans
 
     setTransposition(chessBoard, transpositionTable, -1, transpositionFlag, &bestMove);
 
-    */
-
     return bestMove;
 }
 
 MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, int depth, int alpha, int beta)
 {
-    /*
+    
     TranspositionTableEntry* transpositionScore;
     transpositionScore = getTransposition(chessBoard, transpositionTable, 0, 1);
     
@@ -581,7 +577,6 @@ MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Trans
         }
         
     }
-    */
 
     MoveScore bestMove;
     bestMove.eval = MAX_INT;
@@ -698,7 +693,7 @@ MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Trans
         bestMove.eval = WHITE_MATED;
     }
 
-    /*
+    
 
     if (bestMove.eval >= originalBeta)
     {
@@ -714,8 +709,6 @@ MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Trans
     }
 
     setTransposition(chessBoard, transpositionTable, -1, transpositionFlag, &bestMove);
-
-    */
     
     return bestMove;
 }
