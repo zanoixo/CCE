@@ -1,13 +1,27 @@
 #include "ChessUtils.h"
 #include "time.h"
 
+#ifdef _WIN32
+#include <windows.h>
+
+uint64_t getTimeMs()
+{
+    return GetTickCount64();
+}
+
+#else
+#include <time.h>
+
 uint64_t getTimeMs()
 {
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
 
-    return (uint64_t)ts.tv_sec * 1000ULL + (uint64_t)ts.tv_nsec / 1000000ULL;
+    return (uint64_t)ts.tv_sec * 1000ULL +
+           (uint64_t)ts.tv_nsec / 1000000ULL;
 }
+
+#endif
 
 void showBitBoard(uint64_t bitBoard)
 {
