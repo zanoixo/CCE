@@ -179,6 +179,8 @@ void uci_loop()
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
 
+    //runAllTests();
+
     while (fgets(line, sizeof(line), stdin))
     {
         line[strcspn(line, "\n")] = 0;

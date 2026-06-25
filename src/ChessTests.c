@@ -1998,7 +1998,7 @@ void runMakeMoveTests()
     ChessBoard* chessBoard = initChessBoard();
     AttackTables* attackTables = initAttackTables();
     TranspositionTableHashes* hashes = initTranpositionTableHashes();
-    createPosition("startingPosition.txt", chessBoard);
+    initStartingPosition(chessBoard, hashes);
     chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
     generatePositions(chessBoard, attackTables, hashes, 1);
 
@@ -2011,7 +2011,7 @@ void runMakeMoveTests()
 
     chessBoard = initChessBoard();
     attackTables = initAttackTables();
-    createPosition("startingPosition.txt", chessBoard);
+    initStartingPosition(chessBoard, hashes);
     chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
     generatePositions(chessBoard, attackTables, hashes, 2);
 
@@ -2024,7 +2024,7 @@ void runMakeMoveTests()
 
     chessBoard = initChessBoard();
     attackTables = initAttackTables();
-    createPosition("startingPosition.txt", chessBoard);
+    initStartingPosition(chessBoard, hashes);
     chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
     generatePositions(chessBoard, attackTables, hashes, 3);
 
@@ -2037,7 +2037,7 @@ void runMakeMoveTests()
 
     chessBoard = initChessBoard();
     attackTables = initAttackTables();
-    createPosition("startingPosition.txt", chessBoard);
+    initStartingPosition(chessBoard, hashes);
     chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
     generatePositions(chessBoard, attackTables, hashes, 4);
 
@@ -2050,7 +2050,7 @@ void runMakeMoveTests()
 
     chessBoard = initChessBoard();
     attackTables = initAttackTables();
-    createPosition("startingPosition.txt", chessBoard);
+    initStartingPosition(chessBoard, hashes);
     chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
     generatePositions(chessBoard, attackTables, hashes, 5);
 
@@ -2063,7 +2063,7 @@ void runMakeMoveTests()
 
     chessBoard = initChessBoard();
     attackTables = initAttackTables();
-    createPosition("startingPosition.txt", chessBoard);
+    initStartingPosition(chessBoard, hashes);
     chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
     generatePositions(chessBoard, attackTables, hashes, 6);
 

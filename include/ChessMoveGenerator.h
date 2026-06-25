@@ -43,13 +43,14 @@ enum PromotionPieces
 
 enum MoveFlags
 {
-    promotionPieceMask         = 0b00000000111,
-    capturePieceMask           = 0b00000111000,
-    enPassantMask              = 0b00001000000,
-    removeWhiteShortCastleFlag = 0b00010000000,
-    removeWhiteLongCastleFlag  = 0b00100000000,
-    removeBlackShortCastleFlag = 0b01000000000,
-    removeBlackLongCastleFlag  = 0b10000000000
+    promotionPieceMask         = 0b00000000000111,
+    capturePieceMask           = 0b00000000111000,
+    enPassantMask              = 0b00000001000000,
+    removeWhiteShortCastleFlag = 0b00000010000000,
+    removeWhiteLongCastleFlag  = 0b00000100000000,
+    removeBlackShortCastleFlag = 0b00001000000000,
+    removeBlackLongCastleFlag  = 0b00010000000000,
+    pieceMask                  = 0b11100000000000
 };
 
 enum MoveFlagsPosition
@@ -60,7 +61,8 @@ enum MoveFlagsPosition
     removeWhiteShortCastleFlagPosition = 7,
     removeWhiteLongCastleFlagPosition = 8,
     removeBlackShortCastleFlagPosition = 9,
-    removeBlackLongCastleFlagPosition = 10
+    removeBlackLongCastleFlagPosition = 10,
+    pieceFlagPosition = 11
 };
 
 typedef struct Move

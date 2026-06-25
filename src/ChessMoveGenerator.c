@@ -1140,6 +1140,11 @@ uint8_t getPromotionPiece(uint16_t flags)
     return (flags & promotionPieceMask) >> promotionFlagPosition;
 }
 
+uint8_t getPiece(uint16_t flags)
+{
+    return (flags & pieceMask) >> pieceFlagPosition;
+}
+
 uint8_t getSqInd(uint64_t sq)
 {
     return __builtin_ctzll(sq);
@@ -1169,6 +1174,7 @@ uint8_t canBlackLongCastle(ChessBoard *chessBoard)
 {
     return chessBoard->flags & blackLongCastleMask;
 }
+
 
 int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attackTables, int isAttackedByWhite)
 {
@@ -1225,18 +1231,18 @@ int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attack
     return 0;
 }
 
-void addMove(uint64_t from, uint64_t to, uint64_t prevEnPassantSq, uint8_t flags, MoveList* moveList, int score)
+void addMove(uint64_t from, uint64_t to, uint64_t prevEnPassantSq, uint16_t flags, MoveList* moveList, int score)
 {
     moveList->moves[moveList->nextIndex] = (Move){ from, to, prevEnPassantSq, flags, score };
     moveList->nextIndex++;
 }
 
-void generatePawnPromotionMoves(uint64_t from, uint64_t to, uint64_t prevEnPassantSq, uint8_t flags, MoveList* moveList)
+void generatePawnPromotionMoves(uint64_t from, uint64_t to, uint64_t prevEnPassantSq, uint16_t flags, MoveList* moveList)
 {
-    addMove(from, to, prevEnPassantSq, flags + queenPromotion, moveList, QUEEN_PROMOTION_VALUE);
-    addMove(from, to, prevEnPassantSq, flags + rookPromotion, moveList, ROOK_PROMOTION_VALUE);
-    addMove(from, to, prevEnPassantSq, flags + bishopPromotion, moveList, BISHOP_PROMOTION_VALUE);
-    addMove(from, to, prevEnPassantSq, flags + knightPromotion, moveList, KNIGHT_PROMOTION_VALUE);
+    addMove(from, to, prevEnPassantSq, flags | queenPromotion, moveList, QUEEN_PROMOTION_VALUE);
+    addMove(from, to, prevEnPassantSq, flags | rookPromotion, moveList, ROOK_PROMOTION_VALUE);
+    addMove(from, to, prevEnPassantSq, flags | bishopPromotion, moveList, BISHOP_PROMOTION_VALUE);
+    addMove(from, to, prevEnPassantSq, flags | knightPromotion, moveList, KNIGHT_PROMOTION_VALUE);
 }
 
 void generateKingMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
@@ -1258,17 +1264,18 @@ void generateKingMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
 
     while (kingAttacks != 0)
     {
+        uint16_t moveFlags = king << pieceFlagPosition;
         uint64_t toSq = kingAttacks & -kingAttacks;
 
         if (toSq & enemyPieces)
         {   
             uint8_t enemyColor = !isBlack(chessBoard);
             uint8_t capturedPiece = getPieceFromSquare(toSq, enemyColor, chessBoard);
-            uint8_t capturedPieceFlag = capturedPiece << captureFlagPostion;
-            addMove(fromSq, toSq, chessBoard->enPassantSq, capturedPieceFlag, moveList, calculateCaptureMoveScore(king, capturedPiece));    
+            moveFlags |= capturedPiece << captureFlagPostion;
+            addMove(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList, calculateCaptureMoveScore(king, capturedPiece));    
         }else
         {
-            addMove(fromSq, toSq, chessBoard->enPassantSq, 0, moveList, 0);
+            addMove(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList, 0);
         }
         
         kingAttacks &= kingAttacks - 1;
@@ -1296,16 +1303,17 @@ void generateKnightMoves(ChessBoard *chessBoard, AttackTables *attackTables, Mov
 
         while (knightAttacks != 0)
         {
+            uint16_t moveFlags = knight << pieceFlagPosition;
             uint64_t toSq= knightAttacks & -knightAttacks;
             if (toSq & enemyPieces)
             {
                 uint8_t enemyColor = !isBlack(chessBoard);
                 uint8_t capturedPiece = getPieceFromSquare(toSq, enemyColor, chessBoard);
-                uint8_t capturedPieceFlag = capturedPiece << captureFlagPostion;
-                addMove(fromSq, toSq, chessBoard->enPassantSq, capturedPieceFlag, moveList, calculateCaptureMoveScore(knight, capturedPiece));    
+                moveFlags |= capturedPiece << captureFlagPostion;
+                addMove(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList, calculateCaptureMoveScore(knight, capturedPiece));    
             }else
             {
-                addMove(fromSq, toSq, chessBoard->enPassantSq, 0, moveList, 0);
+                addMove(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList, 0);
             }
             
             knightAttacks &= knightAttacks - 1;
@@ -1336,16 +1344,17 @@ void generateBishopMoves(ChessBoard *chessBoard, AttackTables *attackTables, Mov
 
         while (bishopAttacks != 0)
         {
+            uint16_t moveFlags = bishop << pieceFlagPosition;
             uint64_t toSq = bishopAttacks & -bishopAttacks;
             if (toSq & enemyPieces)
             {
                 uint8_t enemyColor = !isBlack(chessBoard);
                 uint8_t capturedPiece = getPieceFromSquare(toSq, enemyColor, chessBoard);
-                uint8_t capturedPieceFlag = capturedPiece << captureFlagPostion;
-                addMove(fromSq, toSq, chessBoard->enPassantSq, capturedPieceFlag, moveList, calculateCaptureMoveScore(bishop, capturedPiece));    
+                moveFlags |= capturedPiece << captureFlagPostion;
+                addMove(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList, calculateCaptureMoveScore(bishop, capturedPiece));    
             }else
             {
-                addMove(fromSq, toSq, chessBoard->enPassantSq, 0, moveList, 0);
+                addMove(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList, 0);
             }
             
             bishopAttacks &= bishopAttacks - 1;
@@ -1376,16 +1385,17 @@ void generateQueenMoves(ChessBoard *chessBoard, AttackTables *attackTables, Move
 
         while (queenAttacks != 0)
         {
+            uint16_t moveFlags = queen << pieceFlagPosition;
             uint64_t toSq = queenAttacks & -queenAttacks;
             if (toSq & enemyPieces)
             {
                 uint8_t enemyColor = !isBlack(chessBoard);
                 uint8_t capturedPiece = getPieceFromSquare(toSq, enemyColor, chessBoard);
-                uint8_t capturedPieceFlag = capturedPiece << captureFlagPostion;
-                addMove(fromSq, toSq, chessBoard->enPassantSq, capturedPieceFlag, moveList, calculateCaptureMoveScore(queen, capturedPiece));    
+                moveFlags |= capturedPiece << captureFlagPostion;
+                addMove(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList, calculateCaptureMoveScore(queen, capturedPiece));    
             }else
             {
-                addMove(fromSq, toSq, chessBoard->enPassantSq, 0, moveList, 0);
+                addMove(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList, 0);
             }
             
             queenAttacks &= queenAttacks - 1;
@@ -1414,6 +1424,7 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
     
     while (pawnPositions != 0)
     {   
+        uint16_t moveFlags = pawn << pieceFlagPosition;
         uint64_t fromSq = pawnPositions & -pawnPositions;
 
         if (isBlack(chessBoard))
@@ -1423,15 +1434,15 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
             {
                 if (nextSq & promotionLine)
                 {
-                    generatePawnPromotionMoves(fromSq, nextSq, chessBoard->enPassantSq, 0, moveList);
+                    generatePawnPromotionMoves(fromSq, nextSq, chessBoard->enPassantSq, moveFlags, moveList);
                 }else
                 {
-                    addMove(fromSq, nextSq, chessBoard->enPassantSq, 0, moveList, 0);
+                    addMove(fromSq, nextSq, chessBoard->enPassantSq, moveFlags, moveList, 0);
                 }
 
                 if (fromSq & line7 && ((fromSq >> 16) & (~chessBoard->allPieces)))
                 {
-                    addMove(fromSq, fromSq >> 16, chessBoard->enPassantSq,  0, moveList, 0);
+                    addMove(fromSq, fromSq >> 16, chessBoard->enPassantSq,  moveFlags, moveList, 0);
                 }
             }
                     
@@ -1442,15 +1453,15 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
             {
                 if (nextSq & promotionLine)
                 {
-                    generatePawnPromotionMoves(fromSq, nextSq, chessBoard->enPassantSq, 0, moveList);
+                    generatePawnPromotionMoves(fromSq, nextSq, chessBoard->enPassantSq, moveFlags, moveList);
                 }else
                 {
-                    addMove(fromSq, nextSq, chessBoard->enPassantSq, 0, moveList, 0);
+                    addMove(fromSq, nextSq, chessBoard->enPassantSq, moveFlags, moveList, 0);
                 }
 
                 if (fromSq & line2 && ((fromSq << 16) & (~chessBoard->allPieces)))
                 {
-                    addMove(fromSq, fromSq << 16, chessBoard->enPassantSq, 0, moveList, 0);
+                    addMove(fromSq, fromSq << 16, chessBoard->enPassantSq, moveFlags, moveList, 0);
                 }
             } 
         }
@@ -1459,27 +1470,28 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
 
         while (pawnAttacks != 0)
         {   
+            moveFlags = pawn << pieceFlagPosition;
             uint64_t toSq = pawnAttacks & -pawnAttacks;
 
             if (toSq & enemyPieces)
             {
                 uint8_t enemyColor = !isBlack(chessBoard);
                 uint8_t capturedPiece = getPieceFromSquare(toSq, enemyColor, chessBoard);
-                uint8_t capturedPieceFlag = capturedPiece << captureFlagPostion;   
+                moveFlags |= capturedPiece << captureFlagPostion;   
                 if (toSq & promotionLine)
                 {
-                    generatePawnPromotionMoves(fromSq, toSq, chessBoard->enPassantSq, capturedPieceFlag, moveList);
+                    generatePawnPromotionMoves(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList);
                 }else
                 {
-                    addMove(fromSq, toSq, chessBoard->enPassantSq, capturedPieceFlag, moveList, calculateCaptureMoveScore(pawn, capturedPiece));
+                    addMove(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList, calculateCaptureMoveScore(pawn, capturedPiece));
                 }
                  
             }
 
             if ((chessBoard->enPassantSq & toSq) && (chessBoard->enPassantSq & enpassantLine))
             {
-                uint8_t flags = (pawn << captureFlagPostion) | (1 << enPassantFlagPosition);
-                addMove(fromSq, toSq, chessBoard->enPassantSq, flags, moveList, calculateCaptureMoveScore(pawn, pawn));
+                moveFlags |= (pawn << captureFlagPostion) | (1 << enPassantFlagPosition);
+                addMove(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList, calculateCaptureMoveScore(pawn, pawn));
             }
             
             pawnAttacks &= pawnAttacks - 1;
@@ -1510,16 +1522,17 @@ void generateRookMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
 
         while (rookAttacks != 0)
         {
+            uint16_t moveFlags = rook << pieceFlagPosition;
             uint64_t toSq = rookAttacks & -rookAttacks;
             if (toSq & enemyPieces)
             {
                 uint8_t enemyColor = !isBlack(chessBoard);
                 uint8_t capturedPiece = getPieceFromSquare(toSq, enemyColor, chessBoard);
-                uint8_t capturedPieceFlag = capturedPiece << captureFlagPostion;
-                addMove(fromSq, toSq, chessBoard->enPassantSq, capturedPieceFlag, moveList, calculateCaptureMoveScore(rook, capturedPiece));
+                moveFlags |= capturedPiece << captureFlagPostion;
+                addMove(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList, calculateCaptureMoveScore(rook, capturedPiece));
             }else
             {
-                addMove(fromSq, toSq, chessBoard->enPassantSq, 0, moveList, 0);   
+                addMove(fromSq, toSq, chessBoard->enPassantSq, moveFlags, moveList, 0);   
             } 
             
             rookAttacks &= rookAttacks - 1;
@@ -1531,6 +1544,7 @@ void generateRookMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
 
 void generateCastleMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
 {
+    uint16_t moveFlags = king << pieceFlagPosition;
     if (isBlack(chessBoard))
     {
         if (canBlackShortCastle(chessBoard))
@@ -1540,7 +1554,7 @@ void generateCastleMoves(ChessBoard *chessBoard, AttackTables *attackTables, Mov
                 !isSquareAttacked(getSqInd(f8), chessBoard, attackTables, 1) && 
                 !isSquareAttacked(getSqInd(g8), chessBoard, attackTables, 1))
             {
-                addMove(e8, g8, chessBoard->enPassantSq, 0, moveList, 0);
+                addMove(e8, g8, chessBoard->enPassantSq, moveFlags, moveList, 0);
             }
                 
         }
@@ -1552,7 +1566,7 @@ void generateCastleMoves(ChessBoard *chessBoard, AttackTables *attackTables, Mov
                 !isSquareAttacked(getSqInd(c8), chessBoard, attackTables, 1) &&  
                 !isSquareAttacked(getSqInd(d8), chessBoard, attackTables, 1)) 
             {
-                addMove(e8, c8, chessBoard->enPassantSq, 0, moveList, 0);
+                addMove(e8, c8, chessBoard->enPassantSq, moveFlags, moveList, 0);
             }    
         }
     }else
@@ -1564,7 +1578,7 @@ void generateCastleMoves(ChessBoard *chessBoard, AttackTables *attackTables, Mov
                 !isSquareAttacked(getSqInd(f1), chessBoard, attackTables, 0) && 
                 !isSquareAttacked(getSqInd(g1), chessBoard, attackTables, 0))
             {
-                addMove(e1, g1, chessBoard->enPassantSq, 0, moveList, 0);
+                addMove(e1, g1, chessBoard->enPassantSq, moveFlags, moveList, 0);
             }    
         }
 
@@ -1575,7 +1589,7 @@ void generateCastleMoves(ChessBoard *chessBoard, AttackTables *attackTables, Mov
                 !isSquareAttacked(getSqInd(c1), chessBoard, attackTables, 0) &&  
                 !isSquareAttacked(getSqInd(d1), chessBoard, attackTables, 0)) 
             {
-                addMove(e1, c1, chessBoard->enPassantSq, 0, moveList, 0);
+                addMove(e1, c1, chessBoard->enPassantSq, moveFlags, moveList, 0);
             } 
         }
     }
@@ -3443,12 +3457,7 @@ void unMakeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* ha
     chessBoard->flags ^= colorMask;
     chessBoard->positionHash ^= hashes->colorHash;
 
-    uint8_t piece = getPieceFromSquare(move->to, isBlack(chessBoard), chessBoard);
-
-    if (getPromotionPiece(move->flags))
-    {
-        piece = pawn;
-    }
+    uint8_t piece = getPiece(move->flags);
 
     switch (piece)
     {
@@ -3486,7 +3495,7 @@ void unMakeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* ha
 
 void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
-    uint8_t piece = getPieceFromSquare(move->from, isBlack(chessBoard), chessBoard);
+    uint8_t piece = getPiece(move->flags);
     chessBoard->enPassantSq = 0;
 
     switch (piece)
