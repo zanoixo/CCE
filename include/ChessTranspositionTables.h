@@ -52,7 +52,7 @@ typedef struct TranspositionTableHashes
 typedef struct TranspositionTableEntry
 {
     uint64_t hash;
-    int8_t depth;
+    int16_t depth;
     uint8_t flag;
     MoveScore moveScore;
     

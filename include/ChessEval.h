@@ -6,7 +6,7 @@ typedef struct ChessBoard ChessBoard;
 typedef struct TranspositionTableHashes TranspositionTableHashes;
 typedef struct TranspositionTableEntry TranspositionTableEntry;
 
-#define KILLER_MOVE_DEPTH 128
+#define KILLER_MOVE_DEPTH 256
 #define TIME_CHECK 2047
 
 #define MAX_INT 1000000000

@@ -5,7 +5,7 @@ int isThreeFoldRepetition(ChessBoard* chessBoard)
 {
     int repetitionCounter = 0;
 
-    for (int i = chessBoard->history.size - 1; i > 0; i -= 2)
+    for (int i = chessBoard->history.size - 1; i >= 0; i -= 2)
     {
         if (chessBoard->history.positionHashes[i] == chessBoard->positionHash)
         {
@@ -15,7 +15,6 @@ int isThreeFoldRepetition(ChessBoard* chessBoard)
             {
                 return 1;
             }
-            
         }
         
     }
