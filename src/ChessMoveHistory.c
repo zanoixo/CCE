@@ -1,11 +1,14 @@
 #include "ChessMoveHistory.h"
 #include "ChessBoard.h"
+#include "ChessMoveGenerator.h"
 
 int isThreeFoldRepetition(ChessBoard* chessBoard)
 {
     int repetitionCounter = 0;
 
-    for (int i = chessBoard->history.size - 1; i >= 0; i -= 2)
+    int index = chessBoard->history.size - 1;
+
+    for (int i = index; i >= chessBoard->history.lastIrreversableIndex[index]; i -= 2)
     {
         if (chessBoard->history.positionHashes[i] == chessBoard->positionHash)
         {
@@ -22,10 +25,28 @@ int isThreeFoldRepetition(ChessBoard* chessBoard)
     return 0;
 }
 
-void addMoveToHistory(ChessBoard* chessBoard)
+void addMoveToHistory(ChessBoard* chessBoard, Move* move)
 {
-    chessBoard->history.positionHashes[chessBoard->history.size] = chessBoard->positionHash;
-    chessBoard->history.size++;
+    int index = chessBoard->history.size;
+
+    chessBoard->history.positionHashes[index] = chessBoard->positionHash;
+
+    uint8_t piece = getPiece(move->flags);
+
+    if (getCapturedPiece(move->flags) || piece == pawn)
+    {
+        chessBoard->history.lastIrreversableIndex[index] = index;
+    }
+    else
+    {
+        if (index != 0)
+        {
+            chessBoard->history.lastIrreversableIndex[index] = chessBoard->history.lastIrreversableIndex[index - 1];
+        }
+
+    }
+
+     chessBoard->history.size++;
 }
 
 void removeMovefromHistory(ChessBoard* chessBoard)

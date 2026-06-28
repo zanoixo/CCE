@@ -8,6 +8,7 @@
 #define CASTLE_RIGHT_COUNT 4
 #define ENPASSANT_FILES_COUNT 8
 #define TRANSPOSITION_TABLE_NUM_OF_BITS 25
+#define TRANSPOSITION_SCORE 10000000
 
 enum pieceHashes
 {
@@ -64,3 +65,4 @@ void clearTranspositionTable(TranspositionTableEntry* transpositionTable);
 TranspositionTableEntry* getTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth, int isEvalOnly);
 void setTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth, MoveScore* moveScore, int alpha, int beta);
 void checkTranspositionHit(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, TranspositionTableEntry* transpositionScore, TranspositionTableHashes* hashes, int alpha, int beta);
+void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, TranspositionTableEntry* transpositionTable);

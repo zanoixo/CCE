@@ -110,6 +110,22 @@ int transpositionCutoffs;
 int timeCheckCounter = 1;
 int timeLimitReached = 0;
 
+void updateTime()
+{
+    timeCheckCounter++;
+        
+    if ((timeCheckCounter & TIME_CHECK) == 0)
+    {
+        timeCheckCounter = 1;
+        
+        if (stopTime < getTimeMs())
+        {
+            timeLimitReached = 1;
+        }
+        
+    }
+}
+
 void penalizeHistoryHeuristic(Move move, int remeniningDepth)
 {
     historyHeuristic[getSqInd(move.from)][getSqInd(move.to)][getPiece(move.flags) - 1] -= remeniningDepth;     
@@ -367,19 +383,12 @@ int evaluatePosition(ChessBoard* chessBoard, AttackTables* attackTables)
     return score;
 }
 
-void setBestMoveFirst(MoveList* moveList, ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int moveCount)
+void setBestMoveFirst(MoveList* moveList, int moveCount)
 {
     int moveInd = moveCount;
-    TranspositionTableEntry* transposition = getTransposition(chessBoard, transpositionTable, 0, 1);
 
     for (int i = moveCount + 1; i < moveList->nextIndex; i++)
     {   
-        if (transposition != NULL && transposition->moveScore.move.from == moveList->moves[i].from && transposition->moveScore.move.to == moveList->moves[i].to)
-        {
-            moveInd = i;
-            break;
-        }
-        
         if (moveList->moves[i].score > moveList->moves[moveInd].score)
         {
             moveInd = i;
@@ -478,18 +487,7 @@ MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Trans
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
-        timeCheckCounter++;
-        
-        if ((timeCheckCounter & TIME_CHECK) == 0)
-        {
-            timeCheckCounter = 1;
-            
-            if (stopTime < getTimeMs())
-            {
-                timeLimitReached = 1;
-            }
-            
-        }
+        updateTime();
 
         if (timeLimitReached)
         {
@@ -497,7 +495,7 @@ MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Trans
             return bestMove;
         }
 
-        setBestMoveFirst(&moveList,chessBoard, transpositionTable, i);
+        setBestMoveFirst(&moveList, i);
 
         if (!gotChecked && !isValidQSearchMove(chessBoard, attackTables, moveList.moves[i].flags))
         {
@@ -618,18 +616,7 @@ MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Trans
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
-        timeCheckCounter++;
-        
-        if ((timeCheckCounter & TIME_CHECK) == 0)
-        {
-            timeCheckCounter = 1;
-            
-            if (stopTime < getTimeMs())
-            {
-                timeLimitReached = 1;
-            }
-            
-        }
+        updateTime();
 
         if (timeLimitReached)
         {
@@ -637,7 +624,7 @@ MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Trans
             return bestMove;
         }
 
-        setBestMoveFirst(&moveList, chessBoard, transpositionTable, i);
+        setBestMoveFirst(&moveList, i);
 
         if (!gotChecked && !isValidQSearchMove(chessBoard, attackTables, moveList.moves[i].flags))
         {
@@ -730,23 +717,13 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
     //memcpy(original, chessBoard, sizeof(ChessBoard));
 
     generateMoves(chessBoard, attackTables, &moveList);
-
+    
+    setScoreToTranspositionMove(chessBoard, &moveList, transpositionTable);
     findKillerMoves(&moveList, depthSearched);
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
-        timeCheckCounter++;
-
-        if ((timeCheckCounter & TIME_CHECK) == 0)
-        {
-            timeCheckCounter = 1;
-            
-            if (stopTime < getTimeMs())
-            {
-                timeLimitReached = 1;
-            }
-            
-        }
+        updateTime();
 
         if (timeLimitReached)
         {
@@ -755,7 +732,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
         }
         
         
-        setBestMoveFirst(&moveList, chessBoard, transpositionTable, i);
+        setBestMoveFirst(&moveList, i);
 
         makeMove(chessBoard, &moveList.moves[i], hashes);
 
@@ -867,23 +844,13 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
     //memcpy(original, chessBoard, sizeof(ChessBoard));
     
     generateMoves(chessBoard, attackTables, &moveList);
-    
+
+    setScoreToTranspositionMove(chessBoard, &moveList, transpositionTable);
     findKillerMoves(&moveList, depthSearched);
     
     for (int i = 0; i < moveList.nextIndex; i++)
     {
-        timeCheckCounter++;
-        
-        if ((timeCheckCounter & TIME_CHECK) == 0)
-        {
-            timeCheckCounter = 1;
-            
-            if (stopTime < getTimeMs())
-            {
-                timeLimitReached = 1;
-            }
-            
-        }
+        updateTime();
 
         if (timeLimitReached)
         {
@@ -891,7 +858,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
             return bestMove;
         }
 
-        setBestMoveFirst(&moveList, chessBoard, transpositionTable, i);
+        setBestMoveFirst(&moveList, i);
         
         makeMove(chessBoard, &moveList.moves[i], hashes);
 

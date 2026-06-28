@@ -3531,7 +3531,7 @@ void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hash
     
     chessBoard->positionHash ^= hashes->colorHash;
 
-    addMoveToHistory(chessBoard);
+    addMoveToHistory(chessBoard, move);
 }
 
 AttackTables* initAttackTables()

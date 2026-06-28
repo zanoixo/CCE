@@ -162,3 +162,18 @@ void setTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transposi
         transpositionTable[index].flag = transpositionFlag;
     }
 }
+
+void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, TranspositionTableEntry* transpositionTable)
+{
+    TranspositionTableEntry* transposition = getTransposition(chessBoard, transpositionTable, 0, 1);
+
+    for (int i = 0; i < moveList->nextIndex; i++)
+    {
+        if (transposition != NULL && transposition->moveScore.move.from == moveList->moves[i].from && 
+            transposition->moveScore.move.to == moveList->moves[i].to)
+        {
+            moveList->moves[i].score = TRANSPOSITION_SCORE;
+            break;
+        }    
+    }
+}

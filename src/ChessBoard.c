@@ -253,6 +253,7 @@ void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hash
     chessBoard->flags = whiteShortCastleMask | whiteLongCastleMask | blackShortCastleMask | blackLongCastleMask;
     
     chessBoard->history.size = 0;
+    chessBoard->history.lastIrreversableIndex[0] = 0;
 }
 
 void createPosition(char fileName[], ChessBoard *chessBoard)
