@@ -3,11 +3,11 @@
 
 typedef struct ChessBoard ChessBoard;
 
-#define HISTORY_SIZE 256
+#define HISTORY_SIZE 1024
 
 typedef struct MoveHistory
 {
-    uint64_t positionHashes[256];
+    uint64_t positionHashes[HISTORY_SIZE];
     int size;
 }MoveHistory;
 
