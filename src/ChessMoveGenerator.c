@@ -3451,7 +3451,17 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
     }
 }
 
-void unMakeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
+void hashEnPassant(ChessBoard* chessBoard, TranspositionTableHashes* hashes)
+{
+    if (chessBoard->enPassantSq != 0)
+    {
+        uint8_t enPassantSq = getSqInd(chessBoard->enPassantSq);
+        uint8_t enPassantFile = enPassantSq % 8;
+        chessBoard->positionHash ^= hashes->enPassantHashes[enPassantFile];
+    }
+}
+
+void unMakeMove(ChessBoard* chessBoard, Move* move, TranspositionTableHashes* hashes)
 {
     chessBoard->flags ^= colorMask;
     chessBoard->positionHash ^= hashes->colorHash;
@@ -3480,21 +3490,21 @@ void unMakeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* ha
             break;
     }
 
-    if (chessBoard->enPassantSq != 0)
-    {
-        uint8_t enPassantSq = getSqInd(chessBoard->enPassantSq);
-        uint8_t enPassantFile = enPassantSq % 8;
-        chessBoard->positionHash ^= hashes->enPassantHashes[enPassantFile];
-    }
+    hashEnPassant(chessBoard, hashes);
 
     chessBoard->enPassantSq = move->prevEnPassantSq;
 
+    hashEnPassant(chessBoard, hashes);
+    
     removeMovefromHistory(chessBoard);
 }
 
 void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t piece = getPiece(move->flags);
+    
+    hashEnPassant(chessBoard, hashes);
+
     chessBoard->enPassantSq = 0;
 
     switch (piece)
@@ -3521,17 +3531,28 @@ void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hash
 
     chessBoard->flags ^= colorMask;
 
-    if (chessBoard->enPassantSq != 0)
-    {
-        uint8_t enPassantSq = getSqInd(chessBoard->enPassantSq);
-        uint8_t enPassantFile = enPassantSq % 8;
-        chessBoard->positionHash ^= hashes->enPassantHashes[enPassantFile];
-    }
-    
+    hashEnPassant(chessBoard, hashes);
     
     chessBoard->positionHash ^= hashes->colorHash;
 
     addMoveToHistory(chessBoard, move);
+}
+
+void makeNullMove(ChessBoard* chessBoard, Move* move, TranspositionTableHashes* hashes)
+{
+    chessBoard->flags ^= colorMask;
+    chessBoard->positionHash ^= hashes->colorHash;
+    move->prevEnPassantSq = chessBoard->enPassantSq;
+    hashEnPassant(chessBoard, hashes);
+    chessBoard->enPassantSq = 0;
+}
+
+void unMakeNullMove(ChessBoard* chessBoard, Move* move, TranspositionTableHashes* hashes)
+{
+    chessBoard->flags ^= colorMask;
+    chessBoard->positionHash ^= hashes->colorHash;
+    chessBoard->enPassantSq = move->prevEnPassantSq;
+    hashEnPassant(chessBoard, hashes);
 }
 
 AttackTables* initAttackTables()

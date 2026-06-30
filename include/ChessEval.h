@@ -34,6 +34,8 @@ typedef struct TranspositionTableEntry TranspositionTableEntry;
 #define BISHOP_PAIR_VALUE 30
 #define DOUBLED_PAWN_PENALTY 15
 
+#define NULL_MOVE_SKIP 2
+
 
 typedef struct MoveScore
 {

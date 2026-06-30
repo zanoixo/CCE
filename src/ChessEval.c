@@ -109,6 +109,7 @@ int transpositionHits;
 int transpositionCutoffs;
 int timeCheckCounter = 1;
 int timeLimitReached = 0;
+int isNullMove = 0;
 
 void updateTime()
 {
@@ -479,8 +480,8 @@ MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Trans
 
     MoveScore moveScore;
 
-    //ChessBoard* original = malloc(sizeof(ChessBoard));
-    //memcpy(original, chessBoard, sizeof(ChessBoard));
+    ChessBoard* original = malloc(sizeof(ChessBoard));
+    memcpy(original, chessBoard, sizeof(ChessBoard));
 
     generateMoves(chessBoard, attackTables, &moveList);
     
@@ -491,7 +492,7 @@ MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Trans
 
         if (timeLimitReached)
         {
-            //free(original);
+            free(original);
             return bestMove;
         }
 
@@ -535,15 +536,15 @@ MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, Trans
             if (alpha >= beta)
             {
                 unMakeMove(chessBoard, &moveList.moves[i], hashes);
-                //ASSERT_CHESS_BOARD(original, chessBoard);
+                ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
         }
 
         unMakeMove(chessBoard, &moveList.moves[i], hashes);
-        //ASSERT_CHESS_BOARD(original, chessBoard);
+        ASSERT_CHESS_BOARD(original, chessBoard);
     }
-    //free(original);
+    free(original);
 
     
     if (gotChecked && legalMoves == 0)
@@ -608,8 +609,8 @@ MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Trans
 
     MoveScore moveScore;
 
-    //ChessBoard* original = malloc(sizeof(ChessBoard));
-    //memcpy(original, chessBoard, sizeof(ChessBoard));
+    ChessBoard* original = malloc(sizeof(ChessBoard));
+    memcpy(original, chessBoard, sizeof(ChessBoard));
 
 
     generateMoves(chessBoard, attackTables, &moveList);
@@ -620,7 +621,7 @@ MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Trans
 
         if (timeLimitReached)
         {
-            //free(original);
+            free(original);
             return bestMove;
         }
 
@@ -663,15 +664,15 @@ MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, Trans
             if (alpha >= beta)
             {
                 unMakeMove(chessBoard, &moveList.moves[i], hashes);
-                //ASSERT_CHESS_BOARD(original, chessBoard);
+                ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
         }
 
         unMakeMove(chessBoard, &moveList.moves[i], hashes);
-        //ASSERT_CHESS_BOARD(original, chessBoard);
+        ASSERT_CHESS_BOARD(original, chessBoard);
     }
-    //free(original);
+    free(original);
     if (gotChecked && legalMoves == 0)
     {
         bestMove.eval = WHITE_MATED;
@@ -713,8 +714,32 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
         return transpositionScore->moveScore;
     }
 
-    //ChessBoard* original = malloc(sizeof(ChessBoard));
-    //memcpy(original, chessBoard, sizeof(ChessBoard));
+    int amChecked = isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1);
+
+    if (currentDepth - depthSearched >= 3 && !amChecked && !isNullMove)
+    {
+        Move nullMove = (Move){0, 0, 0, 0, 0};
+
+        isNullMove = 1;
+
+        makeNullMove(chessBoard, &nullMove, hashes);
+
+        moveScore = whiteMove(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1 + NULL_MOVE_SKIP, alpha, beta);
+
+        unMakeNullMove(chessBoard, &nullMove, hashes);
+
+        isNullMove = 0;
+
+        if (moveScore.eval <= alpha)
+        {
+            bestMove.eval = alpha;
+            return bestMove;
+        }
+        
+    }
+
+    ChessBoard* original = malloc(sizeof(ChessBoard));
+    memcpy(original, chessBoard, sizeof(ChessBoard));
 
     generateMoves(chessBoard, attackTables, &moveList);
     
@@ -727,7 +752,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
 
         if (timeLimitReached)
         {
-            //free(original);
+            free(original);
             return bestMove;
         }
         
@@ -786,16 +811,16 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
                 
                 unMakeMove(chessBoard, &moveList.moves[i], hashes);
 
-                //ASSERT_CHESS_BOARD(original, chessBoard);
+                ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
             
         }
 
         unMakeMove(chessBoard, &moveList.moves[i], hashes);
-        //ASSERT_CHESS_BOARD(original, chessBoard);
+        ASSERT_CHESS_BOARD(original, chessBoard);
     }
-    //free(original);
+    free(original);
     if (legalMoves == 0)
     {
         if (isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1))
@@ -840,8 +865,33 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
         return transpositionScore->moveScore;
     }
 
-    //ChessBoard* original = malloc(sizeof(ChessBoard));
-    //memcpy(original, chessBoard, sizeof(ChessBoard));
+    int amChecked = isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0);
+
+    if (currentDepth - depthSearched >= 3 && !amChecked && !isNullMove)
+    {
+        Move nullMove = (Move){0, 0, 0, 0, 0};
+
+        isNullMove = 1;
+
+        makeNullMove(chessBoard, &nullMove, hashes);
+
+        moveScore = blackMove(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1 + NULL_MOVE_SKIP, alpha, beta);
+
+        unMakeNullMove(chessBoard, &nullMove, hashes);
+
+        isNullMove = 0;
+
+        if (moveScore.eval >= beta)
+        {
+            bestMove.eval = beta;
+            return bestMove;
+        }
+        
+    }
+    
+
+    ChessBoard* original = malloc(sizeof(ChessBoard));
+    memcpy(original, chessBoard, sizeof(ChessBoard));
     
     generateMoves(chessBoard, attackTables, &moveList);
 
@@ -854,7 +904,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
 
         if (timeLimitReached)
         {
-            //free(original);
+            free(original);
             return bestMove;
         }
 
@@ -911,15 +961,15 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
                 
                 unMakeMove(chessBoard, &moveList.moves[i], hashes);
                 
-                //ASSERT_CHESS_BOARD(original, chessBoard);
+                ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
             
         }
         unMakeMove(chessBoard, &moveList.moves[i], hashes);
-        //ASSERT_CHESS_BOARD(original, chessBoard);
+        ASSERT_CHESS_BOARD(original, chessBoard);
     }
-    //free(original);
+    free(original);
     if (legalMoves == 0)
     {
         if (isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0))

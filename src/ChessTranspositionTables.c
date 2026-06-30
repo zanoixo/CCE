@@ -154,7 +154,7 @@ void setTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transposi
 
     uint64_t index = chessBoard->positionHash & transpositionTableMask;
 
-    if (transpositionTable[index].depth < remainingDepth)
+    if (transpositionTable[index].depth <= remainingDepth)
     {
         transpositionTable[index].moveScore = *moveScore;
         transpositionTable[index].depth = remainingDepth;
