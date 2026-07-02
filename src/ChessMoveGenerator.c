@@ -1131,7 +1131,19 @@ int calculateCaptureMoveScore(uint8_t attackerPiece, uint8_t capturedPiece)
     int attackerScore = getPieceScore(attackerPiece);
     int capturedScore = getPieceScore(capturedPiece);
 
-    return 2000 + 10 * capturedScore - attackerScore;
+    int score;
+
+    if (attackerScore < capturedScore + 30 )
+    {
+        score = 2000 + 10 * capturedScore - attackerScore;
+    }
+    else
+    {
+        score = -2000 + 10 * capturedScore - attackerScore;
+    }
+    
+
+    return score;
 }
 
 uint8_t getPromotionPiece(uint16_t flags)
