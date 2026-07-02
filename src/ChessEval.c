@@ -782,9 +782,9 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
                 }
                 else
                 {
-                    moveScore = whiteMove(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1, beta - 1, beta);
+                    moveScore = whiteMove(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1, alpha, alpha + 1);
                     
-                    if (moveScore.eval > beta && moveScore.eval > alpha)
+                    if (moveScore.eval > alpha)
                     {
                         moveScore = whiteMove(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1, alpha, beta);
                     }
@@ -953,7 +953,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
                 {
                     moveScore = blackMove(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1, alpha, alpha + 1);
 
-                    if (moveScore.eval < beta && moveScore.eval > alpha)
+                    if (moveScore.eval > alpha)
                     {
                         moveScore = blackMove(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1, alpha, beta);
                     }
