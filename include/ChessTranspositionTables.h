@@ -59,10 +59,15 @@ typedef struct TranspositionTableEntry
     
 }TranspositionTableEntry;
 
+typedef struct TranspositionTable
+{
+    TranspositionTableEntry transpositions[1 << TRANSPOSITION_TABLE_NUM_OF_BITS];
+}TranspositionTable;
+
 TranspositionTableHashes* initTranpositionTableHashes();
-TranspositionTableEntry* initTranpositionTable();
-void clearTranspositionTable(TranspositionTableEntry* transpositionTable);
-TranspositionTableEntry* getTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth, int isEvalOnly);
-void setTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth, MoveScore* moveScore, int alpha, int beta);
-void checkTranspositionHit(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, TranspositionTableEntry* transpositionScore, TranspositionTableHashes* hashes, int alpha, int beta);
-void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, TranspositionTableEntry* transpositionTable);
+TranspositionTable* initTranpositionTable();
+void clearTranspositionTable(TranspositionTable* transpositionTable);
+TranspositionTableEntry* getTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, int isEvalOnly);
+void setTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, MoveScore* moveScore, int alpha, int beta);
+TranspositionTableEntry* checkTranspositionHit(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, int alpha, int beta);
+void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, TranspositionTable* transpositionTable);

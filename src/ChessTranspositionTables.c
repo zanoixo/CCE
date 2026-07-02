@@ -42,93 +42,75 @@ TranspositionTableHashes* initTranpositionTableHashes()
     return hashes;
 }
 
-TranspositionTableEntry* initTranpositionTable()
+TranspositionTable* initTranpositionTable()
 {
-    TranspositionTableEntry* transpositionTable = malloc(sizeof(TranspositionTableEntry) * transpositionTableSize);
+    TranspositionTable* transpositionTable = malloc(sizeof(TranspositionTable));
 
     clearTranspositionTable(transpositionTable);
     
     return transpositionTable;
 }
 
-void clearTranspositionTable(TranspositionTableEntry* transpositionTable)
+void clearTranspositionTable(TranspositionTable* transpositionTable)
 {
     for (uint64_t i = 0; i < transpositionTableSize; i++)
     {
-        transpositionTable[i].depth = -1;
+        transpositionTable->transpositions[i].depth = -1;
     }   
 }
 
-TranspositionTableEntry* getTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth, int isEvalOnly)
+TranspositionTableEntry* getTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, int isEvalOnly)
 {
     uint64_t index = chessBoard->positionHash & transpositionTableMask;
 
-    if (isEvalOnly && transpositionTable[index].hash != chessBoard->positionHash)
+    if (isEvalOnly && transpositionTable->transpositions[index].hash != chessBoard->positionHash)
     {
         return NULL;
     }
     
 
-    if (!isEvalOnly && (transpositionTable[index].depth < remainingDepth || transpositionTable[index].hash != chessBoard->positionHash))
+    if (!isEvalOnly && (transpositionTable->transpositions[index].depth < remainingDepth || transpositionTable->transpositions[index].hash != chessBoard->positionHash))
     {
         return NULL;
     }
         
-    return &transpositionTable[index];
+    return &transpositionTable->transpositions[index];
 }
 
-void checkTranspositionHit(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, TranspositionTableEntry* transpositionScore, TranspositionTableHashes* hashes, int alpha, int beta)
+TranspositionTableEntry* checkTranspositionHit(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remeiningDepth, int alpha, int beta)
 {
-    TranspositionTableEntry* transposition = getTransposition(chessBoard, transpositionTable, 0, 1);
+    TranspositionTableEntry* transposition = getTransposition(chessBoard, transpositionTable, remeiningDepth, 0);
 
-    if (transpositionScore != NULL)
+    if (transposition != NULL)
     {
         //transpositionHits++;
-        if (transpositionScore->flag == alphaCutoff && transpositionScore->moveScore.eval <= alpha)
+        if (transposition->flag == alphaCutoff && transposition->moveScore.eval <= alpha)
         {
             //transpositionCutoffs++;
-            makeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
-
-            if (!isThreeFoldRepetition(chessBoard))
-            {
-                transpositionScore = transposition;
-            }
-
-            unMakeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
-            return;
+            return transposition;
         }
-        else if (transpositionScore->flag == betaCutoff && transpositionScore->moveScore.eval >= beta)
+        else if (transposition->flag == betaCutoff && transposition->moveScore.eval >= beta)
         {
             //transpositionCutoffs++;
-            makeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
-            
-            if (!isThreeFoldRepetition(chessBoard))
-            {
-                transpositionScore = transposition;
-            }
-
-            unMakeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
-            return;
+            return transposition;
         }
-        else if (transpositionScore->flag == exactCutoff)
+        else if (transposition->flag == exactCutoff)
         {
             //transpositionCutoffs++;
-            makeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
-            
-            if (!isThreeFoldRepetition(chessBoard))
-            {
-                transpositionScore = transposition;
-            }
-
-            unMakeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
-            return;
+            return transposition;
+        }
+        else
+        {
+            return NULL;
         } 
     }
+
+    return NULL;
 }
 
 
 
-void setTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transpositionTable, int remainingDepth, MoveScore* moveScore, int alpha, int beta)
+void setTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, MoveScore* moveScore, int alpha, int beta)
 {
     if (moveScore->move.flags == 0)
     {
@@ -154,16 +136,16 @@ void setTransposition(ChessBoard* chessBoard, TranspositionTableEntry* transposi
 
     uint64_t index = chessBoard->positionHash & transpositionTableMask;
 
-    if (transpositionTable[index].depth <= remainingDepth)
+    if (transpositionTable->transpositions[index].depth <= remainingDepth)
     {
-        transpositionTable[index].moveScore = *moveScore;
-        transpositionTable[index].depth = remainingDepth;
-        transpositionTable[index].hash = chessBoard->positionHash;
-        transpositionTable[index].flag = transpositionFlag;
+        transpositionTable->transpositions[index].moveScore = *moveScore;
+        transpositionTable->transpositions[index].depth = remainingDepth;
+        transpositionTable->transpositions[index].hash = chessBoard->positionHash;
+        transpositionTable->transpositions[index].flag = transpositionFlag;
     }
 }
 
-void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, TranspositionTableEntry* transpositionTable)
+void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, TranspositionTable* transpositionTable)
 {
     TranspositionTableEntry* transposition = getTransposition(chessBoard, transpositionTable, 0, 1);
 

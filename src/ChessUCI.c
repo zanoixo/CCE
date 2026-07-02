@@ -91,7 +91,7 @@ void userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
     makeMove(chessBoard, playedMove, hashes);
 }
 
-void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTableEntry* transpositionTable, uint64_t timePerMove)
+void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, uint64_t timePerMove)
 {
     
     MoveScore best = evaluate(ChessBoard, attackTables, hashes, transpositionTable, timePerMove);
@@ -186,7 +186,7 @@ void uci_loop()
     ChessBoard* chessBoard = initChessBoard();
     AttackTables* attackTables = initAttackTables();
     TranspositionTableHashes* hashes = initTranpositionTableHashes();
-    TranspositionTableEntry* transpositionTable = initTranpositionTable();
+    TranspositionTable* transpositionTable = initTranpositionTable();
 
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
