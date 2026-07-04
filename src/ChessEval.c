@@ -100,6 +100,8 @@ int blackPawnPosTable[64] =
 
 Move killerMoves[KILLER_MOVE_DEPTH][2];
 int historyHeuristic[BOARD_SIZE][BOARD_SIZE][DIFFERENT_PIECE_COUNT / 2];
+uint64_t passedPawnMasks[64];
+uint64_t isolatedPawnMasks[64];
 uint64_t stopTime = 0;
 int currentDepth;
 int qSearchDepthReached;
@@ -125,6 +127,73 @@ void updateTime()
         }
         
     }
+}
+
+void initPassedPawnMasks()
+{
+    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
+    {
+        uint64_t mask = 0;
+        int file = sqInd % 8;
+
+        for (int i = 0; i < 8; i++)
+        {
+            uint64_t nextSq = 1ULL << (i * 8) + file;
+            mask |= nextSq;
+        }
+
+        
+        if (file + 1 < 8)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                uint64_t nextSq = (1ULL << (i * 8 + file + 1));
+                mask |= nextSq;
+            }
+        }
+        
+        if (file - 1 > -1)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                uint64_t nextSq = (1ULL << (i * 8  + file - 1));
+                mask |= nextSq;
+            }
+        }
+        
+        passedPawnMasks[sqInd] = mask;
+    }
+    
+}
+
+void initIsolatedPawnMasks()
+{
+    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
+    {
+        uint64_t mask = 0;
+        int file = sqInd % 8;
+        
+        if (file + 1 < 8)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                uint64_t nextSq = (1ULL << (i * 8 + file + 1));
+                mask |= nextSq;
+            }
+        }
+        
+        if (file - 1 > -1)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                uint64_t nextSq = (1ULL << (i * 8  + file - 1));
+                mask |= nextSq;
+            }
+        }
+        
+        isolatedPawnMasks[sqInd] = mask;
+    }
+    
 }
 
 void penalizeHistoryHeuristic(Move move, int remeniningDepth)
@@ -250,12 +319,24 @@ int evaluateMobility(ChessBoard* chessBoard, AttackTables* attackTables, int isB
     {
         int sq = getSqInd(queens);
         uint64_t attacks = getQueenAttackPattern(sq, chessBoard->allPieces, attackTables) & ~friendlyPieces;
-        mobility += (countPieces(attacks) * QUEEN_MOBILITY_VALUE);
+        mobility += (countPieces(attacks) * QUEEN_MOBILITY_VALUE) / 2;
         piecePositioning += queenPosTable[sq];
         queens &= queens - 1;
     }
 
     return mobility + piecePositioning;
+}
+
+int evaluateKingSafety(ChessBoard* chessBoard, int isBlack)
+{
+    int score = 0;
+
+    if (hasCastled(chessBoard, isBlack))
+    {
+        score += KING_CASTLED_VALUE;
+    }
+    
+    return score;
 }
 
 int evaluatePawnPositioning(ChessBoard* chessBoard, int isBlack)
@@ -271,6 +352,15 @@ int evaluatePawnPositioning(ChessBoard* chessBoard, int isBlack)
         {
             int sq = getSqInd(pawns);
             score += blackPawnPosTable[sq];
+            if (!(chessBoard->whitePawns & passedPawnMasks[sq]))
+            {
+                score += PASSED_PAWN_SCORE;
+            }  
+            if (!(chessBoard->blackPawns & isolatedPawnMasks[sq]))
+            {
+                score -= ISOLATED_PAWN_PENALTY;
+            }
+            
             fileCount[sq % 8]++;
             pawns &= pawns - 1;
         }   
@@ -283,6 +373,14 @@ int evaluatePawnPositioning(ChessBoard* chessBoard, int isBlack)
         {
             int sq = getSqInd(pawns);
             score += whitePawnPosTable[sq];
+            if (!(chessBoard->blackPawns & passedPawnMasks[sq]))
+            {
+                score += PASSED_PAWN_SCORE;
+            }
+            if (!(chessBoard->whitePawns & isolatedPawnMasks[sq]))
+            {
+                score -= ISOLATED_PAWN_PENALTY;
+            }
             fileCount[sq % 8]++;
             pawns &= pawns - 1;
         }     
@@ -374,12 +472,14 @@ int evaluatePosition(ChessBoard* chessBoard, AttackTables* attackTables)
     score += evaluateMobility(chessBoard, attackTables, white);
     score += evaluatePawnPositioning(chessBoard, white);
     score += evaluateBishopPair(chessBoard, white);
+    score += evaluateKingSafety(chessBoard, white);
 
     score -= evaluateMaterial(chessBoard, black);
     score -= evaluateCenter(chessBoard, black);
     score -= evaluateMobility(chessBoard, attackTables, black);
     score -= evaluatePawnPositioning(chessBoard, black);
     score -= evaluateBishopPair(chessBoard, black);
+    score -= evaluateKingSafety(chessBoard, black);
 
     return score;
 }
@@ -809,7 +909,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
 
             if (legalMoves > 3 && !isEnemyChecked && !getCapturedPiece(moveList.moves[i].flags) && !getPromotionPiece(moveList.moves[i].flags))
             {
-                moveReduction = 1;
+                moveReduction = 0;
             }
             
 
@@ -1000,7 +1100,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
 
             if (legalMoves > 3 && !isEnemyChecked && !getCapturedPiece(moveList.moves[i].flags) && !getPromotionPiece(moveList.moves[i].flags))
             {
-                moveReduction = 1;
+                moveReduction = 0;
             }
 
             if (isThreeFoldRepetition(chessBoard))

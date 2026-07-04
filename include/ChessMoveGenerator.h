@@ -43,14 +43,15 @@ enum PromotionPieces
 
 enum MoveFlags
 {
-    promotionPieceMask         = 0b00000000000111,
-    capturePieceMask           = 0b00000000111000,
-    enPassantMask              = 0b00000001000000,
-    removeWhiteShortCastleFlag = 0b00000010000000,
-    removeWhiteLongCastleFlag  = 0b00000100000000,
-    removeBlackShortCastleFlag = 0b00001000000000,
-    removeBlackLongCastleFlag  = 0b00010000000000,
-    pieceMask                  = 0b11100000000000
+    promotionPieceMask         = 0b000000000000111,
+    capturePieceMask           = 0b000000000111000,
+    enPassantMask              = 0b000000001000000,
+    removeWhiteShortCastleFlag = 0b000000010000000,
+    removeWhiteLongCastleFlag  = 0b000000100000000,
+    removeBlackShortCastleFlag = 0b000001000000000,
+    removeBlackLongCastleFlag  = 0b000010000000000,
+    pieceMask                  = 0b011100000000000,
+    castleMask                 = 0b100000000000000
 };
 
 enum MoveFlagsPosition
@@ -62,7 +63,8 @@ enum MoveFlagsPosition
     removeWhiteLongCastleFlagPosition = 8,
     removeBlackShortCastleFlagPosition = 9,
     removeBlackLongCastleFlagPosition = 10,
-    pieceFlagPosition = 11
+    pieceFlagPosition = 11,
+    castleFlagPosition = 14
 };
 
 typedef struct Move
@@ -103,4 +105,5 @@ uint8_t getSqInd(uint64_t sq);
 uint8_t getCapturedPiece(uint16_t flags);
 uint8_t getPromotionPiece(uint16_t flags);
 uint8_t getPiece(uint16_t flags);
+uint8_t getIsCastleMove(uint16_t flags);
 uint8_t getPieceFromSquare(uint64_t sq, uint8_t isBlack, ChessBoard *chessBoard);

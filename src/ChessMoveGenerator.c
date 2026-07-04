@@ -1156,6 +1156,11 @@ uint8_t getPiece(uint16_t flags)
     return (flags & pieceMask) >> pieceFlagPosition;
 }
 
+uint8_t getIsCastleMove(uint16_t flags)
+{
+    return (flags & castleMask)  >> castleFlagPosition;
+}
+
 uint8_t getSqInd(uint64_t sq)
 {
     return __builtin_ctzll(sq);
@@ -1556,6 +1561,7 @@ void generateRookMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
 void generateCastleMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
 {
     uint16_t moveFlags = king << pieceFlagPosition;
+    moveFlags |= castleMask;
     if (isBlack(chessBoard))
     {
         if (canBlackShortCastle(chessBoard))
@@ -2206,6 +2212,7 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 chessBoard->blackPieces |= f8;
                 chessBoard->allPieces &= ~h8;
                 chessBoard->allPieces |= f8;
+                chessBoard->flags |= hasBlackCastledMask;
             }
 
             if (move->to == c8)
@@ -2218,6 +2225,7 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 chessBoard->blackPieces |= d8;
                 chessBoard->allPieces &= ~a8;
                 chessBoard->allPieces |= d8;
+                chessBoard->flags |= hasBlackCastledMask;
             }
         }
         
@@ -2303,6 +2311,7 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 chessBoard->whitePieces |= f1;
                 chessBoard->allPieces &= ~h1;
                 chessBoard->allPieces |= f1;
+                chessBoard->flags |= hasWhiteCastledMask;
             }
 
             if (move->to == c1)
@@ -2315,6 +2324,7 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 chessBoard->whitePieces |= d1;
                 chessBoard->allPieces &= ~a1;
                 chessBoard->allPieces |= d1;
+                chessBoard->flags |= hasWhiteCastledMask;
             }
         }
     }
@@ -3146,6 +3156,7 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
                 chessBoard->blackPieces |= h8;
                 chessBoard->allPieces &= ~f8;
                 chessBoard->allPieces |= h8;
+                chessBoard->flags &= ~hasBlackCastledMask;
             }
 
             if (move->to == c8)
@@ -3158,6 +3169,7 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
                 chessBoard->blackPieces |= a8;
                 chessBoard->allPieces &= ~d8;
                 chessBoard->allPieces |= a8;
+                chessBoard->flags &= ~hasBlackCastledMask;
             }
         }
     }
@@ -3245,6 +3257,7 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
                 chessBoard->whitePieces |= h1;
                 chessBoard->allPieces &= ~f1;
                 chessBoard->allPieces |= h1;
+                chessBoard->flags &= ~hasWhiteCastledMask;
             }
 
             if (move->to == c1)
@@ -3257,6 +3270,7 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
                 chessBoard->whitePieces |= a1;
                 chessBoard->allPieces &= ~d1;
                 chessBoard->allPieces |= a1;
+                chessBoard->flags &= ~hasWhiteCastledMask;
             }
         }
     }

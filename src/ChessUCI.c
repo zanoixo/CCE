@@ -187,6 +187,8 @@ void uci_loop()
     AttackTables* attackTables = initAttackTables();
     TranspositionTableHashes* hashes = initTranpositionTableHashes();
     TranspositionTable* transpositionTable = initTranpositionTable();
+    initPassedPawnMasks();
+    initIsolatedPawnMasks();
 
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);

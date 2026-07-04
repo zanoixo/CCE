@@ -40,6 +40,18 @@ void showPosition(const ChessBoard* chessBoard)
     printf("   a b c d e f g h\n\n");
 }
 
+uint8_t hasCastled(ChessBoard* chessBoard, int isBlack)
+{
+    int isCastled = chessBoard->flags & hasWhiteCastledMask;
+
+    if (isBlack)
+    {
+        isCastled = chessBoard->flags & hasBlackCastledMask;
+    }
+    
+    return isCastled;
+}
+
 ChessBoard* initChessBoard()
 {
     ChessBoard* chessBoard = malloc(sizeof(ChessBoard));
