@@ -9,13 +9,14 @@ from pathlib import Path
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 REPO        = Path(__file__).parent.resolve()
-ENGINE      = REPO / "bin/engine"
-STOCKFISH   = "stockfish"
+OPENING_BOOK = REPO / "openings" / "50.pgn"
+ENGINE_NEW      = REPO / "bin/engine"
+ENGINE_OLD   = REPO / "bin/engine_old"
 CUTECHESS   = "cutechess-cli"
 
-TIME_CONTROL    = "st=5"  # fixed 5 seconds per move
-GAMES_PER_MATCH = 50       # games per Elo level (more = more accurate)
-CONCURRENCY     = 5        # parallel games
+TIME_CONTROL    = "st=1"  # fixed 5 seconds per move
+GAMES_PER_MATCH = 100       # games per Elo level (more = more accurate)
+CONCURRENCY     = 10        # parallel games
 
 SF_LOW          = 1000     # lowest Stockfish Elo to test
 SF_HIGH         = 3000     # highest Stockfish Elo to test
@@ -130,11 +131,11 @@ def show_illegal_positions(pgn_file: str, illegal_games: list):
 
 
 # ── Play a match and return (score, wdl_string) ───────────────────────────────
-def play_match(sf_elo: int) -> tuple[float, str]:
+def play_match() -> tuple[float, str]:
     global current_proc
 
-    cce_work_dir = str(ENGINE.parent.parent)
-    pgn_file = str(LOG_FILE).replace(".log", f"_sf{sf_elo}.pgn")
+    cce_work_dir = str(ENGINE_NEW.parent.parent)
+    pgn_file = str(LOG_FILE).replace(".log", ".pgn")
 
     if TIME_CONTROL.startswith("st="):
         tc_args = ["-each", "proto=uci", TIME_CONTROL, "timemargin=2000"]
@@ -142,17 +143,34 @@ def play_match(sf_elo: int) -> tuple[float, str]:
         tc_args = ["-each", "proto=uci", f"tc={TIME_CONTROL}", "timemargin=2000"]
 
     cmd = [
-        str(CUTECHESS),
-        "-engine", "name=CCE",           f"cmd={ENGINE}", f"dir={cce_work_dir}",
-        "-engine", f"name=SF{sf_elo}",   f"cmd={STOCKFISH}",
-                   "option.UCI_LimitStrength=true",
-                   f"option.UCI_Elo={sf_elo}",
-        *tc_args,
-        "-games",  str(GAMES_PER_MATCH),
-        "-rounds", "1",
-        "-concurrency", str(CONCURRENCY),
-        "-recover",
-        "-pgnout", pgn_file,
+    str(CUTECHESS),
+
+    "-engine",
+    "name=CCE_NEW",
+    f"cmd={ENGINE_NEW}",
+    f"dir={cce_work_dir}",
+
+    "-engine",
+    "name=CCE_OLD",
+    f"cmd={ENGINE_OLD}",
+    f"dir={cce_work_dir}",
+
+    *tc_args,
+
+    "-games", str(GAMES_PER_MATCH),
+    "-rounds", "1",
+    "-concurrency", str(CONCURRENCY),
+
+    "-openings",
+    f"file={OPENING_BOOK}",
+    "format=pgn",
+    "order=sequential",
+
+    "-repeat",
+
+    "-recover",
+
+    "-pgnout", pgn_file,
     ]
 
     current_proc = subprocess.Popen(
@@ -193,10 +211,10 @@ def play_match(sf_elo: int) -> tuple[float, str]:
                     log(f"    {red(f'Game {gnum}/{GAMES_PER_MATCH}: ILLEGAL MOVE ({mv})')}  {{{reason}}}")
                     illegal_games.append((white_eng, black_eng, mv))
                 elif result == "1-0":
-                    winner = green(f"{white_eng} wins") if white_eng == "CCE" else red(f"{white_eng} wins")
+                    winner = green(f"{white_eng} wins") if white_eng == "CCE_NEW" else red(f"{white_eng} wins")
                     log(f"    Game {gnum}/{GAMES_PER_MATCH}: {winner}  {{{reason}}}")
                 elif result == "0-1":
-                    winner = green(f"{black_eng} wins") if black_eng == "CCE" else red(f"{black_eng} wins")
+                    winner = green(f"{black_eng} wins") if black_eng == "CCE_NEW" else red(f"{black_eng} wins")
                     log(f"    Game {gnum}/{GAMES_PER_MATCH}: {winner}  {{{reason}}}")
                 else:
                     log(f"    Game {gnum}/{GAMES_PER_MATCH}: {cyan('Draw')}  {{{reason}}}")
@@ -248,59 +266,24 @@ def main():
     log(bold("│        CCE  Elo  Estimator               │"))
     log(bold("└──────────────────────────────────────────┘"))
     log()
-    info(f"Engine:       {ENGINE}")
-    info(f"Stockfish:    {STOCKFISH}")
+    info(f"Engine:       {ENGINE_NEW}")
+    info(f"Engine:    {ENGINE_OLD}")
     info(f"Time control: {TIME_CONTROL}")
     info(f"Games/match:  {GAMES_PER_MATCH}")
-    info(f"Search range: Elo {SF_LOW} – {SF_HIGH}")
     info(f"Log file:     {LOG_FILE}")
     log()
 
-    low      = SF_LOW
-    high     = SF_HIGH
-    best_elo = (low + high) // 2
-    history  = []
-
-    iteration = 0
-    while (high - low) > CONVERGE_RANGE:
-        iteration += 1
-        mid = (low + high) // 2
-
-        log(bold(f"── Iteration {iteration} ──────────────────────────────────"))
-        info(f"Range: [{low} – {high}]  →  testing Elo {mid}")
-        info(f"Playing {GAMES_PER_MATCH} games, please wait...")
-
-        score, wdl = play_match(mid)
-        pct = score * 100
-        history.append((mid, wdl, pct))
-
-        if score > WIN_THRESHOLD:
-            ok(   f"CCE scored {pct:.1f}% → stronger than SF {mid} → raising floor")
-            low      = mid
-            best_elo = mid
-        elif score < LOSS_THRESHOLD:
-            warn( f"CCE scored {pct:.1f}% → weaker than SF {mid}   → lowering ceiling")
-            high     = mid
-        else:
-            ok(   f"CCE scored {pct:.1f}% → within target range (45–55%) → converged!")
-            best_elo = mid
-            break
-
-        log()
+    history = []
+    play_match()
+    log()
 
     # ── Final report ──────────────────────────────────────────────────────────
     log()
     log(bold("┌──────────────────────────────────────────┐"))
     log(bold("│              RESULTS                     │"))
     log(bold("├──────────────────────────────────────────┤"))
-    for sf_elo, wdl, pct in history:
-        log(f"{bold('│')}  SF {sf_elo} : {wdl}  [{pct:.1f}%]")
-    log(bold("├──────────────────────────────────────────┤"))
-    log(f"{bold('│')}  {green(f'Estimated CCE Elo:  ~{best_elo}')}")
-    log(f"{bold('│')}  Final range:        [{low} – {high}]")
-    log(f"{bold('│')}  Total iterations:   {iteration}")
-    log(f"{bold('│')}  Total games:        {iteration * GAMES_PER_MATCH}")
-    log(bold("└──────────────────────────────────────────┘"))
+    for wdl, pct in history:
+        log(f"{bold('│')}   : {wdl}  [{pct:.1f}%]")
     log()
     log(f"Full log saved to: {LOG_FILE}")
 

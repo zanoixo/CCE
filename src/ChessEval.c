@@ -827,10 +827,9 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
     moveList.nextIndex = 0;
 
     MoveScore moveScore;
-    //TranspositionTableEntry* transpositionScore = checkTranspositionHit(chessBoard, transpositionTable, currentDepth - depthSearched, originalAlpha, originalBeta);
+    TranspositionTableEntry* transpositionScore = checkTranspositionHit(chessBoard, transpositionTable, currentDepth - depthSearched, originalAlpha, originalBeta);
     int legalMoves = 0;
 
-    /*
     if (transpositionScore != NULL)
     {
         makeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
@@ -847,8 +846,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
         
     }
 
-    */
-
+    /*
     int amChecked = isSquareAttacked(getSqInd(chessBoard->blackKing), chessBoard, attackTables, 1);
 
     if (currentDepth - depthSearched >= 3 && !amChecked && !isNullMove)
@@ -872,6 +870,8 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
         }
         
     }
+
+    */
 
     //ChessBoard* original = malloc(sizeof(ChessBoard));
     //memcpy(original, chessBoard, sizeof(ChessBoard));
@@ -909,7 +909,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
 
             if (legalMoves > 3 && !isEnemyChecked && !getCapturedPiece(moveList.moves[i].flags) && !getPromotionPiece(moveList.moves[i].flags))
             {
-                moveReduction = 0;
+                moveReduction = 1;
             }
             
 
@@ -920,6 +920,8 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
             }
             else
             {
+                moveScore = whiteMove(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1, alpha, beta);
+                /*
                 if (isFirstMove)
                 {
                     moveScore = whiteMove(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1, alpha, beta);
@@ -934,7 +936,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
                     }
                     
                 }
-                
+                */
             }
 
             isFirstMove = 0;
@@ -991,7 +993,7 @@ MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
             bestMove.eval = DRAW;
     }
 
-    //setTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, &bestMove, originalAlpha, originalBeta);
+    setTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, &bestMove, originalAlpha, originalBeta);
     
     return bestMove;
 }
@@ -1017,10 +1019,8 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
     moveList.nextIndex = 0;
 
     MoveScore moveScore;
-    //TranspositionTableEntry* transpositionScore = checkTranspositionHit(chessBoard, transpositionTable, currentDepth - depthSearched, originalAlpha, originalBeta);
+    TranspositionTableEntry* transpositionScore = checkTranspositionHit(chessBoard, transpositionTable, currentDepth - depthSearched, originalAlpha, originalBeta);
     int legalMoves = 0;
-
-    /*
     
     if (transpositionScore != NULL)
     {
@@ -1038,7 +1038,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
         
     }
 
-    */
+    /*
 
     int amChecked = isSquareAttacked(getSqInd(chessBoard->whiteKing), chessBoard, attackTables, 0);
 
@@ -1063,7 +1063,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
         }
         
     }
-    
+    */
 
     //ChessBoard* original = malloc(sizeof(ChessBoard));
     //memcpy(original, chessBoard, sizeof(ChessBoard));
@@ -1100,7 +1100,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
 
             if (legalMoves > 3 && !isEnemyChecked && !getCapturedPiece(moveList.moves[i].flags) && !getPromotionPiece(moveList.moves[i].flags))
             {
-                moveReduction = 0;
+                moveReduction = 1;
             }
 
             if (isThreeFoldRepetition(chessBoard))
@@ -1110,6 +1110,8 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
             }
             else
             {
+                moveScore = blackMove(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1, alpha, beta);
+                /*
                 if (isFirstMove)
                 {
                     moveScore = blackMove(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1, alpha, beta);
@@ -1124,6 +1126,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
                     }
                     
                 }
+                */
             }
 
             isFirstMove = 0;
@@ -1178,7 +1181,7 @@ MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, Transpos
             bestMove.eval = DRAW;
     }
 
-    //setTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, &bestMove, originalAlpha, originalBeta);
+    setTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, &bestMove, originalAlpha, originalBeta);
     
     return bestMove;
 }

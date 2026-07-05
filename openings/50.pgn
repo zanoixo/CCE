@@ -1,0 +1,500 @@
+[Event "Opening 1"]
+[Site "?"]
+[Round "1"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Italian Game"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6 *
+
+[Event "Opening 2"]
+[Site "?"]
+[Round "2"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Ruy Lopez"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 *
+
+[Event "Opening 3"]
+[Site "?"]
+[Round "3"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Scotch"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Nxd4 Bc5 5. Be3 *
+
+[Event "Opening 4"]
+[Site "?"]
+[Round "4"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Petroff"]
+
+1. e4 e5 2. Nf3 Nf6 3. Nxe5 d6 4. Nf3 Nxe4 5. d4 *
+
+[Event "Opening 5"]
+[Site "?"]
+[Round "5"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Vienna"]
+
+1. e4 e5 2. Nc3 Nf6 3. f4 d5 4. fxe5 *
+
+[Event "Opening 6"]
+[Site "?"]
+[Round "6"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Four Knights"]
+
+1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. Bb5 Bb4 *
+
+[Event "Opening 7"]
+[Site "?"]
+[Round "7"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sicilian Open"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 *
+
+[Event "Opening 8"]
+[Site "?"]
+[Round "8"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Najdorf"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 a6 *
+
+[Event "Opening 9"]
+[Site "?"]
+[Round "9"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Dragon"]
+
+1. e4 c5 2. Nf3 d6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 g6 *
+
+[Event "Opening 10"]
+[Site "?"]
+[Round "10"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Accelerated Dragon"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 g6 *
+
+[Event "Opening 11"]
+[Site "?"]
+[Round "11"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Taimanov"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 Nc6 *
+
+[Event "Opening 12"]
+[Site "?"]
+[Round "12"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Kan"]
+
+1. e4 c5 2. Nf3 e6 3. d4 cxd4 4. Nxd4 a6 *
+
+[Event "Opening 13"]
+[Site "?"]
+[Round "13"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Sveshnikov"]
+
+1. e4 c5 2. Nf3 Nc6 3. d4 cxd4 4. Nxd4 Nf6 5. Nc3 e5 *
+
+[Event "Opening 14"]
+[Site "?"]
+[Round "14"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French Classical"]
+
+1. e4 e6 2. d4 d5 3. Nc3 Nf6 4. Bg5 Be7 *
+
+[Event "Opening 15"]
+[Site "?"]
+[Round "15"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "French Tarrasch"]
+
+1. e4 e6 2. d4 d5 3. Nd2 c5 *
+
+[Event "Opening 16"]
+[Site "?"]
+[Round "16"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Caro-Kann"]
+
+1. e4 c6 2. d4 d5 3. Nc3 dxe4 4. Nxe4 *
+
+[Event "Opening 17"]
+[Site "?"]
+[Round "17"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Scandinavian"]
+
+1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5 *
+
+[Event "Opening 18"]
+[Site "?"]
+[Round "18"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Pirc"]
+
+1. e4 d6 2. d4 Nf6 3. Nc3 g6 *
+
+[Event "Opening 19"]
+[Site "?"]
+[Round "19"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Modern"]
+
+1. e4 g6 2. d4 Bg7 3. Nc3 d6 *
+
+[Event "Opening 20"]
+[Site "?"]
+[Round "20"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Alekhine"]
+
+1. e4 Nf6 2. e5 Nd5 3. d4 d6 *
+
+[Event "Opening 21"]
+[Site "?"]
+[Round "21"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Gambit"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 *
+
+[Event "Opening 22"]
+[Site "?"]
+[Round "22"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "QGD Exchange"]
+
+1. d4 d5 2. c4 e6 3. cxd5 exd5 *
+
+[Event "Opening 23"]
+[Site "?"]
+[Round "23"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Slav"]
+
+1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 *
+
+[Event "Opening 24"]
+[Site "?"]
+[Round "24"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Semi-Slav"]
+
+1. d4 d5 2. c4 c6 3. Nf3 Nf6 4. Nc3 e6 *
+
+[Event "Opening 25"]
+[Site "?"]
+[Round "25"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Accepted"]
+
+1. d4 d5 2. c4 dxc4 3. Nf3 Nf6 *
+
+[Event "Opening 26"]
+[Site "?"]
+[Round "26"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Catalan"]
+
+1. d4 Nf6 2. c4 e6 3. g3 d5 *
+
+[Event "Opening 27"]
+[Site "?"]
+[Round "27"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Nimzo"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 *
+
+[Event "Opening 28"]
+[Site "?"]
+[Round "28"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Queen's Indian"]
+
+1. d4 Nf6 2. c4 e6 3. Nf3 b6 *
+
+[Event "Opening 29"]
+[Site "?"]
+[Round "29"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Indian"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 Bg7 4. e4 d6 *
+
+[Event "Opening 30"]
+[Site "?"]
+[Round "30"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Grunfeld"]
+
+1. d4 Nf6 2. c4 g6 3. Nc3 d5 *
+
+[Event "Opening 31"]
+[Site "?"]
+[Round "31"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Benoni"]
+
+1. d4 Nf6 2. c4 c5 3. d5 e6 *
+
+[Event "Opening 32"]
+[Site "?"]
+[Round "32"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Benko"]
+
+1. d4 Nf6 2. c4 c5 3. d5 b5 *
+
+[Event "Opening 33"]
+[Site "?"]
+[Round "33"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Dutch"]
+
+1. d4 f5 2. g3 Nf6 3. Bg2 *
+
+[Event "Opening 34"]
+[Site "?"]
+[Round "34"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "London"]
+
+1. d4 d5 2. Bf4 Nf6 3. e3 *
+
+[Event "Opening 35"]
+[Site "?"]
+[Round "35"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Trompowsky"]
+
+1. d4 Nf6 2. Bg5 *
+
+[Event "Opening 36"]
+[Site "?"]
+[Round "36"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Veresov"]
+
+1. d4 d5 2. Nc3 Nf6 3. Bg5 *
+
+[Event "Opening 37"]
+[Site "?"]
+[Round "37"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English Sym"]
+
+1. c4 c5 2. Nc3 Nc6 3. g3 *
+
+[Event "Opening 38"]
+[Site "?"]
+[Round "38"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English Reversed Sic"]
+
+1. c4 e5 2. Nc3 Nf6 3. g3 *
+
+[Event "Opening 39"]
+[Site "?"]
+[Round "39"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "English KID"]
+
+1. c4 Nf6 2. Nc3 g6 *
+
+[Event "Opening 40"]
+[Site "?"]
+[Round "40"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Reti"]
+
+1. Nf3 d5 2. c4 *
+
+[Event "Opening 41"]
+[Site "?"]
+[Round "41"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Bird"]
+
+1. f4 d5 2. Nf3 Nf6 *
+
+[Event "Opening 42"]
+[Site "?"]
+[Round "42"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Larsen"]
+
+1. b3 d5 2. Bb2 *
+
+[Event "Opening 43"]
+[Site "?"]
+[Round "43"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "King's Gambit"]
+
+1. e4 e5 2. f4 exf4 3. Nf3 *
+
+[Event "Opening 44"]
+[Site "?"]
+[Round "44"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Evans Gambit"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. b4 *
+
+[Event "Opening 45"]
+[Site "?"]
+[Round "45"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Center Game"]
+
+1. e4 e5 2. d4 exd4 3. Qxd4 *
+
+[Event "Opening 46"]
+[Site "?"]
+[Round "46"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Philidor"]
+
+1. e4 e5 2. Nf3 d6 3. d4 *
+
+[Event "Opening 47"]
+[Site "?"]
+[Round "47"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Owen"]
+
+1. e4 b6 2. d4 Bb7 *
+
+[Event "Opening 48"]
+[Site "?"]
+[Round "48"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Closed Sicilian"]
+
+1. e4 c5 2. Nc3 Nc6 3. g3 *
+
+[Event "Opening 49"]
+[Site "?"]
+[Round "49"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Vienna Gambit"]
+
+1. e4 e5 2. Nc3 Nf6 3. f4 *
+
+[Event "Opening 50"]
+[Site "?"]
+[Round "50"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+[Opening "Stonewall Attack"]
+
+1. d4 d5 2. e3 Nf6 3. Bd3 *
+
