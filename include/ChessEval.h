@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdint.h>
 #include "ChessMoveGenerator.h"
 
 typedef struct ChessBoard ChessBoard;
@@ -12,8 +13,7 @@ typedef struct TranspositionTableEntry TranspositionTableEntry;
 
 #define MAX_INT 1000000000
 #define MIN_INT -1000000000
-#define BLACK_MATED 1000000
-#define WHITE_MATED -1000000
+#define MATED -1000000
 #define DRAW 0 
 
 #define PAWN_VALUE   100
@@ -49,10 +49,8 @@ typedef struct MoveScore
 
 
 MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, uint64_t timePerMove);
-MoveScore whiteMove(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, int depth, int alpha, int beta);
-MoveScore blackMove(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, int depth, int alpha, int beta);
-MoveScore qsearchWhite(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, int depth, int alpha, int beta);
-MoveScore qsearchBlack(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, int depth, int alpha, int beta);
+MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, int depthSearched, int alpha, int beta, int side);
+MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, int depth, int alpha, int beta, int side);
 void initPassedPawnMasks();
 void initIsolatedPawnMasks();
 void clearHistoryHeuristic();

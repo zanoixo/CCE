@@ -6,6 +6,8 @@
 uint64_t randomHash = 12121212121212121212ULL;
 uint64_t transpositionTableSize = 1 << TRANSPOSITION_TABLE_NUM_OF_BITS;
 uint64_t transpositionTableMask = (1 << TRANSPOSITION_TABLE_NUM_OF_BITS) - 1;
+uint64_t TTMoveFound = 0;
+uint64_t TTMoveSearched = 0;
 
 uint64_t getRandomHash()
 {
@@ -55,7 +57,7 @@ void clearTranspositionTable(TranspositionTable* transpositionTable)
 {
     for (uint64_t i = 0; i < transpositionTableSize; i++)
     {
-        transpositionTable->transpositions[i].depth = -1;
+        transpositionTable->transpositions[i].depth = UNINITIALIZED;
     }   
 }
 
@@ -147,6 +149,8 @@ void setTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionT
 
 void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, TranspositionTable* transpositionTable)
 {
+
+    TTMoveSearched++;
     TranspositionTableEntry* transposition = getTransposition(chessBoard, transpositionTable, 0, 1);
 
     for (int i = 0; i < moveList->nextIndex; i++)
@@ -155,7 +159,18 @@ void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, Tra
             transposition->moveScore.move.to == moveList->moves[i].to)
         {
             moveList->moves[i].score = TRANSPOSITION_SCORE;
+            TTMoveFound++;
             break;
         }    
     }
+}
+
+uint64_t getTTMovesFound()
+{
+    return TTMoveFound;
+}
+
+uint64_t getTTMovesSearched()
+{
+    return TTMoveSearched;
 }

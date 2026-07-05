@@ -182,7 +182,7 @@ void uci_loop()
 {
     char line[MAX_LINE];
     uint64_t timePerMove = 10000;
-
+    //runAllTests();
     ChessBoard* chessBoard = initChessBoard();
     AttackTables* attackTables = initAttackTables();
     TranspositionTableHashes* hashes = initTranpositionTableHashes();

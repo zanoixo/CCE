@@ -7,8 +7,10 @@
 #define DIFFERENT_PIECE_COUNT 12
 #define CASTLE_RIGHT_COUNT 4
 #define ENPASSANT_FILES_COUNT 8
-#define TRANSPOSITION_TABLE_NUM_OF_BITS 20
+#define TRANSPOSITION_TABLE_NUM_OF_BITS 25
 #define TRANSPOSITION_SCORE 10000000
+#define UNINITIALIZED -2
+#define QSEARCH -1
 
 enum pieceHashes
 {
@@ -71,3 +73,5 @@ TranspositionTableEntry* getTransposition(ChessBoard* chessBoard, TranspositionT
 void setTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, MoveScore* moveScore, int alpha, int beta);
 TranspositionTableEntry* checkTranspositionHit(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, int alpha, int beta);
 void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, TranspositionTable* transpositionTable);
+uint64_t getTTMovesSearched();
+uint64_t getTTMovesFound();

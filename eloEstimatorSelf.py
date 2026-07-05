@@ -10,8 +10,8 @@ from pathlib import Path
 # ── Configuration ─────────────────────────────────────────────────────────────
 REPO        = Path(__file__).parent.resolve()
 OPENING_BOOK = REPO / "openings" / "50.pgn"
-ENGINE_NEW      = REPO / "bin/engine"
-ENGINE_OLD   = REPO / "bin/engine_old"
+ENGINE_NEW      = REPO / "bin/engine_pvs"
+ENGINE_OLD   = REPO / "bin/engine_baseline"
 CUTECHESS   = "cutechess-cli"
 
 TIME_CONTROL    = "st=1"  # fixed 5 seconds per move
@@ -256,7 +256,7 @@ def play_match() -> tuple[float, str]:
     score = float(score_match.group(1))
     wdl   = wdl_match.group(1) if wdl_match else "? - ? - ?"
 
-    return score, wdl
+    return wdl
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
@@ -273,8 +273,7 @@ def main():
     info(f"Log file:     {LOG_FILE}")
     log()
 
-    history = []
-    play_match()
+    wdl = play_match()
     log()
 
     # ── Final report ──────────────────────────────────────────────────────────
@@ -282,8 +281,7 @@ def main():
     log(bold("┌──────────────────────────────────────────┐"))
     log(bold("│              RESULTS                     │"))
     log(bold("├──────────────────────────────────────────┤"))
-    for wdl, pct in history:
-        log(f"{bold('│')}   : {wdl}  [{pct:.1f}%]")
+    log(f"{bold('│')}   : {wdl}")
     log()
     log(f"Full log saved to: {LOG_FILE}")
 
