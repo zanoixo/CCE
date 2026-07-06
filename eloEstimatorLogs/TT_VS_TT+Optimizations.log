@@ -1,0 +1,119 @@
+
+┌──────────────────────────────────────────┐
+│        CCE  Elo  Estimator               │
+└──────────────────────────────────────────┘
+
+[INFO]  Engine:       /home/zan/Documents/GitHub/CCE/bin/engine
+[INFO]  Engine:    /home/zan/Documents/GitHub/CCE/bin/engine_old
+[INFO]  Time control: st=1
+[INFO]  Games/match:  100
+[INFO]  Log file:     ./eloEstimatorLogs/elo_result_20260706_182734.log
+
+    Game 2/100: Draw  {Draw by 3-fold repetition}
+    Game 8/100: CCE_NEW wins  {Black mates}
+    Game 1/100: CCE_OLD wins  {Black mates}
+    Game 7/100: CCE_NEW wins  {White mates}
+    Game 6/100: Draw  {Draw by 3-fold repetition}
+    Game 13/100: CCE_NEW wins  {White mates}
+    Game 9/100: CCE_NEW wins  {White mates}
+    Game 4/100: CCE_NEW wins  {Black mates}
+    Game 15/100: CCE_NEW wins  {White mates}
+    Game 3/100: Draw  {Draw by insufficient mating material}
+    Game 10/100: CCE_NEW wins  {Black mates}
+    Game 5/100: CCE_NEW wins  {White mates}
+    Game 17/100: CCE_NEW wins  {White mates}
+    Game 12/100: Draw  {Draw by 3-fold repetition}
+    Game 16/100: CCE_NEW wins  {Black mates}
+    Game 11/100: CCE_OLD wins  {Black mates}
+    Game 21/100: CCE_NEW wins  {White mates}
+    Game 24/100: CCE_NEW wins  {Black mates}
+    Game 22/100: Draw  {Draw by 3-fold repetition}
+    Game 18/100: CCE_NEW wins  {Black mates}
+    Game 14/100: CCE_NEW wins  {Black mates}
+    Game 25/100: CCE_NEW wins  {White mates}
+    Game 19/100: CCE_NEW wins  {White mates}
+    Game 27/100: Draw  {Draw by 3-fold repetition}
+    Game 23/100: CCE_NEW wins  {White mates}
+    Game 26/100: CCE_NEW wins  {Black mates}
+    Game 20/100: CCE_NEW wins  {Black mates}
+    Game 34/100: CCE_NEW wins  {Black mates}
+    Game 33/100: Draw  {Draw by 3-fold repetition}
+    Game 35/100: CCE_NEW wins  {White mates}
+    Game 28/100: CCE_NEW wins  {Black mates}
+    Game 37/100: Draw  {Draw by 3-fold repetition}
+    Game 30/100: Draw  {Draw by 3-fold repetition}
+    Game 36/100: Draw  {Draw by 3-fold repetition}
+    Game 31/100: Draw  {Draw by 3-fold repetition}
+    Game 38/100: CCE_NEW wins  {Black mates}
+    Game 29/100: Draw  {Draw by 3-fold repetition}
+    Game 39/100: CCE_NEW wins  {White mates}
+    Game 32/100: Draw  {Draw by insufficient mating material}
+    Game 41/100: Draw  {Draw by 3-fold repetition}
+    Game 44/100: CCE_NEW wins  {Black mates}
+    Game 42/100: Draw  {Draw by 3-fold repetition}
+    Game 40/100: Draw  {Draw by insufficient mating material}
+    Game 43/100: Draw  {Draw by 3-fold repetition}
+    Game 47/100: Draw  {Draw by 3-fold repetition}
+    Game 50/100: CCE_NEW wins  {Black mates}
+    Game 45/100: CCE_OLD wins  {Black mates}
+    Game 48/100: CCE_NEW wins  {Black mates}
+    Game 46/100: CCE_NEW wins  {Black mates}
+    Game 55/100: CCE_NEW wins  {White mates}
+    Game 51/100: CCE_NEW wins  {White mates}
+    Game 52/100: Draw  {Draw by 3-fold repetition}
+    Game 49/100: CCE_OLD wins  {Black mates}
+    Game 59/100: CCE_NEW wins  {White mates}
+    Game 60/100: CCE_OLD wins  {White mates}
+    Game 58/100: CCE_NEW wins  {Black mates}
+    Game 61/100: Draw  {Draw by 3-fold repetition}
+    Game 57/100: CCE_NEW wins  {White mates}
+    Game 56/100: CCE_NEW wins  {Black mates}
+    Game 54/100: Draw  {Draw by 3-fold repetition}
+    Game 53/100: CCE_NEW wins  {White mates}
+    Game 65/100: CCE_NEW wins  {White mates}
+    Game 64/100: Draw  {Draw by 3-fold repetition}
+    Game 70/100: Draw  {Draw by 3-fold repetition}
+    Game 62/100: Draw  {Draw by 3-fold repetition}
+    Game 69/100: CCE_NEW wins  {White mates}
+    Game 63/100: CCE_NEW wins  {White mates}
+    Game 67/100: CCE_OLD wins  {Black mates}
+    Game 66/100: CCE_OLD wins  {White mates}
+    Game 77/100: CCE_NEW wins  {White mates}
+    Game 75/100: CCE_NEW wins  {White mates}
+    Game 73/100: CCE_NEW wins  {White mates}
+    Game 72/100: CCE_NEW wins  {Black mates}
+    Game 68/100: CCE_NEW wins  {Black mates}
+    Game 71/100: Draw  {Draw by 3-fold repetition}
+    Game 84/100: CCE_OLD wins  {White mates}
+    Game 78/100: CCE_OLD wins  {White mates}
+    Game 83/100: CCE_NEW wins  {White mates}
+    Game 76/100: Draw  {Draw by 3-fold repetition}
+    Game 74/100: Draw  {Draw by 3-fold repetition}
+    Game 80/100: CCE_NEW wins  {Black mates}
+    Game 81/100: Draw  {Draw by 3-fold repetition}
+    Game 85/100: Draw  {Draw by 3-fold repetition}
+    Game 87/100: Draw  {Draw by 3-fold repetition}
+    Game 89/100: Draw  {Draw by 3-fold repetition}
+    Game 82/100: CCE_OLD wins  {White mates}
+    Game 79/100: CCE_NEW wins  {White mates}
+    Game 94/100: Draw  {Draw by 3-fold repetition}
+    Game 88/100: CCE_NEW wins  {Black mates}
+    Game 96/100: CCE_OLD wins  {White mates}
+    Game 97/100: CCE_NEW wins  {White mates}
+    Game 86/100: Draw  {Draw by 3-fold repetition}
+    Game 91/100: Draw  {Draw by 3-fold repetition}
+    Game 90/100: Draw  {Draw by 3-fold repetition}
+    Game 93/100: Draw  {Draw by 3-fold repetition}
+    Game 92/100: Draw  {Draw by 3-fold repetition}
+    Game 95/100: CCE_NEW wins  {White mates}
+    Game 98/100: CCE_OLD wins  {White mates}
+    Game 99/100: CCE_NEW wins  {White mates}
+    Game 100/100: CCE_OLD wins  {White mates}
+
+
+┌──────────────────────────────────────────┐
+│              RESULTS                     │
+├──────────────────────────────────────────┤
+│   : 50 - 13 - 37
+
+Full log saved to: ./eloEstimatorLogs/elo_result_20260706_182734.log

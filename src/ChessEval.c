@@ -1,4 +1,5 @@
 #include <string.h>
+#include <math.h>
 
 #include "ChessBoard.h"
 #include "ChessMoveGenerator.h"
@@ -526,6 +527,58 @@ int isValidQSearchMove(ChessBoard* chessBoard, AttackTables* attackTables, uint1
            isSquareAttacked(getSqInd(kingPos), chessBoard, attackTables, isAttackedByWhite);
 }
 
+int hasNonPawnPieces(ChessBoard* chessBoard, int side)
+{
+    if (side == black)
+    {
+        if (chessBoard->blackBishops > 0)
+        {
+            return 1;
+        }
+        
+        if (chessBoard->blackKnights > 0)
+        {
+            return 1;
+        }
+        
+        if (chessBoard->blackQueens > 0)
+        {
+            return 1;
+        }
+        
+        if (chessBoard->blackRooks > 0)
+        {
+            return 1;
+        }
+        
+    }
+    else
+    {
+        if (chessBoard->whiteBishops > 0)
+        {
+            return 1;
+        }
+        
+        if (chessBoard->whiteKnights > 0)
+        {
+            return 1;
+        }
+        
+        if (chessBoard->whiteQueens > 0)
+        {
+            return 1;
+        }
+        
+        if (chessBoard->whiteRooks > 0)
+        {
+            return 1;
+        }       
+    }
+
+    return 0;
+    
+}
+
 MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, int depth, int alpha, int beta, int side)
 {
     //nodesSearched++;
@@ -719,7 +772,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     int ownKingSq = getSqInd(side ? chessBoard->blackKing : chessBoard->whiteKing);
     int amChecked = isSquareAttacked(ownKingSq, chessBoard, attackTables, side);
 
-    if (currentDepth - depthSearched >= 3 && !amChecked && !isNullMove)
+    if (!isNullMove && currentDepth - depthSearched >= 3 && !amChecked && hasNonPawnPieces(chessBoard, side))
     {
         Move nullMove = (Move){0, 0, 0, 0, 0};
 
@@ -727,7 +780,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
         makeNullMove(chessBoard, &nullMove, hashes);
 
-        moveScore = negamax(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1 + NULL_MOVE_SKIP, -beta, -alpha, !side);
+        moveScore = negamax(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1 + NULL_MOVE_SKIP, -beta, -beta + 1, !side);
         moveScore.eval = -moveScore.eval;
 
         unMakeNullMove(chessBoard, &nullMove, hashes);
@@ -775,9 +828,9 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             int isEnemyChecked = isSquareAttacked(enemyKingSq, chessBoard, attackTables, !side);
             int moveReduction = 0;
 
-            if (legalMoves > 3 && !isEnemyChecked && !getCapturedPiece(moveList.moves[i].flags) && !getPromotionPiece(moveList.moves[i].flags))
+            if (i > 3 && !isEnemyChecked && !amChecked && currentDepth - depthSearched >= 3 && !getCapturedPiece(moveList.moves[i].flags) && !getPromotionPiece(moveList.moves[i].flags))
             {
-                //moveReduction = 1;
+                moveReduction = (int)(0.75 * log(currentDepth - depthSearched) * log(i) / 2.25);
             }
 
             if (isThreeFoldRepetition(chessBoard))
@@ -786,7 +839,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
                 moveScore.eval = DRAW;
             }
             else
-            {
+            {   
                 if (isFirstMove)
                 {
                     moveScore = negamax(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1, -beta, -alpha, !side);
@@ -805,6 +858,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
                         moveScore.eval = -moveScore.eval;
                     }
                 }
+                    
             }
 
             isFirstMove = 0;

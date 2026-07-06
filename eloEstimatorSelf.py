@@ -10,8 +10,8 @@ from pathlib import Path
 # ── Configuration ─────────────────────────────────────────────────────────────
 REPO        = Path(__file__).parent.resolve()
 OPENING_BOOK = REPO / "openings" / "50.pgn"
-ENGINE_NEW      = REPO / "bin/engine_pvs"
-ENGINE_OLD   = REPO / "bin/engine_baseline"
+ENGINE_NEW      = REPO / "bin/engine"
+ENGINE_OLD   = REPO / "bin/engine_old"
 CUTECHESS   = "cutechess-cli"
 
 TIME_CONTROL    = "st=1"  # fixed 5 seconds per move

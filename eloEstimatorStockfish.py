@@ -9,16 +9,17 @@ from pathlib import Path
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 REPO        = Path(__file__).parent.resolve()
+OPENING_BOOK = REPO / "openings" / "50.pgn"
 ENGINE      = REPO / "bin/engine"
 STOCKFISH   = "stockfish"
 CUTECHESS   = "cutechess-cli"
 
-TIME_CONTROL    = "st=1"  # fixed 5 seconds per move
+TIME_CONTROL    = "st=5"  # fixed 5 seconds per move
 GAMES_PER_MATCH = 100       # games per Elo level (more = more accurate)
 CONCURRENCY     = 10        # parallel games
 
-SF_LOW          = 1000     # lowest Stockfish Elo to test
-SF_HIGH         = 3000     # highest Stockfish Elo to test
+SF_LOW          = 2000     # lowest Stockfish Elo to test
+SF_HIGH         = 2800     # highest Stockfish Elo to test
 CONVERGE_RANGE  = 50       # stop when range is smaller than this
 WIN_THRESHOLD   = 0.55     # score above this → CCE is stronger
 LOSS_THRESHOLD  = 0.45     # score below this → CCE is weaker
@@ -151,6 +152,11 @@ def play_match(sf_elo: int) -> tuple[float, str]:
         "-games",  str(GAMES_PER_MATCH),
         "-rounds", "1",
         "-concurrency", str(CONCURRENCY),
+        "-openings",
+        f"file={OPENING_BOOK}",
+        "format=pgn",
+        "order=sequential",
+        "-repeat",
         "-recover",
         "-pgnout", pgn_file,
     ]
