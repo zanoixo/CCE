@@ -11,11 +11,11 @@ from pathlib import Path
 REPO        = Path(__file__).parent.resolve()
 OPENING_BOOK = REPO / "openings" / "50.pgn"
 ENGINE_NEW      = REPO / "bin/engine"
-ENGINE_OLD   = REPO / "bin/engine_old"
+ENGINE_OLD   = REPO / "bin/engine"
 CUTECHESS   = "cutechess-cli"
 
-TIME_CONTROL    = "st=1"  # fixed 5 seconds per move
-GAMES_PER_MATCH = 100       # games per Elo level (more = more accurate)
+TIME_CONTROL    = "st=0.2"  # fixed 5 seconds per move
+GAMES_PER_MATCH = 1000       # games per Elo level (more = more accurate)
 CONCURRENCY     = 10        # parallel games
 
 SF_LOW          = 1000     # lowest Stockfish Elo to test

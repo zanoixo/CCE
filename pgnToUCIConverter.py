@@ -2,20 +2,18 @@ import io
 import re
 import chess.pgn
 
-pgn = """ 1. e4 {4.9s} Nc6 {-0.34/22 5.0s} 2. d4 {4.9s} e6 {-0.58/23 5.0s} 3. Nc3 {4.9s}
-d5 {-0.69/22 5.0s} 4. e5 {4.9s} Na5 {-0.79/22 5.0s} 5. Nf3 {4.9s}
-c5 {-0.71/22 5.0s} 6. Bg5 {4.9s} Be7 {-0.73/22 5.0s} 7. Bxe7 {4.9s}
-Qxe7 {-0.92/24 5.0s} 8. Nb5 {4.9s} Kf8 {-1.89/23 5.0s} 9. Nd6 {4.9s}
-b6 {-1.87/23 5.0s} 10. c4 {4.9s} dxc4 {-2.01/24 5.0s} 11. dxc5 {4.9s}
-Nh6 {-2.47/22 5.0s} 12. cxb6 {4.9s} axb6 {-1.67/22 5.0s} 13. Rc1 {4.9s}
-g6 {-1.62/22 5.0s} 14. b4 {4.9s} cxb3 {-0.76/24 5.0s} 15. Nxc8 {4.9s}
-Qb4+ {-0.77/24 5.0s} 16. Qd2 {4.9s} Qxd2+ {-0.71/25 5.0s} 17. Nxd2 {4.9s}
-Kg7 {-0.72/24 5.0s} 18. Nxb6 {4.9s} Rab8 {-2.85/24 5.0s} 19. Nd7 {4.9s}
-Rb7 {-2.60/22 5.0s} 20. Nc5 {4.9s} b2 {-3.90/21 5.0s} 21. Rb1 {4.9s}
-Rb6 {-3.82/23 5.0s} 22. Be2 {4.9s} Rc6 {-3.88/22 5.0s} 23. Nd3 {4.9s}
-Rd8 {-3.62/22 5.0s} 24. h3 {4.9s} g5 {-3.55/23 5.0s} 25. Nxb2 {4.9s}
-Nf5 {-3.98/22 5.0s} 26. Nf3 {4.9s} Nd4 {-3.25/22 5.0s} 27. Rd1 {4.9s}
-Nc2+ {-4.03/23 5.0s, White makes an illegal move: a9a9} 0-1"""
+pgn = """1. e4 {book} e5 {book} 2. Nc3 {book} Nf6 {book} 3. f4 {book} d5 {book}
+4. fxe5 {book} Nxe4 5. Nf3 Nc6 6. Bb5 Bb4 7. O-O O-O 8. Nxe4 dxe4 9. Bxc6 bxc6
+10. c3 Bc5+ 11. d4 exd3+ 12. Kh1 Qd5 13. b4 Bb6 14. Bf4 Be6 15. Qd2 c5 16. Ng5
+Bf5 17. Bg3 Bd7 18. Rf3 Bb5 19. a4 Bc4 20. a5 cxb4 21. axb6 bxc3 22. Qxc3 cxb6
+23. Rf4 b5 24. Rd4 Qb7 25. Ne4 Rad8 26. Nd6 Qb6 27. Bf2 a6 28. Rd1 h6 29. Be3
+Qb8 30. Nxc4 bxc4 31. Rxc4 Rfe8 32. Bd4 Rd5 33. Ra4 Qb5 34. Rb4 Qd7 35. Rxd3
+Rexe5 36. Bxe5 Rxd3 37. Rb8+ Kh7 38. Qc2 Qd5 39. Rb6 g6 40. Kg1 Rd1+ 41. Kf2
+Rd2+ 42. Qxd2 Qxd2+ 43. Kf1 Qd3+ 44. Kf2 Qd2+ 45. Kf1 Qd3+ 46. Kf2 f6 47. Bxf6
+Qd5 48. Kf1 Qf5+ 49. Ke2 Qd5 50. Kf1 Kg8 51. h3 Qc4+ 52. Ke1 Qc5 53. Bd8 a5
+54. Rxg6+ Kh7 55. Rf6 Qe3+ 56. Kf1 Qd3+ 57. Kg1 Qxd8 58. Rf7+ Kg6 59. Rf4 Qd6
+60. Rg4+ Kf5 61. Kh1 a4 62. Rg8 a3 63. Ra8 Qd1+ 64. Kh2 Qd6+ 65. Kh1
+Qd1+"""
 
 pgn = re.sub(r"\{[^}]*\}", "", pgn)
 

@@ -58,6 +58,7 @@ void clearTranspositionTable(TranspositionTable* transpositionTable)
     for (uint64_t i = 0; i < transpositionTableSize; i++)
     {
         transpositionTable->transpositions[i].depth = UNINITIALIZED;
+        transpositionTable->transpositions[i].hash = 0;
     }   
 }
 
@@ -114,7 +115,7 @@ TranspositionTableEntry* checkTranspositionHit(ChessBoard* chessBoard, Transposi
 
 void setTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, MoveScore* moveScore, int alpha, int beta)
 {
-    if (moveScore->move.flags == 0)
+    if (moveScore->move.from == 0 || moveScore->move.to == 0)
     {
         return;
     }

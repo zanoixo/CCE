@@ -510,21 +510,9 @@ void setBestMoveFirst(MoveList* moveList, int moveCount)
     moveList->moves[moveInd] = tmp;
 }
 
-int isValidQSearchMove(ChessBoard* chessBoard, AttackTables* attackTables, uint16_t moveFlags)
-{
-    int color = isBlack(chessBoard);
-    uint64_t kingPos = chessBoard->blackKing;
-    int isAttackedByWhite = 1;
-
-    if (color == white)
-    {
-        kingPos = chessBoard->whiteKing;
-        isAttackedByWhite = 0;
-    }
-     
-    return getCapturedPiece(moveFlags)  ||
-           getPromotionPiece(moveFlags) ||
-           isSquareAttacked(getSqInd(kingPos), chessBoard, attackTables, isAttackedByWhite);
+int isValidQSearchMove(uint16_t moveFlags)
+{    
+    return getCapturedPiece(moveFlags)  || getPromotionPiece(moveFlags);
 }
 
 int hasNonPawnPieces(ChessBoard* chessBoard, int side)
@@ -656,7 +644,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     {
         updateTime();
 
-        if (timeLimitReached)
+        if (timeLimitReached && currentDepth != 1)
         {
             //free(original);
             return bestMove;
@@ -664,7 +652,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
         setBestMoveFirst(&moveList, i);
 
-        if (!gotChecked && !isValidQSearchMove(chessBoard, attackTables, moveList.moves[i].flags))
+        if (!gotChecked && !isValidQSearchMove(moveList.moves[i].flags))
         {
             continue;
         }
@@ -689,7 +677,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
                 moveScore.eval = -moveScore.eval;
             }
 
-            if (moveScore.eval > bestMove.eval)
+            if (moveScore.eval > bestMove.eval || legalMoves == 1)
             {
                 bestMove.eval = moveScore.eval;
                 bestMove.move = moveList.moves[i];
@@ -772,7 +760,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     int ownKingSq = getSqInd(side ? chessBoard->blackKing : chessBoard->whiteKing);
     int amChecked = isSquareAttacked(ownKingSq, chessBoard, attackTables, side);
 
-    if (!isNullMove && currentDepth - depthSearched >= 3 && !amChecked && hasNonPawnPieces(chessBoard, side))
+    if (!isNullMove && currentDepth - depthSearched >= 3 && !amChecked && depthSearched != 0 && hasNonPawnPieces(chessBoard, side))
     {
         Move nullMove = (Move){0, 0, 0, 0, 0};
 
@@ -806,7 +794,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     {
         updateTime();
 
-        if (timeLimitReached)
+        if (timeLimitReached && currentDepth != 1)
         {
             //free(original);
             return bestMove;
@@ -861,13 +849,13 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
                     
             }
 
-            isFirstMove = 0;
-
-            if (moveScore.eval > bestMove.eval)
+            if (moveScore.eval > bestMove.eval || isFirstMove)
             {
                 bestMove.eval = moveScore.eval;
                 bestMove.move = moveList.moves[i];
             }
+
+            isFirstMove = 0;
 
             if (moveScore.eval > alpha)
             {
@@ -883,7 +871,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
                     for (int moveInd = i - 1; moveInd >= 0; moveInd--)
                     {
-                        if (moveList.moves[moveInd].score != 0)
+                        if (moveList.moves[moveInd].score > 0)
                         {
                             break;
                         }
@@ -914,7 +902,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     }
 
     setTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, &bestMove, originalAlpha, originalBeta);
-
+    
     return bestMove;
 }
 
@@ -949,16 +937,15 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
         depthBestMove = iterativeSearch(chessBoard, attackTables, transpositionTable, hashes);
         
         //printf("Nodes: %d, Transposition searches: %d, hits: %d, Cutoffs: %d\n", nodesSearched, transpositionSearches, transpositionHits, transpositionCutoffs);
-        if (!timeLimitReached)
+        if (!timeLimitReached || currentDepth == 1)
         {
             currentBestMove = depthBestMove;
         }
 
-        if (currentBestMove.eval == -MATED || currentBestMove.eval == MATED || currentBestMove.move.flags == 0)
+        if (currentBestMove.eval == -MATED || currentBestMove.eval == MATED)
         {
             break;
         }
-        
         
         currentDepth++; 
 
