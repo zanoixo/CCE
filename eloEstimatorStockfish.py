@@ -16,7 +16,7 @@ CUTECHESS   = "cutechess-cli"
 
 TIME_CONTROL    = "st=5"  # fixed 5 seconds per move
 GAMES_PER_MATCH = 100       # games per Elo level (more = more accurate)
-CONCURRENCY     = 10        # parallel games
+CONCURRENCY     = 5        # parallel games
 
 SF_LOW          = 2000     # lowest Stockfish Elo to test
 SF_HIGH         = 2800     # highest Stockfish Elo to test

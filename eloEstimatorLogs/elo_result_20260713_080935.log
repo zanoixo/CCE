@@ -1,0 +1,129 @@
+
+┌──────────────────────────────────────────┐
+│        CCE  Elo  Estimator               │
+└──────────────────────────────────────────┘
+
+[INFO]  Engine:       /home/zan/Documents/GitHub/CchessEngine---CCE/bin/engine
+[INFO]  Stockfish:    stockfish
+[INFO]  Time control: st=5
+[INFO]  Games/match:  100
+[INFO]  Search range: Elo 2000 – 2800
+[INFO]  Log file:     ./eloEstimatorLogs/elo_result_20260713_080935.log
+
+── Iteration 1 ──────────────────────────────────
+[INFO]  Range: [2000 – 2800]  →  testing Elo 2400
+[INFO]  Playing 100 games, please wait...
+    Game 4/100: SF2400 wins  {White mates}
+    Game 1/100: SF2400 wins  {Black mates}
+    Game 2/100: CCE wins  {Black mates}
+    Game 6/100: SF2400 wins  {White mates}
+    Game 8/100: SF2400 wins  {White mates}
+    Game 3/100: SF2400 wins  {Black mates}
+    Game 5/100: SF2400 wins  {Black mates}
+    Game 7/100: SF2400 wins  {Black mates}
+    Game 9/100: CCE wins  {White mates}
+    Game 12/100: Draw  {Draw by 3-fold repetition}
+    Game 11/100: CCE wins  {White mates}
+    Game 13/100: CCE wins  {White mates}
+    Game 14/100: SF2400 wins  {White mates}
+    Game 10/100: SF2400 wins  {White mates}
+    Game 18/100: CCE wins  {Black mates}
+    Game 15/100: Draw  {Draw by 3-fold repetition}
+    Game 19/100: Draw  {Draw by 3-fold repetition}
+    Game 17/100: Draw  {Draw by insufficient mating material}
+    Game 16/100: SF2400 wins  {White mates}
+    Game 20/100: Draw  {Draw by 3-fold repetition}
+    Game 24/100: SF2400 wins  {White mates}
+    Game 21/100: CCE wins  {White mates}
+    Game 23/100: CCE wins  {White mates}
+    Game 22/100: Draw  {Draw by 3-fold repetition}
+    Game 28/100: CCE wins  {Black mates}
+    Game 25/100: SF2400 wins  {Black mates}
+    Game 26/100: SF2400 wins  {White mates}
+    Game 27/100: SF2400 wins  {Black mates}
+    Game 30/100: CCE wins  {Black mates}
+    Game 29/100: CCE wins  {White mates}
+    Game 31/100: SF2400 wins  {Black mates}
+    Game 35/100: SF2400 wins  {Black mates}
+    Game 32/100: CCE wins  {Black mates}
+    Game 33/100: Draw  {Draw by 3-fold repetition}
+    Game 34/100: SF2400 wins  {White mates}
+    Game 36/100: SF2400 wins  {White mates}
+    Game 37/100: SF2400 wins  {Black mates}
+    Game 39/100: CCE wins  {White mates}
+    Game 40/100: SF2400 wins  {White mates}
+    Game 41/100: CCE wins  {White mates}
+    Game 43/100: CCE wins  {White mates}
+    Game 38/100: SF2400 wins  {White mates}
+    Game 42/100: CCE wins  {Black mates}
+    Game 45/100: CCE wins  {White mates}
+    Game 48/100: Draw  {Draw by 3-fold repetition}
+    Game 47/100: SF2400 wins  {Black mates}
+    Game 46/100: SF2400 wins  {White mates}
+    Game 49/100: CCE wins  {White mates}
+    Game 44/100: Draw  {Draw by insufficient mating material}
+    Game 53/100: CCE wins  {White mates}
+    Game 52/100: Draw  {Draw by 3-fold repetition}
+    Game 51/100: SF2400 wins  {Black mates}
+    Game 50/100: SF2400 wins  {White mates}
+    Game 57/100: SF2400 wins  {Black mates}
+    Game 59/100: CCE wins  {White mates}
+    Game 58/100: CCE wins  {Black mates}
+    Game 54/100: CCE wins  {Black mates}
+    Game 56/100: SF2400 wins  {White mates}
+    Game 55/100: CCE wins  {White mates}
+    Game 62/100: CCE wins  {Black mates}
+    Game 61/100: CCE wins  {White mates}
+    Game 60/100: SF2400 wins  {White mates}
+    Game 64/100: SF2400 wins  {White mates}
+    Game 63/100: Draw  {Draw by 3-fold repetition}
+    Game 65/100: CCE wins  {White mates}
+    Game 67/100: CCE wins  {White mates}
+    Game 70/100: SF2400 wins  {White mates}
+    Game 68/100: SF2400 wins  {White mates}
+    Game 66/100: SF2400 wins  {White mates}
+    Game 71/100: CCE wins  {White mates}
+    Game 69/100: SF2400 wins  {Black mates}
+    Game 73/100: SF2400 wins  {Black mates}
+    Game 72/100: CCE wins  {Black mates}
+    Game 74/100: SF2400 wins  {White mates}
+    Game 76/100: CCE wins  {Black mates}
+    Game 78/100: CCE wins  {Black mates}
+    Game 75/100: SF2400 wins  {Black mates}
+    Game 77/100: CCE wins  {White mates}
+    Game 79/100: CCE wins  {White mates}
+    Game 83/100: SF2400 wins  {Black mates}
+    Game 84/100: SF2400 wins  {White mates}
+    Game 80/100: SF2400 wins  {White mates}
+    Game 81/100: CCE wins  {White mates}
+    Game 88/100: CCE wins  {Black mates}
+    Game 85/100: SF2400 wins  {Black mates}
+    Game 86/100: CCE wins  {Black mates}
+    Game 82/100: SF2400 wins  {White mates}
+    Game 89/100: SF2400 wins  {Black mates}
+    Game 87/100: SF2400 wins  {Black mates}
+    Game 93/100: CCE wins  {White mates}
+    Game 91/100: CCE wins  {White mates}
+    Game 94/100: SF2400 wins  {White mates}
+    Game 96/100: SF2400 wins  {White mates}
+    Game 90/100: CCE wins  {Black mates}
+    Game 92/100: SF2400 wins  {White mates}
+    Game 97/100: SF2400 wins  {Black mates}
+    Game 99/100: CCE wins  {White mates}
+    Game 98/100: CCE wins  {Black mates}
+    Game 100/100: SF2400 wins  {White mates}
+    Game 95/100: Draw  {Draw by fifty moves rule}
+[ OK ]  CCE scored 46.0% → within target range (45–55%) → converged!
+
+┌──────────────────────────────────────────┐
+│              RESULTS                     │
+├──────────────────────────────────────────┤
+│  SF 2400 : 40 - 48 - 12  [46.0%]
+├──────────────────────────────────────────┤
+│  Estimated CCE Elo:  ~2400
+│  Final range:        [2000 – 2800]
+│  Total iterations:   1
+│  Total games:        100
+└──────────────────────────────────────────┘
+
+Full log saved to: ./eloEstimatorLogs/elo_result_20260713_080935.log
