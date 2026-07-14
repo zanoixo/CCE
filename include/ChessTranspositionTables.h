@@ -57,6 +57,7 @@ typedef struct TranspositionTableEntry
     uint64_t hash;
     int16_t depth;
     uint8_t flag;
+    uint16_t age;
     MoveScore moveScore;
     
 }TranspositionTableEntry;
@@ -73,5 +74,8 @@ TranspositionTableEntry* getTransposition(ChessBoard* chessBoard, TranspositionT
 void setTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, MoveScore* moveScore, int alpha, int beta);
 TranspositionTableEntry* checkTranspositionHit(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, int alpha, int beta);
 void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, TranspositionTable* transpositionTable);
+void initAge();
+void incrementAge();
+uint16_t getCurrentAge();
 uint64_t getTTMovesSearched();
 uint64_t getTTMovesFound();

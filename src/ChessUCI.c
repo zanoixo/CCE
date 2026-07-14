@@ -174,6 +174,7 @@ void applyUCIMoves(char *moves, ChessBoard *chessBoard, AttackTables *attackTabl
 
     for (int i = 0; i < count; i++)
     {
+        incrementAge();
         userMove(from[i], to[i], promotion[i], chessBoard, attackTables, hashes);
     }
 }
@@ -222,6 +223,7 @@ void uci_loop()
         else if (strncmp(line, "position startpos", 17) == 0) 
         { 
             initStartingPosition(chessBoard, hashes);
+            initAge();
             char *moves = strstr(line, "moves"); 
             if (moves)
             { 

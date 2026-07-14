@@ -8,6 +8,7 @@ uint64_t transpositionTableSize = 1 << TRANSPOSITION_TABLE_NUM_OF_BITS;
 uint64_t transpositionTableMask = (1 << TRANSPOSITION_TABLE_NUM_OF_BITS) - 1;
 uint64_t TTMoveFound = 0;
 uint64_t TTMoveSearched = 0;
+uint16_t currentAge = 0;
 
 uint64_t getRandomHash()
 {
@@ -139,12 +140,13 @@ void setTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionT
 
     uint64_t index = chessBoard->positionHash & transpositionTableMask;
 
-    if (transpositionTable->transpositions[index].depth <= remainingDepth)
+    if (transpositionTable->transpositions[index].depth <= remainingDepth || transpositionTable->transpositions[index].age < currentAge)
     {
         transpositionTable->transpositions[index].moveScore = *moveScore;
         transpositionTable->transpositions[index].depth = remainingDepth;
         transpositionTable->transpositions[index].hash = chessBoard->positionHash;
         transpositionTable->transpositions[index].flag = transpositionFlag;
+        transpositionTable->transpositions[index].age = currentAge;
     }
 }
 
@@ -174,4 +176,19 @@ uint64_t getTTMovesFound()
 uint64_t getTTMovesSearched()
 {
     return TTMoveSearched;
+}
+
+void initAge()
+{
+    currentAge = 0;
+}
+
+void incrementAge()
+{
+    currentAge++;
+}   
+
+uint16_t getCurrentAge()
+{
+    return currentAge;
 }
