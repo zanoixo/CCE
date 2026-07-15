@@ -14,6 +14,7 @@ typedef struct TranspositionTableEntry TranspositionTableEntry;
 #define MAX_INT 1000000000
 #define MIN_INT -1000000000
 #define MATED -1000000
+#define MATED_TRESHOLD (-MATED - 1000)
 #define DRAW 0 
 
 #define PAWN_VALUE   100

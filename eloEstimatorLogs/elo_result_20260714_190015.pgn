@@ -1,0 +1,1636 @@
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1/2-1/2"]
+[ECO "C53"]
+[GameDuration "00:02:10"]
+[GameEndTime "2026-07-14T19:02:26.453 CEST"]
+[GameStartTime "2026-07-14T19:00:15.714 CEST"]
+[Opening "Giuoco Piano"]
+[PlyCount "253"]
+[TimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bc4 {book} Bc5 {book}
+4. c3 {book} Nf6 {book} 5. d3 {book} d6 {book} 6. O-O {0.90s} O-O {0.90s}
+7. d4 {0.90s} Bb6 {0.90s} 8. Re1 {0.90s} exd4 {0.90s} 9. cxd4 {0.90s}
+Bg4 {0.90s} 10. d5 {0.90s} Ne5 {0.90s} 11. Nbd2 {0.90s} Bxf3 {0.90s}
+12. gxf3 {0.90s} c6 {0.90s} 13. dxc6 {0.90s} bxc6 {0.90s} 14. Be2 {0.90s}
+Bc5 {0.90s} 15. Nb3 {0.90s} Bb4 {0.90s} 16. Rf1 {0.90s} Qe7 {0.90s}
+17. a3 {0.90s} Bc5 {0.90s} 18. Nxc5 {0.90s} dxc5 {0.90s} 19. Be3 {0.90s}
+c4 {0.90s} 20. f4 {0.90s} Ng6 {0.90s} 21. f5 {0.90s} Ne5 {0.90s} 22. Qc2 {0.90s}
+Rab8 {0.90s} 23. h3 {0.90s} Nd3 {0.90s} 24. Qxc4 {0.90s} Nxb2 {0.90s}
+25. Bc5 {0.90s} Nxc4 {0.90s} 26. Bxe7 {0.90s} Nd2 {0.90s} 27. Bxf8 {0.90s}
+Rxf8 {0.90s} 28. Rfd1 {0.90s} Ndxe4 {0.90s} 29. Rac1 {0.90s} c5 {0.90s}
+30. f3 {0.90s} Ng3 {0.90s} 31. Bd3 {0.90s} Rd8 {0.90s} 32. Rxc5 {0.90s}
+Kf8 {0.90s} 33. Ra5 {0.90s} Ngh5 {0.90s} 34. Be2 {0.90s} Rxd1+ {0.90s}
+35. Bxd1 {0.90s} Ng3 {0.90s} 36. Kf2 {0.90s} Ngh5 {0.90s} 37. Ke3 {0.90s}
+a6 {0.90s} 38. f4 {0.90s} Ng3 {0.90s} 39. Bc2 {0.90s} Ke7 {0.90s}
+40. Bd3 {0.90s} Ngh5 {0.90s} 41. Bxa6 {0.90s} Nd7 {0.90s} 42. Bd3 {0.90s}
+Nhf6 {0.90s} 43. Kd4 {0.90s} Ne8 {0.90s} 44. Ra7 {0.90s} Kd6 {0.90s}
+45. Bc4 {0.90s} Ke7 {0.90s} 46. Bd3 {0.90s} Kd8 {0.90s} 47. h4 {0.90s}
+Nd6 {0.90s} 48. Ra8+ {0.90s} Kc7 {0.90s} 49. Rg8 {0.90s} g6 {0.90s}
+50. fxg6 {0.90s} hxg6 {0.90s} 51. Ra8 {0.90s} Nb8 {0.90s} 52. Kc5 {0.90s}
+Nd7+ {0.90s} 53. Kd4 {0.90s} Nb8 {0.90s} 54. Kd5 {0.90s} Nc8 {0.90s}
+55. Kc5 {0.90s} Nd7+ {0.90s} 56. Kd4 {0.90s} Nd6 {0.90s} 57. Ra5 {0.90s}
+Nf6 {0.90s} 58. Re5 {0.90s} Kc6 {0.90s} 59. Rc5+ {0.90s} Kd7 {0.90s}
+60. Re5 {0.90s} Nh5 {0.90s} 61. f5 {0.90s} Nf4 {0.90s} 62. fxg6 {0.90s}
+fxg6 {0.90s} 63. Bc2 {0.90s} Ne6+ {0.90s} 64. Kc3 {0.90s} Nf4 {0.90s}
+65. Rg5 {0.90s} Ne2+ {0.90s} 66. Kb4 {0.90s} Nd4 {0.90s} 67. Bxg6 {0.90s}
+Ke6 {0.90s} 68. h5 {0.90s} Nc6+ {0.90s} 69. Kc5 {0.90s} Ne7 {0.90s}
+70. h6 {0.90s} Kf6 {0.90s} 71. Kxd6 {0.90s} Kxg5 {0.90s} 72. Kxe7 {0.90s}
+Kxg6 {0.90s} 73. a4 {0.90s} Kxh6 {0.90s} 74. a5 {0.90s} Kg5 {0.90s}
+75. a6 {0.90s} Kf4 {0.90s} 76. a7 Ke3 {0.90s} 77. a8=Q Kd4 {0.90s} 78. Qf3 Kc4
+79. Kd6 Kd4 80. Ke7 Kc4 81. Kd6 Kd4 82. Qb3 Ke4 83. Ke7 Kd4 84. Kd6 Ke4 85. Ke7
+Kd4 86. Qb4+ Ke5 87. Qc4 Kf5 88. Qd3+ Ke5 89. Qc4 Kf5 90. Qd3+ Ke5 91. Kf7 Kf4
+92. Ke8 Ke5 93. Ke7 Kf4 94. Kf7 Ke5 95. Ke7 Kf4 96. Kf7 Ke5 97. Kg7 Kf4 98. Kg6
+Ke5 99. Kf7 Kf4 100. Ke8 Ke5 101. Qc4 Kd6 102. Kd8 Ke5 103. Ke8 Kd6 104. Kd8 Ke5
+105. Qb3 Kf6 106. Qa2 Kg5 107. Ke7 Kg4 108. Qb3 Kf4 109. Qa3 Ke5 110. Qa8
+Kd4 {0.68s} 111. Qa3 Kc4 112. Kd6 Kd4 113. Ke7 Kc4 114. Kd6 Kd4 115. Qf3 Kc4
+116. Ke7 Kd4 117. Qb3 Kc5 118. Kd7 Kd4 119. Ke7 Kc5 120. Kd7 Kd4 121. Qc2 Ke3
+122. Ke7 Kf3 123. Qd2 Ke4 124. Kf6 Kf3 125. Ke7 Ke4 126. Kf6 Kf3
+127. Ke5 {Draw by fifty moves rule} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "0-1"]
+[ECO "C53"]
+[GameDuration "00:01:10"]
+[GameEndTime "2026-07-14T19:01:26.426 CEST"]
+[GameStartTime "2026-07-14T19:00:15.711 CEST"]
+[Opening "Giuoco Piano"]
+[PlyCount "102"]
+[TimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bc4 {book} Bc5 {book}
+4. c3 {book} Nf6 {book} 5. d3 {book} d6 {book} 6. O-O {0.90s} O-O {0.90s}
+7. d4 {0.90s} Bb6 {0.90s} 8. d5 {0.90s} Ne7 {0.90s} 9. Bd3 {0.90s} Nexd5 {0.90s}
+10. exd5 {0.90s} e4 {0.90s} 11. Na3 {0.90s} exf3 {0.90s} 12. Qxf3 {0.90s}
+Bg4 {0.90s} 13. Qf4 {0.90s} Qd7 {0.90s} 14. h3 {0.90s} Bh5 {0.90s}
+15. Nc4 {0.90s} Bc5 {0.90s} 16. b4 {0.90s} Bb6 {0.90s} 17. Nxb6 {0.90s}
+axb6 {0.90s} 18. Qd4 {0.90s} Bg6 {0.90s} 19. Bxg6 {0.90s} fxg6 {0.90s}
+20. Be3 {0.90s} Rfe8 {0.90s} 21. a3 {0.90s} Re5 {0.90s} 22. c4 {0.90s}
+b5 {0.90s} 23. Rfd1 {0.90s} Qf7 {0.90s} 24. cxb5 {0.90s} Rxd5 {0.90s}
+25. Qc3 {0.90s} Rxb5 {0.90s} 26. Rac1 {0.90s} c6 {0.90s} 27. Rd4 {0.90s}
+Rf5 {0.90s} 28. Qd3 {0.90s} Nd5 {0.90s} 29. Rd1 {0.90s} Re8 {0.90s}
+30. Re4 {0.90s} Rxe4 {0.90s} 31. Qxe4 {0.90s} Nc3 {0.90s} 32. Qd3 {0.90s}
+Rd5 {0.90s} 33. Qxc3 {0.90s} Rxd1+ {0.90s} 34. Kh2 {0.90s} Qd5 {0.90s}
+35. Qc2 {0.90s} Rd3 {0.90s} 36. Qa4 {0.90s} Qe5+ {0.90s} 37. g3 {0.90s}
+Qe7 {0.90s} 38. Qa7 {0.90s} h6 {0.90s} 39. a4 {0.90s} Rd1 {0.90s} 40. b5 {0.90s}
+Qe4 41. f3 {0.90s} Qxf3 {0.90s} 42. Bg1 {0.90s} Rd2+ {0.90s} 43. Qf2 {0.90s}
+Rxf2+ {0.90s} 44. Bxf2 {0.90s} Qxf2+ {0.90s} 45. Kh1 {0.90s} cxb5 46. axb5 d5
+47. h4 d4 48. h5 gxh5 49. g4 d3 50. gxh5 d2 51. b6 d1=Q# {Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1/2-1/2"]
+[ECO "C84"]
+[GameDuration "00:01:56"]
+[GameEndTime "2026-07-14T19:02:11.964 CEST"]
+[GameStartTime "2026-07-14T19:00:15.712 CEST"]
+[Opening "Ruy Lopez"]
+[PlyCount "139"]
+[TimeControl "1/move"]
+[Variation "Closed defense"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. d3 {0.90s} b5 {0.90s}
+7. Bb3 {0.90s} d5 {0.90s} 8. Bxd5 {0.90s} Nxd5 {0.90s} 9. exd5 {0.90s}
+Qxd5 {0.90s} 10. Nc3 {0.90s} Qd6 {0.90s} 11. Bg5 {0.90s} f6 {0.90s}
+12. Ne4 {0.90s} Qe6 {0.90s} 13. Be3 {0.90s} f5 {0.90s} 14. Neg5 {0.90s}
+Qd5 {0.90s} 15. Qe2 {0.90s} O-O {0.90s} 16. c4 {0.90s} Qd6 {0.90s}
+17. Rac1 {0.90s} b4 {0.90s} 18. Rfe1 {0.90s} h6 {0.90s} 19. Nh3 {0.90s}
+Bf6 {0.90s} 20. Qd2 {0.90s} Rd8 {0.90s} 21. Rcd1 {0.90s} Be6 {0.90s}
+22. Nf4 {0.90s} exf4 {0.90s} 23. Bxf4 {0.90s} Qe7 {0.90s} 24. Bxc7 {0.90s}
+Rd7 {0.90s} 25. Bf4 {0.90s} Re8 {0.90s} 26. c5 {0.90s} Qxc5 {0.90s}
+27. Rc1 {0.90s} Qd5 {0.90s} 28. h4 {0.90s} Kf7 {0.90s} 29. Qe3 {0.90s}
+Rb7 {0.90s} 30. Qc5 {0.90s} Rc8 {0.90s} 31. Qxd5 {0.90s} Bxd5 {0.90s}
+32. Rc2 {0.90s} Bxa2 {0.90s} 33. Rec1 {0.90s} Bd5 {0.90s} 34. d4 {0.90s}
+Ke6 {0.90s} 35. Rc5 {0.90s} Bxf3 {0.90s} 36. gxf3 {0.90s} Nxd4 {0.90s}
+37. Rxc8 {0.90s} Ne2+ {0.90s} 38. Kh2 {0.90s} Nxf4 {0.90s} 39. R8c6+ {0.90s}
+Kf7 {0.90s} 40. R1c5 {0.90s} Ne6 {0.90s} 41. Rd5 {0.90s} f4 {0.90s}
+42. Rxa6 {0.90s} Bxb2 {0.90s} 43. Rdd6 {0.90s} Re7 {0.90s} 44. Rd1 {0.90s}
+Rc7 {0.90s} 45. Rdd6 {0.90s} Re7 {0.90s} 46. Rd1 {0.90s} Rc7 {0.90s}
+47. Rdd6 {0.90s} Nd4 {0.90s} 48. Kh3 {0.90s} g5 {0.90s} 49. Rxh6 {0.90s}
+Nxf3 {0.90s} 50. Kg4 {0.90s} Nxh4 {0.90s} 51. Kxg5 {0.90s} Ng2 {0.90s}
+52. Rh7+ {0.90s} Bg7 {0.90s} 53. Rb6 {0.90s} Ne1 {0.90s} 54. Kxf4 {0.90s}
+Nd3+ {0.90s} 55. Ke3 {0.90s} Rd7 {0.90s} 56. Rh4 {0.90s} Kg8 {0.90s}
+57. Rb8+ {0.90s} Kf7 {0.90s} 58. Rb5 {0.90s} Ne1 {0.90s} 59. Rc4 {0.90s}
+Nd3 {0.90s} 60. Rh4 {0.90s} Ne1 {0.90s} 61. Rf4+ {0.90s} Ke7 {0.90s}
+62. Re4+ {0.90s} Kd8 {0.90s} 63. Rc4 {0.90s} Bc3 {0.90s} 64. Rf5 {0.90s}
+Nc2+ {0.90s} 65. Ke4 {0.90s} Nd4 {0.90s} 66. Rfc5 {0.90s} Re7+ {0.90s}
+67. Kd3 {0.90s} Rd7 {0.90s} 68. Ke4 {0.90s} Re7+ {0.90s} 69. Kd3 {0.90s}
+Rd7 {0.90s} 70. Ke4 {0.90s, Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "0-1"]
+[ECO "C84"]
+[GameDuration "00:02:45"]
+[GameEndTime "2026-07-14T19:03:01.509 CEST"]
+[GameStartTime "2026-07-14T19:00:15.713 CEST"]
+[Opening "Ruy Lopez"]
+[PlyCount "202"]
+[TimeControl "1/move"]
+[Variation "Closed defense"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Bb5 {book} a6 {book}
+4. Ba4 {book} Nf6 {book} 5. O-O {book} Be7 {book} 6. d3 {0.91s} b5 {0.90s}
+7. Bb3 {0.90s} d5 {0.90s} 8. exd5 {0.90s} Nxd5 {0.90s} 9. d4 {0.90s} e4 {0.90s}
+10. Ne5 {0.90s} Qd6 {0.90s} 11. Bxd5 {0.90s} Qxd5 {0.90s} 12. Nc3 {0.90s}
+Qd6 {0.90s} 13. Nxe4 {0.90s} Qxd4 {0.90s} 14. Nxc6 {0.90s} Qxe4 {0.90s}
+15. Nxe7 {0.90s} Qxe7 {0.90s} 16. Qd5 {0.90s} Rb8 {0.90s} 17. Bf4 {0.90s}
+O-O {0.90s} 18. Rfe1 {0.90s} Be6 {0.90s} 19. Qc6 {0.90s} Rb6 {0.90s}
+20. Qc3 {0.90s} Rc8 {0.90s} 21. a3 {0.90s} b4 {0.90s} 22. axb4 {0.90s}
+Qxb4 {0.90s} 23. Qxb4 {0.90s} Rxb4 {0.90s} 24. Be5 {0.90s} Rc4 {0.90s}
+25. Bc3 {0.90s} Bf5 {0.90s} 26. Rxa6 {0.90s} Bxc2 {0.90s} 27. Ra7 {0.90s}
+Be4 {0.90s} 28. Rd1 {0.90s} Rc5 {0.90s} 29. f3 {0.90s} Bf5 {0.90s}
+30. Re1 {0.90s} Be6 {0.90s} 31. f4 {0.90s} Rc4 {0.90s} 32. Be5 {0.90s}
+Kf8 {0.90s} 33. Rb7 {0.90s} Kg8 {0.90s} 34. Ra7 {0.90s} Kf8 {0.90s}
+35. Ra3 {0.90s} Bf5 {0.90s} 36. Rd1 {0.90s} Be4 {0.90s} 37. Rg3 {0.90s}
+f6 {0.90s} 38. Bc3 {0.90s} Bf5 {0.90s} 39. Bd4 {0.90s} c5 {0.90s}
+40. Be3 {0.90s} Kf7 {0.90s} 41. Kh1 {0.90s} Rc2 {0.90s} 42. h3 {0.90s}
+Be6 {0.90s} 43. Ra1 {0.90s} Rc7 {0.90s} 44. Ra5 {0.90s} f5 {0.90s}
+45. Rb5 {0.90s} Rc4 {0.90s} 46. Rb8 {0.90s} Rd7 {0.90s} 47. Kh2 {0.90s}
+Re7 {0.90s} 48. Rh8 {0.90s} Rb7 {0.90s} 49. Rxh7 {0.90s} Kg8 {0.90s}
+50. Rh6 {0.90s} Bd5 {0.90s} 51. Rd6 {0.90s} Be4 {0.90s} 52. Rd2 {0.90s}
+Kh7 {0.90s} 53. Rg5 {0.90s} Rb3 {0.90s} 54. Re2 {0.90s} Bd3 {0.90s}
+55. Rd2 {0.90s} Be4 {0.90s} 56. Re2 {0.90s} Bd3 {0.90s} 57. Rf2 {0.90s}
+Bc2 {0.90s} 58. Bc1 {0.90s} Bd3 {0.90s} 59. Be3 {0.90s} Bc2 {0.90s}
+60. Bc1 {0.90s} Bd3 {0.90s} 61. Rg3 {0.90s} Rxc1 {0.90s} 62. Re2 {0.90s}
+Bxe2 {0.90s} 63. Rxb3 {0.90s} Rc2 {0.90s} 64. Kg1 {0.90s} Bc4 {0.90s}
+65. Rc3 {0.90s} Rxc3 {0.90s} 66. bxc3 {0.90s} Kh6 {0.90s} 67. Kf2 {0.90s}
+Kh5 {0.90s} 68. g3 {0.90s} g6 {0.90s} 69. Kg1 {0.90s} g5 {0.90s}
+70. fxg5 {0.90s} Kxg5 {0.90s} 71. Kf2 {0.90s} Bd5 {0.90s} 72. Ke3 {0.90s}
+Kf6 {0.90s} 73. h4 {0.90s} Ke5 {0.90s} 74. h5 {0.90s} Bc4 {0.90s}
+75. Kf3 {0.90s} Kf6 {0.90s} 76. Kf4 {0.90s} Bd3 {0.90s} 77. Ke3 {0.90s}
+c4 {0.90s} 78. Kf4 {0.90s} Be2 {0.90s} 79. h6 {0.90s} Bg4 {0.90s} 80. h7 {0.90s}
+Kg7 {0.90s} 81. h8=Q+ {0.90s} Kxh8 {0.90s} 82. Ke5 {0.90s} Kg7 {0.90s}
+83. Kd6 {0.90s} Kf6 {0.90s} 84. Kc6 {0.90s} Kg5 {0.90s} 85. Kc5 {0.90s}
+Bh3 {0.90s} 86. Kxc4 {0.90s} Kg4 {0.90s} 87. Kb5 {0.90s} Kxg3 {0.90s}
+88. c4 {0.90s} f4 {0.90s} 89. c5 {0.90s} f3 {0.90s} 90. Kb6 {0.90s} f2 {0.90s}
+91. c6 {0.90s} f1=Q {0.90s} 92. Kc5 {0.90s} Qf4 {0.90s} 93. Kd5 {0.90s}
+Bg2+ {0.90s} 94. Kc5 {0.90s} Qc7 {0.90s} 95. Kd4 {0.90s} Kf4 {0.90s}
+96. Kc3 {0.90s} Qe5+ {0.90s} 97. Kb3 {0.90s} Bxc6 98. Kb4 {0.58s} Qb5+ 99. Ka3
+Be4 100. Ka2 Qb4 101. Ka1 Qa3# {Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1/2-1/2"]
+[ECO "C45"]
+[GameDuration "00:00:31"]
+[GameEndTime "2026-07-14T19:00:47.271 CEST"]
+[GameStartTime "2026-07-14T19:00:15.715 CEST"]
+[Opening "Scotch game"]
+[PlyCount "44"]
+[TimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. d4 {book} exd4 {book}
+4. Nxd4 {book} Bc5 {book} 5. Be3 {book} Qf6 {0.90s} 6. Nxc6 {0.90s} Bxe3 {0.90s}
+7. fxe3 {0.90s} Qxb2 {0.90s} 8. Qd4 {0.90s} Qc1+ {0.90s} 9. Kf2 {0.90s}
+Qxc2+ {0.90s} 10. Be2 {0.90s} Qxc6 {0.90s} 11. Qxg7 {0.90s} Qf6+ {0.90s}
+12. Qxf6 {0.90s} Nxf6 {0.90s} 13. Nc3 {0.90s} d6 {0.90s} 14. Rhc1 {0.90s}
+Be6 {0.90s} 15. Bf3 {0.90s} c6 {0.90s} 16. Rab1 {0.90s} O-O-O {0.90s}
+17. Nd5 {0.90s} Ng4+ {0.90s} 18. Bxg4 {0.90s} Bxg4 {0.90s} 19. Ne7+ {0.90s}
+Kc7 {0.90s} 20. Nd5+ {0.90s} Kc8 {0.90s} 21. Ne7+ {0.90s} Kc7 {0.90s}
+22. Nd5+ {0.90s} Kc8 {0.90s, Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "0-1"]
+[ECO "C45"]
+[GameDuration "00:01:43"]
+[GameEndTime "2026-07-14T19:02:30.563 CEST"]
+[GameStartTime "2026-07-14T19:00:47.271 CEST"]
+[Opening "Scotch game"]
+[PlyCount "140"]
+[TimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. d4 {book} exd4 {book}
+4. Nxd4 {book} Bc5 {book} 5. Be3 {book} Qf6 {0.90s} 6. Nxc6 {0.90s} Bxe3 {0.90s}
+7. fxe3 {0.90s} Qxb2 {0.90s} 8. Qd4 {0.90s} Qc1+ {0.90s} 9. Kf2 {0.90s}
+Qxc2+ {0.90s} 10. Be2 {0.90s} Qxc6 {0.90s} 11. Nc3 {0.90s} Qf6+ {0.90s}
+12. Qxf6 {0.90s} Nxf6 {0.90s} 13. e5 {0.90s} Ng8 {0.90s} 14. Nb5 {0.90s}
+Kd8 {0.90s} 15. Rhc1 {0.90s} c6 {0.90s} 16. Nd6 {0.90s} Nh6 {0.90s}
+17. Kg3 {0.90s} Ke7 {0.90s} 18. Rab1 {0.90s} b5 {0.90s} 19. Rd1 {0.90s}
+Rf8 {0.90s} 20. Bf3 {0.90s} a6 {0.90s} 21. Rb4 {0.90s} Ke6 {0.90s}
+22. Nxc8 {0.90s} Raxc8 {0.90s} 23. Re4 {0.90s} Nf5+ {0.90s} 24. Kf4 {0.90s}
+f6 {0.90s} 25. h4 {0.90s} Nxh4 {0.90s} 26. exf6+ {0.90s} Kxf6 {0.90s}
+27. Rd6+ {0.90s} Kf7 {0.90s} 28. Rxd7+ {0.90s} Kg8+ {0.90s} 29. Kg3 {0.90s}
+Nf5+ {0.90s} 30. Kf2 {0.90s} c5 {0.90s} 31. Rd5 {0.90s} c4 {0.90s}
+32. Rf4 {0.90s} c3 {0.90s} 33. Rd1 {0.90s} c2 {0.90s} 34. Rc1 {0.90s} g5 {0.90s}
+35. Rg4 {0.90s} h6 {0.90s} 36. Bd5+ {0.90s} Kg7 {0.90s} 37. e4 {0.90s}
+Rfd8 {0.90s} 38. Ke2 {0.90s} Rc7 {0.90s} 39. Bb3 {0.90s} Nd4+ {0.90s}
+40. Ke1 {0.90s} Nxb3 {0.90s} 41. axb3 {0.90s} Kf6 {0.90s} 42. Rg3 {0.90s}
+Ke5 {0.90s} 43. Re3 {0.90s} b4 {0.90s} 44. Re2 {0.90s} Rdc8 {0.90s}
+45. Re3 {0.90s} Rc3 {0.90s} 46. Rxc3 {0.90s} Rxc3 {0.90s} 47. Kd2 {0.90s}
+Kxe4 {0.90s} 48. Rxc2 {0.90s} Rxc2+ {0.90s} 49. Kxc2 {0.90s} Kf4 {0.90s}
+50. Kd3 {0.90s} Kg3 {0.90s} 51. Kc4 {0.90s} g4 {0.90s} 52. Kxb4 {0.90s}
+Kxg2 {0.90s} 53. Ka5 {0.90s} Kf3 {0.90s} 54. b4 {0.90s} g3 {0.90s}
+55. Kxa6 {0.90s} g2 {0.90s} 56. b5 {0.90s} g1=Q {0.90s} 57. b6 {0.90s}
+Qa1+ {0.90s} 58. Kb5 {0.90s} Qa8 {0.90s} 59. Kb4 {0.90s} h5 {0.90s}
+60. Kc5 {0.90s} h4 {0.90s} 61. Kd6 {0.90s} Qb7 {0.90s} 62. Kc5 {0.90s} h3
+63. Kb5 h2 64. Kc5 h1=Q 65. Kc4 Qf1+ 66. Kc5 Qh1 67. Kc4 Qf1+ 68. Kc5 Qg1+
+69. Kd6 Kf4 70. Ke6 Qgxb6# {Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1/2-1/2"]
+[ECO "C42"]
+[GameDuration "00:00:36"]
+[GameEndTime "2026-07-14T19:02:03.371 CEST"]
+[GameStartTime "2026-07-14T19:01:26.427 CEST"]
+[Opening "Petrov"]
+[PlyCount "50"]
+[TimeControl "1/move"]
+[Variation "Classical attack"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nf6 {book} 3. Nxe5 {book} d6 {book}
+4. Nf3 {book} Nxe4 {book} 5. d4 {book} d5 {0.90s} 6. Bd3 {0.90s} Nc6 {0.90s}
+7. Qe2 {0.90s} Bf5 {0.90s} 8. Nc3 {0.90s} Bb4 {0.90s} 9. O-O {0.90s} O-O {0.90s}
+10. Qe3 {0.90s} Re8 {0.90s} 11. Qf4 {0.90s} Bg6 {0.90s} 12. Nb5 {0.90s}
+Nd6 {0.90s} 13. Bxg6 {0.90s} hxg6 {0.90s} 14. Nxd6 {0.90s} Bxd6 {0.90s}
+15. Qd2 {0.90s} Qf6 {0.90s} 16. Qc3 {0.90s} Re2 {0.90s} 17. Qd3 {0.90s}
+Re4 {0.90s} 18. Be3 {0.90s} Qf5 {0.90s} 19. Qb5 {0.90s} Rb8 {0.90s}
+20. c4 {0.90s} dxc4 {0.90s} 21. Qxc4 {0.90s} Nb4 {0.90s} 22. Nd2 {0.90s}
+Rh4 {0.90s} 23. Nf3 {0.90s} Re4 {0.90s} 24. Nd2 {0.90s} Rh4 {0.90s}
+25. Nf3 {0.90s} Re4 {0.90s, Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1/2-1/2"]
+[ECO "C42"]
+[GameDuration "00:00:41"]
+[GameEndTime "2026-07-14T19:02:44.821 CEST"]
+[GameStartTime "2026-07-14T19:02:03.371 CEST"]
+[Opening "Petrov"]
+[PlyCount "55"]
+[TimeControl "1/move"]
+[Variation "Classical attack"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nf6 {book} 3. Nxe5 {book} d6 {book}
+4. Nf3 {book} Nxe4 {book} 5. d4 {book} d5 {0.90s} 6. Bd3 {0.90s} Nc6 {0.90s}
+7. Qe2 {0.90s} Bf5 {0.90s} 8. Nc3 {0.90s} Bb4 {0.90s} 9. O-O {0.90s} O-O {0.90s}
+10. Qe3 {0.90s} Re8 {0.90s} 11. Qf4 {0.90s} Bg6 {0.90s} 12. Nb5 {0.90s}
+Nd6 {0.90s} 13. Bxg6 {0.90s} hxg6 {0.90s} 14. Nxd6 {0.90s} Bxd6 {0.90s}
+15. Qd2 {0.90s} Qf6 {0.90s} 16. Qc3 {0.90s} Qf5 {0.90s} 17. Be3 {0.90s}
+a6 {0.90s} 18. Kh1 {0.90s} Re4 {0.90s} 19. Rad1 {0.90s} Rae8 {0.90s}
+20. Qd3 {0.90s} Kh8 {0.90s} 21. Qc3 {0.90s} Kg8 {0.90s} 22. Qd3 {0.90s}
+Kh8 {0.90s} 23. Qc3 {0.90s} Rd8 {0.90s} 24. Qd3 {0.90s} Kg8 {0.90s}
+25. Qc3 {0.90s} Kh8 {0.90s} 26. Qd3 {0.90s} Kg8 {0.90s} 27. Rc1 {0.90s}
+Kh8 {0.90s} 28. Rcd1 {0.90s, Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1-0"]
+[ECO "C29"]
+[GameDuration "00:01:53"]
+[GameEndTime "2026-07-14T19:04:05.817 CEST"]
+[GameStartTime "2026-07-14T19:02:11.964 CEST"]
+[Opening "Vienna gambit"]
+[PlyCount "145"]
+[TimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nc3 {book} Nf6 {book} 3. f4 {book} d5 {book}
+4. fxe5 {book} Nxe4 {0.90s} 5. Nf3 {0.90s} Nc6 {0.90s} 6. Bb5 {0.90s}
+Bb4 {0.90s} 7. O-O {0.90s} Qd7 {0.90s} 8. Qe2 {0.90s} a6 {0.90s} 9. Ba4 {0.90s}
+Nxc3 {0.90s} 10. dxc3 {0.90s} Be7 {0.90s} 11. Be3 {0.90s} b5 {0.90s}
+12. Bb3 {0.90s} Na5 {0.90s} 13. Nd4 {0.90s} O-O {0.90s} 14. a4 {0.90s}
+Nxb3 {0.90s} 15. cxb3 {0.90s} c5 {0.90s} 16. Nf5 {0.90s} bxa4 {0.90s}
+17. bxa4 {0.90s} Qc7 {0.90s} 18. Rad1 {0.90s} Bxf5 {0.90s} 19. Rxf5 {0.90s}
+g6 {0.90s} 20. Qg4 {0.90s} Kh8 {0.90s} 21. Bh6 {0.90s} Rfd8 {0.90s}
+22. Rxf7 {0.90s} Qxe5 {0.90s} 23. Bg7+ {0.90s} Qxg7 {0.90s} 24. Rxg7 {0.90s}
+Kxg7 {0.90s} 25. Qe6 {0.90s} Bf6 {0.90s} 26. Rf1 {0.90s} Rf8 {0.90s}
+27. Qxd5 {0.90s} Bh4 {0.90s} 28. Qe5+ {0.90s} Kh6 {0.90s} 29. Qe3+ {0.90s}
+Bg5 {0.90s} 30. Qxc5 {0.90s} Rfd8 {0.90s} 31. Kh1 {0.90s} Rab8 {0.90s}
+32. Rb1 {0.90s} Rd2 {0.90s} 33. b4 {0.90s} Rbd8 {0.90s} 34. g3 {0.90s}
+R2d5 {0.90s} 35. Qa7 {0.90s} Rd3 {0.90s} 36. c4 {0.90s} Rd1+ {0.90s}
+37. Rxd1 {0.90s} Rxd1+ {0.90s} 38. Kg2 {0.90s} Rd6 {0.90s} 39. Qc5 {0.90s}
+Rd3 {0.90s} 40. Qf8+ {0.90s} Kh5 {0.90s} 41. Qf7 {0.90s} Kh6 {0.90s}
+42. Qf8+ {0.90s} Kh5 {0.90s} 43. Qg7 {0.90s} Kg4 {0.90s} 44. Qxh7 {0.90s}
+Rd2+ {0.90s} 45. Kf1 {0.90s} Rd1+ {0.90s} 46. Ke2 {0.90s} Rd2+ {0.90s}
+47. Ke1 {0.90s} Rd6 {0.90s} 48. c5 {0.90s} Re6+ {0.90s} 49. Kf1 {0.90s}
+Rf6+ {0.90s} 50. Ke2 {0.90s} Re6+ {0.90s} 51. Kd3 {0.90s} Kf5 {0.90s}
+52. Qf7+ {0.90s} Ke5 {0.90s} 53. h4 {0.90s} Re7 {0.90s} 54. Qxg6 {0.90s}
+Rd7+ {0.90s} 55. Kc2 {0.90s} Be7 {0.90s} 56. Qh5+ {0.90s} Kf6 {0.90s}
+57. c6 {0.90s} Rd8 {0.90s} 58. c7 {0.90s} Rf8 {0.90s} 59. Qh6+ {0.90s}
+Kf7 {0.90s} 60. Qxa6 {0.90s} Bf6 {0.90s} 61. c8=Q {0.90s} Rxc8+ {0.90s}
+62. Qxc8 {0.90s} Ke7 {0.90s} 63. b5 {0.90s} Be5 {0.90s} 64. g4 {0.90s}
+Bg3 {0.90s} 65. b6 {0.90s} Kf7 {0.90s} 66. Qd7+ {0.90s} Kf6 {0.90s}
+67. g5+ {0.72s} Kg6 {0.51s} 68. Qd3+ Kf7 69. Qxg3 Ke6 70. b7 Kd5 71. b8=Q Kd4
+72. Qbe5+ Kc4 73. Qg4# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1-0"]
+[ECO "C29"]
+[GameDuration "00:01:35"]
+[GameEndTime "2026-07-14T19:04:02.007 CEST"]
+[GameStartTime "2026-07-14T19:02:26.453 CEST"]
+[Opening "Vienna gambit"]
+[PlyCount "123"]
+[TimeControl "1/move"]
+
+1. e4 {book} e5 {book} 2. Nc3 {book} Nf6 {book} 3. f4 {book} d5 {book}
+4. fxe5 {book} Nxe4 {0.90s} 5. Nf3 {0.90s} Nc6 {0.90s} 6. Bb5 {0.90s}
+Bb4 {0.90s} 7. O-O {0.90s} Bf5 {0.90s} 8. a3 {0.90s} Ba5 {0.90s} 9. Na4 {0.90s}
+Qe7 {0.90s} 10. d3 {0.90s} Nc5 {0.90s} 11. Bg5 {0.90s} Qf8 {0.90s}
+12. Be3 {0.90s} Nxa4 {0.90s} 13. Bxa4 {0.90s} Bb6 {0.90s} 14. Nd4 {0.90s}
+Bd7 {0.90s} 15. Qf3 {0.90s} Qe7 {0.90s} 16. Nxc6 {0.90s} Bxe3+ {0.90s}
+17. Qxe3 {0.90s} bxc6 {0.90s} 18. d4 {0.90s} O-O {0.90s} 19. Qc3 {0.90s}
+Qe6 {0.90s} 20. Bb3 {0.90s} f6 {0.90s} 21. Rae1 {0.90s} fxe5 {0.90s}
+22. Rxf8+ {0.90s} Rxf8 {0.90s} 23. dxe5 {0.90s} a6 {0.90s} 24. Qe3 {0.90s}
+Rf5 {0.90s} 25. Kh1 {0.90s} Qf7 {0.90s} 26. Qd3 {0.90s} Qe7 {0.90s}
+27. Qe3 {0.90s} Kh8 {0.90s} 28. Qd4 {0.90s} Be6 {0.90s} 29. Qa7 {0.90s}
+Bg8 {0.90s} 30. Qe3 {0.90s} c5 {0.90s} 31. Ba4 {0.90s} Be6 {0.90s}
+32. Bc6 {0.90s} Qh4 {0.90s} 33. Kg1 {0.90s} Qd4 {0.90s} 34. Qxd4 {0.90s}
+cxd4 {0.90s} 35. b4 {0.90s} Rf8 {0.90s} 36. Bb7 {0.90s} h6 {0.90s}
+37. Rd1 {0.90s} Rf4 {0.90s} 38. Bxa6 {0.90s} Re4 {0.90s} 39. Bb5 {0.90s}
+Kg8 {0.90s} 40. Bc6 {0.90s} Kf7 {0.90s} 41. Rd3 {0.90s} Kg6 {0.90s}
+42. Bb5 {0.90s} Kf5 {0.90s} 43. Rg3 {0.90s} Rg4 {0.90s} 44. Rxg4 {0.90s}
+Kxg4 {0.90s} 45. a4 {0.90s} Bf5 {0.90s} 46. a5 {0.90s} Kg5 {0.90s}
+47. a6 {0.90s} Bc8 {0.90s} 48. Bd3 {0.90s} h5 {0.90s} 49. a7 {0.90s} Bb7 {0.90s}
+50. h4+ {0.90s} Kxh4 {0.90s} 51. e6 {0.90s} c5 {0.90s} 52. bxc5 {0.90s}
+g5 {0.90s} 53. Bb5 {0.90s} d3 {0.90s} 54. cxd3 {0.90s} g4 {0.90s} 55. e7 {0.90s}
+Kg5 {0.90s} 56. e8=Q {0.90s} Kh6 {0.90s} 57. Qh8+ Kg6 58. Qg8+ Kf6 {0.50s}
+59. Qf8+ Ke5 60. Qg7+ Ke6 61. a8=Q Bxa8 62. Bd7# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "0-1"]
+[ECO "C49"]
+[GameDuration "00:01:22"]
+[GameEndTime "2026-07-14T19:03:53.369 CEST"]
+[GameStartTime "2026-07-14T19:02:30.564 CEST"]
+[Opening "Four knights"]
+[PlyCount "110"]
+[TimeControl "1/move"]
+[Variation "double Ruy Lopez"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Nc3 {book} Nf6 {book}
+4. Bb5 {book} Bb4 {book} 5. O-O {0.90s} O-O {0.90s} 6. a3 {0.90s} Bxc3 {0.90s}
+7. dxc3 {0.90s} Nxe4 {0.90s} 8. Bxc6 {0.90s} dxc6 {0.90s} 9. Nxe5 {0.90s}
+Bf5 {0.90s} 10. Qxd8 {0.90s} Raxd8 {0.90s} 11. Bf4 {0.90s} Nf6 {0.90s}
+12. Nd3 {0.90s} Bxd3 {0.90s} 13. cxd3 {0.90s} Rxd3 {0.90s} 14. Bxc7 {0.90s}
+Rd2 {0.90s} 15. b4 {0.90s} Re8 {0.90s} 16. c4 {0.90s} Rd7 {0.90s}
+17. Bg3 {0.90s} Rd4 {0.90s} 18. Rfe1 {0.90s} Rxe1+ {0.90s} 19. Rxe1 {0.90s}
+Rxc4 {0.90s} 20. Be5 {0.90s} Re4 {0.90s} 21. Rxe4 {0.90s} Nxe4 {0.90s}
+22. f3 {0.90s} f6 {0.90s} 23. Bd4 {0.90s} Nd6 {0.90s} 24. Bxa7 {0.90s}
+Nb5 {0.90s} 25. Bc5 {0.90s} Nxa3 {0.90s} 26. f4 {0.90s} f5 {0.90s}
+27. Kf2 {0.90s} Nb5 {0.90s} 28. Ke3 {0.90s} Kf7 {0.90s} 29. Kd3 {0.90s}
+Nc7 {0.90s} 30. g3 {0.90s} Nd5 {0.90s} 31. Kc4 {0.90s} b5+ {0.90s}
+32. Kd4 {0.90s} Ke6 {0.90s} 33. g4 {0.90s} fxg4 {0.90s} 34. Ke4 {0.90s}
+g6 {0.90s} 35. Bf8 {0.90s} h5 {0.90s} 36. Bc5 {0.90s} h4 {0.90s} 37. Bf2 {0.90s}
+h3 {0.90s} 38. Bg3 {0.90s} Nxb4 {0.90s} 39. Kd4 {0.90s} Nd5 {0.90s}
+40. Kc5 {0.90s} Nc3 {0.90s} 41. Kxc6 {0.90s} Ne2 {0.90s} 42. Bf2 {0.90s}
+b4 {0.90s} 43. Kc5 {0.90s} b3 {0.90s} 44. Kc4 {0.90s} b2 {0.90s} 45. Kd3 {0.90s}
+b1=Q+ {0.90s} 46. Kxe2 {0.90s} Qe4+ {0.90s} 47. Kd1 {0.90s} Qd3+ {0.90s}
+48. Kc1 {0.90s} Qf1+ {0.90s} 49. Be1 {0.90s} Qxe1+ {0.90s} 50. Kc2 g3 {0.90s}
+51. hxg3 h2 52. Kb3 h1=Q 53. f5+ Ke5 54. fxg6 Qb7+ 55. Kc4 Qd5# {Black mates}
+0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1/2-1/2"]
+[ECO "C49"]
+[GameDuration "00:00:56"]
+[GameEndTime "2026-07-14T19:03:41.588 CEST"]
+[GameStartTime "2026-07-14T19:02:44.821 CEST"]
+[Opening "Four knights"]
+[PlyCount "71"]
+[TimeControl "1/move"]
+[Variation "double Ruy Lopez"]
+
+1. e4 {book} e5 {book} 2. Nf3 {book} Nc6 {book} 3. Nc3 {book} Nf6 {book}
+4. Bb5 {book} Bb4 {book} 5. O-O {0.90s} O-O {0.90s} 6. a3 {0.90s} Bxc3 {0.90s}
+7. dxc3 {0.90s} Nxe4 {0.90s} 8. Bxc6 {0.90s} dxc6 {0.90s} 9. Qxd8 {0.90s}
+Rxd8 {0.90s} 10. Nxe5 {0.90s} Bf5 {0.90s} 11. Nf3 {0.90s} c5 {0.90s}
+12. Re1 {0.90s} Re8 {0.90s} 13. Bf4 {0.90s} Nd6 {0.90s} 14. Rac1 {0.90s}
+Rxe1+ {0.90s} 15. Rxe1 {0.90s} Rd8 {0.90s} 16. b4 {0.90s} cxb4 {0.90s}
+17. Nd4 {0.90s} c5 {0.90s} 18. Nxf5 {0.90s} Nxf5 {0.90s} 19. axb4 {0.90s}
+cxb4 {0.90s} 20. Bc7 {0.90s} Rc8 {0.90s} 21. cxb4 {0.90s} h6 {0.90s}
+22. Bf4 {0.90s} Rxc2 {0.90s} 23. Re4 {0.90s} g5 {0.90s} 24. Be3 {0.90s}
+Kg7 {0.90s} 25. Kf1 {0.90s} Nxe3+ {0.90s} 26. Rxe3 {0.90s} Rc4 {0.90s}
+27. b5 {0.90s} Rc1+ {0.90s} 28. Ke2 {0.90s} Rc5 {0.90s} 29. Ra3 {0.90s}
+Kf6 {0.90s} 30. Rxa7 {0.90s} Rxb5 {0.90s} 31. Ra3 {0.90s} Ke5 {0.90s}
+32. Re3+ {0.90s} Kd6 {0.90s} 33. Rd3+ {0.90s} Ke5 {0.90s} 34. Re3+ {0.90s}
+Kd6 {0.90s} 35. Rd3+ {0.90s} Ke5 {0.90s}
+36. Re3+ {0.90s, Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "0-1"]
+[ECO "B56"]
+[GameDuration "00:00:36"]
+[GameEndTime "2026-07-14T19:03:37.903 CEST"]
+[GameStartTime "2026-07-14T19:03:01.509 CEST"]
+[Opening "Sicilian"]
+[PlyCount "60"]
+[TimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} e5 {0.90s} 6. Nf3 {0.90s} Be7 {0.90s}
+7. Bc4 {0.90s} Nc6 {0.90s} 8. O-O {0.90s} O-O {0.90s} 9. Be3 {0.90s} Ng4 {0.90s}
+10. Bc1 {0.90s} Be6 {0.90s} 11. Bxe6 {0.90s} fxe6 {0.90s} 12. Ng5 {0.90s}
+Nxf2 {0.90s} 13. Rxf2 {0.90s} Rxf2 {0.90s} 14. Kxf2 {0.90s} Bxg5 {0.90s}
+15. Bxg5 {0.90s} Qxg5 {0.90s} 16. Qxd6 {0.90s} Nd4 {0.90s} 17. Rd1 {0.90s}
+Rd8 {0.90s} 18. Rxd4 {0.90s} Qf6+ {0.90s} 19. Ke2 {0.90s} exd4 {0.90s}
+20. Qg3 {0.90s} dxc3 {0.90s} 21. bxc3 {0.90s} e5 {0.90s} 22. h3 {0.90s}
+Qa6+ {0.90s} 23. Kf3 {0.90s} Rd2 {0.90s} 24. c4 {0.90s} Qxc4 {0.90s}
+25. Qxe5 {0.90s} Qf1+ 26. Kg4 Rxg2+ 27. Qg3 g5 28. a3 Qf4+ 29. Kh5 Rxg3 30. e5
+Rxh3# {Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1/2-1/2"]
+[ECO "B56"]
+[GameDuration "00:01:20"]
+[GameEndTime "2026-07-14T19:04:58.096 CEST"]
+[GameStartTime "2026-07-14T19:03:37.903 CEST"]
+[Opening "Sicilian"]
+[PlyCount "98"]
+[TimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} e5 {0.90s} 6. Nf3 {0.90s} Nc6 {0.90s}
+7. Bc4 {0.90s} Be6 {0.90s} 8. Bxe6 {0.90s} fxe6 {0.90s} 9. Qd3 {0.90s}
+d5 {0.90s} 10. exd5 {0.90s} exd5 {0.90s} 11. Qb5 {0.90s} a6 {0.90s}
+12. Qe2 {0.90s} e4 {0.90s} 13. Bf4 {0.90s} Qe7 {0.90s} 14. Nd2 {0.90s}
+Nd4 {0.90s} 15. Qd1 {0.90s} O-O-O {0.90s} 16. Nb3 {0.90s} Nxb3 {0.90s}
+17. axb3 {0.90s} Qb4 {0.90s} 18. Be5 {0.90s} Be7 {0.90s} 19. O-O {0.90s}
+Qc5 {0.90s} 20. Qd2 {0.90s} Qc6 {0.90s} 21. Qg5 {0.90s} Qe6 {0.90s}
+22. Bd4 {0.90s} h6 {0.90s} 23. Qg3 {0.90s} Rhg8 {0.90s} 24. f4 {0.90s}
+Qf5 {0.90s} 25. Qe3 {0.90s} Kd7 {0.90s} 26. Bxf6 {0.90s} Bxf6 {0.90s}
+27. Nxd5 {0.90s} Qe6 {0.90s} 28. f5 {0.90s} Qe5 {0.90s} 29. Nxf6+ {0.90s}
+gxf6 {0.90s} 30. Rf4 {0.90s} Kc8 {0.90s} 31. Rxe4 {0.90s} Qxb2 {0.90s}
+32. Rc4+ {0.90s} Kb8 {0.90s} 33. Rf1 {0.90s} h5 {0.90s} 34. Re1 {0.90s}
+Rg4 {0.90s} 35. Rc5 {0.90s} Rdg8 {0.90s} 36. g3 {0.90s} h4 {0.90s}
+37. Kf2 {0.90s} hxg3+ {0.90s} 38. hxg3 {0.90s} Rd8 {0.90s} 39. Kf3 {0.90s}
+Qd4 {0.90s} 40. Qxd4 {0.90s} Rgxd4 {0.90s} 41. Re6 {0.90s} R8d6 {0.90s}
+42. Rxd6 {0.90s} Rxd6 {0.90s} 43. Rc4 {0.90s} Ka7 {0.90s} 44. Ke4 {0.90s}
+Rd1 {0.90s} 45. b4 {0.90s} Re1+ {0.90s} 46. Kf4 {0.90s} Rf1+ {0.90s}
+47. Ke4 {0.90s} Re1+ {0.90s} 48. Kf4 {0.90s} Rf1+ {0.90s} 49. Ke4 {0.90s}
+Re1+ {0.90s, Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1-0"]
+[ECO "B90"]
+[GameDuration "00:02:29"]
+[GameEndTime "2026-07-14T19:06:11.521 CEST"]
+[GameStartTime "2026-07-14T19:03:41.588 CEST"]
+[Opening "Sicilian"]
+[PlyCount "187"]
+[TimeControl "1/move"]
+[Variation "Najdorf"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. Nf3 {0.90s} e5 {0.90s}
+7. Bc4 {0.90s} Qc7 {0.90s} 8. Qe2 {0.90s} Bg4 {0.90s} 9. Be3 {0.90s} Nc6 {0.90s}
+10. O-O-O {0.90s} O-O-O {0.90s} 11. Nd5 {0.90s} Nxd5 {0.90s} 12. Bxd5 {0.90s}
+Nb4 {0.90s} 13. Bb3 {0.90s} Nc6 {0.90s} 14. h3 {0.90s} Bh5 {0.90s}
+15. Rd3 {0.90s} Be7 {0.90s} 16. Bd5 {0.90s} Kb8 {0.90s} 17. Rb3 {0.90s}
+Bxf3 {0.90s} 18. gxf3 {0.90s} Ka8 {0.90s} 19. Rg1 {0.90s} Bf6 {0.90s}
+20. Bb6 {0.90s} Qd7 {0.90s} 21. Bxd8 {0.90s} Rxd8 {0.90s} 22. f4 {0.90s}
+exf4 {0.90s} 23. Qh5 {0.90s} h6 {0.90s} 24. Rf3 {0.90s} Rc8 {0.90s}
+25. Rb3 {0.90s} Qc7 {0.90s} 26. c3 {0.90s} Rf8 {0.90s} 27. Qf5 {0.90s}
+Be5 {0.90s} 28. Kb1 {0.90s} Ka7 {0.90s} 29. Qg4 {0.90s} b5 {0.90s}
+30. Qh5 {0.90s} Na5 {0.90s} 31. Rb4 {0.90s} Nc6 {0.90s} 32. Rb3 {0.90s}
+Na5 {0.90s} 33. Rb4 {0.90s} Nc6 {0.90s} 34. Bxc6 {0.90s} Qxc6 {0.90s}
+35. Qd1 {0.90s} f5 {0.90s} 36. Qd5 {0.90s} Qc5 {0.90s} 37. Rf1 {0.90s}
+Kb6 {0.90s} 38. Rb3 {0.90s} fxe4 {0.90s} 39. Qxe4 {0.90s} Ka7 {0.90s}
+40. Rb4 {0.90s} a5 {0.90s} 41. Rb3 {0.90s} a4 {0.90s} 42. Ra3 {0.90s} f3 {0.90s}
+43. c4 {0.90s} Rf4 {0.90s} 44. Qe3 {0.90s} Kb6 {0.90s} 45. cxb5 {0.90s}
+Kxb5 {0.90s} 46. Rd1 {0.90s} Qxe3 {0.90s} 47. Rxe3 {0.90s} Bd4 {0.90s}
+48. Red3 {0.90s} Be5 {0.90s} 49. Rc1 {0.90s} Rb4 {0.90s} 50. Rc2 {0.90s}
+Rf4 {0.90s} 51. Rc1 {0.90s} Rb4 {0.90s} 52. Rc2 {0.90s} Rf4 {0.90s}
+53. a3 {0.90s} Kb6 {0.90s} 54. b3 {0.90s} axb3 {0.90s} 55. Rxb3+ {0.90s}
+Ka7 {0.90s} 56. Rd2 {0.90s} Ka6 {0.90s} 57. Rdd3 {0.90s} Re4 {0.90s}
+58. Rxf3 {0.90s} Ka5 {0.90s} 59. Rbe3 {0.90s} Rc4 {0.90s} 60. Rb3 {0.90s}
+Ka4 {0.90s} 61. Rbd3 {0.90s} Kb5 {0.90s} 62. Rf8 {0.90s} Bd4 {0.90s}
+63. Re8 {0.90s} d5 {0.90s} 64. f4 {0.90s} Kc6 {0.90s} 65. Rc8+ {0.90s}
+Kb5 {0.90s} 66. Rb3+ {0.92s} Ka4 {0.90s} 67. Rxc4+ {0.90s} dxc4 {0.90s}
+68. Rb4+ {0.90s} Kxa3 {0.90s} 69. Rxc4 {0.90s} Bf6 {0.90s} 70. Kc2 {0.90s}
+Be7 {0.90s} 71. f5 {0.90s} Bf6 {0.90s} 72. h4 {0.90s} h5 {0.90s} 73. Re4 {0.90s}
+Ba1 {0.90s} 74. Re8 {0.90s} Bf6 {0.90s} 75. Rh8 {0.90s} Bxh4 {0.90s}
+76. Rxh5 {0.90s} Bf6 {0.90s} 77. Rh8 {0.90s} Be5 {0.90s} 78. Kd3 {0.90s}
+Kb3 {0.90s} 79. Re8 {0.90s} Bf6 {0.90s} 80. Ke4 {0.90s} Kc2 {0.90s}
+81. Rc8+ {0.90s} Bc3 {0.90s} 82. Rd8 {0.90s} Kb1 {0.90s} 83. Kd3 {0.90s}
+Bf6 {0.90s} 84. Rb8+ {0.90s} Kc1 {0.90s} 85. Rb4 {0.90s} Be5 {0.90s}
+86. Rb5 {0.90s} Bf6 {0.90s} 87. Rb4 {0.90s} Be5 {0.90s} 88. Rb5 {0.90s}
+g5 {0.90s} 89. Rxe5 g4 90. f6 g3 91. f7 g2 92. f8=Q Kd1 93. Qb4 g1=Q
+94. Qb1# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1-0"]
+[ECO "B90"]
+[GameDuration "00:00:45"]
+[GameEndTime "2026-07-14T19:04:38.685 CEST"]
+[GameStartTime "2026-07-14T19:03:53.369 CEST"]
+[Opening "Sicilian"]
+[PlyCount "69"]
+[TimeControl "1/move"]
+[Variation "Najdorf"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} a6 {book} 6. Nf3 {0.90s} e5 {0.90s}
+7. Bc4 {0.90s} Qc7 {0.90s} 8. Bb3 {0.90s} Be7 {0.90s} 9. Be3 {0.90s} O-O {0.90s}
+10. O-O {0.90s} Nbd7 {0.90s} 11. Nd5 {0.90s} Nxd5 {0.90s} 12. Qxd5 {0.90s}
+Nf6 {0.90s} 13. Qd3 {0.90s} Bd7 {0.90s} 14. Rfe1 {0.90s} Ng4 {0.90s}
+15. Bd2 {0.90s} Qc5 {0.90s} 16. Rf1 {0.90s} Bb5 {0.90s} 17. c4 {0.90s}
+Bc6 {0.90s} 18. Bc3 {0.90s} g6 {0.90s} 19. h3 {0.90s} Nf6 {0.90s}
+20. Rfe1 {0.90s} Rac8 {0.90s} 21. Rad1 {0.90s} Rc7 {0.90s} 22. Re3 {0.90s}
+Rd8 {0.90s} 23. a3 {0.90s} h6 {0.90s} 24. Bb4 {0.90s} Qb6 {0.90s}
+25. Qc2 {0.90s} Nxe4 {0.90s} 26. Rxe4 {0.90s} Bxe4 {0.90s} 27. Qxe4 {0.90s}
+Kg7 {0.90s} 28. Qd5 {0.90s} f6 {0.90s} 29. c5 {0.90s} Qxb4 {0.90s}
+30. axb4 {0.90s} Kh8 {0.90s} 31. Nh4 Rf8 32. Nxg6+ Kg7 33. Nxf8 f5 34. Qf7+ Kh8
+35. Qg8# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1/2-1/2"]
+[ECO "B70"]
+[GameDuration "00:01:52"]
+[GameEndTime "2026-07-14T19:05:54.646 CEST"]
+[GameStartTime "2026-07-14T19:04:02.007 CEST"]
+[Opening "Sicilian"]
+[PlyCount "135"]
+[TimeControl "1/move"]
+[Variation "Dragon variation"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} g6 {book} 6. Bb5+ {0.90s} Nbd7 {0.90s}
+7. Bg5 {0.90s} e5 {0.90s} 8. Nd5 {0.90s} Be7 {0.90s} 9. Bxf6 {0.90s}
+Bxf6 {0.90s} 10. Nb3 {0.90s} O-O {0.90s} 11. O-O {0.90s} Nb6 {0.90s}
+12. Nxf6+ {0.90s} Qxf6 {0.90s} 13. Re1 {0.90s} Rd8 {0.90s} 14. Re3 {0.90s}
+Be6 {0.90s} 15. Qf3 {0.90s} Qxf3 {0.90s} 16. Rxf3 {0.90s} Rac8 {0.90s}
+17. Na5 {0.90s} Rc7 {0.90s} 18. Bd3 {0.90s} Kg7 {0.90s} 19. h3 {0.90s}
+d5 {0.90s} 20. exd5 {0.90s} Rxd5 {0.90s} 21. Nb3 {0.90s} f5 {0.90s}
+22. Nd2 {0.90s} e4 {0.90s} 23. Nxe4 {0.90s} fxe4 {0.90s} 24. Bxe4 {0.90s}
+Re5 {0.90s} 25. Re3 {0.90s} Nc4 {0.90s} 26. f4 {0.90s} Nxe3 {0.90s}
+27. fxe5 {0.90s} Nc4 {0.90s} 28. Kh2 {0.90s} Nxe5 {0.90s} 29. Rd1 {0.90s}
+Bxa2 {0.90s} 30. Ra1 {0.90s} Bf7 {0.90s} 31. Rxa7 {0.90s} Rc4 {0.90s}
+32. Bxb7 {0.90s} Rxc2 {0.90s} 33. Be4 {0.90s} Rxb2 {0.90s} 34. Kg3 {0.90s}
+h6 {0.90s} 35. Ra5 {0.90s} Rb3+ {0.90s} 36. Kf4 {0.90s} Nd3+ {0.90s}
+37. Kg3 {0.90s} Be6 {0.90s} 38. Kh2 {0.90s} Kf6 {0.90s} 39. Bd5 {0.90s}
+Bxd5 {0.90s} 40. Rxd5 {0.90s} Nf4 {0.90s} 41. Rd2 {0.90s} Ke5 {0.90s}
+42. Rc2 {0.90s} g5 {0.90s} 43. Kh1 {0.90s} Nd5 {0.90s} 44. Kh2 {0.90s}
+Nf4 {0.90s} 45. Kh1 {0.90s} Nd5 {0.90s} 46. Kh2 {0.90s} Rb4 {0.90s}
+47. Rc6 {0.90s} Rb6 {0.90s} 48. Rc5 {0.90s} Kd4 {0.90s} 49. Rc1 {0.90s}
+Ne3 {0.90s} 50. Kg1 {0.90s} Rb2 {0.90s} 51. g4 {0.90s} Rg2+ {0.90s}
+52. Kh1 {0.90s} Rc2 {0.90s} 53. Ra1 {0.90s} Rc6 {0.90s} 54. Kh2 {0.90s}
+Nd5 {0.90s} 55. Rd1+ {0.90s} Ke4 {0.90s} 56. Re1+ {0.90s} Ne3 {0.90s}
+57. Kg3 {0.90s} Rc2 {0.90s} 58. Rg1 {0.90s} Re2 {0.90s} 59. h4 {0.90s}
+gxh4+ {0.90s} 60. Kxh4 {0.90s} Kf3 {0.90s} 61. Kh5 {0.90s} Rh2+ {0.90s}
+62. Kg6 {0.90s} Nxg4 {0.90s} 63. Rb1 {0.90s} Ne5+ {0.90s} 64. Kf6 {0.90s}
+Rh5 {0.90s} 65. Kg7 {0.90s} Rh2 {0.90s} 66. Kf6 {0.90s} Rh5 {0.90s}
+67. Kg7 {0.90s} Rh2 {0.90s} 68. Kf6 {0.90s, Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1-0"]
+[ECO "B70"]
+[GameDuration "00:01:49"]
+[GameEndTime "2026-07-14T19:05:54.873 CEST"]
+[GameStartTime "2026-07-14T19:04:05.818 CEST"]
+[Opening "Sicilian"]
+[PlyCount "145"]
+[TimeControl "1/move"]
+[Variation "Dragon variation"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} d6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} g6 {book} 6. Bb5+ {0.90s} Nbd7 {0.90s}
+7. Bg5 {0.90s} e5 {0.90s} 8. Nd5 {0.90s} Be7 {0.90s} 9. Nxe7 {0.90s}
+Kxe7 {0.90s} 10. Bxd7 {0.90s} Qa5+ {0.90s} 11. c3 {0.90s} exd4 {0.90s}
+12. Bxf6+ {0.90s} Kxf6 {0.90s} 13. Qxd4+ {0.90s} Qe5 {0.90s} 14. Bxc8 {0.90s}
+Raxc8 {0.90s} 15. O-O-O {0.90s} Ke7 {0.90s} 16. Qxa7 {0.90s} Qf4+ {0.90s}
+17. Qe3 {0.90s} Qxe3+ {0.90s} 18. fxe3 {0.90s} Rc5 {0.90s} 19. Rhf1 {0.90s}
+Ke6 {0.90s} 20. Kb1 {0.90s} Rhc8 {0.90s} 21. Rd4 {0.90s} Rg5 {0.90s}
+22. Rf2 {0.90s} Rc7 {0.90s} 23. Rfd2 {0.90s} Rc6 {0.90s} 24. Rb4 {0.90s}
+Rc7 {0.90s} 25. Rb6 {0.90s} Rd7 {0.90s} 26. c4 {0.90s} Re5 {0.90s}
+27. Rd4 {0.90s} Rg5 {0.90s} 28. Rd2 {0.90s} Re5 {0.90s} 29. Rd4 {0.90s}
+Rg5 {0.90s} 30. g3 {0.90s} Rh5 {0.90s} 31. h4 {0.90s} Re5 {0.90s} 32. g4 {0.90s}
+f6 {0.90s} 33. b4 {0.90s} f5 {0.90s} 34. exf5+ {0.90s} gxf5 {0.90s}
+35. gxf5+ {0.90s} Kxf5 {0.90s} 36. Rbxd6 {0.90s} Rxd6 {0.90s} 37. Rxd6 {0.90s}
+Rxe3 {0.90s} 38. Rd7 {0.90s} Re4 {0.90s} 39. Rxh7 {0.90s} Rxc4 {0.90s}
+40. Rxb7 {0.90s} Rxh4 {0.90s} 41. Kc2 {0.90s} Ke6 {0.90s} 42. Kd3 {0.90s}
+Rh3+ {0.90s} 43. Kc2 {0.90s} Rh4 {0.90s} 44. Kd3 {0.90s} Rh3+ {0.90s}
+45. Kc2 {0.90s} Ke5 {0.90s} 46. Rd7 {0.90s} Ra3 {0.90s} 47. Kb2 {0.90s}
+Rf3 {0.90s} 48. b5 {0.90s} Ke6 {0.90s} 49. Rd4 {0.90s} Ke5 {0.90s}
+50. Rd1 {0.90s} Rf7 {0.90s} 51. Kc3 {0.90s} Rf3+ {0.90s} 52. Kb4 {0.90s}
+Rf2 {0.90s} 53. a4 {0.90s} Rf4+ {0.90s} 54. Ka5 {0.90s} Rf8 {0.90s}
+55. b6 {0.90s} Rb8 {0.90s} 56. Ka6 {0.90s} Ra8+ {0.90s} 57. Kb5 {0.90s}
+Rb8 {0.90s} 58. a5 {0.90s} Rf8 {0.90s} 59. a6 {0.90s} Rf2 {0.90s} 60. a7 {0.90s}
+Rb2+ {0.90s} 61. Kc4 {0.90s} Rc2+ {0.90s} 62. Kd3 {0.90s} Ra2 {0.90s}
+63. b7 {0.90s} Ra3+ {0.90s} 64. Ke2 {0.90s} Ra2+ {0.90s} 65. Rd2 {0.90s}
+Rxa7 {0.90s} 66. b8=Q+ {0.84s} Ke4 67. Qxa7 Ke5 68. Qc7+ Ke4 69. Qg7 Kf5 70. Kf3
+Ke6 71. Qa7 Ke5 72. Qb6 Kf5 73. Rd5# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1/2-1/2"]
+[ECO "B34"]
+[GameDuration "00:01:37"]
+[GameEndTime "2026-07-14T19:06:16.154 CEST"]
+[GameStartTime "2026-07-14T19:04:38.685 CEST"]
+[Opening "Sicilian"]
+[PlyCount "116"]
+[TimeControl "1/move"]
+[Variation "Accelerated Fianchetto, Modern variation"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} Nc6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} g6 {book} 5. Nc3 {0.90s} e5 {0.90s} 6. Ndb5 {0.90s} Bb4 {0.90s}
+7. Nd6+ {0.90s} Ke7 {0.90s} 8. Bg5+ {0.90s} f6 {0.90s} 9. Nxc8+ {0.90s}
+Qxc8 {0.90s} 10. Bd2 {0.90s} Bxc3 {0.90s} 11. Bxc3 {0.90s} f5 {0.90s}
+12. Qd3 {0.90s} fxe4 {0.90s} 13. Qxe4 {0.90s} Nf6 {0.90s} 14. Qe3 {0.90s}
+d6 {0.90s} 15. O-O-O {0.90s} Qe6 {0.90s} 16. Bb5 {0.90s} a6 {0.90s}
+17. Bxc6 {0.90s} bxc6 {0.90s} 18. Qb6 {0.90s} Rhc8 {0.90s} 19. Qb7+ {0.90s}
+Kf8 {0.90s} 20. Rhe1 {0.90s} Kg8 {0.90s} 21. Re3 {0.90s} Nd5 {0.90s}
+22. Rh3 {0.90s} h5 {0.90s} 23. Rf3 {0.90s} Nxc3 {0.90s} 24. Rxc3 {0.90s}
+d5 {0.90s} 25. Rc5 {0.90s} e4 {0.90s} 26. Kb1 {0.90s} Qf6 {0.90s} 27. b3 {0.90s}
+g5 {0.90s} 28. Rdxd5 {0.90s} cxd5 {0.90s} 29. Rxc8+ {0.90s} Rxc8 {0.90s}
+30. Qxc8+ {0.90s} Kg7 {0.90s} 31. Qc5 {0.90s} Qf5 {0.90s} 32. Qb6 {0.90s}
+Qf6 {0.90s} 33. Qc5 {0.90s} Qf5 {0.90s} 34. Qa7+ {0.90s} Qf7 {0.90s}
+35. Qd4+ {0.90s} Kh6 {0.90s} 36. c4 {0.90s} dxc4 {0.90s} 37. bxc4 {0.90s}
+Qf5 {0.90s} 38. Qb6+ {0.90s} Kg7 {0.90s} 39. Qb7+ {0.90s} Kf8 {0.90s}
+40. Ka1 {0.90s} Qe6 {0.90s} 41. Qb8+ {0.90s} Ke7 {0.90s} 42. Qb4+ {0.90s}
+Kf6 {0.90s} 43. Qf8+ {0.90s} Kg6 {0.90s} 44. Qc5 {0.90s} g4 {0.90s}
+45. Kb2 {0.90s} h4 {0.90s} 46. Kc3 {0.90s} h3 {0.90s} 47. gxh3 {0.90s}
+Qf6+ {0.90s} 48. Qd4 {0.90s} Qf3+ {0.90s} 49. Qe3 {0.90s} Qf6+ {0.90s}
+50. Kb3 {0.90s} Qe6 {0.90s} 51. Qg3 {0.90s} Kh5 {0.90s} 52. hxg4+ {0.90s}
+Qxg4 {0.90s} 53. Kc3 {0.90s} Qe2 {0.90s} 54. Kd4 {0.90s} Qxa2 {0.90s}
+55. Qe5+ {0.90s} Kg4 {0.90s} 56. Qg3+ {1.0s} Kh5 {0.90s} 57. Qe5+ {0.90s}
+Kg4 {0.90s} 58. Qg3+ {0.90s} Kh5 {0.90s, Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1-0"]
+[ECO "B34"]
+[GameDuration "00:01:29"]
+[GameEndTime "2026-07-14T19:06:27.544 CEST"]
+[GameStartTime "2026-07-14T19:04:58.096 CEST"]
+[Opening "Sicilian"]
+[PlyCount "123"]
+[TimeControl "1/move"]
+[Variation "Accelerated Fianchetto, Modern variation"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} Nc6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} g6 {book} 5. Nc3 {0.90s} e5 {0.90s} 6. Ndb5 {0.90s} Nf6 {0.90s}
+7. Bg5 {0.90s} Bc5 {0.90s} 8. Qf3 {0.90s} Be7 {0.90s} 9. Bxf6 {0.90s}
+Bxf6 {0.90s} 10. Nd5 {0.90s} O-O {0.90s} 11. Qxf6 {0.90s} Qxf6 {0.90s}
+12. Nxf6+ {0.90s} Kg7 {0.90s} 13. Nc7 {0.90s} Rb8 {0.90s} 14. Nce8+ {0.90s}
+Kh8 {0.90s} 15. O-O-O {0.90s} h6 {0.90s} 16. c3 {0.90s} b5 {0.90s}
+17. Nd6 {0.90s} Kg7 {0.90s} 18. Nfe8+ {0.90s} Kg8 {0.90s} 19. Nxc8 {0.90s}
+Rxe8 {0.90s} 20. Nd6 {0.90s} Re6 {0.90s} 21. Nxb5 {0.90s} Rf6 {0.90s}
+22. f3 {0.90s} Rd8 {0.90s} 23. Nd6 {0.90s} Rb8 {0.90s} 24. Rd5 {0.90s}
+Re6 {0.90s} 25. Bc4 {0.90s} a6 {0.90s} 26. Rd2 {0.90s} Re7 {0.90s}
+27. Bxa6 {0.90s} Kg7 {0.90s} 28. Rhd1 {0.90s} Ra8 {0.90s} 29. Bc4 {0.90s}
+h5 {0.90s} 30. b4 {0.90s} Rb8 {0.90s} 31. Rd5 {0.90s} h4 {0.90s} 32. Kc2 {0.90s}
+Kf6 {0.90s} 33. Rc5 {0.90s} Rf8 {0.90s} 34. Bd5 {0.90s} Nd8 {0.90s}
+35. Nc8 {0.90s} Ne6 {0.90s} 36. Nxe7 {0.90s} Nxc5 {0.90s} 37. Nxg6 {0.90s}
+fxg6 {0.90s} 38. bxc5 {0.90s} Ke7 {0.90s} 39. Bc4 {0.90s} h3 {0.90s}
+40. gxh3 {0.90s} Rxf3 {0.90s} 41. Bb5 {0.90s} Rxh3 {0.90s} 42. Rxd7+ {0.90s}
+Kf6 {0.90s} 43. c6 {0.90s} Rxh2+ {0.90s} 44. Kb3 {0.90s} Rh8 {0.90s}
+45. c7 {0.90s} Rc8 {0.90s} 46. Ba6 {0.90s} Rxc7 {0.90s} 47. Rxc7 {0.90s}
+g5 {0.90s} 48. Bc8 {0.90s} g4 {0.90s} 49. Bxg4 {0.90s} Kg5 {0.90s}
+50. Bf5 {0.90s} Kf4 {0.90s} 51. c4 {0.90s} Ke3 {0.90s} 52. Rd7 {0.90s}
+Ke2 {0.90s} 53. c5 {0.90s} Ke3 {0.90s} 54. c6 Kf3 {0.68s} 55. c7 Kf4 56. c8=Q
+Ke3 57. Qc6 Kf3 58. Qc1 Kg3 59. Qb2 Kf4 60. Qc3 Kg5 61. Qe3+ Kf6
+62. Qh6# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1/2-1/2"]
+[ECO "B44"]
+[GameDuration "00:00:50"]
+[GameEndTime "2026-07-14T19:06:45.110 CEST"]
+[GameStartTime "2026-07-14T19:05:54.647 CEST"]
+[Opening "Sicilian defense"]
+[PlyCount "64"]
+[TimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} e6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nc6 {book} 5. Nxc6 {0.90s} bxc6 {0.90s} 6. Nc3 {0.90s} d5 {0.90s}
+7. Be3 {0.90s} Nf6 {0.90s} 8. Qd4 {0.90s} Qc7 {0.90s} 9. exd5 {0.90s}
+exd5 {0.90s} 10. Bg5 {0.90s} Bd6 {0.90s} 11. Bxf6 {0.90s} gxf6 {0.90s}
+12. Qxf6 {0.90s} Be5 {0.90s} 13. Qf3 {0.90s} Be6 {0.90s} 14. O-O-O {0.90s}
+O-O-O {0.90s} 15. Kb1 {0.90s} Kb8 {0.90s} 16. Bd3 {0.90s} d4 {0.90s}
+17. Ne4 {0.90s} Qa5 {0.90s} 18. a3 {0.90s} Rhg8 {0.90s} 19. Nf6 {0.90s}
+Rg7 {0.90s} 20. Be4 {0.90s} Qb6 {0.90s} 21. Rd2 {0.90s} c5 {0.90s}
+22. Nd5 {0.90s} Qd6 {0.90s} 23. Ne3 {0.90s} Qc7 {0.90s} 24. Nf5 {0.90s}
+Rgg8 {0.90s} 25. Rdd1 {0.90s} Rg6 {0.90s} 26. Qh5 {0.90s} f6 {0.90s}
+27. Qf3 {0.90s} Rgg8 {0.90s} 28. h4 {0.90s} c4 {0.90s} 29. Nh6 {0.90s}
+Rg7 {0.90s} 30. Nf5 {0.90s} Rgg8 {0.90s} 31. Nh6 {0.90s} Rg7 {0.90s}
+32. Nf5 {0.90s} Rgg8 {0.90s, Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1/2-1/2"]
+[ECO "B44"]
+[GameDuration "00:00:27"]
+[GameEndTime "2026-07-14T19:06:22.814 CEST"]
+[GameStartTime "2026-07-14T19:05:54.873 CEST"]
+[Opening "Sicilian defense"]
+[PlyCount "39"]
+[TimeControl "1/move"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} e6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nc6 {book} 5. Nxc6 {0.90s} bxc6 {0.90s} 6. Nc3 {0.90s} d5 {0.90s}
+7. Qd4 {0.90s} Nf6 {0.90s} 8. Be3 {0.90s} dxe4 {0.90s} 9. O-O-O {0.90s}
+Qxd4 {0.90s} 10. Bxd4 {0.90s} Be7 {0.90s} 11. Bxf6 {0.90s} Bxf6 {0.90s}
+12. Nxe4 {0.90s} Be5 {0.90s} 13. Bc4 {0.90s} O-O {0.90s} 14. Nc5 {0.90s}
+Rb8 {0.90s} 15. Nd3 {0.90s} Bf6 {0.90s} 16. Rde1 {0.90s} Bb7 {0.90s}
+17. Nc5 {0.90s} Bc8 {0.90s} 18. Nd3 {0.90s} Bb7 {0.90s} 19. Nc5 {0.90s}
+Bc8 {0.90s} 20. Nd3 {0.90s, Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1/2-1/2"]
+[ECO "B43"]
+[GameDuration "00:00:57"]
+[GameEndTime "2026-07-14T19:07:09.205 CEST"]
+[GameStartTime "2026-07-14T19:06:11.521 CEST"]
+[Opening "Sicilian"]
+[PlyCount "72"]
+[TimeControl "1/move"]
+[Variation "Kan, 5.Nc3"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} e6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} a6 {book} 5. Nc3 {0.90s} e5 {0.90s} 6. Nf3 {0.90s} Nc6 {0.90s}
+7. Bc4 {0.91s} Bb4 {0.90s} 8. Qd5 {0.90s} Qe7 {0.90s} 9. Ng5 {0.90s} Nh6 {0.90s}
+10. O-O {0.90s} Bxc3 {0.90s} 11. bxc3 {0.90s} O-O {0.90s} 12. Be3 {0.90s}
+d6 {0.90s} 13. h3 {0.90s} Rd8 {0.90s} 14. Rab1 {0.90s} Qf6 {0.90s}
+15. Qd3 {0.90s} Rd7 {0.90s} 16. Nf3 {0.90s} Qg6 {0.90s} 17. Rfd1 {0.90s}
+b5 {0.90s} 18. Bd5 {0.90s} Bb7 {0.90s} 19. c4 {0.90s} a5 {0.90s}
+20. Rxb5 {0.90s} Nb4 {0.90s} 21. Bxb7 {0.90s} Nxd3 {0.90s} 22. Bxa8 {0.90s}
+Rd8 {0.90s} 23. Rxa5 {0.90s} Nf4 {0.90s} 24. Bxf4 {0.90s} exf4 {0.90s}
+25. c5 {0.90s} Qf6 {0.90s} 26. Rxd6 {0.90s} Rxd6 {0.90s} 27. cxd6 {0.90s}
+Qxd6 {0.90s} 28. Bd5 {0.90s} g6 {0.90s} 29. Rb5 {0.90s} Kg7 {0.90s}
+30. Rb7 {0.90s} Qa3 {0.90s} 31. Kf1 {0.90s} Qc1+ {0.90s} 32. Ne1 {0.90s}
+Qd2 {0.90s} 33. Rd7 {0.90s} Qb4 {0.90s} 34. Rb7 {0.90s} Qd2 {0.90s}
+35. Rd7 {0.90s} Qb4 {0.90s} 36. Rb7 {0.90s}
+Qd2 {0.90s, Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1/2-1/2"]
+[ECO "B43"]
+[GameDuration "00:01:52"]
+[GameEndTime "2026-07-14T19:08:08.717 CEST"]
+[GameStartTime "2026-07-14T19:06:16.155 CEST"]
+[Opening "Sicilian"]
+[PlyCount "189"]
+[TimeControl "1/move"]
+[Variation "Kan, 5.Nc3"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} e6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} a6 {book} 5. Nc3 {0.90s} d5 {0.90s} 6. Be3 {0.90s} Nf6 {0.90s}
+7. exd5 {0.90s} Nxd5 {0.90s} 8. Qd3 {0.90s} Nxe3 {0.90s} 9. fxe3 {0.90s}
+Nd7 {0.90s} 10. O-O-O {0.90s} e5 {0.90s} 11. Qe4 {0.90s} g6 {0.90s}
+12. Bc4 {0.90s} Bc5 {0.90s} 13. Nb3 {0.90s} Be7 {0.90s} 14. Nd2 {0.90s}
+Bc5 {0.90s} 15. Nb3 {0.90s} Be7 {0.90s} 16. Nd2 {0.90s} Bc5 {0.90s}
+17. Qf3 {0.90s} Qf6 {0.90s} 18. Rhf1 {0.90s} Qxf3 {0.90s} 19. Rxf3 {0.90s}
+f5 {0.90s} 20. e4 {0.90s} Nf6 {0.90s} 21. Nd5 {0.90s} Nxd5 {0.90s}
+22. Bxd5 {0.90s} Rb8 {0.90s} 23. Re1 {0.90s} Kd8 {0.90s} 24. Nc4 {0.90s}
+Re8 {0.90s} 25. exf5 {0.90s} Bxf5 {0.90s} 26. Rxe5 {0.90s} Rxe5 {0.90s}
+27. Nxe5 {0.90s} Kc7 {0.90s} 28. g4 {0.90s} Kd6 {0.90s} 29. Nf7+ {0.90s}
+Kxd5 {0.90s} 30. gxf5 {0.90s} Ke4 {0.90s} 31. Ng5+ {0.90s} Ke5 {0.90s}
+32. fxg6 {0.90s} hxg6 {0.90s} 33. Rc3 {0.90s} b6 {0.90s} 34. Rd3 {0.90s}
+Rf8 {0.90s} 35. Nf3+ {0.90s} Kf4 {0.90s} 36. Kd2 {0.90s} b5 {0.90s}
+37. a3 {0.90s} Ke4 {0.90s} 38. Ng5+ {0.90s} Ke5 {0.90s} 39. b4 {0.90s}
+Bb6 {0.90s} 40. Nf3+ {0.90s} Kf4 {0.90s} 41. Rd6 {0.90s} Rd8 {0.90s}
+42. Rxd8 {0.90s} Bxd8 {0.90s} 43. Nd4 {0.90s} Ke4 {0.90s} 44. Ne6 {0.90s}
+Bb6 {0.90s} 45. h3 {0.90s} Kf5 {0.90s} 46. Nf8 {0.90s} Bc7 {0.90s}
+47. Kc3 {0.90s} Be5+ {0.90s} 48. Kb3 {0.90s} Bd6 {0.90s} 49. Nd7 {0.90s}
+g5 {0.90s} 50. c4 {0.90s} Ke4 {0.90s} 51. Nc5+ {0.90s} Kf3 {0.90s}
+52. Nxa6 {0.90s} bxc4+ {0.90s} 53. Kxc4 {0.90s} Be7 {0.90s} 54. b5 {0.90s}
+Bxa3 {0.90s} 55. b6 {0.90s} Bc1 {0.90s} 56. b7 {0.90s} Bf4 {0.90s}
+57. Kd5 {0.90s} Kg3 {0.90s} 58. Kc6 {0.90s} Kxh3 {0.90s} 59. Nc7 {0.90s}
+Bxc7 {0.90s} 60. Kd7 {0.90s} Bf4 {0.90s} 61. Kc8 {0.90s} Kg4 {0.90s}
+62. Kd7 {0.90s} Kf5 {0.90s} 63. Kc8 {0.90s} Kg4 {0.90s} 64. b8=Q {0.90s}
+Bxb8 {0.90s} 65. Kxb8 {0.90s} Kf5 {0.90s} 66. Kb7 {0.90s} g4 67. Kc6 {0.90s} g3
+68. Kd5 g2 69. Kd4 g1=Q+ 70. Kd5 Qg4 71. Kc6 Ke6 72. Kb7 Qg1 73. Ka8 Qd4 74. Kb7
+Qg1 75. Ka8 Qd4 76. Kb7 Kd5 77. Ka8 Ke4 78. Kb7 Kd5 79. Ka8 Ke4 80. Kb7 Kf5
+81. Kc6 Qg1 82. Kd5 Qg4 83. Kc6 Ke6 84. Kb7 Kd7 85. Kb6 Qd4+ 86. Kb7 Qg4 87. Kb6
+Qd4+ 88. Kb7 Qd5+ 89. Kb6 Kd6 90. Ka6 Kc7 91. Ka7 Kc6 92. Ka8 Kc7+ 93. Ka7 Kc6
+94. Ka8 Kc7+ 95. Ka7 {Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "0-1"]
+[ECO "B33"]
+[GameDuration "00:01:09"]
+[GameEndTime "2026-07-14T19:07:32.198 CEST"]
+[GameStartTime "2026-07-14T19:06:22.814 CEST"]
+[Opening "Sicilian"]
+[PlyCount "102"]
+[TimeControl "1/move"]
+[Variation "Pelikan (Lasker/Sveshnikov) variation"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} Nc6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} e5 {book} 6. Nxc6 {0.90s} bxc6 {0.90s}
+7. Bg5 {0.90s} Rb8 {0.90s} 8. Rb1 {0.90s} Bb4 {0.90s} 9. Bd3 {0.90s} d5 {0.90s}
+10. O-O {0.90s} h6 {0.90s} 11. Bd2 {0.90s} dxe4 {0.90s} 12. Bxe4 {0.90s}
+Nxe4 {0.90s} 13. Nxe4 {0.90s} O-O {0.90s} 14. Bxb4 {0.90s} Rxb4 {0.90s}
+15. Qxd8 {0.90s} Rxd8 {0.90s} 16. Rfe1 {0.90s} Bf5 {0.90s} 17. f3 {0.90s}
+Bxe4 {0.90s} 18. fxe4 {0.90s} Rd2 {0.90s} 19. a3 {0.90s} Rb6 {0.90s}
+20. b4 {0.90s} Rxc2 {0.90s} 21. Rbc1 {0.90s} Ra2 {0.90s} 22. Rc3 {0.90s}
+Rd2 {0.90s} 23. Ree3 {0.90s} a5 {0.90s} 24. Rc4 {0.90s} axb4 {0.90s}
+25. Rb3 {0.90s} Kh7 {0.90s} 26. Rbxb4 {0.90s} Rxb4 {0.90s} 27. axb4 {0.90s}
+Rd4 {0.90s} 28. Rxd4 {0.90s} exd4 {0.90s} 29. Kf2 {0.90s} Kg6 {0.90s}
+30. Kf3 {0.90s} Kf6 {0.90s} 31. Kf4 {0.90s} g5+ {0.90s} 32. Kf3 {0.90s}
+Ke6 {0.90s} 33. h3 {0.90s} Ke5 {0.90s} 34. g3 {0.90s} h5 {0.90s} 35. g4 {0.90s}
+hxg4+ {0.90s} 36. hxg4 {0.90s} f6 {0.90s} 37. Kf2 {0.90s} Kxe4 {0.90s}
+38. Ke2 {0.90s} d3+ {0.90s} 39. Kd1 {0.90s} Ke3 {0.90s} 40. b5 {0.90s}
+cxb5 {0.90s} 41. Kc1 {0.90s} Kd4 {0.90s} 42. Kb2 {0.90s} Kc4 {0.90s}
+43. Kc1 {0.90s} Kc3 {0.90s} 44. Kd1 d2 {0.90s} 45. Ke2 Kc2 46. Kf3 d1=Q+ 47. Kg3
+Kd2 48. Kg2 Ke3 49. Kh2 Qxg4 50. Kh1 Kf3 51. Kh2 Qg2# {Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "0-1"]
+[ECO "B33"]
+[GameDuration "00:02:22"]
+[GameEndTime "2026-07-14T19:08:49.798 CEST"]
+[GameStartTime "2026-07-14T19:06:27.544 CEST"]
+[Opening "Sicilian"]
+[PlyCount "182"]
+[TimeControl "1/move"]
+[Variation "Pelikan (Lasker/Sveshnikov) variation"]
+
+1. e4 {book} c5 {book} 2. Nf3 {book} Nc6 {book} 3. d4 {book} cxd4 {book}
+4. Nxd4 {book} Nf6 {book} 5. Nc3 {book} e5 {book} 6. Nxc6 {0.90s} bxc6 {0.90s}
+7. Bg5 {0.90s} Ke7 {0.90s} 8. Bc4 {0.90s} d6 {0.90s} 9. Bxf6+ {0.90s}
+gxf6 {0.90s} 10. Qh5 {0.90s} Qe8 {0.90s} 11. O-O-O {0.90s} Rg8 {0.90s}
+12. Rdg1 {0.90s} Rg7 {0.90s} 13. Qf3 {0.90s} Rb8 {0.90s} 14. Rd1 {0.90s}
+Qd8 {0.90s} 15. Rd3 {0.90s} Qb6 {0.90s} 16. b3 {0.90s} Bg4 {0.90s}
+17. Qe3 {0.90s} Qxe3+ {0.90s} 18. Rxe3 {0.90s} Be6 {0.90s} 19. Bxe6 {0.90s}
+Kxe6 {0.90s} 20. Rg3 {0.90s} f5 {0.90s} 21. Rxg7 {0.90s} Bxg7 {0.90s}
+22. Rd1 {0.90s} fxe4 {0.90s} 23. Nxe4 {0.90s} d5 {0.90s} 24. Nc5+ {0.90s}
+Kd6 {0.90s} 25. Ne4+ {0.90s} Kc7 {0.90s} 26. Ng3 {0.90s} e4 {0.90s}
+27. c4 {0.90s} Rd8 {0.90s} 28. Nf5 {0.90s} Be5 {0.90s} 29. h3 {0.90s}
+Kb6 {0.90s} 30. f3 {0.90s} exf3 {0.90s} 31. gxf3 {0.90s} d4 {0.90s}
+32. Re1 {0.90s} Bf4+ {0.90s} 33. Kd1 {0.90s} c5 {0.90s} 34. Re4 {0.90s}
+Bg5 {0.90s} 35. f4 {0.90s} Bf6 {0.90s} 36. Nh6 {0.90s} Rd7 {0.90s}
+37. Ng4 {0.90s} Bh4 {0.90s} 38. f5 {0.90s} Kc7 {0.90s} 39. f6 {0.90s}
+Bg3 {0.90s} 40. Nh6 {0.90s} a5 {0.90s} 41. Kc2 {0.90s} Bd6 {0.90s}
+42. Rh4 {0.90s} Bg3 {0.90s} 43. Rh5 {0.90s} d3+ {0.90s} 44. Kd1 {0.90s}
+Kc6 {0.90s} 45. Ng4 {0.90s} Bf4 {0.90s} 46. Rxh7 {0.90s} a4 {0.90s}
+47. Nf2 {0.90s} axb3 {0.90s} 48. axb3 {0.90s} Be3 {0.90s} 49. Ng4 {0.90s}
+Bf4 {0.90s} 50. Nf2 {0.90s} d2 {0.90s} 51. Rh5 {0.90s} Rd4 {0.90s}
+52. Rh7 {0.90s} Rd7 {0.90s} 53. Ne4 {0.90s} Ra7 {0.90s} 54. Nxd2 {0.90s}
+Rd7 {0.90s} 55. Rh8 {0.90s} Rxd2+ {0.90s} 56. Ke1 {0.90s} Rd3 {0.90s}
+57. Rc8+ {0.90s} Bc7 {0.90s} 58. Rf8 {0.90s} Rd7 {0.90s} 59. Ra8 {0.90s}
+Kb6 {0.90s} 60. Ke2 {0.90s} Rd6 {0.90s} 61. Re8 {0.90s} Rxf6 {0.90s}
+62. Rf8 {0.90s} Kc6 {0.90s} 63. Ke3 {0.90s} Bd6 {0.90s} 64. Rh8 {0.90s}
+Rg6 {0.90s} 65. Kd2 {0.90s} Rg3 {0.90s} 66. Kc2 {0.90s} f5 {0.90s}
+67. h4 {0.90s} Rg2+ {0.90s} 68. Kb1 {0.90s} f4 {0.90s} 69. b4 {0.90s}
+cxb4 {0.90s} 70. c5 {0.90s} f3 {0.90s} 71. cxd6 {0.90s} f2 {0.90s}
+72. Rf8 {0.90s} Kxd6 {0.90s} 73. Rf6+ {0.90s} Ke5 {0.90s} 74. Rf3 {0.90s}
+Rg1+ {0.90s} 75. Kc2 {0.90s} f1=Q {0.90s} 76. Rxf1 {0.90s} Rxf1 {0.90s}
+77. Kb3 {0.90s} Rf4 {0.90s} 78. h5 {0.90s} Kf6 {0.90s} 79. Ka4 {0.90s}
+Kg5 {0.90s} 80. h6 {0.90s} Kxh6 {0.90s} 81. Kb3 {0.90s} Rh4 {0.90s}
+82. Ka4 {0.90s} Kg5 {0.90s} 83. Kb3 {0.90s} Kf5 {0.90s} 84. Kc2 {0.90s} Ke4
+85. Kb3 {0.61s} Kd3 86. Kb2 b3 87. Kxb3 Re4 88. Kb2 Rb4+ 89. Ka3 Kc3 90. Ka2 Kc2
+91. Ka1 Ra4# {Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1/2-1/2"]
+[ECO "C14"]
+[GameDuration "00:01:08"]
+[GameEndTime "2026-07-14T19:07:53.590 CEST"]
+[GameStartTime "2026-07-14T19:06:45.110 CEST"]
+[Opening "French"]
+[PlyCount "84"]
+[TimeControl "1/move"]
+[Variation "Classical variation"]
+
+1. e4 {book} e6 {book} 2. d4 {book} d5 {book} 3. Nc3 {book} Nf6 {book}
+4. Bg5 {book} Be7 {book} 5. e5 {0.90s} Nfd7 {0.90s} 6. Bxe7 {0.90s} Qxe7 {0.90s}
+7. Nf3 {0.90s} O-O {0.90s} 8. Bb5 {0.90s} a6 {0.90s} 9. Ba4 {0.90s} c5 {0.90s}
+10. Bxd7 {0.90s} Bxd7 {0.90s} 11. O-O {0.90s} Nc6 {0.90s} 12. Re1 {0.90s}
+cxd4 {0.90s} 13. Nxd4 {0.90s} Qb4 {0.90s} 14. Nxc6 {0.90s} Bxc6 {0.90s}
+15. Rb1 {0.90s} f6 {0.90s} 16. Re3 {0.90s} d4 {0.90s} 17. Qg4 {0.90s} f5 {0.90s}
+18. Qh4 {0.90s} Qc5 {0.90s} 19. b4 {0.90s} Qb6 {0.90s} 20. Rh3 {0.90s}
+dxc3 {0.90s} 21. Qxh7+ {0.90s} Kf7 {0.90s} 22. Qh5+ {0.90s} Ke7 {0.90s}
+23. Qh4+ {0.90s} Kd7 {0.90s} 24. Rd1+ {0.90s} Bd5 {0.90s} 25. Rxc3 {0.90s}
+Rac8 {0.90s} 26. Rg3 {0.90s} Rxc2 {0.90s} 27. Rxg7+ {0.90s} Kc6 {0.90s}
+28. a3 {0.90s} f4 {0.90s} 29. Rf1 {0.90s} Kb5 {0.90s} 30. Qe7 {0.90s}
+Rf5 {0.90s} 31. Rf7 {0.90s} Rxe5 {0.90s} 32. Rxf4 {0.90s} Rc3 {0.90s}
+33. a4+ {0.90s} Kxa4 {0.90s} 34. b5+ {0.90s} Bc4 {0.90s} 35. Ra1+ {0.90s}
+Kxb5 {0.90s} 36. Qg7 {0.90s} Qd6 {0.90s} 37. Qxb7+ {0.90s} Kc5 {0.90s}
+38. Qc8+ {0.90s} Kb4 {0.90s} 39. Rb1+ {0.90s} Ka5 {0.90s} 40. Ra1+ {0.90s}
+Kb4 {0.90s} 41. Rb1+ {0.90s} Ka5 {0.90s} 42. Ra1+ {0.90s}
+Kb4 {0.90s, Draw by 3-fold repetition} 1/2-1/2
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1-0"]
+[ECO "C14"]
+[GameDuration "00:01:56"]
+[GameEndTime "2026-07-14T19:09:05.474 CEST"]
+[GameStartTime "2026-07-14T19:07:09.205 CEST"]
+[Opening "French"]
+[PlyCount "145"]
+[TimeControl "1/move"]
+[Variation "Classical variation"]
+
+1. e4 {book} e6 {book} 2. d4 {book} d5 {book} 3. Nc3 {book} Nf6 {book}
+4. Bg5 {book} Be7 {book} 5. e5 {0.90s} Nfd7 {0.90s} 6. Bxe7 {0.90s} Qxe7 {0.90s}
+7. Nf3 {0.90s} a6 {0.90s} 8. a3 {0.90s} c5 {0.90s} 9. dxc5 {0.90s} Nc6 {0.90s}
+10. Qe2 {0.90s} Qxc5 {0.90s} 11. O-O-O {0.90s} O-O {0.90s} 12. Re1 {0.90s}
+f6 {0.90s} 13. exf6 {0.90s} Nxf6 {0.90s} 14. Qe3 {0.90s} d4 {0.90s}
+15. Ne4 {0.90s} dxe3 {0.90s} 16. Nxc5 {0.90s} exf2 {0.90s} 17. Re2 {0.90s}
+Kh8 {0.90s} 18. Nd3 {0.90s} Bd7 {0.90s} 19. Rxf2 {0.90s} Rac8 {0.90s}
+20. Nde5 {0.90s} Rc7 {0.90s} 21. Bd3 {0.90s} Nd5 {0.90s} 22. Re1 {0.90s}
+Nxe5 {0.90s} 23. Rxe5 {0.90s} Nf4 {0.90s} 24. Be4 {0.90s} Bc6 {0.90s}
+25. Rd2 {0.90s} Bxe4 {0.90s} 26. Rxe4 {0.90s} Nxg2 {0.90s} 27. Rxe6 {0.90s}
+Kg8 {0.90s} 28. Nd4 {0.90s} Rd7 {0.90s} 29. Rd1 {0.90s} Rfd8 {0.90s}
+30. c3 {0.90s} Nf4 {0.90s} 31. Re4 {0.90s} Nd5 {0.90s} 32. Ne6 {0.90s}
+Re8 {0.90s} 33. c4 {0.90s} Nf6 {0.90s} 34. Rxd7 {0.90s} Nxd7 {0.90s}
+35. Kd2 {0.90s} Nf6 {0.90s} 36. Re2 {0.90s} h6 {0.90s} 37. Nd4 {0.90s}
+Rxe2+ {0.90s} 38. Kxe2 {0.90s} Nd7 {0.90s} 39. Kd3 {0.90s} Ne5+ {0.90s}
+40. Kc3 {0.90s} Kh7 {0.90s} 41. Ne6 {0.90s} a5 {0.90s} 42. c5 {0.90s}
+Nd7 {0.90s} 43. Kc4 {0.90s} Ne5+ {0.90s} 44. Kb5 {0.90s} Nd3 {0.90s}
+45. b3 {0.90s} a4 {0.90s} 46. bxa4 {0.90s} Kg8 {0.90s} 47. Nd8 {0.90s}
+Nf4 {0.90s} 48. Nxb7 {0.90s} Nd5 {0.90s} 49. Nd6 {0.90s} g6 {0.90s}
+50. Kc6 {0.90s} Ne7+ {0.90s} 51. Kb7 {0.90s} Kg7 {0.90s} 52. a5 {0.90s}
+Kf6 {0.90s} 53. Ne8+ {0.90s} Ke6 {0.90s} 54. a6 {0.90s} Kd7 {0.90s}
+55. a7 {0.90s} Kxe8 {0.90s} 56. a8=Q+ {0.90s} Kf7 {0.90s} 57. c6 {0.90s}
+h5 {0.90s} 58. c7 {0.90s} h4 {0.90s} 59. Qh8 {0.90s} Ke6 {0.90s}
+60. Qxh4 {0.90s} Kf7 {0.90s} 61. Qd4 {0.90s} Ke6 {0.90s} 62. Qg7 {0.90s}
+Kd6 {0.90s} 63. h4 {0.90s} Ke6 {0.90s} 64. Qc3 {0.90s} Kf5 {0.90s}
+65. Qh3+ {0.90s} Ke5 {0.90s} 66. Qd7 {0.90s} Nf5 {0.90s} 67. Qd8 {0.90s}
+Nd6+ {0.90s} 68. Kc6 {0.90s} Nc8 {0.90s} 69. Qxc8 {0.90s} Kd4 70. Qh3 g5
+71. c8=Q Ke5 72. Qce6+ Kd4 73. Qhe3# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1-0"]
+[ECO "C07"]
+[GameDuration "00:01:28"]
+[GameEndTime "2026-07-14T19:09:00.398 CEST"]
+[GameStartTime "2026-07-14T19:07:32.198 CEST"]
+[Opening "French"]
+[PlyCount "121"]
+[TimeControl "1/move"]
+[Variation "Tarrasch, Open variation"]
+
+1. e4 {book} e6 {book} 2. d4 {book} d5 {book} 3. Nd2 {book} c5 {book}
+4. Ngf3 {0.90s} Nc6 {0.90s} 5. Bb5 {0.90s} Qb6 {0.90s} 6. c4 {0.90s}
+dxc4 {0.90s} 7. a4 {0.90s} Nf6 {0.90s} 8. Nxc4 {0.90s} Qc7 {0.90s} 9. d5 {0.90s}
+exd5 {0.90s} 10. exd5 {0.90s} a6 {0.90s} 11. d6 {0.90s} Qd7 {0.90s}
+12. Qe2+ {0.90s} Qe6 {0.90s} 13. Bxc6+ {0.90s} bxc6 {0.90s} 14. Be3 {0.90s}
+Ne4 {0.90s} 15. O-O {0.90s} Bxd6 {0.90s} 16. Nxd6+ {0.90s} Nxd6 {0.90s}
+17. Rfe1 {0.90s} O-O {0.90s} 18. Bxc5 {0.90s} Qd5 {0.90s} 19. Qe5 {0.90s}
+Nc4 {0.90s} 20. Qxd5 {0.90s} cxd5 {0.90s} 21. b3 {0.90s} Nb2 {0.90s}
+22. Bxf8 {0.90s} Kxf8 {0.90s} 23. Re5 {0.90s} Be6 {0.90s} 24. Ng5 {0.90s}
+Rb8 {0.90s} 25. Nxe6+ {0.90s} fxe6 {0.90s} 26. Rxe6 {0.90s} Nd3 {0.90s}
+27. Rd1 {0.90s} Rxb3 {0.90s} 28. Re3 {0.90s} Nb2 {0.90s} 29. Rxb3 {0.90s}
+Nxd1 {0.90s} 30. Kf1 {0.90s} d4 {0.90s} 31. Rd3 {0.90s} Nc3 {0.90s}
+32. Rxd4 {0.90s} Ke7 {0.90s} 33. Ke1 {0.90s} Ke6 {0.90s} 34. Rc4 {0.90s}
+Nd5 {0.90s} 35. Rc6+ {0.90s} Ke5 {0.90s} 36. Rxa6 {0.90s} g6 {0.90s}
+37. Ra7 {0.90s} h6 {0.90s} 38. a5 {0.90s} Nb4 {0.90s} 39. a6 {0.90s} Nc6 {0.90s}
+40. Rc7 {0.90s} Kd5 {0.90s} 41. g4 {0.90s} Kd6 {0.90s} 42. Rxc6+ {0.90s}
+Kxc6 {0.90s} 43. f4 {0.90s} Kb6 {0.90s} 44. f5 {0.90s} gxf5 {0.90s}
+45. gxf5 {0.90s} Kc6 {0.90s} 46. a7 {0.90s} Kb7 {0.90s} 47. f6 {0.90s}
+Kxa7 {0.90s} 48. f7 {0.90s} Kb6 {0.90s} 49. f8=Q {0.90s} Kc6 {0.90s}
+50. Qxh6+ {0.90s} Kd5 {0.90s} 51. Kd2 {0.90s} Ke5 {0.90s} 52. Kd3 {0.86s}
+Kd5 {0.62s} 53. Qf6 Kc5 54. Qe6 Kb5 55. Kc3 Kc5 56. Kd3 Kb5 57. Kc3 Kc5 58. h4
+Kb5 59. Qd6 Ka5 60. Kc4 Ka4 61. Qb4# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1-0"]
+[ECO "C07"]
+[GameDuration "00:01:51"]
+[GameEndTime "2026-07-14T19:09:44.728 CEST"]
+[GameStartTime "2026-07-14T19:07:53.590 CEST"]
+[Opening "French"]
+[PlyCount "147"]
+[TimeControl "1/move"]
+[Variation "Tarrasch, Open variation"]
+
+1. e4 {book} e6 {book} 2. d4 {book} d5 {book} 3. Nd2 {book} c5 {book}
+4. Ngf3 {0.90s} Nc6 {0.90s} 5. Bb5 {0.90s} Qb6 {0.90s} 6. c4 {0.90s}
+dxc4 {0.90s} 7. a4 {0.90s} Nf6 {0.90s} 8. Nxc4 {0.90s} Qc7 {0.90s} 9. d5 {0.90s}
+exd5 {0.90s} 10. exd5 {0.90s} a6 {0.90s} 11. d6 {0.90s} Qd7 {0.90s}
+12. Qe2+ {0.90s} Qe6 {0.90s} 13. Bxc6+ {0.90s} bxc6 {0.90s} 14. Nb6 {0.90s}
+Qxe2+ {0.90s} 15. Kxe2 {0.90s} Bxd6 {0.90s} 16. Nxa8 {0.90s} Nd5 {0.90s}
+17. Rd1 {0.90s} Be6 {0.90s} 18. Nb6 {0.90s} O-O {0.90s} 19. Ke1 {0.90s}
+Re8 {0.90s} 20. Be3 {0.90s} Nxe3 {0.90s} 21. fxe3 {0.90s} Bc7 {0.90s}
+22. a5 {0.90s} Bb3 {0.90s} 23. Rd3 {0.90s} c4 {0.90s} 24. Rc3 {0.90s}
+Bd6 {0.90s} 25. Ke2 {0.90s} Bb4 {0.90s} 26. Rcc1 {0.90s} Re4 {0.90s}
+27. Nd2 {0.90s} Bxd2 {0.90s} 28. Kxd2 {0.90s} Rg4 {0.90s} 29. Rg1 {0.90s}
+Rh4 {0.90s} 30. h3 {0.90s} Rh5 {0.90s} 31. Kc3 {0.90s} Rb5 {0.90s}
+32. Rge1 {0.90s} h6 {0.90s} 33. Re2 {0.90s} f5 {0.90s} 34. Nxc4 {0.90s}
+Bxc4 {0.90s} 35. Kxc4 {0.90s} Kh7 {0.90s} 36. e4 {0.90s} fxe4 {0.90s}
+37. b4 {0.90s} Rg5 {0.90s} 38. Rg1 {0.90s} Re5 {0.90s} 39. Rge1 {0.90s}
+Rg5 {0.90s} 40. g4 {0.90s} Rb5 {0.90s} 41. Rxe4 {0.90s} c5 {0.90s}
+42. bxc5 {0.90s} Rxa5 {0.90s} 43. c6 {0.90s} Ra2 {0.90s} 44. Kc5 {0.90s}
+Rc2+ {0.90s} 45. Rc4 {0.90s} Rf2 {0.90s} 46. Rf1 {0.90s} Rxf1 {0.90s}
+47. c7 {0.90s} Rf8 {0.90s} 48. Kb6 {0.90s} a5 {0.90s} 49. c8=Q {0.90s}
+Rxc8 {0.90s} 50. Rxc8 {0.90s} Kg6 {0.90s} 51. Kxa5 {0.90s} Kg5 {0.90s}
+52. Rf8 {0.90s} Kh4 {0.90s} 53. Rf3 {0.90s} Kg5 {0.90s} 54. Rf8 {0.90s}
+Kh4 {0.90s} 55. Rf1 {0.90s} Kxh3 {0.90s} 56. Kb4 {0.90s} Kg3 {0.90s}
+57. Kc5 {0.90s} Kh4 {0.90s} 58. Rf7 {0.90s} g5 {0.90s} 59. Rf6 {0.90s}
+Kxg4 {0.90s} 60. Rxh6 {0.90s} Kf3 {0.90s} 61. Kd4 {0.90s} g4 {0.90s}
+62. Kd3 {0.90s} g3 {0.90s} 63. Rf6+ {0.90s} Kg2 {0.90s} 64. Ke3 {0.90s}
+Kg1 {0.90s} 65. Kf3 {0.90s} g2 66. Rg6 Kf1 67. Rxg2 Ke1 68. Ke4 Kd1 69. Kd3 Kc1
+70. Rc2+ Kb1 71. Kc3 Ka1 72. Rc1+ Ka2 73. Rg1 Ka3 74. Ra1# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1-0"]
+[ECO "B15"]
+[GameDuration "00:02:11"]
+[GameEndTime "2026-07-14T19:10:20.567 CEST"]
+[GameStartTime "2026-07-14T19:08:08.717 CEST"]
+[Opening "Caro-Kann"]
+[PlyCount "161"]
+[TimeControl "1/move"]
+[Variation "Forgacs variation"]
+
+1. e4 {book} c6 {book} 2. d4 {book} d5 {book} 3. Nc3 {book} dxe4 {book}
+4. Nxe4 {book} Nf6 {0.90s} 5. Nxf6+ {0.90s} exf6 {0.90s} 6. Bc4 {0.90s}
+Be6 {0.90s} 7. Qe2 {0.90s} Qxd4 {0.90s} 8. Bxe6 {0.90s} fxe6 {0.90s}
+9. Qxe6+ {0.90s} Kd8 {0.90s} 10. Nf3 {0.90s} Qd7 {0.90s} 11. Qc4 {0.90s}
+Bd6 {0.90s} 12. Be3 {0.90s} Na6 {0.90s} 13. O-O-O {0.90s} Nb4 {0.90s}
+14. Rxd6 {0.90s} Qxd6 {0.90s} 15. Bc5 {0.90s} Nxa2+ {0.90s} 16. Kb1 {0.90s}
+Qd5 {0.90s} 17. Qxd5+ {0.90s} cxd5 {0.90s} 18. Rd1 {0.90s} b6 {0.90s}
+19. Rxd5+ {0.90s} Ke8 {0.90s} 20. Bd6 {0.90s} Nc3+ {0.90s} 21. bxc3 {0.90s}
+Rc8 {0.90s} 22. Kb2 {0.90s} Kf7 {0.90s} 23. Nd4 {0.90s} Rhe8 {0.90s}
+24. Bf4 {0.90s} Re4 {0.90s} 25. Be3 {0.90s} Rc7 {0.90s} 26. Kb3 {0.90s}
+Rg4 {0.90s} 27. g3 {0.90s} Re4 {0.90s} 28. c4 {0.90s} a6 {0.90s} 29. Kc3 {0.90s}
+b5 {0.90s} 30. Rd6 {0.90s} Rxc4+ {0.90s} 31. Kd3 {0.90s} Re7 {0.90s}
+32. Rxa6 {0.90s} Rd7 {0.90s} 33. g4 {0.90s} Rc5 {0.90s} 34. Rb6 {0.90s}
+h6 {0.90s} 35. f4 {0.90s} f5 {0.90s} 36. gxf5 {0.90s} Rxf5 {0.90s}
+37. Ke4 {0.90s} Rh5 {0.90s} 38. Nf3 {0.90s} Re7+ {0.90s} 39. Ne5+ {0.90s}
+Kg8 {0.90s} 40. Rxb5 {0.90s} Rxh2 {0.90s} 41. c4 {0.90s} Re2 {0.90s}
+42. Rb1 {0.90s} Re8 {0.90s} 43. c5 {0.90s} Ra8 {0.90s} 44. Kd3 {0.90s}
+Rea2 {0.90s} 45. c6 {0.90s} R8a3+ {0.90s} 46. Kd4 {0.90s} Ra4+ {0.90s}
+47. Kd5 {0.90s} Rc2 {0.90s} 48. Rb7 {0.90s} Ra5+ {0.90s} 49. Ke6 {0.90s}
+Ra8 {0.90s} 50. c7 {0.90s} Kh7 {0.90s} 51. Bd4 {0.90s} Ra4 {0.90s}
+52. Kd5 {0.90s} Ra8 {0.90s} 53. Nc6 {0.90s} Rc8 {0.90s} 54. Kd6 {0.90s}
+Re2 {0.90s} 55. Kd7 {0.90s} Rf8 {0.90s} 56. c8=Q {0.90s} Rxc8 {0.90s}
+57. Kxc8 {0.90s} Re8+ {0.90s} 58. Nd8 {0.90s} Kg6 {0.90s} 59. Rxg7+ {0.90s}
+Kh5 {0.90s} 60. Kd7 {0.90s} Re2 {0.90s} 61. Ne6 {0.90s} Rf2 {0.90s}
+62. Rh7 {0.90s} Rf1 {0.90s} 63. Bg7 {0.90s} Rd1+ {0.90s} 64. Ke7 {0.90s}
+Kg6 {0.90s} 65. Rxh6+ {0.90s} Kf5 {0.90s} 66. Bd4 {0.90s} Ke4 {0.90s}
+67. Rh5 {0.90s} Kd3 {0.90s} 68. f5 {0.90s} Rb1 {0.90s} 69. Be5 {0.90s}
+Rb7+ {0.90s} 70. Nc7 {0.90s} Ke4 {0.90s} 71. f6 {0.90s} Rb1 {0.90s}
+72. f7 {0.90s} Rf1 {0.90s} 73. Bf6 {0.90s} Kd3 {0.90s} 74. f8=Q {0.90s}
+Rf3 {0.90s} 75. Nd5 {0.90s} Rf2 {0.90s} 76. Qc8 {0.90s} Re2+ {0.90s}
+77. Kf7 {0.73s} Rf2 78. Re5 Rxf6+ 79. Kxf6 Kd2 80. Qc3+ Kd1
+81. Re1# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1-0"]
+[ECO "B15"]
+[GameDuration "00:01:00"]
+[GameEndTime "2026-07-14T19:09:50.186 CEST"]
+[GameStartTime "2026-07-14T19:08:49.798 CEST"]
+[Opening "Caro-Kann"]
+[PlyCount "81"]
+[TimeControl "1/move"]
+[Variation "Tartakower (Nimzowitsch) variation"]
+
+1. e4 {book} c6 {book} 2. d4 {book} d5 {book} 3. Nc3 {book} dxe4 {book}
+4. Nxe4 {book} Nf6 {0.90s} 5. Nxf6+ {0.90s} exf6 {0.90s} 6. Nf3 {0.90s}
+Be6 {0.90s} 7. Bd3 {0.90s} Bd6 {0.90s} 8. c4 {0.90s} O-O {0.90s} 9. c5 {0.90s}
+Bc7 {0.90s} 10. Qc2 {0.90s} h6 {0.90s} 11. O-O {0.90s} Nd7 {0.90s}
+12. Be3 {0.90s} Bd5 {0.90s} 13. Kh1 {0.90s} Re8 {0.90s} 14. Qc3 {0.90s}
+Ba5 {0.90s} 15. b4 {0.90s} Bc7 {0.90s} 16. Kg1 {0.90s} Qb8 {0.90s}
+17. Bf5 {0.90s} Bxf3 {0.90s} 18. gxf3 {0.90s} Bxh2+ {0.90s} 19. Kh1 {0.90s}
+Rd8 {0.90s} 20. Qc1 {0.90s} g5 {0.90s} 21. b5 {0.90s} cxb5 {0.90s}
+22. c6 {0.90s} Qc7 {0.90s} 23. cxd7 {0.90s} a6 {0.90s} 24. Qb1 {0.90s}
+Bd6 {0.90s} 25. Rc1 {0.90s} Qa5 {0.90s} 26. Qe4 {0.90s} b4 {0.90s}
+27. f4 {0.90s} Qb6 {0.90s} 28. fxg5 {0.90s} fxg5 {0.90s} 29. d5 {0.90s}
+Qb5 {0.90s} 30. Rc8 {0.90s} Bf8 {0.90s} 31. Rac1 {0.90s} b3 {0.90s}
+32. Bd4 {0.90s} Bg7 {0.90s} 33. Rxa8 {0.90s} Qxd7 {0.90s} 34. Bxd7 {0.90s}
+Rxa8 {0.90s} 35. axb3 {0.90s} Bxd4 {0.90s} 36. Qxd4 {0.90s} Rf8 {0.90s}
+37. Qf6 {0.90s} b5 {0.90s} 38. Qxh6 Re8 39. Bxe8 b4 40. Rc7 f6
+41. Qg7# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1-0"]
+[ECO "B01"]
+[GameDuration "00:01:44"]
+[GameEndTime "2026-07-14T19:10:44.441 CEST"]
+[GameStartTime "2026-07-14T19:09:00.398 CEST"]
+[Opening "Scandinavian (centre counter) defense"]
+[PlyCount "131"]
+[TimeControl "1/move"]
+
+1. e4 {book} d5 {book} 2. exd5 {book} Qxd5 {book} 3. Nc3 {book} Qa5 {book}
+4. d4 {0.90s} Nf6 {0.90s} 5. Nf3 {0.90s} Be6 {0.90s} 6. Bb5+ {0.90s}
+Nbd7 {0.90s} 7. Ng5 {0.90s} Bg4 {0.90s} 8. Qd3 {0.90s} h6 {0.90s} 9. f3 {0.90s}
+hxg5 {0.90s} 10. fxg4 {0.90s} a6 {0.90s} 11. Bc4 {0.90s} Nb6 {0.90s}
+12. Bb3 {0.90s} e6 {0.90s} 13. O-O {0.90s} Bd6 {0.90s} 14. h3 {0.90s} c5 {0.90s}
+15. dxc5 {0.90s} Bxc5+ {0.90s} 16. Kh1 {0.90s} Bb4 {0.90s} 17. Ne4 {0.90s}
+Qe5 {0.90s} 18. Nxg5 {0.90s} Nbd5 {0.90s} 19. c4 {0.90s} Ne7 {0.90s}
+20. Be3 {0.90s} Nxg4 {0.90s} 21. Bf4 {0.90s} Qf5 {0.90s} 22. Rad1 {0.90s}
+Qxd3 {0.90s} 23. Rxd3 {0.90s} e5 {0.90s} 24. Bg3 {0.90s} Rh5 {0.90s}
+25. c5 {0.90s} Rxg5 {0.90s} 26. Bxf7+ {0.90s} Kf8 {0.90s} 27. hxg4 {0.90s}
+Nc6 {0.90s} 28. Rb3 {0.90s} a5 {0.90s} 29. a3 {0.90s} Bxc5 {0.90s}
+30. Bh5+ {0.90s} Kg8 {0.90s} 31. Bf7+ {0.90s} Kh7 {0.90s} 32. Bf2 {0.90s}
+g6 {0.90s} 33. Bxc5 {0.90s} Rxg4 {0.90s} 34. Bd5 {0.90s} Rh4+ {0.90s}
+35. Kg1 {0.90s} Nd8 {0.90s} 36. Be7 {0.90s} Rf4 {0.90s} 37. Rxf4 {0.90s}
+exf4 {0.90s} 38. Bf6 {0.90s} g5 {0.90s} 39. Bxg5 {0.90s} Kg7 {0.90s}
+40. Bxf4 {0.90s} Kf6 {0.90s} 41. Be4 {0.90s} Rc8 {0.90s} 42. Rb5 {0.90s}
+a4 {0.90s} 43. Bg5+ {0.90s} Kf7 {0.90s} 44. Rb4 {0.90s} Ra8 {0.90s}
+45. Bxd8 {0.90s} Rxd8 {0.90s} 46. Bxb7 {0.90s} Rd1+ {0.90s} 47. Kh2 {0.90s}
+Rd2 {0.90s} 48. Bc6 {0.90s} Ke6 {0.90s} 49. Bxa4 {0.90s} Kd6 {0.90s}
+50. Be8 {0.90s} Rd5 {0.90s} 51. Kg3 {0.90s} Rd3+ {0.90s} 52. Kh2 {0.90s}
+Ke5 {0.90s} 53. Bc6 {0.90s} Rd4 {0.90s} 54. Rxd4 {0.90s} Kxd4 {0.90s}
+55. g4 {0.90s} Ke5 {0.90s} 56. b4 {0.90s} Kd6 {0.90s} 57. b5 {0.90s} Kc7 {0.90s}
+58. g5 {0.90s} Kd6 {0.90s} 59. g6 {0.90s} Ke6 {0.90s} 60. b6 {0.90s} Kf6 {0.90s}
+61. b7 Kxg6 {0.81s} 62. b8=Q Kf6 63. Qd6+ Kg5 64. Be4 Kh4 65. Qf6+ Kg4
+66. Bf3# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1-0"]
+[ECO "B01"]
+[GameDuration "00:02:05"]
+[GameEndTime "2026-07-14T19:11:11.307 CEST"]
+[GameStartTime "2026-07-14T19:09:05.474 CEST"]
+[Opening "Scandinavian (centre counter) defense"]
+[PlyCount "159"]
+[TimeControl "1/move"]
+
+1. e4 {book} d5 {book} 2. exd5 {book} Qxd5 {book} 3. Nc3 {book} Qa5 {book}
+4. d4 {0.90s} Nf6 {0.90s} 5. Nf3 {0.90s} Be6 {0.90s} 6. Bb5+ {0.90s}
+Nbd7 {0.90s} 7. O-O {0.90s} O-O-O {0.90s} 8. Bf4 {0.90s} c6 {0.90s}
+9. Be2 {0.90s} Qb6 {0.90s} 10. b3 {0.90s} Nd5 {0.90s} 11. Nxd5 {0.90s}
+cxd5 {0.90s} 12. Ng5 {0.90s} Nf6 {0.90s} 13. Qd3 {0.90s} Ne4 {0.90s}
+14. Nxe6 {0.90s} Qxe6 {0.90s} 15. f3 {0.90s} Nd6 {0.90s} 16. c4 {0.90s}
+dxc4 {0.90s} 17. Rac1 {0.90s} b5 {0.90s} 18. bxc4 {0.90s} Nxc4 {0.90s}
+19. Qa3 {0.90s} Qd5 {0.90s} 20. Bxc4 {0.90s} bxc4 {0.90s} 21. Qa6+ {0.90s}
+Kd7 {0.90s} 22. Qxa7+ {0.90s} Ke6 {0.90s} 23. Rfe1+ {0.90s} Kf6 {0.90s}
+24. Qa6+ {0.90s} e6 {0.90s} 25. Qxc4 {0.90s} Qxc4 {0.90s} 26. Be5+ {0.90s}
+Kg6 {0.90s} 27. Rxc4 {0.90s} Bd6 {0.90s} 28. f4 {0.90s} f6 {0.90s}
+29. Bxd6 {0.90s} Rxd6 {0.90s} 30. Kf2 {0.90s} f5 {0.90s} 31. a4 {0.90s}
+Kf6 {0.90s} 32. Rb1 {0.90s} Rdd8 {0.90s} 33. Rb6 {0.90s} Rd5 {0.90s}
+34. Ke3 {0.90s} Rhd8 {0.90s} 35. Rb5 {0.90s} h6 {0.90s} 36. h3 {0.90s}
+R8d7 {0.90s} 37. Kd3 {0.90s} Kf7 {0.90s} 38. Rxd5 {0.90s} Rxd5 {0.90s}
+39. Rc5 {0.90s} Rd8 {0.90s} 40. a5 {0.90s} Rd6 {0.90s} 41. Kc4 {0.90s}
+Kg6 {0.90s} 42. Kd3 {0.90s} Kf6 {0.90s} 43. Ke3 {0.90s} g5 {0.90s}
+44. fxg5+ {0.90s} hxg5 {0.90s} 45. g4 {0.90s} Rd8 {0.90s} 46. gxf5 {0.90s}
+exf5 {0.90s} 47. Rc6+ {0.90s} Kf7 {0.90s} 48. Rc7+ {0.90s} Ke6 {0.90s}
+49. Rc6+ {0.90s} Kf7 {0.90s} 50. Rc7+ {0.90s} Kf6 {0.90s} 51. a6 {0.90s}
+Rh8 {0.90s} 52. Rc6+ {0.90s} Kg7 {0.90s} 53. d5 {0.90s} Rxh3+ {0.90s}
+54. Kd4 {0.90s} f4 {0.90s} 55. Ke4 {0.90s} Re3+ {0.90s} 56. Kf5 {0.90s}
+f3 {0.90s} 57. Rc7+ {0.90s} Kh6 {0.90s} 58. Rc6+ {0.90s} Kh5 {0.90s}
+59. Rc1 {0.90s} Kh4 {0.90s} 60. Rh1+ {0.90s} Kg3 {0.90s} 61. d6 {0.90s}
+f2 {0.90s} 62. d7 {0.90s} Rf3+ {0.90s} 63. Ke6 {0.90s} Rf8 {0.90s}
+64. Ke7 {0.90s} Kg2 {0.90s} 65. Rd1 {0.90s} f1=Q {0.90s} 66. Rxf1 {0.90s}
+Rxf1 {0.90s} 67. d8=Q {0.90s} Re1+ {0.90s} 68. Kf8 {0.90s} Kh3 {0.90s}
+69. Qa5 {0.90s} Rf1+ {0.90s} 70. Kg8 {0.90s} Kg4 {0.90s} 71. a7 {0.90s}
+Rf5 {0.90s} 72. Qb6 {0.90s} Kg3 {0.90s} 73. a8=Q {0.90s} g4 74. Qd6+ Rf4 75. Qe4
+Kh2 76. Qdxf4+ Kg1 77. Kf7 g3 78. Qe1+ Kh2 79. Qh4+ Kg2 80. Qhh1# {White mates}
+1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1-0"]
+[ECO "B08"]
+[GameDuration "00:00:27"]
+[GameEndTime "2026-07-14T19:10:11.764 CEST"]
+[GameStartTime "2026-07-14T19:09:44.728 CEST"]
+[Opening "Pirc"]
+[PlyCount "43"]
+[TimeControl "1/move"]
+[Variation "Classical (Two knights) system"]
+
+1. e4 {book} d6 {book} 2. d4 {book} Nf6 {book} 3. Nc3 {book} g6 {book}
+4. Nf3 {0.90s} e6 {0.90s} 5. Bb5+ {0.90s} Nc6 {0.90s} 6. Bf4 {0.90s} Bd7 {0.90s}
+7. O-O {0.90s} d5 {0.90s} 8. Qe2 {0.90s} dxe4 {0.90s} 9. Nxe4 {0.90s}
+Nxe4 {0.90s} 10. Qxe4 {0.90s} Be7 {0.90s} 11. Bc4 {0.90s} O-O {0.90s}
+12. Rae1 {0.90s} Re8 {0.90s} 13. Re3 {0.90s} Na5 {0.90s} 14. Be2 {0.90s}
+f5 {0.90s} 15. Qd3 {0.90s} g5 {0.90s} 16. Nxg5 {0.90s} Nc6 {0.90s}
+17. Rg3 {0.90s} Bxg5 {0.90s} 18. Bxg5 {0.90s} Qc8 {0.90s} 19. Bh4+ Kf8 20. Qd2
+Nb4 21. Bh5 e5 22. Qh6# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "0-1"]
+[ECO "B08"]
+[GameDuration "00:01:42"]
+[GameEndTime "2026-07-14T19:11:33.140 CEST"]
+[GameStartTime "2026-07-14T19:09:50.187 CEST"]
+[Opening "Pirc"]
+[PlyCount "146"]
+[TimeControl "1/move"]
+[Variation "Classical (Two knights) system"]
+
+1. e4 {book} d6 {book} 2. d4 {book} Nf6 {book} 3. Nc3 {book} g6 {book}
+4. Nf3 {0.90s} e6 {0.90s} 5. Bb5+ {0.90s} Nc6 {0.90s} 6. O-O {0.90s} Bd7 {0.90s}
+7. Bf4 {0.90s} d5 {0.90s} 8. Qe2 {0.90s} dxe4 {0.90s} 9. Nxe4 {0.90s}
+Nd5 {0.90s} 10. Bg5 {0.90s} Be7 {0.90s} 11. Bxe7 {0.90s} Qxe7 {0.90s}
+12. Bxc6 {0.90s} Bxc6 {0.90s} 13. Ne5 {0.90s} O-O {0.90s} 14. Nxc6 {0.90s}
+bxc6 {0.90s} 15. c4 {0.90s} Nf6 {0.90s} 16. Nc5 {0.90s} Qd6 {0.90s}
+17. Rad1 {0.90s} Rab8 {0.90s} 18. f4 {0.90s} Kg7 {0.90s} 19. Rf2 {0.90s}
+h6 {0.90s} 20. Qe5 {0.90s} Rfd8 {0.90s} 21. Re2 {0.90s} Qxe5 {0.90s}
+22. fxe5 {0.90s} Nd7 {0.90s} 23. Nb3 {0.90s} Rb4 {0.90s} 24. Rd3 {0.90s}
+Rxc4 {0.90s} 25. Rd1 {0.90s} Nc5 {0.90s} 26. Red2 {0.90s} Nxb3 {0.90s}
+27. axb3 {0.90s} Rb4 {0.90s} 28. Rd3 {0.90s} Rd5 {0.90s} 29. Kf2 {0.90s}
+Rbb5 {0.90s} 30. Ra1 {0.90s} a5 {0.90s} 31. Kf3 {0.90s} c5 {0.90s}
+32. Ra4 {0.90s} cxd4 {0.90s} 33. Raxd4 {0.90s} Rxd4 {0.90s} 34. Rxd4 {0.90s}
+Rxb3+ {0.90s} 35. Ke4 {0.90s} Rxb2 {0.90s} 36. Kf3 {0.90s} Rb5 {0.90s}
+37. Ke4 {0.90s} f5+ {0.90s} 38. exf6+ {0.90s} Kxf6 {0.90s} 39. Rc4 {0.90s}
+c5 {0.90s} 40. Rc2 {0.90s} Rb4+ {0.90s} 41. Ke3 {0.90s} Rb3+ {0.90s}
+42. Kd2 {0.90s} Rb5 {0.90s} 43. Kd3 {0.90s} a4 {0.90s} 44. Kc4 {0.90s}
+Ra5 {0.90s} 45. Ra2 {0.90s} Ke5 {0.90s} 46. Ra1 {0.90s} h5 {0.90s}
+47. Re1+ {0.90s} Kd6 {0.90s} 48. Rd1+ {0.90s} Ke5 {0.90s} 49. Re1+ {0.90s}
+Kd6 {0.90s} 50. Rd1+ {0.90s} Kc6 {0.90s} 51. Rd3 {0.90s} a3 {0.90s}
+52. Re3 {0.90s} Ra4+ {0.90s} 53. Kd3 {0.90s} a2 {0.90s} 54. Rxe6+ {0.90s}
+Kd5 {0.90s} 55. Re1 {0.90s} c4+ {0.90s} 56. Kc3 {0.90s} a1=Q+ {0.90s}
+57. Rxa1 {0.90s} Rxa1 {0.90s} 58. h3 {0.90s} Ra3+ {0.90s} 59. Kb2 {0.90s}
+Rg3 {0.90s} 60. Kc2 {0.90s} Kd4 {0.51s} 61. Kd1 Rxg2 62. Ke1 Ke3 63. Kd1 Kd4
+64. Ke1 Ke3 65. Kd1 c3 66. h4 Kd4 67. Kc1 Ke4 68. Kb1 Rh2 69. Kc1 Rg2 70. Kb1
+Rh2 71. Kc1 Kd3 72. Kb1 Rg2 73. Kc1 Rg1# {Black mates} 0-1
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1-0"]
+[ECO "B06"]
+[GameDuration "00:01:54"]
+[GameEndTime "2026-07-14T19:12:06.228 CEST"]
+[GameStartTime "2026-07-14T19:10:11.764 CEST"]
+[Opening "Robatsch defense"]
+[PlyCount "161"]
+[TimeControl "1/move"]
+[Variation "Two knights variation"]
+
+1. e4 {book} g6 {book} 2. d4 {book} Bg7 {book} 3. Nc3 {book} d6 {book}
+4. Nf3 {0.90s} Nd7 {0.90s} 5. Bb5 {0.90s} a6 {0.90s} 6. Bc4 {0.90s} Nb6 {0.90s}
+7. Bb3 {0.90s} Nf6 {0.90s} 8. Qd3 {0.90s} d5 {0.90s} 9. Be3 {0.90s} Nxe4 {0.90s}
+10. Nxe4 {0.90s} Bf5 {0.90s} 11. Nfd2 {0.90s} e5 {0.90s} 12. O-O-O {0.90s}
+dxe4 {0.90s} 13. Nxe4 {0.90s} Qh4 {0.90s} 14. f3 {0.90s} O-O-O {0.90s}
+15. d5 {0.90s} Bh6 {0.90s} 16. Kb1 {0.90s} Bxe3 {0.90s} 17. Qxe3 {0.90s}
+a5 {0.90s} 18. g3 {0.90s} Qe7 {0.90s} 19. h3 {0.90s} a4 {0.90s} 20. d6 {0.90s}
+cxd6 {0.90s} 21. Qxb6 {0.90s} axb3 {0.90s} 22. Qxb3 {0.90s} Be6 {0.90s}
+23. Qa3 {0.90s} Kc7 {0.90s} 24. f4 {0.90s} Bf5 {0.90s} 25. Nc3 {0.90s}
+Qe8 {0.90s} 26. g4 {0.90s} Be6 {0.90s} 27. fxe5 {0.90s} dxe5 {0.90s}
+28. Qc5+ {0.90s} Kb8 {0.90s} 29. Rxd8+ {0.90s} Qxd8 {0.90s} 30. Qxe5+ {0.90s}
+Ka8 {0.90s} 31. Rd1 {0.90s} Qb8 {0.90s} 32. Qd4 {0.90s} Rf8 {0.90s}
+33. Nb5 {0.90s} b6 {0.90s} 34. Qa4+ {0.90s} Kb7 {0.90s} 35. Qe4+ {0.90s}
+Ka6 {0.90s} 36. Qa4+ {0.90s} Kb7 {0.90s} 37. Qe4+ {0.90s} Ka6 {0.90s}
+38. Qd3 {0.90s} Qf4 {0.90s} 39. Nc7+ {0.90s} Kb7 {0.90s} 40. Nxe6 {0.90s}
+fxe6 {0.90s} 41. Qd7+ {0.90s} Ka6 {0.90s} 42. Qxe6 {0.90s} Rf7 {0.90s}
+43. Qe2+ {0.90s} Ka7 {0.90s} 44. Ka1 {0.90s} g5 {0.90s} 45. a3 {0.90s}
+Rc7 {0.90s} 46. Kb1 {0.90s} Qf6 {0.90s} 47. Rd5 {0.90s} Re7 {0.90s}
+48. Qd3 {0.90s} h6 {0.90s} 49. Rd6 {0.90s} Qf7 {0.90s} 50. Qd1 {0.90s}
+Qf8 {0.90s} 51. Qd4 {0.90s} Rb7 {0.90s} 52. Rf6 {0.90s} Qc5 {0.90s}
+53. Qxc5 {0.90s} bxc5 {0.90s} 54. Rxh6 {0.90s} Rb6 {0.90s} 55. Rxb6 {0.90s}
+Kxb6 {0.90s} 56. c4 {0.90s} Kc6 {0.90s} 57. Kc2 {0.90s} Kc7 {0.90s}
+58. Kd3 {0.90s} Kd6 {0.90s} 59. Ke4 {0.90s} Ke6 {0.90s} 60. b3 {0.90s}
+Kd6 {0.90s} 61. Kf5 {0.90s} Kd7 {0.90s} 62. Kxg5 {0.90s} Ke6 {0.90s}
+63. Kf4 {0.90s} Ke7 {0.90s} 64. g5 {0.90s} Kd8 {0.90s} 65. Ke5 {0.90s}
+Ke8 {0.90s} 66. g6 Ke7 {0.90s} 67. Kf5 Ke8 68. Ke5 Ke7 {0.89s} 69. Kf5 Ke8
+70. Kf6 Kd7 71. g7 Kc8 72. g8=Q+ Kd7 73. Ke5 Kc6 74. Kf6 Kb7 75. Ke5 Ka6 76. Kd5
+Kb7 77. Ke5 Ka6 78. Kd5 Kb7 79. Kd6 Kb6 80. Qb8+ Ka5 81. Qa7# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "1-0"]
+[ECO "B06"]
+[GameDuration "00:01:29"]
+[GameEndTime "2026-07-14T19:11:49.772 CEST"]
+[GameStartTime "2026-07-14T19:10:20.567 CEST"]
+[Opening "Robatsch defense"]
+[PlyCount "125"]
+[TimeControl "1/move"]
+[Variation "Two knights variation"]
+
+1. e4 {book} g6 {book} 2. d4 {book} Bg7 {book} 3. Nc3 {book} d6 {book}
+4. Nf3 {0.90s} Nd7 {0.90s} 5. Bb5 {0.90s} a6 {0.90s} 6. Bc4 {0.90s} Nb6 {0.90s}
+7. Bb3 {0.90s} Nf6 {0.90s} 8. O-O {0.90s} O-O {0.90s} 9. Bg5 {0.90s} e6 {0.90s}
+10. e5 {0.90s} dxe5 {0.90s} 11. dxe5 {0.90s} Qxd1 {0.90s} 12. Raxd1 {0.90s}
+Nfd7 {0.90s} 13. Rfe1 {0.90s} h6 {0.90s} 14. Bh4 {0.90s} Re8 {0.90s}
+15. Na4 {0.90s} Nxa4 {0.90s} 16. Bxa4 {0.90s} b5 {0.90s} 17. Bb3 {0.90s}
+g5 {0.90s} 18. Bg3 {0.90s} Nc5 {0.90s} 19. Nd4 {0.90s} Nxb3 {0.90s}
+20. Nxb3 {0.90s} h5 {0.90s} 21. h4 {0.90s} gxh4 {0.90s} 22. Bxh4 {0.90s}
+Bb7 {0.90s} 23. Rd7 {0.90s} Rec8 {0.90s} 24. Nc5 {0.90s} Bc6 {0.90s}
+25. Rd4 {0.90s} Bd5 {0.90s} 26. a3 {0.90s} Kh7 {0.90s} 27. Rf4 {0.90s}
+Bh8 {0.90s} 28. Rxf7+ {0.90s} Kg6 {0.90s} 29. Re7 {0.90s} Kf5 {0.90s}
+30. Rf7+ {0.90s} Kg6 {0.90s} 31. Re7 {0.90s} Bg7 {0.90s} 32. c4 {0.90s}
+Bxc4 {0.90s} 33. Nxe6 {0.90s} Bxe6 {0.90s} 34. Rxe6+ {0.90s} Kh7 {0.90s}
+35. Rc6 {0.90s} Ra7 {0.90s} 36. f4 {0.90s} Rf8 {0.90s} 37. Re4 {0.90s}
+a5 {0.90s} 38. Bf2 {0.90s} Rb7 {0.90s} 39. Bc5 {0.90s} Re8 {0.90s}
+40. Rd4 {0.90s} Rc8 {0.90s} 41. Rd7 {0.90s} b4 {0.90s} 42. axb4 {0.90s}
+axb4 {0.90s} 43. Bd4 {0.90s} b3 {0.90s} 44. e6 {0.90s} Rg8 {0.90s}
+45. f5 {0.90s} Rb4 {0.90s} 46. Bxg7 {0.90s} Rxg7 {0.90s} 47. Rcxc7 {0.90s}
+Rg4 {0.90s} 48. Rxg7+ {0.90s} Rxg7 {0.90s} 49. Rd7 {0.90s} Kh6 {0.90s}
+50. f6 {0.90s} Rg8 {0.90s} 51. f7 {0.90s} Rf8 {0.90s} 52. e7 {0.90s}
+Rxf7 {0.90s} 53. Rd6+ {0.90s} Kg7 54. e8=Q h4 55. Qe5+ Kg8 56. Rg6+ Rg7
+57. Rxg7+ Kh8 58. Rg5+ Kh7 59. Qe4+ Kh8 60. Qe5+ Kh7 61. Qe4+ Kh8 62. Qd4+ Kh7
+63. Qg7# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "1-0"]
+[ECO "B04"]
+[GameDuration "00:01:54"]
+[GameEndTime "2026-07-14T19:12:39.245 CEST"]
+[GameStartTime "2026-07-14T19:10:44.442 CEST"]
+[Opening "Alekhine's defense"]
+[PlyCount "145"]
+[TimeControl "1/move"]
+[Variation "Modern variation"]
+
+1. e4 {book} Nf6 {book} 2. e5 {book} Nd5 {book} 3. d4 {book} d6 {book}
+4. Nf3 {0.90s} Bf5 {0.90s} 5. Bb5+ {0.90s} Nc6 {0.90s} 6. O-O {0.90s} e6 {0.90s}
+7. c4 {0.90s} Nb4 {0.90s} 8. Nc3 {0.90s} dxe5 {0.90s} 9. Nxe5 {0.90s}
+Bd6 {0.90s} 10. Bxc6+ {0.90s} bxc6 {0.90s} 11. Qf3 {0.90s} O-O {0.90s}
+12. Nxc6 {0.90s} Nxc6 {0.90s} 13. Qxc6 {0.90s} Qh4 {0.90s} 14. f4 {0.90s}
+Bd3 {0.90s} 15. Rf2 {0.90s} Rad8 {0.90s} 16. c5 {0.90s} Be7 {0.90s}
+17. Be3 {0.90s} Qg4 {0.90s} 18. Rd1 {0.90s} Qf5 {0.90s} 19. Kh1 {0.90s}
+h5 {0.90s} 20. Qxc7 {0.90s} Bf6 {0.90s} 21. Rfd2 {0.90s} Bc2 {0.90s}
+22. Rc1 {0.90s} Bd3 {0.90s} 23. Rcd1 {0.90s} Bc2 {0.90s} 24. g3 {0.90s}
+Bxd1 {0.90s} 25. Rxd1 {0.90s} Rb8 {0.90s} 26. Rd2 {0.90s} h4 {0.90s}
+27. Kg1 {0.90s} hxg3 {0.90s} 28. hxg3 {0.90s} Ra8 {0.90s} 29. Qb7 {0.90s}
+Rfe8 {0.90s} 30. Qf3 {0.90s} Rad8 {0.90s} 31. g4 {0.90s} Qg6 {0.90s}
+32. Kf1 {0.90s} Be7 {0.90s} 33. a3 {0.90s} f5 {0.90s} 34. g5 {0.90s} Rb8 {0.90s}
+35. Rg2 {0.90s} Rb3 {0.90s} 36. Na2 {0.90s} Reb8 {0.90s} 37. Nb4 {0.90s}
+Rc8 {0.90s} 38. Na2 {0.90s} Qe8 {0.90s} 39. Nc3 {0.90s} Rcb8 {0.90s}
+40. Bc1 {0.90s} Qd7 {0.90s} 41. Qe2 {0.90s} Qc6 {0.90s} 42. d5 {0.90s}
+Qc8 {0.90s} 43. d6 {0.90s} Bd8 {0.90s} 44. c6 {0.90s} Ba5 {0.90s}
+45. Qc4 {0.90s} R3b6 {0.90s} 46. c7 {0.90s} Ra8 {0.90s} 47. b4 {0.90s}
+Bxb4 {0.90s} 48. axb4 {0.90s} Rxd6 {0.90s} 49. Nb5 {0.90s} Rd1+ {0.90s}
+50. Ke2 {0.90s} Rd5 {0.90s} 51. Be3 {0.90s} Qa6 {0.90s} 52. Bc5 {0.90s}
+Qc6 {0.90s} 53. Ke3 {0.90s} a6 {0.90s} 54. Nd4 {0.90s} Qb7 {0.90s}
+55. Nxf5 {0.90s} exf5 {0.90s} 56. Rd2 {0.90s} Re8+ {0.90s} 57. Kf3 {0.90s}
+Qxc7 {0.90s} 58. Qxd5+ {0.90s} Qf7 {0.90s} 59. g6 {0.90s} Qxd5+ {0.90s}
+60. Rxd5 {0.90s} Rb8 {0.90s} 61. Rxf5 {0.90s} Rd8 {0.90s} 62. Rf7 {0.90s}
+Rb8 {0.90s} 63. Ra7 {0.90s} Rd8 {0.90s} 64. Bd4 {0.90s} a5 {0.90s}
+65. bxa5 {0.90s} Kf8 {0.90s} 66. Bxg7+ {0.90s} Ke8 {0.90s} 67. Bf6 {0.90s} Rd3+
+68. Ke4 Rg3 69. g7 Rg6 70. Ke5 Rxg7 71. Rxg7 Kf8 72. Ke6 Ke8
+73. Rg8# {White mates} 1-0
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "*"]
+[ECO "B04"]
+[GameDuration "00:01:32"]
+[GameEndTime "2026-07-14T19:12:44.068 CEST"]
+[GameStartTime "2026-07-14T19:11:11.307 CEST"]
+[Opening "Alekhine's defense"]
+[PlyCount "112"]
+[Termination "unterminated"]
+[TimeControl "1/move"]
+[Variation "Modern variation"]
+
+1. e4 {book} Nf6 {book} 2. e5 {book} Nd5 {book} 3. d4 {book} d6 {book}
+4. Nf3 {0.90s} Bf5 {0.90s} 5. Bb5+ {0.90s} Nd7 {0.90s} 6. Nh4 {0.90s} e6 {0.90s}
+7. Nxf5 {0.90s} exf5 {0.90s} 8. c4 {0.90s} c6 {0.90s} 9. cxd5 {0.90s}
+cxb5 {0.90s} 10. exd6 {0.90s} Bxd6 {0.90s} 11. O-O {0.90s} O-O {0.90s}
+12. Nc3 {0.90s} b4 {0.90s} 13. Nb5 {0.90s} Bb8 {0.90s} 14. Bd2 {0.90s}
+Qa5 {0.90s} 15. Qe2 {0.90s} a6 {0.90s} 16. Rfc1 {0.90s} Qxb5 {0.90s}
+17. Qxb5 {0.90s} axb5 {0.90s} 18. Bxb4 {0.90s} Re8 {0.90s} 19. Re1 {0.90s}
+Re4 {0.90s} 20. a3 {0.90s} Nf6 {0.90s} 21. Rxe4 {0.90s} fxe4 {0.90s}
+22. d6 {0.90s} Ba7 {0.90s} 23. Rc1 {0.90s} Bxd4 {0.90s} 24. d7 {0.90s}
+Nxd7 {0.90s} 25. Rd1 {0.90s} Bc5 {0.90s} 26. Rxd7 {0.90s} Bxb4 {0.90s}
+27. Rxb7 {0.90s} Ra5 {0.90s} 28. f3 {0.90s} e3 {0.90s} 29. Kf1 {0.90s}
+Bf8 {0.90s} 30. g3 {0.90s} b4 {0.90s} 31. axb4 {0.90s} Ra2 {0.90s}
+32. Ke2 {0.90s} Rxb2+ {0.90s} 33. Kxe3 {0.90s} Rxb4 {0.90s} 34. Rxb4 {0.90s}
+Bxb4 {0.90s} 35. Ke4 {0.90s} Kf8 {0.90s} 36. f4 {0.90s} Bd6 {0.90s}
+37. h3 {0.90s} Ke7 {0.90s} 38. g4 {0.90s} Kf6 {0.90s} 39. Kf3 {0.90s}
+Bc5 {0.90s} 40. Ke4 {0.90s} Bd6 {0.90s} 41. Kf3 {0.90s} Bc5 {0.90s}
+42. Ke4 {0.90s} Ke6 {0.90s} 43. Kf3 {0.90s} Bd6 {0.90s} 44. Ke4 {0.90s}
+Bc5 {0.90s} 45. Kf3 {0.90s} g6 {0.90s} 46. Ke4 {0.90s} f5+ {0.90s}
+47. Kf3 {0.90s} Kd5 {0.90s} 48. g5 {0.90s} Kd4 {0.90s} 49. h4 {0.90s}
+Bf8 {0.90s} 50. Kg2 {0.90s} Ke3 {0.90s} 51. h5 {0.90s} Bd6 {0.90s}
+52. hxg6 {0.90s} hxg6 {0.90s} 53. Kf1 {0.90s} Bb4 54. Kg1 {0.90s} Kf3
+55. Kf1 {0.90s} Ke3 56. Kg1 {0.90s} Kf3 {No result} *
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_NEW"]
+[Black "CCE_OLD"]
+[Result "*"]
+[ECO "D50"]
+[GameDuration "00:01:10"]
+[GameEndTime "2026-07-14T19:12:44.068 CEST"]
+[GameStartTime "2026-07-14T19:11:33.140 CEST"]
+[Opening "Queen's Gambit declined"]
+[PlyCount "85"]
+[Termination "unterminated"]
+[TimeControl "1/move"]
+[Variation "4.Bg5"]
+
+1. d4 {book} d5 {book} 2. c4 {book} e6 {book} 3. Nc3 {book} Nf6 {book}
+4. Bg5 {book} Bb4 {0.90s} 5. Qb3 {0.90s} Nc6 {0.90s} 6. e3 {0.90s} h6 {0.90s}
+7. Bxf6 {0.90s} Qxf6 {0.90s} 8. Nf3 {0.90s} O-O {0.90s} 9. O-O-O {0.90s}
+Bxc3 {0.90s} 10. Qxc3 {0.90s} a5 {0.90s} 11. a3 {0.90s} a4 {0.90s}
+12. Bd3 {0.90s} Bd7 {0.90s} 13. Kc2 {0.90s} g5 {0.90s} 14. h3 {0.90s} h5 {0.90s}
+15. e4 {0.90s} dxe4 {0.90s} 16. Bxe4 {0.90s} g4 {0.90s} 17. hxg4 {0.90s}
+hxg4 {0.90s} 18. Ne5 {0.90s} Rfd8 {0.90s} 19. Nxg4 {0.90s} Qf4 {0.90s}
+20. Qf3 {0.90s} Qxf3 {0.90s} 21. Bxf3 {0.90s} Kg7 {0.90s} 22. Ne5 {0.90s}
+Nxe5 {0.90s} 23. dxe5 {0.90s} Bc6 {0.90s} 24. Bxc6 {0.90s} bxc6 {0.90s}
+25. Rxd8 {0.90s} Rxd8 {0.90s} 26. Rh4 {0.90s} Kg6 {0.90s} 27. Rf4 {0.90s}
+f5 {0.90s} 28. Kc3 {0.90s} c5 {0.90s} 29. Rf3 {0.90s} Kg5 {0.90s}
+30. Rg3+ {0.90s} Kf4 {0.90s} 31. Re3 {0.90s} Rd4 {0.90s} 32. g3+ {0.90s}
+Kg4 {0.90s} 33. b3 {0.90s} axb3 {0.90s} 34. Kxb3 {0.90s} f4 {0.90s}
+35. gxf4 {0.90s} Rxf4 {0.90s} 36. f3+ {0.90s} Kg3 {0.90s} 37. a4 {0.90s}
+Kf2 {0.90s} 38. Rc3 {0.90s} Kg3 {0.90s} 39. a5 {0.90s} Rf5 {0.90s}
+40. Ka4 {0.90s} c6 {0.90s} 41. a6 {0.90s} Rf8 {0.90s} 42. Ka5 {0.90s}
+Kf4 {0.90s} 43. Kb6 {0.90s, No result} *
+
+[Event "?"]
+[Site "?"]
+[Date "2026.07.14"]
+[Round "1"]
+[White "CCE_OLD"]
+[Black "CCE_NEW"]
+[Result "*"]
+[ECO "D50"]
+[GameDuration "00:00:54"]
+[GameEndTime "2026-07-14T19:12:44.068 CEST"]
+[GameStartTime "2026-07-14T19:11:49.772 CEST"]
+[Opening "Queen's Gambit declined"]
+[PlyCount "67"]
+[Termination "unterminated"]
+[TimeControl "1/move"]
+[Variation "4.Bg5"]
+
+1. d4 {book} d5 {book} 2. c4 {book} e6 {book} 3. Nc3 {book} Nf6 {book}
+4. Bg5 {book} Bb4 {0.90s} 5. Qb3 {0.90s} Nc6 {0.90s} 6. e3 {0.90s} h6 {0.90s}
+7. Bxf6 {0.90s} Qxf6 {0.90s} 8. cxd5 {0.90s} exd5 {0.90s} 9. Qxd5 {0.90s}
+Be6 {0.90s} 10. Qf3 {0.90s} Qg5 {0.90s} 11. Ne2 {0.90s} O-O-O {0.90s}
+12. a3 {0.90s} Ba5 {0.90s} 13. b4 {0.90s} Bb6 {0.90s} 14. Qe4 {0.90s}
+Rhe8 {0.90s} 15. Qf4 {0.90s} a6 {0.90s} 16. Qxg5 {0.90s} hxg5 {0.90s}
+17. O-O-O {0.90s} Bg4 {0.90s} 18. Rd2 {0.90s} Re7 {0.90s} 19. h3 {0.90s}
+Be6 {0.90s} 20. Ng3 {0.90s} f5 {0.90s} 21. d5 {0.90s} Red7 {0.90s}
+22. dxe6 {0.90s} Rxd2 {0.90s} 23. Be2 {0.90s} Ne7 {0.90s} 24. Rd1 {0.90s}
+R2d6 {0.90s} 25. Bf3 {0.90s} Rxd1+ {0.90s} 26. Bxd1 {0.90s} f4 {0.90s}
+27. Nf1 {0.90s} fxe3 {0.90s} 28. fxe3 {0.90s} Bxe3+ {0.90s} 29. Nxe3 {0.90s}
+Rd3 {0.90s} 30. Kc2 {0.90s} Rxe3 {0.90s} 31. Kd2 {0.90s} Re5 {0.90s}
+32. Bb3 {0.90s} Ng6 {0.90s} 33. Kd3 {0.90s} Nf4+ {0.90s}
+34. Kd4 {0.90s, No result} *
+

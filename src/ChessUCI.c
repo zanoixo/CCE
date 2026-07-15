@@ -136,6 +136,28 @@ void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables,
     {
         moveStr[4] = '\0';
     }
+
+    int mateInNumberOfMoves = 0;
+
+    if (best.eval > MATED_TRESHOLD)
+    {
+        mateInNumberOfMoves = -(MATED + best.eval);
+    }
+
+    if (best.eval < -MATED_TRESHOLD)
+    {
+        mateInNumberOfMoves = -(MATED - best.eval);
+    }
+    
+    if (mateInNumberOfMoves != 0)
+    {
+        printf("move: %s Mate in %d\n", moveStr, best.eval);
+    }
+    else
+    {
+        double score = best.eval / 100.0;
+        printf("move: %s evaluated at %.2f\n", moveStr, score);
+    }
         
 }
 
@@ -182,7 +204,7 @@ void applyUCIMoves(char *moves, ChessBoard *chessBoard, AttackTables *attackTabl
 void uci_loop()
 {
     char line[MAX_LINE];
-    uint64_t timePerMove = 5000;
+    uint64_t timePerMove = 10000;
     //runAllTests();
     ChessBoard* chessBoard = initChessBoard();
     AttackTables* attackTables = initAttackTables();

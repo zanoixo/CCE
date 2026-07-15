@@ -79,3 +79,5 @@ void incrementAge();
 uint16_t getCurrentAge();
 uint64_t getTTMovesSearched();
 uint64_t getTTMovesFound();
+int getScoreForTransposition(int eval, int depth);
+int getScoreFromTransposition(int eval, int depth);
