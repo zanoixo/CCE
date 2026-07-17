@@ -151,7 +151,7 @@ void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables,
     
     if (mateInNumberOfMoves != 0)
     {
-        printf("move: %s Mate in %d\n", moveStr, best.eval);
+        printf("move: %s Mate in %d\n", moveStr, mateInNumberOfMoves);
     }
     else
     {

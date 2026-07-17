@@ -49,7 +49,8 @@ Kd4 86. Qb4+ Ke5 87. Qc4 Kf5 88. Qd3+ Ke5 89. Qc4 Kf5 90. Qd3+ Ke5 91. Kf7 Kf4
 92. Ke8 Ke5 93. Ke7 Kf4 94. Kf7 Ke5 95. Ke7 Kf4 96. Kf7 Ke5 97. Kg7 Kf4 98. Kg6
 Ke5 99. Kf7 Kf4 100. Ke8 Ke5 101. Qc4 Kd6 102. Kd8 Ke5 103. Ke8 Kd6 104. Kd8 Ke5
 105. Qb3 Kf6 106. Qa2 Kg5 107. Ke7 Kg4 108. Qb3 Kf4 109. Qa3 Ke5 110. Qa8 Kd4
-{0.68s} 111. Qa3 Kc4 112. Kd6 Kd4 113. Ke7 Kc4 114. Kd6 Kd4 115. """
+{0.68s} 111. Qa3 Kc4 112. Kd6 Kd4 113. Ke7 Kc4 114. Kd6 Kd4 115. Qf3 Kc4 116.
+Qe3 Kb4 117. Kd5 Ka5 118."""
 
 pgn = re.sub(r"\{[^}]*\}", "", pgn)
 

@@ -567,6 +567,18 @@ int hasNonPawnPieces(ChessBoard* chessBoard, int side)
     
 }
 
+int isBetaValid(int beta)
+{
+    if (beta < 0)
+    {
+        return !(MIN_INT + 1000 > beta); 
+    }
+    else
+    {
+        return !(MAX_INT - 1000 < beta);
+    }
+}
+
 MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, int depth, int alpha, int beta, int side)
 {
     //nodesSearched++;
@@ -598,8 +610,9 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             unMakeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
             //ASSERT_CHESS_BOARD(original, chessBoard);
             //free(original);
-            transpositionScore->moveScore.eval = getScoreFromTransposition(transpositionScore->moveScore.eval, depth);
-            return transpositionScore->moveScore;
+            MoveScore transpositionMove = transpositionScore->moveScore;
+            transpositionMove.eval = getScoreFromTransposition(transpositionMove.eval, depth);
+            return transpositionMove;
         }
     }
     
@@ -611,9 +624,10 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
         int standPat = evaluatePosition(chessBoard, attackTables);
         bestMove.eval = side ? -standPat : standPat;
 
-        if (bestMove.eval >= beta)
+        if (bestMove.eval >= beta && isBetaValid(beta))
         {
             bestMove.eval = beta;
+
             //free(original);
             return bestMove;
         }
@@ -711,8 +725,11 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     MoveScore transpositionMove = bestMove;
     transpositionMove.eval = getScoreForTransposition(transpositionMove.eval, depth);
 
-    setTransposition(chessBoard, transpositionTable, QSEARCH, &transpositionMove, originalAlpha, originalBeta);
-
+    if (!timeLimitReached)
+    {
+        setTransposition(chessBoard, transpositionTable, QSEARCH, &transpositionMove, originalAlpha, originalBeta);
+    }
+    
     return bestMove;
 }
 
@@ -759,32 +776,38 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             unMakeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
             //ASSERT_CHESS_BOARD(original, chessBoard);
             //free(original);
-            transpositionScore->moveScore.eval = getScoreFromTransposition(transpositionScore->moveScore.eval, depthSearched);
-            return transpositionScore->moveScore;
+            MoveScore transpositionMove = transpositionScore->moveScore;
+            transpositionMove.eval = getScoreFromTransposition(transpositionMove.eval, depthSearched);
+
+            return transpositionMove;
         }
     }
 
     int ownKingSq = getSqInd(side ? chessBoard->blackKing : chessBoard->whiteKing);
     int amChecked = isSquareAttacked(ownKingSq, chessBoard, attackTables, side);
 
-    if (!isNullMove && currentDepth - depthSearched >= 3 && !amChecked && depthSearched != 0 && hasNonPawnPieces(chessBoard, side))
+    if (!isNullMove && currentDepth - depthSearched >= 3 && !amChecked && depthSearched != 0 && hasNonPawnPieces(chessBoard, side) && isBetaValid(beta))
     {
         Move nullMove = (Move){0, 0, 0, 0, 0};
+
+        MoveScore nullMoveScore;
+        nullMoveScore.move = nullMove;
 
         isNullMove = 1;
 
         makeNullMove(chessBoard, &nullMove, hashes);
 
-        moveScore = negamax(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1 + NULL_MOVE_SKIP, -beta, -beta + 1, !side);
-        moveScore.eval = -moveScore.eval;
+        nullMoveScore = negamax(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1 + NULL_MOVE_SKIP, -beta, -beta + 1, !side);
+        nullMoveScore.eval = -nullMoveScore.eval;
 
         unMakeNullMove(chessBoard, &nullMove, hashes);
 
         isNullMove = 0;
 
-        if (moveScore.eval >= beta)
+        if (nullMoveScore.eval >= beta)
         {
             bestMove.eval = beta;
+            
             //free(original);
             return bestMove;
         }
@@ -911,7 +934,10 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     MoveScore transpositionMove = bestMove;
     transpositionMove.eval = getScoreForTransposition(transpositionMove.eval, depthSearched); 
 
-    setTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, &transpositionMove, originalAlpha, originalBeta);
+    if (!timeLimitReached)
+    {
+        setTransposition(chessBoard, transpositionTable, currentDepth - depthSearched, &transpositionMove, originalAlpha, originalBeta);
+    }
     
     return bestMove;
 }
@@ -950,11 +976,6 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
         if (!timeLimitReached || currentDepth == 1)
         {
             currentBestMove = depthBestMove;
-        }
-
-        if (currentBestMove.eval > MATED_TRESHOLD || currentBestMove.eval < -MATED_TRESHOLD)
-        {
-            break;
         }
         
         currentDepth++; 

@@ -77,6 +77,12 @@ TranspositionTableEntry* getTransposition(ChessBoard* chessBoard, TranspositionT
     {
         return NULL;
     }
+
+    if (transpositionTable->transpositions[index].moveScore.eval == MIN_INT || transpositionTable->transpositions[index].moveScore.eval == MAX_INT)
+    {
+        //printf("GOT BAD MOVE\n");
+    }
+    
         
     return &transpositionTable->transpositions[index];
 }
@@ -195,12 +201,12 @@ uint16_t getCurrentAge()
 
 int getScoreForTransposition(int eval, int depth)
 {
-    if (eval > MATED_TRESHOLD)
+    if (eval > MATED_TRESHOLD && eval != MAX_INT)
     {
         return eval + depth;
     }
     
-    if (eval < -MATED_TRESHOLD)
+    if (eval < -MATED_TRESHOLD && eval != MIN_INT)
     {
         return eval - depth;
     }
@@ -210,12 +216,12 @@ int getScoreForTransposition(int eval, int depth)
 
 int getScoreFromTransposition(int eval, int depth)
 {
-    if (eval > MATED_TRESHOLD)
+    if (eval > MATED_TRESHOLD && eval != MAX_INT)
     {
         return eval - depth;
     }
     
-    if (eval < -MATED_TRESHOLD)
+    if (eval < -MATED_TRESHOLD && eval != MIN_INT)
     {
         return eval + depth;
     }

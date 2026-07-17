@@ -2,7 +2,7 @@ CC = gcc
 WINCC = x86_64-w64-mingw32-gcc
 
 CFLAGS = -O3 -Wall -Wextra -march=native -lm
-DEBUG_CFLAGS = -g -O0 -Wall -Wextra
+DEBUG_CFLAGS = -g -O0 -Wall -Wextra -lm
 
 SRC = $(wildcard src/*.c)
 
