@@ -587,6 +587,32 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     bestMove.eval = MIN_INT;
     bestMove.move = (Move){0, 0, 0, 0, 0};
 
+    int mateValue = -MATED - mateDistance;
+
+    if (mateValue < beta)
+    {
+        beta = mateValue;
+        if (alpha >= beta)
+        {
+            bestMove.eval = mateValue;
+            return bestMove;
+        }
+        
+    }
+
+    mateValue = MATED - mateDistance;
+
+    if (mateValue > alpha)
+    {
+        alpha = mateValue;
+        if (beta <= alpha)
+        {
+            bestMove.eval = mateValue;
+            return bestMove;
+        }
+        
+    }
+
     int originalBeta = beta;
     int originalAlpha = alpha;
 
@@ -743,6 +769,32 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     {
         bestMove = qsearch(chessBoard, attackTables, hashes, transpositionTable, depthSearched, mateDistance, alpha, beta, side);
         return bestMove;
+    }
+
+    int mateValue = -MATED - mateDistance;
+
+    if (mateValue < beta)
+    {
+        beta = mateValue;
+        if (alpha >= beta)
+        {
+            bestMove.eval = mateValue;
+            return bestMove;
+        }
+        
+    }
+
+    mateValue = MATED - mateDistance;
+
+    if (mateValue > alpha)
+    {
+        alpha = mateValue;
+        if (beta <= alpha)
+        {
+            bestMove.eval = mateValue;
+            return bestMove;
+        }
+        
     }
 
     //ChessBoard* original = malloc(sizeof(ChessBoard));
