@@ -14,12 +14,12 @@ ENGINE      = REPO / "bin/engine"
 STOCKFISH   = "stockfish"
 CUTECHESS   = "cutechess-cli"
 
-TIME_CONTROL    = "st=5"  # fixed 5 seconds per move
+TIME_CONTROL    = "st=1"  # fixed 5 seconds per move
 GAMES_PER_MATCH = 100       # games per Elo level (more = more accurate)
 CONCURRENCY     = 5        # parallel games
 
-SF_LOW          = 2000     # lowest Stockfish Elo to test
-SF_HIGH         = 2800     # highest Stockfish Elo to test
+SF_LOW          = 1000     # lowest Stockfish Elo to test
+SF_HIGH         = 3000     # highest Stockfish Elo to test
 CONVERGE_RANGE  = 50       # stop when range is smaller than this
 WIN_THRESHOLD   = 0.55     # score above this → CCE is stronger
 LOSS_THRESHOLD  = 0.45     # score below this → CCE is weaker
@@ -138,9 +138,9 @@ def play_match(sf_elo: int) -> tuple[float, str]:
     pgn_file = str(LOG_FILE).replace(".log", f"_sf{sf_elo}.pgn")
 
     if TIME_CONTROL.startswith("st="):
-        tc_args = ["-each", "proto=uci", TIME_CONTROL, "timemargin=2000"]
+        tc_args = ["-each", "proto=uci", TIME_CONTROL, "timemargin=200"]
     else:
-        tc_args = ["-each", "proto=uci", f"tc={TIME_CONTROL}", "timemargin=2000"]
+        tc_args = ["-each", "proto=uci", f"tc={TIME_CONTROL}", "timemargin=200"]
 
     cmd = [
         str(CUTECHESS),
