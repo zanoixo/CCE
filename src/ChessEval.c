@@ -7,25 +7,7 @@
 #include "ChessEval.h"
 #include "ChessTests.h"
 #include "ChessTranspositionTables.h"
-
-
-uint64_t innerCenterEval = 0b00000000ULL << 56 |
-                           0b00000000ULL << 48 |
-                           0b00000000ULL << 40 |
-                           0b00011000ULL << 32 |
-                           0b00011000ULL << 24 |
-                           0b00000000ULL << 16 |
-                           0b00000000ULL << 8  |
-                           0b00000000ULL;
-
-uint64_t outerCenterEval = 0b00000000ULL << 56 |
-                           0b00000000ULL << 48 |
-                           0b00111100ULL << 40 |
-                           0b00100100ULL << 32 |
-                           0b00100100ULL << 24 |
-                           0b00111100ULL << 16 |
-                           0b00000000ULL << 8  |
-                           0b00000000ULL;
+#include "ChessBitboards.h"
 
 int knightPosTable[64] =
 {
@@ -330,13 +312,202 @@ int evaluateMobility(ChessBoard* chessBoard, AttackTables* attackTables, int isB
     return mobility + piecePositioning;
 }
 
-int evaluateKingSafety(ChessBoard* chessBoard, int isBlack)
+int evaluateKingSafety(ChessBoard* chessBoard, int isBlack, int material)
 {
     int score = 0;
 
-    if (hasCastled(chessBoard, isBlack))
+    if (isBlack)
     {
-        score += KING_CASTLED_VALUE;
+        int pawnsValue = countPieces(chessBoard->blackPawns) * PAWN_VALUE;
+
+        if ((material - pawnsValue) < KING_SAFETY_CUTOFF)
+        {
+            return 0;
+        }
+        
+
+        if (hasCastled(chessBoard, isBlack) && ((blackKingSideCastleSquares | blackQueenSideCastleSquares) & chessBoard->blackKing))
+        {
+            score += KING_CASTLED_VALUE;
+        }
+        
+        if (chessBoard->blackKing & blackKingSideCastleSquares)
+        {
+            score += countPieces(chessBoard->blackPawns & blackKingSideInnerPawnShield) * INNER_PAWN_WALL_VALUE;
+            score += countPieces(chessBoard->blackPawns & blackKingSideOuterPawnShield) * OUTER_PAWN_WALL_VALUE;
+
+            uint64_t blackKingSideShield = blackKingSideInnerPawnShield | blackKingSideOuterPawnShield;
+
+            if ((chessBoard->blackPawns & blackKingSideShield & hFile) == 0)
+            {
+                score -= PAWN_WALL_MISSING_PENALTY;
+
+                if ((chessBoard->blackPawns & hFile) == 0)
+                {
+                    score -= OPEN_FILE_IN_WALL;
+                }
+                
+            }
+
+            if ((chessBoard->blackPawns & blackKingSideShield & gFile) == 0)
+            {
+                score -= PAWN_WALL_MISSING_PENALTY;
+
+                if ((chessBoard->blackPawns & gFile) == 0)
+                {
+                    score -= OPEN_FILE_IN_WALL;
+                }
+                
+            }
+
+            if ((chessBoard->blackPawns & blackKingSideShield & fFile) == 0)
+            {
+                score -= PAWN_WALL_MISSING_PENALTY;
+
+                if ((chessBoard->blackPawns & fFile) == 0)
+                {
+                    score -= OPEN_FILE_IN_WALL;
+                }
+                
+            }
+        }
+        else if(chessBoard->blackKing & blackQueenSideCastleSquares)
+        {
+            score += countPieces(chessBoard->blackPawns & blackQueenSideInnerPawnShield) * INNER_PAWN_WALL_VALUE;
+            score += countPieces(chessBoard->blackPawns & blackQueenSideOuterPawnShield) * OUTER_PAWN_WALL_VALUE;
+
+            uint64_t blackQueenSideShield = blackQueenSideInnerPawnShield | blackQueenSideOuterPawnShield;
+
+            if ((chessBoard->blackPawns & blackQueenSideShield & bFile) == 0)
+            {
+                score -= PAWN_WALL_MISSING_PENALTY;
+
+                if ((chessBoard->blackPawns & bFile) == 0)
+                {
+                    score -= OPEN_FILE_IN_WALL;
+                }
+                
+            }
+
+            if ((chessBoard->blackPawns & blackQueenSideShield & cFile) == 0)
+            {
+                score -= PAWN_WALL_MISSING_PENALTY;
+
+                if ((chessBoard->blackPawns & cFile) == 0)
+                {
+                    score -= OPEN_FILE_IN_WALL;
+                }
+                
+            }
+
+            if ((chessBoard->blackPawns & blackQueenSideShield & dFile) == 0)
+            {
+                score -= PAWN_WALL_MISSING_PENALTY;
+
+                if ((chessBoard->blackPawns & dFile) == 0)
+                {
+                    score -= OPEN_FILE_IN_WALL;
+                }
+                
+            }
+            
+        }
+        
+    }
+    else
+    {
+        int pawnsValue = countPieces(chessBoard->whitePawns) * PAWN_VALUE;
+
+        if ((material - pawnsValue) < KING_SAFETY_CUTOFF)
+        {
+            return 0;
+        }
+
+        if (hasCastled(chessBoard, isBlack) && ((whiteKingSideCastleSquares | whiteQueenSideCastleSquares) & chessBoard->whiteKing))
+        {
+            score += KING_CASTLED_VALUE;
+        }
+
+        if (chessBoard->whiteKing & whiteKingSideCastleSquares)
+        {
+            score += countPieces(chessBoard->whitePawns & whiteKingSideInnerPawnShield) * INNER_PAWN_WALL_VALUE;
+            score += countPieces(chessBoard->whitePawns & whiteKingSideOuterPawnShield) * OUTER_PAWN_WALL_VALUE;
+
+            uint64_t whiteKingSideShield = whiteKingSideInnerPawnShield | whiteKingSideOuterPawnShield;
+
+            if ((chessBoard->whitePawns & whiteKingSideShield & hFile) == 0)
+            {
+                score -= PAWN_WALL_MISSING_PENALTY;
+
+                if ((chessBoard->whitePawns & hFile) == 0)
+                {
+                    score -= OPEN_FILE_IN_WALL;
+                }
+                
+            }
+
+            if ((chessBoard->whitePawns & whiteKingSideShield & gFile) == 0)
+            {
+                score -= PAWN_WALL_MISSING_PENALTY;
+
+                if ((chessBoard->whitePawns & gFile) == 0)
+                {
+                    score -= OPEN_FILE_IN_WALL;
+                }
+                
+            }
+
+            if ((chessBoard->whitePawns & whiteKingSideShield & fFile) == 0)
+            {
+                score -= PAWN_WALL_MISSING_PENALTY;
+
+                if ((chessBoard->whitePawns & fFile) == 0)
+                {
+                    score -= OPEN_FILE_IN_WALL;
+                }
+                
+            }
+        }
+        else if(chessBoard->whiteKing & whiteQueenSideCastleSquares)
+        {
+            score += countPieces(chessBoard->whitePawns & whiteQueenSideInnerPawnShield) * INNER_PAWN_WALL_VALUE;
+            score += countPieces(chessBoard->whitePawns & whiteQueenSideOuterPawnShield) * OUTER_PAWN_WALL_VALUE;
+            
+            uint64_t whiteQueenSideShield = whiteQueenSideInnerPawnShield | whiteQueenSideOuterPawnShield;
+
+            if ((chessBoard->whitePawns & whiteQueenSideShield & bFile) == 0)
+            {
+                score -= PAWN_WALL_MISSING_PENALTY;
+
+                if ((chessBoard->whitePawns & bFile) == 0)
+                {
+                    score -= OPEN_FILE_IN_WALL;
+                }
+                
+            }
+
+            if ((chessBoard->whitePawns & whiteQueenSideShield & cFile) == 0)
+            {
+                score -= PAWN_WALL_MISSING_PENALTY;
+
+                if ((chessBoard->whitePawns & cFile) == 0)
+                {
+                    score -= OPEN_FILE_IN_WALL;
+                }
+                
+            }
+
+            if ((chessBoard->whitePawns & whiteQueenSideShield & dFile) == 0)
+            {
+                score -= PAWN_WALL_MISSING_PENALTY;
+
+                if ((chessBoard->whitePawns & dFile) == 0)
+                {
+                    score -= OPEN_FILE_IN_WALL;
+                }
+                
+            }
+        }
     }
     
     return score;
@@ -423,23 +594,6 @@ int evaluateMaterial(ChessBoard* chessBoard, int isBlack)
     return score;
 }
 
-int evaluateCenter(ChessBoard* chessBoard, int isBlack)
-{
-    int score = 0;
-
-    if (isBlack)
-    {
-        score += countPieces(chessBoard->blackPieces & innerCenterEval) * INNER_CENTER_VALUE;
-        score += countPieces(chessBoard->blackPieces & outerCenterEval) * OUTER_CENTER_VALUE;
-    }
-    else
-    {
-        score += countPieces(chessBoard->whitePieces & innerCenterEval) * INNER_CENTER_VALUE;
-        score += countPieces(chessBoard->whitePieces & outerCenterEval) * OUTER_CENTER_VALUE;    
-    }
-    return score;
-}
-
 int evaluateBishopPair(ChessBoard* chessBoard, int isBlack)
 {
     int score = 0;
@@ -470,19 +624,21 @@ int evaluatePosition(ChessBoard* chessBoard, AttackTables* attackTables)
 {
     int score = 0;
 
-    score += evaluateMaterial(chessBoard, white);
-    score += evaluateCenter(chessBoard, white);
+
+    int whiteMaterial = evaluateMaterial(chessBoard, white);
+    score += whiteMaterial;
     score += evaluateMobility(chessBoard, attackTables, white);
     score += evaluatePawnPositioning(chessBoard, white);
     score += evaluateBishopPair(chessBoard, white);
-    score += evaluateKingSafety(chessBoard, white);
+    score += evaluateKingSafety(chessBoard, white, whiteMaterial);
 
-    score -= evaluateMaterial(chessBoard, black);
-    score -= evaluateCenter(chessBoard, black);
+
+    int blackMaterial = evaluateMaterial(chessBoard, black);
+    score -= blackMaterial;
     score -= evaluateMobility(chessBoard, attackTables, black);
     score -= evaluatePawnPositioning(chessBoard, black);
     score -= evaluateBishopPair(chessBoard, black);
-    score -= evaluateKingSafety(chessBoard, black);
+    score -= evaluateKingSafety(chessBoard, black, blackMaterial);
 
     return score;
 }
