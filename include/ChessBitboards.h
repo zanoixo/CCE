@@ -65,3 +65,5 @@ extern const uint64_t blackKingSideCastleSquares;
 extern const uint64_t blackQueenSideInnerPawnShield;
 extern const uint64_t blackQueenSideOuterPawnShield;
 extern const uint64_t blackQueenSideCastleSquares;
+
+extern const uint64_t files[];

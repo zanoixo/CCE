@@ -258,19 +258,25 @@ int evaluateMobility(ChessBoard* chessBoard, AttackTables* attackTables, int isB
     int mobility = 0;
     int piecePositioning = 0;
 
+    uint64_t pawns = chessBoard->whitePawns;
     uint64_t knights = chessBoard->whiteKnights;
     uint64_t bishops = chessBoard->whiteBishops;
     uint64_t rooks = chessBoard->whiteRooks;
     uint64_t queens = chessBoard->whiteQueens;
     uint64_t friendlyPieces = chessBoard->whitePieces;
+    uint64_t enemyPawns = chessBoard->blackPawns;
+    uint64_t enemyKing = chessBoard->blackKing;
 
     if (isBlack)
     {
+        pawns = chessBoard->blackPawns;
         knights = chessBoard->blackKnights;
         bishops = chessBoard->blackBishops;
         rooks = chessBoard->blackRooks;
         queens = chessBoard->blackQueens;
         friendlyPieces = chessBoard->blackPieces;
+        enemyPawns = chessBoard->whitePawns;
+        enemyKing = chessBoard->whiteKing;
     }
     
     while (knights)
@@ -297,6 +303,27 @@ int evaluateMobility(ChessBoard* chessBoard, AttackTables* attackTables, int isB
         uint64_t attacks = getRookAttackPattern(sq, chessBoard->allPieces, attackTables) & ~friendlyPieces;
         mobility += countPieces(attacks) * ROOK_MOBILITY_VALUE;
         piecePositioning += rookPosTable[sq];
+
+        uint64_t rookFile = files[sq % 8];
+
+        if (!(pawns & rookFile))
+        {
+            if (!(enemyPawns & rookFile))
+            {
+                piecePositioning += ROOK_OPEN_FILE_VALUE;
+            }
+            else
+            {
+                piecePositioning += ROOK_SEMIOPEN_FILE_VALUE;
+            }
+
+            if (enemyKing & rookFile)
+            {
+                piecePositioning += ROOK_ON_KING_FILE_VALUE;
+            }
+            
+        }
+        
         rooks &= rooks - 1;
     }
 
@@ -318,7 +345,7 @@ int evaluateKingSafety(ChessBoard* chessBoard, int isBlack, int material)
 
     if (isBlack)
     {
-        int pawnsValue = countPieces(chessBoard->blackPawns) * PAWN_VALUE;
+        int pawnsValue = countPieces(chessBoard->whitePawns) * PAWN_VALUE;
 
         if ((material - pawnsValue) < KING_SAFETY_CUTOFF)
         {
@@ -416,7 +443,7 @@ int evaluateKingSafety(ChessBoard* chessBoard, int isBlack, int material)
     }
     else
     {
-        int pawnsValue = countPieces(chessBoard->whitePawns) * PAWN_VALUE;
+        int pawnsValue = countPieces(chessBoard->blackPawns) * PAWN_VALUE;
 
         if ((material - pawnsValue) < KING_SAFETY_CUTOFF)
         {
@@ -626,19 +653,20 @@ int evaluatePosition(ChessBoard* chessBoard, AttackTables* attackTables)
 
 
     int whiteMaterial = evaluateMaterial(chessBoard, white);
+    int blackMaterial = evaluateMaterial(chessBoard, black);
+    
     score += whiteMaterial;
     score += evaluateMobility(chessBoard, attackTables, white);
     score += evaluatePawnPositioning(chessBoard, white);
     score += evaluateBishopPair(chessBoard, white);
-    score += evaluateKingSafety(chessBoard, white, whiteMaterial);
+    score += evaluateKingSafety(chessBoard, white, blackMaterial);
 
 
-    int blackMaterial = evaluateMaterial(chessBoard, black);
     score -= blackMaterial;
     score -= evaluateMobility(chessBoard, attackTables, black);
     score -= evaluatePawnPositioning(chessBoard, black);
     score -= evaluateBishopPair(chessBoard, black);
-    score -= evaluateKingSafety(chessBoard, black, blackMaterial);
+    score -= evaluateKingSafety(chessBoard, black, whiteMaterial);
 
     return score;
 }
@@ -1075,7 +1103,13 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
                 {
                     moveScore = negamax(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1 + moveReduction, mateDistance + 1, -alpha - 1, -alpha, !side);
                     moveScore.eval = -moveScore.eval;
-                    pvsChecks++;  
+                    pvsChecks++;
+                    
+                    if (moveReduction > 0 && moveScore.eval > alpha)
+                    {
+                        moveScore = negamax(chessBoard, attackTables, hashes, transpositionTable,  depthSearched + 1, mateDistance + 1, -alpha - 1, -alpha, !side);
+                        moveScore.eval = -moveScore.eval;
+                    }
 
                     if (moveScore.eval > alpha)
                     {

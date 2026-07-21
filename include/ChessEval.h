@@ -43,6 +43,9 @@ typedef struct TranspositionTableEntry TranspositionTableEntry;
 #define PAWN_WALL_MISSING_PENALTY 12
 #define OPEN_FILE_IN_WALL 18
 #define KING_SAFETY_CUTOFF 1350
+#define ROOK_OPEN_FILE_VALUE 20
+#define ROOK_SEMIOPEN_FILE_VALUE 10
+#define ROOK_ON_KING_FILE_VALUE 10
 
 #define NULL_MOVE_SKIP 2
 

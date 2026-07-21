@@ -75,6 +75,8 @@ const uint64_t hFile = 0b10000000ULL << 56 |
                        0b10000000ULL << 8  |
                        0b10000000ULL;
 
+const uint64_t files[] = {aFile, bFile, cFile, dFile, eFile, fFile, gFile, hFile};
+
 
 //LINES
 
