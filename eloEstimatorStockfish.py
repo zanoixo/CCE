@@ -16,7 +16,7 @@ CUTECHESS   = "cutechess-cli"
 
 TIME_CONTROL    = "st=1"  # fixed 5 seconds per move
 GAMES_PER_MATCH = 100       # games per Elo level (more = more accurate)
-CONCURRENCY     = 5        # parallel games
+CONCURRENCY     = 10        # parallel games
 
 SF_LOW          = 1000     # lowest Stockfish Elo to test
 SF_HIGH         = 3000     # highest Stockfish Elo to test
@@ -25,7 +25,7 @@ WIN_THRESHOLD   = 0.55     # score above this → CCE is stronger
 LOSS_THRESHOLD  = 0.45     # score below this → CCE is weaker
 # ─────────────────────────────────────────────────────────────────────────────
 
-LOG_FILE = f"./eloEstimatorLogs/elo_result_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+LOG_FILE = f"./eloEstimatorLogs/result.log"
 
 # ── Colours ───────────────────────────────────────────────────────────────────
 USE_COLOR = sys.stdout.isatty()
@@ -258,39 +258,31 @@ def main():
     info(f"Stockfish:    {STOCKFISH}")
     info(f"Time control: {TIME_CONTROL}")
     info(f"Games/match:  {GAMES_PER_MATCH}")
-    info(f"Search range: Elo {SF_LOW} – {SF_HIGH}")
     info(f"Log file:     {LOG_FILE}")
     log()
 
-    low      = SF_LOW
-    high     = SF_HIGH
-    best_elo = (low + high) // 2
     history  = []
 
-    iteration = 0
-    while (high - low) > CONVERGE_RANGE:
-        iteration += 1
-        mid = (low + high) // 2
+    for elo in [2000, 2100, 2200, 2300, 2400, 2500]:
 
-        log(bold(f"── Iteration {iteration} ──────────────────────────────────"))
-        info(f"Range: [{low} – {high}]  →  testing Elo {mid}")
+        log(bold(f"── Iteration {elo} ──────────────────────────────────"))
         info(f"Playing {GAMES_PER_MATCH} games, please wait...")
 
-        score, wdl = play_match(mid)
+        score, wdl = play_match(elo)
         pct = score * 100
-        history.append((mid, wdl, pct))
 
-        if score > WIN_THRESHOLD:
-            ok(   f"CCE scored {pct:.1f}% → stronger than SF {mid} → raising floor")
-            low      = mid
-            best_elo = mid
-        elif score < LOSS_THRESHOLD:
-            warn( f"CCE scored {pct:.1f}% → weaker than SF {mid}   → lowering ceiling")
-            high     = mid
-        else:
-            ok(   f"CCE scored {pct:.1f}% → within target range (45–55%) → converged!")
-            best_elo = mid
-            break
+        # Parse W-D-L from the score string
+        wins, draws, losses = map(int, wdl.split(" - "))
+
+        history.append((elo, wins, draws, losses, pct))
+
+        log()
+        log(bold(f"── Iteration {elo} Finished ─────────────────────────"))
+        log(f"    Wins:   {wins}")
+        log(f"    Draws:  {draws}")
+        log(f"    Losses: {losses}")
+        log(f"    Score:  {pct:.1f}%")
+        log()
 
         log()
 
@@ -299,14 +291,12 @@ def main():
     log(bold("┌──────────────────────────────────────────┐"))
     log(bold("│              RESULTS                     │"))
     log(bold("├──────────────────────────────────────────┤"))
-    for sf_elo, wdl, pct in history:
-        log(f"{bold('│')}  SF {sf_elo} : {wdl}  [{pct:.1f}%]")
-    log(bold("├──────────────────────────────────────────┤"))
-    log(f"{bold('│')}  {green(f'Estimated CCE Elo:  ~{best_elo}')}")
-    log(f"{bold('│')}  Final range:        [{low} – {high}]")
-    log(f"{bold('│')}  Total iterations:   {iteration}")
-    log(f"{bold('│')}  Total games:        {iteration * GAMES_PER_MATCH}")
-    log(bold("└──────────────────────────────────────────┘"))
+    for sf_elo, wins, draws, losses, pct in history:
+        log(
+        f"{bold('│')}  SF {sf_elo} : "
+        f"W {wins}  D {draws}  L {losses}  "
+        f"[{pct:.1f}%]"
+        )
     log()
     log(f"Full log saved to: {LOG_FILE}")
 
