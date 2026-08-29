@@ -8,6 +8,7 @@
 #include "ChessUtils.h"
 #include "ChessTests.h"
 #include "ChessTranspositionTables.h"
+#include "ChessClock.h"
 
 #define MAX_LINE 2048
 
@@ -253,16 +254,14 @@ void uci_loop()
                 applyUCIMoves(moves, chessBoard, attackTables, hashes); 
             } 
         } 
-        
+
         else if (strncmp(line, "go", 2) == 0) 
         { 
-            char *ptr;
+            ChessClock clock;
+            ParseTime(line, &clock);
 
-            if ((ptr = strstr(line, "movetime")))
-            {
-                timePerMove = strtoull(ptr + 9, NULL, 10);
-            }
-                
+            timePerMove = CalculateTime(&clock, isBlack(chessBoard), getCurrentAge());
+
             char moveStr[6];
             bestMove(moveStr, chessBoard, attackTables, hashes, transpositionTable, timePerMove);
             printf("bestmove %s\n", moveStr);

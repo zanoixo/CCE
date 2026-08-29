@@ -1198,7 +1198,7 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
     MoveScore depthBestMove;
     timeLimitReached = 0;
     timeCheckCounter = 1;
-    stopTime = getTimeMs() + timePerMove - 100;
+    stopTime = getTimeMs() + timePerMove;
 
     currentDepth = 1;
     qSearchDepthReached = 1;

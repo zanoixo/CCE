@@ -1,8 +1,10 @@
 CC = gcc
 WINCC = x86_64-w64-mingw32-gcc
 
-CFLAGS = -O3 -Wall -Wextra -march=native -lm
-DEBUG_CFLAGS = -g -O0 -Wall -Wextra -lm
+CFLAGS = -O3 -Wall -Wextra -march=native
+DEBUG_CFLAGS = -g -O0 -Wall -Wextra
+
+LDFLAGS = -lm
 
 SRC = $(wildcard src/*.c)
 
@@ -18,11 +20,11 @@ all: $(TARGET)
 
 $(TARGET): $(OBJ)
 	mkdir -p bin
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 $(DEBUG_TARGET): $(DEBUG_OBJ)
 	mkdir -p bin
-	$(CC) $(DEBUG_CFLAGS) -o $@ $^
+	$(CC) $(DEBUG_CFLAGS) -o $@ $^ $(LDFLAGS)
 
 $(WIN_TARGET):
 	mkdir -p release
