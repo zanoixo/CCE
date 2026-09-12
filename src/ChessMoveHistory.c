@@ -14,7 +14,7 @@ int isThreeFoldRepetition(ChessBoard* chessBoard)
         {
             repetitionCounter++;
 
-            if (repetitionCounter == 3)
+            if (repetitionCounter == 2)
             {
                 return 1;
             }

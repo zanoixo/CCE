@@ -1015,6 +1015,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             MoveScore transpositionMove = transpositionScore->moveScore;
             transpositionMove.eval = getScoreFromTransposition(transpositionMove.eval, mateDistance);
             
+            printf("TT return\n");
             return transpositionMove;
         }
     }
