@@ -1,8 +1,10 @@
 #pragma once
 
-#include <stdint.h>
 #include "ChessUtils.h"
-#include "ChessEval.h"
+#include "Move.h"
+
+typedef struct ChessBoard ChessBoard;
+
 
 #define DIFFERENT_PIECE_COUNT 12
 #define CASTLE_RIGHT_COUNT 4
@@ -81,3 +83,4 @@ uint64_t getTTMovesSearched();
 uint64_t getTTMovesFound();
 int getScoreForTransposition(int eval, int depth);
 int getScoreFromTransposition(int eval, int depth);
+void hashEnPassant(ChessBoard* chessBoard, TranspositionTableHashes* hashes);

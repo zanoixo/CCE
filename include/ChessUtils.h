@@ -5,6 +5,11 @@
 #include <stdio.h>
 
 #define BOARD_SIZE 64
+#define MAX_INT 1000000000
+#define MIN_INT -1000000000
+#define MATED -1000000
+#define MATED_TRESHOLD (-MATED - 1000)
+#define DRAW 0 
 
 enum Piece
 {
@@ -25,3 +30,4 @@ enum color
 void showBitBoard(uint64_t bitBoard);
 void sendError(char errorMsg[]);
 uint64_t getTimeMs();
+uint8_t getSqInd(uint64_t sq);

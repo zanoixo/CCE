@@ -6,6 +6,8 @@
 #include "ChessMoveGenerator.h"
 #include "ChessUtils.h"
 #include "ChessBoard.h"
+#include "MakeMove.h"
+#include "UnMakeMove.h"
 
 uint64_t positionsGenerated = 0;
 

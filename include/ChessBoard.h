@@ -49,3 +49,8 @@ ChessBoard* initChessBoard();
 void createPosition(char fileName[], ChessBoard *chessBoard);
 void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hashes);
 uint8_t hasCastled(ChessBoard* chessBoard, int isBlack);
+uint8_t canWhiteShortCastle(ChessBoard *chessBoard);
+uint8_t canWhiteLongCastle(ChessBoard *chessBoard);
+uint8_t canBlackShortCastle(ChessBoard *chessBoard);
+uint8_t canBlackLongCastle(ChessBoard *chessBoard);
+uint8_t isBlack(ChessBoard *chessBoard);

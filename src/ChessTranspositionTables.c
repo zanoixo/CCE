@@ -223,3 +223,13 @@ int getScoreFromTransposition(int eval, int depth)
     
     return eval;
 }
+
+void hashEnPassant(ChessBoard* chessBoard, TranspositionTableHashes* hashes)
+{
+    if (chessBoard->enPassantSq != 0)
+    {
+        uint8_t enPassantSq = getSqInd(chessBoard->enPassantSq);
+        uint8_t enPassantFile = enPassantSq % 8;
+        chessBoard->positionHash ^= hashes->enPassantHashes[enPassantFile];
+    }
+}

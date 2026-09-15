@@ -31,9 +31,9 @@ void addMoveToHistory(ChessBoard* chessBoard, Move* move)
 
     chessBoard->history.positionHashes[index] = chessBoard->positionHash;
 
-    uint8_t piece = getPiece(move->flags);
+    uint8_t piece = getPiece(*move);
 
-    if (getCapturedPiece(move->flags) || piece == pawn)
+    if (getCapturedPiece(*move) || piece == pawn)
     {
         chessBoard->history.lastIrreversableIndex[index] = index;
     }

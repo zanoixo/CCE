@@ -268,6 +268,31 @@ void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hash
     chessBoard->history.lastIrreversableIndex[0] = 0;
 }
 
+uint8_t canWhiteShortCastle(ChessBoard *chessBoard)
+{
+    return chessBoard->flags & whiteShortCastleMask;
+}
+
+uint8_t canWhiteLongCastle(ChessBoard *chessBoard)
+{
+    return chessBoard->flags & whiteLongCastleMask;
+}
+
+uint8_t canBlackShortCastle(ChessBoard *chessBoard)
+{
+    return chessBoard->flags & blackShortCastleMask;
+}
+
+uint8_t canBlackLongCastle(ChessBoard *chessBoard)
+{
+    return chessBoard->flags & blackLongCastleMask;
+}
+
+uint8_t isBlack(ChessBoard *chessBoard)
+{
+    return chessBoard->flags & colorMask;
+}
+
 void createPosition(char fileName[], ChessBoard *chessBoard)
 {
     int squareIndex = 0;

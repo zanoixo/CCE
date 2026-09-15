@@ -8,6 +8,8 @@
 #include "ChessTests.h"
 #include "ChessTranspositionTables.h"
 #include "ChessBitboards.h"
+#include "MakeMove.h"
+#include "UnMakeMove.h"
 
 int knightPosTable[64] =
 {
@@ -183,17 +185,17 @@ void initIsolatedPawnMasks()
 
 void penalizeHistoryHeuristic(Move move, int remeniningDepth)
 {
-    historyHeuristic[getSqInd(move.from)][getSqInd(move.to)][getPiece(move.flags) - 1] -= remeniningDepth;     
+    historyHeuristic[getSqInd(move.from)][getSqInd(move.to)][getPiece(move) - 1] -= remeniningDepth;     
 }
 
 void updateHistoryHeuristic(Move move, int remeniningDepth)
 {
-    historyHeuristic[getSqInd(move.from)][getSqInd(move.to)][getPiece(move.flags) - 1] += remeniningDepth * remeniningDepth; 
+    historyHeuristic[getSqInd(move.from)][getSqInd(move.to)][getPiece(move) - 1] += remeniningDepth * remeniningDepth; 
 }
 
 int getHistoryHeuristic(Move move)
 {
-    return historyHeuristic[getSqInd(move.from)][getSqInd(move.to)][getPiece(move.flags) - 1];
+    return historyHeuristic[getSqInd(move.from)][getSqInd(move.to)][getPiece(move) - 1];
 }
 
 void clearHistoryHeuristic()
@@ -694,9 +696,9 @@ void setBestMoveFirst(MoveList* moveList, int moveCount)
     moveList->moves[moveInd] = tmp;
 }
 
-int isValidQSearchMove(uint16_t moveFlags)
+int isValidQSearchMove(Move move)
 {    
-    return getCapturedPiece(moveFlags)  || getPromotionPiece(moveFlags);
+    return getCapturedPiece(move)  || getPromotionPiece(move);
 }
 
 int hasNonPawnPieces(ChessBoard* chessBoard, int side)
@@ -877,7 +879,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
         setBestMoveFirst(&moveList, i);
 
-        if (!gotChecked && !isValidQSearchMove(moveList.moves[i].flags))
+        if (!gotChecked && !isValidQSearchMove(moveList.moves[i]))
         {
             continue;
         }
@@ -1015,7 +1017,6 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             MoveScore transpositionMove = transpositionScore->moveScore;
             transpositionMove.eval = getScoreFromTransposition(transpositionMove.eval, mateDistance);
             
-            printf("TT return\n");
             return transpositionMove;
         }
     }
@@ -1083,7 +1084,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             int isEnemyChecked = isSquareAttacked(enemyKingSq, chessBoard, attackTables, !side);
             int moveReduction = 0;
 
-            if (i > 3 && !isEnemyChecked && !amChecked && currentDepth - depthSearched >= 3 && !getCapturedPiece(moveList.moves[i].flags) && !getPromotionPiece(moveList.moves[i].flags))
+            if (i > 3 && !isEnemyChecked && !amChecked && currentDepth - depthSearched >= 3 && !getCapturedPiece(moveList.moves[i]) && !getPromotionPiece(moveList.moves[i]))
             {
                 moveReduction = (int)(0.75 * log(currentDepth - depthSearched) * log(i) / 2.25);
             }
@@ -1137,7 +1138,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
             if (alpha >= beta)
             {
-                if (!getPromotionPiece(moveList.moves[i].flags) && !getCapturedPiece(moveList.moves[i].flags))
+                if (!getPromotionPiece(moveList.moves[i]) && !getCapturedPiece(moveList.moves[i]))
                 {
                     setKillerMove(moveList.moves[i], depthSearched);
                     updateHistoryHeuristic(moveList.moves[i], currentDepth - depthSearched);

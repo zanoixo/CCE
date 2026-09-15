@@ -45,3 +45,8 @@ void sendError(char errorMsg[]){
     printf("[ERROR]: %s\n", errorMsg);
     exit(1);
 }
+
+uint8_t getSqInd(uint64_t sq)
+{
+    return __builtin_ctzll(sq);
+}

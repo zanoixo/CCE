@@ -9,6 +9,7 @@
 #include "ChessTests.h"
 #include "ChessTranspositionTables.h"
 #include "ChessClock.h"
+#include "MakeMove.h"
 
 #define MAX_LINE 2048
 
@@ -106,9 +107,9 @@ void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables,
     moveStr[2] = 'a' + (toSq % 8);
     moveStr[3] = '1' + (toSq / 8);
 
-    if (getPromotionPiece(best.move.flags))
+    if (getPromotionPiece(best.move))
     {
-        switch (getPromotionPiece(best.move.flags))
+        switch (getPromotionPiece(best.move))
         {
             case queen:
                 moveStr[4] = 'q';
@@ -206,7 +207,7 @@ void uci_loop()
 {
     char line[MAX_LINE];
     uint64_t timePerMove = 10000;
-    //runAllTests();
+    runAllTests();
     ChessBoard* chessBoard = initChessBoard();
     AttackTables* attackTables = initAttackTables();
     TranspositionTableHashes* hashes = initTranpositionTableHashes();
@@ -217,7 +218,7 @@ void uci_loop()
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
 
-    //runAllTests();
+    runAllTests();
 
     while (fgets(line, sizeof(line), stdin))
     {
