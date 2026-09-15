@@ -1,4 +1,4 @@
-#include "ChessUtils.h"
+#include "Utils.h"
 #include "time.h"
 
 #ifdef _WIN32
@@ -49,4 +49,17 @@ void sendError(char errorMsg[]){
 uint8_t getSqInd(uint64_t sq)
 {
     return __builtin_ctzll(sq);
+}
+
+int countPieces(uint64_t bitboard)
+{
+    int count = 0;
+
+    while (bitboard)
+    {
+        count++;
+        bitboard &= bitboard - 1;
+    }
+
+    return count;
 }

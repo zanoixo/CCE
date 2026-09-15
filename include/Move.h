@@ -61,3 +61,4 @@ enum MoveFlagsPosition
 uint8_t getCapturedPiece(Move move);
 uint8_t getPromotionPiece(Move move);
 uint8_t getPiece(Move move);
+uint8_t getIsCastleMove(Move flags);

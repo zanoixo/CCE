@@ -31,3 +31,4 @@ void showBitBoard(uint64_t bitBoard);
 void sendError(char errorMsg[]);
 uint64_t getTimeMs();
 uint8_t getSqInd(uint64_t sq);
+int countPieces(uint64_t bitboard);

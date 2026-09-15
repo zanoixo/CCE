@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-#include "ChessTranspositionTables.h"
+#include "TranspositionTables.h"
 #include "ChessBoard.h"
 
 uint64_t randomHash = 12121212121212121212ULL;

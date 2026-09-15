@@ -3,13 +3,15 @@
 #include <stdlib.h>
 
 #include "ChessBoard.h"
-#include "ChessEval.h"
-#include "ChessMoveGenerator.h"
-#include "ChessUtils.h"
-#include "ChessTests.h"
-#include "ChessTranspositionTables.h"
+#include "Search.h"
+#include "Utils.h"
+#include "Tests.h"
+#include "TranspositionTables.h"
 #include "ChessClock.h"
 #include "MakeMove.h"
+#include "AttackTables.h"
+#include "MoveGenerator.h"
+#include "Eval.h"
 
 #define MAX_LINE 2048
 
@@ -207,7 +209,7 @@ void uci_loop()
 {
     char line[MAX_LINE];
     uint64_t timePerMove = 10000;
-    runAllTests();
+    //runAllTests();
     ChessBoard* chessBoard = initChessBoard();
     AttackTables* attackTables = initAttackTables();
     TranspositionTableHashes* hashes = initTranpositionTableHashes();
@@ -217,8 +219,6 @@ void uci_loop()
 
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
-
-    runAllTests();
 
     while (fgets(line, sizeof(line), stdin))
     {

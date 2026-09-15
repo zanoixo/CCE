@@ -1,8 +1,9 @@
 #include <stdio.h>
 
 #include "ChessBoard.h"
-#include "ChessUtils.h"
-#include "ChessTranspositionTables.h"
+#include "Utils.h"
+#include "TranspositionTables.h"
+#include "AttackTables.h"
 
 void showPosition(const ChessBoard* chessBoard)
 {
@@ -291,6 +292,165 @@ uint8_t canBlackLongCastle(ChessBoard *chessBoard)
 uint8_t isBlack(ChessBoard *chessBoard)
 {
     return chessBoard->flags & colorMask;
+}
+
+uint8_t getPieceFromSquare(uint64_t sq, uint8_t isBlack, ChessBoard *chessBoard)
+{
+    uint64_t pawnsSq = chessBoard->whitePawns;
+    uint64_t knightsSq = chessBoard->whiteKnights; 
+    uint64_t bishopsSq = chessBoard->whiteBishops; 
+    uint64_t rooksSq = chessBoard->whiteRooks; 
+    uint64_t queensSq = chessBoard->whiteQueens;
+    uint64_t kingSq = chessBoard->whiteKing;
+    
+    if (isBlack)
+    {
+        pawnsSq = chessBoard->blackPawns;
+        knightsSq = chessBoard->blackKnights; 
+        bishopsSq = chessBoard->blackBishops; 
+        rooksSq = chessBoard->blackRooks; 
+        queensSq = chessBoard->blackQueens;
+        kingSq = chessBoard->blackKing;
+    }
+
+    if (pawnsSq & sq)
+    {
+        return pawn;
+    }
+    
+    if (knightsSq & sq)
+    {
+        return knight;
+    }
+
+    if (bishopsSq & sq)
+    {
+        return bishop;
+    }
+
+    if (rooksSq & sq)
+    {
+        return rook;
+    }
+
+    if (queensSq & sq)
+    {
+        return queen;
+    }
+
+    if (kingSq & sq)
+    {
+        return king;
+    }
+    
+    return 0;
+}
+
+int hasNonPawnPieces(ChessBoard* chessBoard, int side)
+{
+    if (side == black)
+    {
+        if (chessBoard->blackBishops > 0)
+        {
+            return 1;
+        }
+        
+        if (chessBoard->blackKnights > 0)
+        {
+            return 1;
+        }
+        
+        if (chessBoard->blackQueens > 0)
+        {
+            return 1;
+        }
+        
+        if (chessBoard->blackRooks > 0)
+        {
+            return 1;
+        }
+        
+    }
+    else
+    {
+        if (chessBoard->whiteBishops > 0)
+        {
+            return 1;
+        }
+        
+        if (chessBoard->whiteKnights > 0)
+        {
+            return 1;
+        }
+        
+        if (chessBoard->whiteQueens > 0)
+        {
+            return 1;
+        }
+        
+        if (chessBoard->whiteRooks > 0)
+        {
+            return 1;
+        }       
+    }
+
+    return 0;
+    
+}
+
+int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attackTables, int isAttackedByWhite)
+{
+    
+    uint64_t enemyKnights = chessBoard->blackKnights;
+    uint64_t enemyBishops = chessBoard->blackBishops;
+    uint64_t enemyRooks = chessBoard->blackRooks;
+    uint64_t enemyQueens = chessBoard->blackQueens;
+    uint64_t enemyPawns = chessBoard->blackPawns;
+    uint64_t enemyKing = chessBoard->blackKing;
+    uint64_t *friendlyPawnAttacks = attackTables->whitePanwsAttacks;
+    
+    if (isAttackedByWhite)
+    {
+        enemyKnights = chessBoard->whiteKnights;
+        enemyBishops = chessBoard->whiteBishops;
+        enemyRooks = chessBoard->whiteRooks;
+        enemyQueens = chessBoard->whiteQueens;
+        enemyPawns = chessBoard->whitePawns;
+        enemyKing = chessBoard->whiteKing;
+        friendlyPawnAttacks = attackTables->blackPanwsAttacks;
+
+    }
+    
+    if (attackTables->knightAttacks[sqInd] & enemyKnights)
+    {
+        return 1;
+    }
+
+    if (attackTables->kingAttacks[sqInd] & enemyKing)
+    {
+        return 1;
+    }
+    
+    uint64_t bishopAndQueenAttacks = getBishopAttackPattern(sqInd, chessBoard->allPieces, attackTables);
+    
+    if ((bishopAndQueenAttacks & enemyBishops) || (bishopAndQueenAttacks & enemyQueens))
+    {
+        return 1;
+    }
+    
+    uint64_t rookAndQueenAttacks = getRookAttackPattern(sqInd, chessBoard->allPieces, attackTables);
+    
+    if ((rookAndQueenAttacks & enemyRooks) || (rookAndQueenAttacks & enemyQueens))
+    {
+        return 1;
+    }
+
+    if (friendlyPawnAttacks[sqInd] & enemyPawns)
+    {
+        return 1;
+    }
+
+    return 0;
 }
 
 void createPosition(char fileName[], ChessBoard *chessBoard)

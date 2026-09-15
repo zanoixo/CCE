@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ChessUtils.h"
+#include "Utils.h"
 #include "Move.h"
 
 typedef struct ChessBoard ChessBoard;

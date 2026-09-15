@@ -1,6 +1,6 @@
-#include "ChessMoveHistory.h"
+#include "MoveHistory.h"
 #include "ChessBoard.h"
-#include "ChessMoveGenerator.h"
+#include "MoveGenerator.h"
 
 int isThreeFoldRepetition(ChessBoard* chessBoard)
 {

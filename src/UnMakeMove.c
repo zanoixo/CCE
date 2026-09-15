@@ -1,6 +1,6 @@
 #include "ChessBoard.h"
 #include "Move.h"
-#include "ChessTranspositionTables.h"
+#include "TranspositionTables.h"
 #include "ChessBitboards.h"
 
 void unMakeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)

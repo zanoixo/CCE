@@ -2,12 +2,13 @@
 #include <string.h>
 #include <time.h>
 
-#include "ChessTranspositionTables.h"
-#include "ChessMoveGenerator.h"
-#include "ChessUtils.h"
+#include "TranspositionTables.h"
+#include "MoveGenerator.h"
+#include "Utils.h"
 #include "ChessBoard.h"
 #include "MakeMove.h"
 #include "UnMakeMove.h"
+#include "AttackTables.h"
 
 uint64_t positionsGenerated = 0;
 
@@ -1965,6 +1966,7 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, Trans
     uint64_t originalEnPassantSq = chessBoard->enPassantSq;
 
     generateMoves(chessBoard, attackTables, moveList);
+    //printf("Moves generated: %d\n", moveList->nextIndex);
     
     for (int i = 0; i < moveList->nextIndex; i++)
     {
@@ -2112,4 +2114,6 @@ void runAllTests()
     runAttackTablesTests();
     runPseudeLegalMovesTests();
     runMakeMoveTests();
+
+    printf("ALL TESTS PASSED\n");
 }

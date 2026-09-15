@@ -14,3 +14,8 @@ uint8_t getPiece(Move move)
 {
     return (move.flags & pieceMask) >> pieceFlagPosition;
 }
+
+uint8_t getIsCastleMove(Move move)
+{
+    return (move.flags & castleMask)  >> castleFlagPosition;
+}
