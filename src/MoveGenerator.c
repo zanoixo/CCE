@@ -26,7 +26,8 @@ int calculateCaptureMoveScore(uint8_t attackerPiece, uint8_t capturedPiece)
 
 void addMove(uint64_t from, uint64_t to, uint16_t flags, MoveList* moveList, int score)
 {
-    moveList->moves[moveList->nextIndex] = (Move){ from, to, flags, score };
+    uint32_t move = constructMove(from, to);
+    moveList->moves[moveList->nextIndex] = (Move){ move, flags, score };
     moveList->nextIndex++;
 }
 

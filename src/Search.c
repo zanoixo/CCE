@@ -47,17 +47,17 @@ void updateTime()
 
 void penalizeHistoryHeuristic(Move move, int remeniningDepth)
 {
-    historyHeuristic[getSqInd(move.from)][getSqInd(move.to)][getPiece(move) - 1] -= remeniningDepth;     
+    historyHeuristic[getFromSq(move.move)][getToSq(move.move)][getPiece(move) - 1] -= remeniningDepth;     
 }
 
 void updateHistoryHeuristic(Move move, int remeniningDepth)
 {
-    historyHeuristic[getSqInd(move.from)][getSqInd(move.to)][getPiece(move) - 1] += remeniningDepth * remeniningDepth; 
+    historyHeuristic[getFromSq(move.move)][getToSq(move.move)][getPiece(move) - 1] += remeniningDepth * remeniningDepth; 
 }
 
 int getHistoryHeuristic(Move move)
 {
-    return historyHeuristic[getSqInd(move.from)][getSqInd(move.to)][getPiece(move) - 1];
+    return historyHeuristic[getFromSq(move.move)][getToSq(move.move)][getPiece(move) - 1];
 }
 
 void clearHistoryHeuristic()
@@ -69,8 +69,8 @@ void initKillerMoves()
 {
     for (int i = 0; i < currentDepth; i++)
     {
-        killerMoves[i][0] = (Move){0, 0, 0, 0};
-        killerMoves[i][1] = (Move){0, 0, 0, 0};
+        killerMoves[i][0] = (Move){0, 0, 0};
+        killerMoves[i][1] = (Move){0, 0, 0};
     }
 }
 
@@ -78,14 +78,12 @@ void findKillerMoves(MoveList *moveList, int depth)
 {
     for (int i = 0; i < moveList->nextIndex; i++)
     {
-        if (moveList->moves[i].from == killerMoves[depth][0].from &&
-             moveList->moves[i].to == killerMoves[depth][0].to)
+        if (moveList->moves[i].move == killerMoves[depth][0].move)
         {
             moveList->moves[i].score = 200;
         }
 
-        if (moveList->moves[i].from == killerMoves[depth][1].from &&
-             moveList->moves[i].to == killerMoves[depth][1].to)
+        if (moveList->moves[i].move == killerMoves[depth][1].move)
         {
             moveList->moves[i].score = 100;
         }
@@ -96,8 +94,8 @@ void findKillerMoves(MoveList *moveList, int depth)
 
 void setKillerMove(Move killerMove, int depth)
 {
-    if (!(killerMoves[depth][0].from == killerMove.from && killerMoves[depth][0].to == killerMove.to) &&
-        !(killerMoves[depth][1].from == killerMove.from && killerMoves[depth][1].to == killerMove.to))
+    if (!(killerMoves[depth][0].move == killerMove.move) &&
+        !(killerMoves[depth][1].move == killerMove.move))
     {
         killerMoves[depth][1] = killerMoves[depth][0];
         killerMoves[depth][0] = killerMove;
@@ -150,7 +148,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     MoveScore bestMove;
     bestMove.eval = MIN_INT;
-    bestMove.move = (Move){0, 0, 0, 0};
+    bestMove.move = (Move){0, 0, 0};
 
     int mateValue = -MATED - mateDistance;
 
@@ -328,7 +326,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 {
     MoveScore bestMove;
     bestMove.eval = MIN_INT;
-    bestMove.move = (Move){0, 0, 0, 0};
+    bestMove.move = (Move){0, 0, 0};
 
     if (depthSearched > currentDepth)
     {
@@ -405,7 +403,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     if (!isNullMove && currentDepth - depthSearched >= 3 && !amChecked && depthSearched != 0 && hasNonPawnPieces(chessBoard, side) && isBetaValid(beta))
     {
-        Move nullMove = (Move){0, 0, 0, 0};
+        Move nullMove = (Move){0, 0, 0};
 
         MoveScore nullMoveScore;
         nullMoveScore.move = nullMove;

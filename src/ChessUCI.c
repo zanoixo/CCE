@@ -85,7 +85,7 @@ void userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
-        if (fromBitboard == moveList.moves[i].from && toBitboard == moveList.moves[i].to && promotionFlag == (moveList.moves[i].flags & promotionPieceMask))
+        if (fromBitboard == getFromBitboard(moveList.moves[i].move) && toBitboard == getToBitboard(moveList.moves[i].move) && promotionFlag == (moveList.moves[i].flags & promotionPieceMask))
         {
             playedMove = &moveList.moves[i];
             break;
@@ -100,8 +100,8 @@ void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables,
     
     MoveScore best = evaluate(ChessBoard, attackTables, hashes, transpositionTable, timePerMove);
 
-    int fromSq = getSqInd(best.move.from);
-    int toSq   = getSqInd(best.move.to);
+    int fromSq = getFromSq(best.move.move);
+    int toSq   = getToSq(best.move.move);
 
     moveStr[0] = 'a' + (fromSq % 8);
     moveStr[1] = '1' + (fromSq / 8);

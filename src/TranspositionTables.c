@@ -116,7 +116,7 @@ TranspositionTableEntry* checkTranspositionHit(ChessBoard* chessBoard, Transposi
 
 void setTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, MoveScore* moveScore, int alpha, int beta)
 {
-    if (moveScore->move.from == 0 || moveScore->move.to == 0)
+    if (moveScore->move.move == 0)
     {
         return;
     }
@@ -158,8 +158,7 @@ void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, Tra
 
     for (int i = 0; i < moveList->nextIndex; i++)
     {
-        if (transposition != NULL && transposition->moveScore.move.from == moveList->moves[i].from && 
-            transposition->moveScore.move.to == moveList->moves[i].to)
+        if (transposition != NULL && transposition->moveScore.move.move == moveList->moves[i].move)
         {
             moveList->moves[i].score = TRANSPOSITION_SCORE;
             TTMoveFound++;

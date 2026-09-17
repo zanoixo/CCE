@@ -4,8 +4,9 @@
 
 typedef struct Move
 {
-    uint64_t from;
-    uint64_t to;
+    uint32_t move;
+    //uint64_t from;
+    //uint64_t to;
     uint16_t flags;
     int score;
 }Move;
@@ -44,6 +45,18 @@ enum MoveFlags
     castleMask                 = 0b100000000000000
 };
 
+enum MovePosition
+{
+    fromPosition = 0,
+    toPosition = 6
+};
+
+enum MoveMasks
+{
+    fromMask = 0b0000000000111111,
+    toMask   = 0b0000111111000000
+};
+
 enum MoveFlagsPosition
 {
     promotionFlagPosition = 0,
@@ -61,3 +74,8 @@ uint8_t getCapturedPiece(Move move);
 uint8_t getPromotionPiece(Move move);
 uint8_t getPiece(Move move);
 uint8_t getIsCastleMove(Move flags);
+uint32_t constructMove(uint64_t from, uint64_t to);
+uint8_t getFromSq(uint32_t move);
+uint8_t getToSq(uint32_t move);
+uint64_t getFromBitboard(uint32_t move);
+uint64_t getToBitboard(uint32_t move);
