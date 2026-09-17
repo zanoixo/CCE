@@ -977,17 +977,17 @@ void unMakeMove(ChessBoard* chessBoard, Move* move, TranspositionTableHashes* ha
 
     hashEnPassant(chessBoard, hashes);
 
-    chessBoard->enPassantSq = move->prevEnPassantSq;
+    revertMoveData(chessBoard);
 
     hashEnPassant(chessBoard, hashes);
     
     removeMovefromHistory(chessBoard);
 }
 
-void unMakeNullMove(ChessBoard* chessBoard, Move* move, TranspositionTableHashes* hashes)
+void unMakeNullMove(ChessBoard* chessBoard, TranspositionTableHashes* hashes)
 {
     chessBoard->flags ^= colorMask;
     chessBoard->positionHash ^= hashes->colorHash;
-    chessBoard->enPassantSq = move->prevEnPassantSq;
+    revertMoveData(chessBoard);
     hashEnPassant(chessBoard, hashes);
 }

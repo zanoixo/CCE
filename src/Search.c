@@ -69,8 +69,8 @@ void initKillerMoves()
 {
     for (int i = 0; i < currentDepth; i++)
     {
-        killerMoves[i][0] = (Move){0, 0, 0, 0, 0};
-        killerMoves[i][1] = (Move){0, 0, 0, 0, 0};
+        killerMoves[i][0] = (Move){0, 0, 0, 0};
+        killerMoves[i][1] = (Move){0, 0, 0, 0};
     }
 }
 
@@ -150,7 +150,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     MoveScore bestMove;
     bestMove.eval = MIN_INT;
-    bestMove.move = (Move){0, 0, 0, 0, 0};
+    bestMove.move = (Move){0, 0, 0, 0};
 
     int mateValue = -MATED - mateDistance;
 
@@ -328,7 +328,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 {
     MoveScore bestMove;
     bestMove.eval = MIN_INT;
-    bestMove.move = (Move){0, 0, 0, 0, 0};
+    bestMove.move = (Move){0, 0, 0, 0};
 
     if (depthSearched > currentDepth)
     {
@@ -405,19 +405,19 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     if (!isNullMove && currentDepth - depthSearched >= 3 && !amChecked && depthSearched != 0 && hasNonPawnPieces(chessBoard, side) && isBetaValid(beta))
     {
-        Move nullMove = (Move){0, 0, 0, 0, 0};
+        Move nullMove = (Move){0, 0, 0, 0};
 
         MoveScore nullMoveScore;
         nullMoveScore.move = nullMove;
 
         isNullMove = 1;
 
-        makeNullMove(chessBoard, &nullMove, hashes);
+        makeNullMove(chessBoard, hashes);
 
         nullMoveScore = negamax(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1 + NULL_MOVE_SKIP, mateDistance + 1, -beta, -beta + 1, !side);
         nullMoveScore.eval = -nullMoveScore.eval;
 
-        unMakeNullMove(chessBoard, &nullMove, hashes);
+        unMakeNullMove(chessBoard, hashes);
 
         isNullMove = 0;
 

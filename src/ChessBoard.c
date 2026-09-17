@@ -78,6 +78,7 @@ ChessBoard* initChessBoard()
     chessBoard->flags = 0;
 
     chessBoard->history.size = 0;
+    chessBoard->moveDataStack.size = 0;
     
     return chessBoard;
 }
@@ -267,6 +268,8 @@ void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hash
     
     chessBoard->history.size = 0;
     chessBoard->history.lastIrreversableIndex[0] = 0;
+
+    chessBoard->moveDataStack.size = 0;
 }
 
 uint8_t canWhiteShortCastle(ChessBoard *chessBoard)
@@ -451,6 +454,18 @@ int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attack
     }
 
     return 0;
+}
+
+void addMoveData(ChessBoard *chessBoard, uint64_t EnPassantSq)
+{
+    chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].EnPassantSq = EnPassantSq;
+    chessBoard->moveDataStack.size++;
+}
+
+void revertMoveData(ChessBoard *chessBoard)
+{
+    chessBoard->moveDataStack.size--;
+    chessBoard->enPassantSq = chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].EnPassantSq;
 }
 
 void createPosition(char fileName[], ChessBoard *chessBoard)

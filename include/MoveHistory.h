@@ -9,6 +9,7 @@ typedef struct Move Move;
 typedef struct MoveHistory
 {
     uint64_t positionHashes[HISTORY_SIZE];
+    uint64_t enPassantList[HISTORY_SIZE];
     int lastIrreversableIndex[HISTORY_SIZE];
     int size;
 }MoveHistory;
@@ -16,3 +17,4 @@ typedef struct MoveHistory
 int isThreeFoldRepetition(ChessBoard* chessBoard);
 void addMoveToHistory(ChessBoard* chessBoard, Move* move);
 void removeMovefromHistory(ChessBoard* chessBoard);
+uint64_t getPrevEnPassantBitboard();

@@ -919,6 +919,8 @@ void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hash
     
     hashEnPassant(chessBoard, hashes);
 
+    addMoveData(chessBoard, chessBoard->enPassantSq);
+
     chessBoard->enPassantSq = 0;
 
     switch (piece)
@@ -952,11 +954,11 @@ void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hash
     addMoveToHistory(chessBoard, move);
 }
 
-void makeNullMove(ChessBoard* chessBoard, Move* move, TranspositionTableHashes* hashes)
+void makeNullMove(ChessBoard* chessBoard, TranspositionTableHashes* hashes)
 {
+    addMoveData(chessBoard, chessBoard->enPassantSq);
     chessBoard->flags ^= colorMask;
     chessBoard->positionHash ^= hashes->colorHash;
-    move->prevEnPassantSq = chessBoard->enPassantSq;
     hashEnPassant(chessBoard, hashes);
     chessBoard->enPassantSq = 0;
 }

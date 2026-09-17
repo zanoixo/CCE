@@ -8,6 +8,17 @@
 typedef struct TranspositionTableHashes TranspositionTableHashes;
 typedef struct AttackTables AttackTables;
 
+typedef struct MoveData
+{
+    uint64_t EnPassantSq;
+}MoveData;
+
+typedef struct MoveDataStack
+{
+    MoveData moveData[1024];
+    int size;
+}MoveDataStack;
+
 typedef struct ChessBoard
 {
     uint64_t whitePawns;
@@ -32,6 +43,7 @@ typedef struct ChessBoard
     uint64_t positionHash;
 
     MoveHistory history;
+    MoveDataStack moveDataStack;
 }ChessBoard;
 
 enum boardFlags
@@ -58,3 +70,5 @@ uint8_t isBlack(ChessBoard *chessBoard);
 uint8_t getPieceFromSquare(uint64_t sq, uint8_t isBlack, ChessBoard *chessBoard);
 int hasNonPawnPieces(ChessBoard* chessBoard, int side);
 int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attackTables, int isAttackedByWhite);
+void addMoveData(ChessBoard *chessBoard, uint64_t EnPassantSq);
+void revertMoveData(ChessBoard *chessBoard);

@@ -46,7 +46,7 @@ void addMoveToHistory(ChessBoard* chessBoard, Move* move)
 
     }
 
-     chessBoard->history.size++;
+    chessBoard->history.size++;
 }
 
 void removeMovefromHistory(ChessBoard* chessBoard)
