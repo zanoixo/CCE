@@ -339,7 +339,7 @@ void generateRookMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
 void generateCastleMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
 {
     uint16_t moveFlags = king << pieceFlagPosition;
-    moveFlags |= castleMask;
+    
     if (isBlack(chessBoard))
     {
         if (canBlackShortCastle(chessBoard))

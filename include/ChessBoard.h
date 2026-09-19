@@ -10,7 +10,9 @@ typedef struct AttackTables AttackTables;
 
 typedef struct MoveData
 {
-    uint64_t EnPassantSq;
+    uint64_t enPassantSq;
+    uint64_t positionHash;
+    uint8_t boardFlags;
 }MoveData;
 
 typedef struct MoveDataStack
@@ -70,5 +72,5 @@ uint8_t isBlack(ChessBoard *chessBoard);
 uint8_t getPieceFromSquare(uint64_t sq, uint8_t isBlack, ChessBoard *chessBoard);
 int hasNonPawnPieces(ChessBoard* chessBoard, int side);
 int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attackTables, int isAttackedByWhite);
-void addMoveData(ChessBoard *chessBoard, uint64_t EnPassantSq);
+void addMoveData(ChessBoard *chessBoard);
 void revertMoveData(ChessBoard *chessBoard);

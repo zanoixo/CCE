@@ -48,13 +48,11 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
                 {
                     chessBoard->flags &= ~whiteLongCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-                    move->flags |= removeWhiteLongCastleFlag;
                 }
                 if (to == h1 && canWhiteShortCastle(chessBoard))
                 {
                     chessBoard->flags &= ~whiteShortCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-                    move->flags |= removeWhiteShortCastleFlag;
                 }
 
                 break;
@@ -104,13 +102,11 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
                 {
                     chessBoard->flags &= ~blackLongCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-                    move->flags |= removeBlackLongCastleFlag;
                 }
                 if (to == h8 && canBlackShortCastle(chessBoard))
                 {
                     chessBoard->flags &= ~blackShortCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-                    move->flags |= removeBlackShortCastleFlag;
                 }
 
                 break;
@@ -170,13 +166,11 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
                 {
                     chessBoard->flags &= ~whiteLongCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-                    move->flags |= removeWhiteLongCastleFlag;
                 }
                 if (to == h1 && canWhiteShortCastle(chessBoard))
                 {
                     chessBoard->flags &= ~whiteShortCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-                    move->flags |= removeWhiteShortCastleFlag;
                 }
 
                 break;
@@ -225,13 +219,11 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
                 {
                     chessBoard->flags &= ~blackLongCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-                    move->flags |= removeBlackLongCastleFlag;
                 }
                 if (to == h8 && canBlackShortCastle(chessBoard))
                 {
                     chessBoard->flags &= ~blackShortCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-                    move->flags |= removeBlackShortCastleFlag;
                 }
 
                 break;
@@ -269,14 +261,12 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         {
             chessBoard->flags &= ~blackShortCastleMask;
             chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-            move->flags |= removeBlackShortCastleFlag;
         }
 
         if (from == a8 && canBlackLongCastle(chessBoard))
         {
             chessBoard->flags &= ~blackLongCastleMask;
             chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-            move->flags |= removeBlackLongCastleFlag;
         }
 
         switch (capture)
@@ -305,13 +295,11 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 {
                     chessBoard->flags &= ~whiteLongCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-                    move->flags |= removeWhiteLongCastleFlag;
                 }
                 if (to == h1 && canWhiteShortCastle(chessBoard))
                 {
                     chessBoard->flags &= ~whiteShortCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-                    move->flags |= removeWhiteShortCastleFlag;
                 }
 
                 break;
@@ -338,14 +326,12 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         {
             chessBoard->flags &= ~whiteShortCastleMask;
             chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-            move->flags |= removeWhiteShortCastleFlag;
         }
 
         if (from == a1 && canWhiteLongCastle(chessBoard))
         {
             chessBoard->flags &= ~whiteLongCastleMask;
             chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-            move->flags |= removeWhiteLongCastleFlag;
         }
 
         switch (capture)
@@ -374,13 +360,11 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 {
                     chessBoard->flags &= ~blackLongCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-                    move->flags |= removeBlackLongCastleFlag;
                 }
                 if (to == h8 && canBlackShortCastle(chessBoard))
                 {
                     chessBoard->flags &= ~blackShortCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-                    move->flags |= removeBlackShortCastleFlag;
                 }
 
                 break;
@@ -440,13 +424,11 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
                 {
                     chessBoard->flags &= ~whiteLongCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-                    move->flags |= removeWhiteLongCastleFlag;
                 }
                 if (to == h1 && canWhiteShortCastle(chessBoard))
                 {
                     chessBoard->flags &= ~whiteShortCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-                    move->flags |= removeWhiteShortCastleFlag;
                 }
 
                 break;
@@ -495,13 +477,11 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
                 {
                     chessBoard->flags &= ~blackLongCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-                    move->flags |= removeBlackLongCastleFlag;
                 }
                 if (to == h8 && canBlackShortCastle(chessBoard))
                 {
                     chessBoard->flags &= ~blackShortCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-                    move->flags |= removeBlackShortCastleFlag;
                 }
 
                 break;
@@ -539,14 +519,12 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         {
             chessBoard->flags &= ~blackShortCastleMask;
             chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-            move->flags |= removeBlackShortCastleFlag;
         }
 
         if (from == e8 && canBlackLongCastle(chessBoard))
         {
             chessBoard->flags &= ~blackLongCastleMask;
             chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-            move->flags |= removeBlackLongCastleFlag;
         }
 
         switch (capture)
@@ -575,13 +553,11 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 {
                     chessBoard->flags &= ~whiteLongCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-                    move->flags |= removeWhiteLongCastleFlag;
                 }
                 if (to == h1 && canWhiteShortCastle(chessBoard))
                 {
                     chessBoard->flags &= ~whiteShortCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-                    move->flags |= removeWhiteShortCastleFlag;
                 }
 
                 break;
@@ -638,14 +614,12 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         {
             chessBoard->flags &= ~whiteShortCastleMask;
             chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-            move->flags |= removeWhiteShortCastleFlag;
         }
 
         if (from == e1 && canWhiteLongCastle(chessBoard))
         {
             chessBoard->flags &= ~whiteLongCastleMask;
             chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-            move->flags |= removeWhiteLongCastleFlag;
         }
 
         switch (capture)
@@ -674,13 +648,11 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 {
                     chessBoard->flags &= ~blackLongCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-                    move->flags |= removeBlackLongCastleFlag;
                 }
                 if (to == h8 && canBlackShortCastle(chessBoard))
                 {
                     chessBoard->flags &= ~blackShortCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-                    move->flags |= removeBlackShortCastleFlag;
                 }
 
                 break;
@@ -778,13 +750,11 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 {
                     chessBoard->flags &= ~whiteLongCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-                    move->flags |= removeWhiteLongCastleFlag;
                 }
                 if (to == h1 && canWhiteShortCastle(chessBoard))
                 {
                     chessBoard->flags &= ~whiteShortCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-                    move->flags |= removeWhiteShortCastleFlag;
                 }
 
                 break;
@@ -876,13 +846,11 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 {
                     chessBoard->flags &= ~blackLongCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-                    move->flags |= removeBlackLongCastleFlag;
                 }
                 if (to == h8 && canBlackShortCastle(chessBoard))
                 {
                     chessBoard->flags &= ~blackShortCastleMask;
                     chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-                    move->flags |= removeBlackShortCastleFlag;
                 }
 
                 break;
@@ -935,10 +903,10 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
     uint8_t piece = getPiece(*move);
+
+    addMoveData(chessBoard);
     
     hashEnPassant(chessBoard, hashes);
-
-    addMoveData(chessBoard, chessBoard->enPassantSq);
 
     chessBoard->enPassantSq = 0;
 
@@ -975,7 +943,7 @@ void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hash
 
 void makeNullMove(ChessBoard* chessBoard, TranspositionTableHashes* hashes)
 {
-    addMoveData(chessBoard, chessBoard->enPassantSq);
+    addMoveData(chessBoard);
     chessBoard->flags ^= colorMask;
     chessBoard->positionHash ^= hashes->colorHash;
     hashEnPassant(chessBoard, hashes);

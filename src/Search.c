@@ -191,12 +191,12 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
         if (isThreeFoldRepetition(chessBoard))
         {
-            unMakeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
+            unMakeMove(chessBoard, &transpositionScore->moveScore.move);
             //ASSERT_CHESS_BOARD(original, chessBoard);
         }
         else
         {
-            unMakeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
+            unMakeMove(chessBoard, &transpositionScore->moveScore.move);
             //ASSERT_CHESS_BOARD(original, chessBoard);
             //free(original);
             MoveScore transpositionMove = transpositionScore->moveScore;
@@ -294,13 +294,13 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
             if (alpha >= beta)
             {
-                unMakeMove(chessBoard, &moveList.moves[i], hashes);
+                unMakeMove(chessBoard, &moveList.moves[i]);
                 //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
         }
 
-        unMakeMove(chessBoard, &moveList.moves[i], hashes);
+        unMakeMove(chessBoard, &moveList.moves[i]);
         //ASSERT_CHESS_BOARD(original, chessBoard);
     }
 
@@ -327,7 +327,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     MoveScore bestMove;
     bestMove.eval = MIN_INT;
     bestMove.move = (Move){0, 0, 0};
-
+    
     if (depthSearched > currentDepth)
     {
         bestMove = qsearch(chessBoard, attackTables, hashes, transpositionTable, depthSearched, mateDistance, alpha, beta, side);
@@ -383,12 +383,12 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
         if (isThreeFoldRepetition(chessBoard))
         {
-            unMakeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
+            unMakeMove(chessBoard, &transpositionScore->moveScore.move);
             //ASSERT_CHESS_BOARD(original, chessBoard);
         }
         else
         {
-            unMakeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
+            unMakeMove(chessBoard, &transpositionScore->moveScore.move);
             //ASSERT_CHESS_BOARD(original, chessBoard);
             //free(original);
             MoveScore transpositionMove = transpositionScore->moveScore;
@@ -415,7 +415,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
         nullMoveScore = negamax(chessBoard, attackTables, hashes, transpositionTable, depthSearched + 1 + NULL_MOVE_SKIP, mateDistance + 1, -beta, -beta + 1, !side);
         nullMoveScore.eval = -nullMoveScore.eval;
 
-        unMakeNullMove(chessBoard, hashes);
+        unMakeNullMove(chessBoard);
 
         isNullMove = 0;
 
@@ -531,13 +531,13 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
                     }
                 }
 
-                unMakeMove(chessBoard, &moveList.moves[i], hashes);
+                unMakeMove(chessBoard, &moveList.moves[i]);
                 //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
         }
 
-        unMakeMove(chessBoard, &moveList.moves[i], hashes);
+        unMakeMove(chessBoard, &moveList.moves[i]);
         //ASSERT_CHESS_BOARD(original, chessBoard);
     }
 

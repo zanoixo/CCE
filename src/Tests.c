@@ -218,7 +218,6 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         printf("GOT: %llu\n", (unsigned long long)modified->positionHash);
         isSame = 0;
     }
-    
 
     if (!isSame)
     {
@@ -1963,7 +1962,6 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, Trans
 
     memcpy(chessBoardOriginal, chessBoard, sizeof(ChessBoard));
 
-    uint64_t originalEnPassantSq = chessBoard->enPassantSq;
 
     generateMoves(chessBoard, attackTables, moveList);
     //printf("Moves generated: %d\n", moveList->nextIndex);
@@ -1985,8 +1983,7 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, Trans
         }
         
         
-        unMakeMove(chessBoard, &moveList->moves[i], hashes);
-        chessBoard->enPassantSq = originalEnPassantSq;
+        unMakeMove(chessBoard, &moveList->moves[i]);
 
         ASSERT_CHESS_BOARD(chessBoardOriginal, chessBoard);
 

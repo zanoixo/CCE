@@ -456,16 +456,20 @@ int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attack
     return 0;
 }
 
-void addMoveData(ChessBoard *chessBoard, uint64_t EnPassantSq)
+void addMoveData(ChessBoard *chessBoard)
 {
-    chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].EnPassantSq = EnPassantSq;
+    chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].enPassantSq = chessBoard->enPassantSq;
+    chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].positionHash = chessBoard->positionHash;
+    chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].boardFlags = chessBoard->flags;
     chessBoard->moveDataStack.size++;
 }
 
 void revertMoveData(ChessBoard *chessBoard)
 {
     chessBoard->moveDataStack.size--;
-    chessBoard->enPassantSq = chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].EnPassantSq;
+    chessBoard->enPassantSq = chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].enPassantSq;
+    chessBoard->positionHash = chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].positionHash;
+    chessBoard->flags = chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].boardFlags;
 }
 
 void createPosition(char fileName[], ChessBoard *chessBoard)

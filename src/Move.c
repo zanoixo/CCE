@@ -16,11 +16,6 @@ uint8_t getPiece(Move move)
     return (move.flags & pieceMask) >> pieceFlagPosition;
 }
 
-uint8_t getIsCastleMove(Move move)
-{
-    return (move.flags & castleMask)  >> castleFlagPosition;
-}
-
 uint32_t constructMove(uint64_t from, uint64_t to)
 {
     uint32_t move = 0;
