@@ -3,10 +3,10 @@
 #include "TranspositionTables.h"
 #include "ChessBitboards.h"
 
-void unMakeKnightMove(ChessBoard *chessBoard, Move *move)
+void unMakeKnightMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
-    uint8_t capture = getCapturedPiece(*move);
+    uint8_t capture = moveData.capturedPiece;
 
     uint64_t from = getFromBitboard(move->move);
     uint64_t to = getToBitboard(move->move);
@@ -110,10 +110,10 @@ void unMakeKnightMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void unMakeBishopMove(ChessBoard *chessBoard, Move *move)
+void unMakeBishopMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
-    uint8_t capture = getCapturedPiece(*move);
+    uint8_t capture = moveData.capturedPiece;
 
     uint64_t from = getFromBitboard(move->move);
     uint64_t to = getToBitboard(move->move);
@@ -217,10 +217,10 @@ void unMakeBishopMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void unMakeRookMove(ChessBoard *chessBoard, Move *move)
+void unMakeRookMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
-    uint8_t capture = getCapturedPiece(*move);
+    uint8_t capture = moveData.capturedPiece;
 
     uint64_t from = getFromBitboard(move->move);
     uint64_t to = getToBitboard(move->move);
@@ -324,10 +324,10 @@ void unMakeRookMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void unMakeQueenMove(ChessBoard *chessBoard, Move *move)
+void unMakeQueenMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
-    uint8_t capture = getCapturedPiece(*move);
+    uint8_t capture = moveData.capturedPiece;
 
     uint64_t from = getFromBitboard(move->move);
     uint64_t to = getToBitboard(move->move);
@@ -431,10 +431,10 @@ void unMakeQueenMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void unMakeKingMove(ChessBoard *chessBoard, Move *move)
+void unMakeKingMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
-    uint8_t capture = getCapturedPiece(*move);
+    uint8_t capture = moveData.capturedPiece;
 
     uint64_t from = getFromBitboard(move->move);
     uint64_t to = getToBitboard(move->move);
@@ -592,10 +592,10 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move)
     }
 }
 
-void unMakePawnMove(ChessBoard *chessBoard, Move *move)
+void unMakePawnMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
-    uint8_t capture = getCapturedPiece(*move);
+    uint8_t capture = moveData.capturedPiece;
     uint8_t promotion = getPromotionPiece(*move);
     
     uint64_t from = getFromBitboard(move->move);
@@ -763,29 +763,29 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move)
 
 void unMakeMove(ChessBoard* chessBoard, Move* move)
 {
-    revertMoveData(chessBoard);
+    MoveData moveData = revertMoveData(chessBoard);
 
     uint8_t piece = getPiece(*move);
 
     switch (piece)
     {
         case pawn:
-            unMakePawnMove(chessBoard, move);
+            unMakePawnMove(chessBoard, move, moveData);
             break;
         case knight:
-            unMakeKnightMove(chessBoard, move);
+            unMakeKnightMove(chessBoard, move, moveData);
             break;
         case bishop:
-            unMakeBishopMove(chessBoard, move);
+            unMakeBishopMove(chessBoard, move, moveData);
             break;
         case rook:
-            unMakeRookMove(chessBoard, move);
+            unMakeRookMove(chessBoard, move, moveData);
             break;
         case queen:
-            unMakeQueenMove(chessBoard, move);
+            unMakeQueenMove(chessBoard, move, moveData);
             break;
         case king:
-            unMakeKingMove(chessBoard, move);
+            unMakeKingMove(chessBoard, move, moveData);
             break;
     }
     

@@ -487,12 +487,14 @@ void addMoveData(ChessBoard *chessBoard)
     chessBoard->moveDataStack.size++;
 }
 
-void revertMoveData(ChessBoard *chessBoard)
+MoveData revertMoveData(ChessBoard *chessBoard)
 {
     chessBoard->moveDataStack.size--;
     chessBoard->enPassantSq = chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].enPassantSq;
     chessBoard->positionHash = chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].positionHash;
     chessBoard->flags = chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].boardFlags;
+
+    return chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size];
 }
 
 void createPosition(char fileName[], ChessBoard *chessBoard)
