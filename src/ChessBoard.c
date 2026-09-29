@@ -5,6 +5,17 @@
 #include "TranspositionTables.h"
 #include "AttackTables.h"
 
+uint8_t startPos[64] = {
+    whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook,
+    whitePawn, whitePawn,   whitePawn,   whitePawn,  whitePawn, whitePawn,   whitePawn,   whitePawn,
+    empty,     empty,       empty,       empty,      empty,     empty,       empty,       empty,
+    empty,     empty,       empty,       empty,      empty,     empty,       empty,       empty,
+    empty,     empty,       empty,       empty,      empty,     empty,       empty,       empty,
+    empty,     empty,       empty,       empty,      empty,     empty,       empty,       empty,
+    blackPawn, blackPawn,   blackPawn,   blackPawn,  blackPawn, blackPawn,   blackPawn,   blackPawn,
+    blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook,
+};
+
 void showPosition(const ChessBoard* chessBoard)
 {
     for (int rank = 7; rank >= 0; rank--)
@@ -79,6 +90,12 @@ ChessBoard* initChessBoard()
 
     chessBoard->history.size = 0;
     chessBoard->moveDataStack.size = 0;
+
+    for (int sq = 0; sq < BOARD_SIZE; sq++)
+    {
+        chessBoard->pieceLookup[sq] = empty;
+    }
+    
     
     return chessBoard;
 }
@@ -224,39 +241,39 @@ void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hash
 
     for (int sq = 8; sq < 16; sq++)
     {
-        chessBoard->positionHash ^= hashes->pieceHashes[whitePawnHash][sq];
+        chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][sq];
     }
 
     for (int sq = 48; sq < 56; sq++)
     {
-        chessBoard->positionHash ^= hashes->pieceHashes[blackPawnHash][sq];
+        chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][sq];
     }
 
-    chessBoard->positionHash ^= hashes->pieceHashes[whiteRookHash][0];
-    chessBoard->positionHash ^= hashes->pieceHashes[whiteRookHash][7];
+    chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][0];
+    chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][7];
     
-    chessBoard->positionHash ^= hashes->pieceHashes[blackRookHash][56];
-    chessBoard->positionHash ^= hashes->pieceHashes[blackRookHash][63];
+    chessBoard->positionHash ^= hashes->pieceHashes[blackRook][56];
+    chessBoard->positionHash ^= hashes->pieceHashes[blackRook][63];
 
-    chessBoard->positionHash ^= hashes->pieceHashes[whiteKnightHash][1];
-    chessBoard->positionHash ^= hashes->pieceHashes[whiteKnightHash][6];
+    chessBoard->positionHash ^= hashes->pieceHashes[whiteKnight][1];
+    chessBoard->positionHash ^= hashes->pieceHashes[whiteKnight][6];
     
-    chessBoard->positionHash ^= hashes->pieceHashes[blackKnightHash][57];
-    chessBoard->positionHash ^= hashes->pieceHashes[blackKnightHash][62];
+    chessBoard->positionHash ^= hashes->pieceHashes[blackKnight][57];
+    chessBoard->positionHash ^= hashes->pieceHashes[blackKnight][62];
 
-    chessBoard->positionHash ^= hashes->pieceHashes[whiteBishopHash][2];
-    chessBoard->positionHash ^= hashes->pieceHashes[whiteBishopHash][5];
+    chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][2];
+    chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][5];
     
-    chessBoard->positionHash ^= hashes->pieceHashes[blackBishopHash][58];
-    chessBoard->positionHash ^= hashes->pieceHashes[blackBishopHash][61];
+    chessBoard->positionHash ^= hashes->pieceHashes[blackBishop][58];
+    chessBoard->positionHash ^= hashes->pieceHashes[blackBishop][61];
 
-    chessBoard->positionHash ^= hashes->pieceHashes[whiteBishopHash][3];
+    chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][3];
 
-    chessBoard->positionHash ^= hashes->pieceHashes[blackQueenHash][60];
+    chessBoard->positionHash ^= hashes->pieceHashes[blackQueen][60];
 
-    chessBoard->positionHash ^= hashes->pieceHashes[whiteKingHash][4];
+    chessBoard->positionHash ^= hashes->pieceHashes[whiteKing][4];
 
-    chessBoard->positionHash ^= hashes->pieceHashes[blackKingHash][59];
+    chessBoard->positionHash ^= hashes->pieceHashes[blackKing][59];
 
     chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
     chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
@@ -270,6 +287,12 @@ void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hash
     chessBoard->history.lastIrreversableIndex[0] = 0;
 
     chessBoard->moveDataStack.size = 0;
+
+    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
+    {
+        chessBoard->pieceLookup[sqInd] = startPos[sqInd];
+    }
+    
 }
 
 uint8_t canWhiteShortCastle(ChessBoard *chessBoard)
@@ -491,18 +514,19 @@ void createPosition(char fileName[], ChessBoard *chessBoard)
         fscanf(positionFile, "%s", piece);
 
         uint64_t square = 1ULL << squareIndex;
+        uint8_t sqInd = getSqInd(square);
         pieceName = piece[1];
 
         if (piece[0] == 'W')
         {
             switch (pieceName)
             {
-            case 'Q': chessBoard->whiteQueens |= square; break;
-            case 'R': chessBoard->whiteRooks |= square; break;
-            case 'N': chessBoard->whiteKnights |= square; break;
-            case 'B': chessBoard->whiteBishops |= square; break;
-            case 'P': chessBoard->whitePawns |= square; break;
-            case 'K': chessBoard->whiteKing |= square; break;
+            case 'Q': chessBoard->whiteQueens |= square; chessBoard->pieceLookup[sqInd] = whiteQueen; break;
+            case 'R': chessBoard->whiteRooks |= square; chessBoard->pieceLookup[sqInd] = whiteRook; break;
+            case 'N': chessBoard->whiteKnights |= square; chessBoard->pieceLookup[sqInd] = whiteKnight; break;
+            case 'B': chessBoard->whiteBishops |= square; chessBoard->pieceLookup[sqInd] = whiteBishop; break;
+            case 'P': chessBoard->whitePawns |= square; chessBoard->pieceLookup[sqInd] = whitePawn; break;
+            case 'K': chessBoard->whiteKing |= square; chessBoard->pieceLookup[sqInd] = whiteKing; break;
             default: sendError("Wrong format in file");   
             }
             chessBoard->whitePieces |= square;
@@ -510,12 +534,12 @@ void createPosition(char fileName[], ChessBoard *chessBoard)
         {
             switch (pieceName)
             {
-            case 'Q': chessBoard->blackQueens |= square; break;
-            case 'R': chessBoard->blackRooks |= square; break;
-            case 'N': chessBoard->blackKnights |= square; break;
-            case 'B': chessBoard->blackBishops |= square; break;
-            case 'P': chessBoard->blackPawns |= square; break;
-            case 'K': chessBoard->blackKing |= square; break;
+            case 'Q': chessBoard->blackQueens |= square; chessBoard->pieceLookup[sqInd] = blackQueen; break;
+            case 'R': chessBoard->blackRooks |= square; chessBoard->pieceLookup[sqInd] = blackRook; break;
+            case 'N': chessBoard->blackKnights |= square; chessBoard->pieceLookup[sqInd] = blackKnight; break;
+            case 'B': chessBoard->blackBishops |= square; chessBoard->pieceLookup[sqInd] = blackBishop; break;
+            case 'P': chessBoard->blackPawns |= square; chessBoard->pieceLookup[sqInd] = blackPawn; break;
+            case 'K': chessBoard->blackKing |= square; chessBoard->pieceLookup[sqInd] = blackKing; break;
             default: sendError("Wrong format in file");   
             }
             chessBoard->blackPieces |= square;

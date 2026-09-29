@@ -17,4 +17,3 @@ typedef struct MoveHistory
 int isThreeFoldRepetition(ChessBoard* chessBoard);
 void addMoveToHistory(ChessBoard* chessBoard, Move* move);
 void removeMovefromHistory(ChessBoard* chessBoard);
-uint64_t getPrevEnPassantBitboard();

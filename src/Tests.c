@@ -219,6 +219,21 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
         isSame = 0;
     }
 
+    for (int sqInd = 0; sqInd < BOARD_SIZE; sqInd++)
+    {
+        if (original->pieceLookup[sqInd] != modified->pieceLookup[sqInd])
+        {
+            printf("POSITION LOOKUP TABLE ASSERT FAILED\n");
+            printf("ON SQUARE: %d EXPECTED: %d\n", sqInd, original->pieceLookup[sqInd]);
+            printf("ON SQUARE: %d GOT: %d\n", sqInd, modified->pieceLookup[sqInd]);
+            isSame = 0;
+            showPosition(original);
+            showPosition(modified);
+            break;   
+        }
+        
+    }
+    
     if (!isSame)
     {
         exit(1);

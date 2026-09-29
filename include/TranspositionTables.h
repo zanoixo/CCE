@@ -14,23 +14,6 @@ typedef struct ChessBoard ChessBoard;
 #define UNINITIALIZED -2
 #define QSEARCH -1
 
-enum pieceHashes
-{
-    whitePawnHash = 0,
-    whiteKnightHash = 1,
-    whiteBishopHash = 2,
-    whiteRookHash = 3,
-    whiteQueenHash = 4,
-    whiteKingHash = 5,
-
-    blackPawnHash = 6,
-    blackKnightHash = 7,
-    blackBishopHash = 8,
-    blackRookHash = 9,
-    blackQueenHash = 10,
-    blackKingHash = 11,  
-};
-
 enum castellingHashes
 {
     whiteShortCastleHash = 0,

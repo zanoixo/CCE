@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "MoveHistory.h"
+#include "Utils.h"
 
 typedef struct TranspositionTableHashes TranspositionTableHashes;
 typedef struct AttackTables AttackTables;
@@ -46,6 +47,7 @@ typedef struct ChessBoard
 
     MoveHistory history;
     MoveDataStack moveDataStack;
+    uint8_t pieceLookup[BOARD_SIZE];
 }ChessBoard;
 
 enum boardFlags

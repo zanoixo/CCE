@@ -21,6 +21,25 @@ enum Piece
     king = 6
 };
 
+enum PieceColored
+{
+    whitePawn = 0,
+    whiteKnight = 1,
+    whiteBishop = 2,
+    whiteRook = 3,
+    whiteQueen = 4,
+    whiteKing = 5,
+
+    blackPawn = 6,
+    blackKnight = 7,
+    blackBishop = 8,
+    blackRook = 9,
+    blackQueen = 10,
+    blackKing = 11,
+    empty = 12,
+}; 
+
+
 enum color
 {
     white = 0,
