@@ -25,15 +25,13 @@ int isThreeFoldRepetition(ChessBoard* chessBoard)
     return 0;
 }
 
-void addMoveToHistory(ChessBoard* chessBoard, Move* move)
+void addMoveToHistory(ChessBoard* chessBoard, MoveData* moveData, uint8_t piece)
 {
     int index = chessBoard->history.size;
 
     chessBoard->history.positionHashes[index] = chessBoard->positionHash;
 
-    uint8_t piece = getPiece(*move);
-
-    if (getCapturedPiece(*move) || piece == pawn)
+    if (moveData->capturedPiece || piece == pawn)
     {
         chessBoard->history.lastIrreversableIndex[index] = index;
     }

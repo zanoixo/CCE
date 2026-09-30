@@ -17,7 +17,7 @@
 
 void userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, AttackTables* attackTables, TranspositionTableHashes* hashes)
 {
-    uint16_t promotionFlag = 0;
+    uint8_t promotionPiece = 0;
 
     uint8_t fromFile = from[0] - 'a';
     uint8_t fromRank = from[1] - '1';
@@ -31,21 +31,21 @@ void userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
     uint64_t fromBitboard = 1ULL << fromSq;
     uint64_t toBitboard = 1ULL << toSq;
 
-    uint64_t piece = getPieceFromSquare(fromBitboard, isBlack(chessBoard), chessBoard);
+    uint64_t piece = getPieceFromSquare(fromSq, chessBoard);
 
     switch (promotion)
     {
         case 'q':
-            promotionFlag |= queenPromotion;
+            promotionPiece |= queen;
             break;
         case 'r':
-            promotionFlag |= rookPromotion;
+            promotionPiece |= rook;
             break;
         case 'n':
-            promotionFlag |= knightPromotion;
+            promotionPiece |= knight;
             break;
         case 'b':
-            promotionFlag |= bishopPromotion;
+            promotionPiece |= bishop;
             break;
         default:
             break;
@@ -85,7 +85,7 @@ void userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
-        if (fromBitboard == getFromBitboard(moveList.moves[i].move) && toBitboard == getToBitboard(moveList.moves[i].move) && promotionFlag == (moveList.moves[i].flags & promotionPieceMask))
+        if (fromBitboard == getFromBitboard(moveList.moves[i].move) && toBitboard == getToBitboard(moveList.moves[i].move) && promotionPiece == getPromotionPiece(moveList.moves[i]))
         {
             playedMove = &moveList.moves[i];
             break;

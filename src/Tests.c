@@ -38,7 +38,7 @@ void ASSERT(int acctual, int expected)
     
 }
 
-void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
+void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified, Move move)
 {
     int isSame = 1;
     if (original->allPieces != modified->allPieces)
@@ -236,6 +236,11 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified)
     
     if (!isSame)
     {
+        printf("FROM: \n");
+        showBitBoard(getFromBitboard(move.move));
+        printf("TO: \n");
+        showBitBoard(getToBitboard(move.move));
+        printf("promotionFlags: %d enpassant flags: %d\n", getPromotionPiece(move), move.move & enPassantMask);
         exit(1);
     }
 }
@@ -2000,7 +2005,7 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, Trans
         
         unMakeMove(chessBoard, &moveList->moves[i]);
 
-        ASSERT_CHESS_BOARD(chessBoardOriginal, chessBoard);
+        ASSERT_CHESS_BOARD(chessBoardOriginal, chessBoard, moveList->moves[i]);
 
     }
     free(chessBoardOriginal);
@@ -2020,6 +2025,8 @@ void runMakeMoveTests()
 
     ASSERT(positionsGenerated, 20);
 
+    printf("[PASS] MAKE MOVE DEPTH: 1 PASSED\n");
+
     positionsGenerated = 0;
 
     free(attackTables);
@@ -2032,6 +2039,8 @@ void runMakeMoveTests()
     generatePositions(chessBoard, attackTables, hashes, 2);
 
     ASSERT(positionsGenerated, 400);
+    
+    printf("[PASS] MAKE MOVE DEPTH: 2 PASSED\n");
 
     positionsGenerated = 0;
 
@@ -2046,6 +2055,8 @@ void runMakeMoveTests()
 
     ASSERT(positionsGenerated, 8902);
 
+    printf("[PASS] MAKE MOVE DEPTH: 3 PASSED\n");
+
     positionsGenerated = 0;
 
     free(attackTables);
@@ -2058,6 +2069,8 @@ void runMakeMoveTests()
     generatePositions(chessBoard, attackTables, hashes, 4);
 
     ASSERT(positionsGenerated, 197281);
+
+    printf("[PASS] MAKE MOVE DEPTH: 4 PASSED\n");
 
     positionsGenerated = 0;
 
@@ -2072,6 +2085,8 @@ void runMakeMoveTests()
 
     ASSERT(positionsGenerated, 4865609);
 
+    printf("[PASS] MAKE MOVE DEPTH: 5 PASSED\n");
+
     positionsGenerated = 0;
 
     free(attackTables);
@@ -2084,6 +2099,8 @@ void runMakeMoveTests()
     generatePositions(chessBoard, attackTables, hashes, 6);
 
     ASSERT(positionsGenerated, 119060324);
+
+    printf("[PASS] MAKE MOVE DEPTH: 6 PASSED\n");
 
     positionsGenerated = 0;
 

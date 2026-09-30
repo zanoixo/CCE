@@ -72,7 +72,7 @@ uint8_t canWhiteLongCastle(ChessBoard *chessBoard);
 uint8_t canBlackShortCastle(ChessBoard *chessBoard);
 uint8_t canBlackLongCastle(ChessBoard *chessBoard);
 uint8_t isBlack(ChessBoard *chessBoard);
-uint8_t getPieceFromSquare(uint64_t sq, uint8_t isBlack, ChessBoard *chessBoard);
+uint8_t getPieceFromSquare(uint8_t sq, ChessBoard *chessBoard);
 int hasNonPawnPieces(ChessBoard* chessBoard, int side);
 int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attackTables, int isAttackedByWhite);
 void addMoveData(ChessBoard *chessBoard);

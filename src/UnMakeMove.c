@@ -640,7 +640,7 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         chessBoard->pieceLookup[toSq] = empty;
         chessBoard->pieceLookup[fromSq] = blackPawn;
 
-        if (move->flags & enPassantMask)
+        if (move->move & enPassantMask)
         {
             moveTo = to << 8;
             moveToSq = getSqInd(moveTo);
@@ -716,7 +716,7 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         chessBoard->pieceLookup[toSq] = empty;
         chessBoard->pieceLookup[fromSq] = whitePawn;
 
-        if (move->flags & enPassantMask)
+        if (move->move & enPassantMask)
         {
             moveTo = to >> 8;
             moveToSq = getSqInd(moveTo);
@@ -765,7 +765,17 @@ void unMakeMove(ChessBoard* chessBoard, Move* move)
 {
     MoveData moveData = revertMoveData(chessBoard);
 
-    uint8_t piece = getPiece(*move);
+    uint8_t piece;
+    
+    if (getPromotionPiece(*move))
+    {
+        piece = pawn;
+    }
+    else
+    {
+        piece = getPieceFromSquare(getToSq(move->move), chessBoard);
+    }
+
 
     switch (piece)
     {

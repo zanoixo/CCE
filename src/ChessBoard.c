@@ -320,56 +320,9 @@ uint8_t isBlack(ChessBoard *chessBoard)
     return chessBoard->flags & colorMask;
 }
 
-uint8_t getPieceFromSquare(uint64_t sq, uint8_t isBlack, ChessBoard *chessBoard)
+uint8_t getPieceFromSquare(uint8_t sq, ChessBoard *chessBoard)
 {
-    uint64_t pawnsSq = chessBoard->whitePawns;
-    uint64_t knightsSq = chessBoard->whiteKnights; 
-    uint64_t bishopsSq = chessBoard->whiteBishops; 
-    uint64_t rooksSq = chessBoard->whiteRooks; 
-    uint64_t queensSq = chessBoard->whiteQueens;
-    uint64_t kingSq = chessBoard->whiteKing;
-    
-    if (isBlack)
-    {
-        pawnsSq = chessBoard->blackPawns;
-        knightsSq = chessBoard->blackKnights; 
-        bishopsSq = chessBoard->blackBishops; 
-        rooksSq = chessBoard->blackRooks; 
-        queensSq = chessBoard->blackQueens;
-        kingSq = chessBoard->blackKing;
-    }
-
-    if (pawnsSq & sq)
-    {
-        return pawn;
-    }
-    
-    if (knightsSq & sq)
-    {
-        return knight;
-    }
-
-    if (bishopsSq & sq)
-    {
-        return bishop;
-    }
-
-    if (rooksSq & sq)
-    {
-        return rook;
-    }
-
-    if (queensSq & sq)
-    {
-        return queen;
-    }
-
-    if (kingSq & sq)
-    {
-        return king;
-    }
-    
-    return 0;
+    return coloredPieceToGeneric(chessBoard->pieceLookup[sq]);
 }
 
 int hasNonPawnPieces(ChessBoard* chessBoard, int side)

@@ -15,7 +15,7 @@
 #include "Eval.h"
 
 Move killerMoves[KILLER_MOVE_DEPTH][2];
-int historyHeuristic[BOARD_SIZE][BOARD_SIZE][DIFFERENT_PIECE_COUNT / 2];
+int historyHeuristic[BOARD_SIZE][BOARD_SIZE];
 uint64_t stopTime = 0;
 int currentDepth;
 int qSearchDepthReached;
@@ -47,17 +47,17 @@ void updateTime()
 
 void penalizeHistoryHeuristic(Move move, int remeniningDepth)
 {
-    historyHeuristic[getFromSq(move.move)][getToSq(move.move)][getPiece(move) - 1] -= remeniningDepth;     
+    historyHeuristic[getFromSq(move.move)][getToSq(move.move)] -= remeniningDepth;     
 }
 
 void updateHistoryHeuristic(Move move, int remeniningDepth)
 {
-    historyHeuristic[getFromSq(move.move)][getToSq(move.move)][getPiece(move) - 1] += remeniningDepth * remeniningDepth; 
+    historyHeuristic[getFromSq(move.move)][getToSq(move.move)] += remeniningDepth * remeniningDepth; 
 }
 
 int getHistoryHeuristic(Move move)
 {
-    return historyHeuristic[getFromSq(move.move)][getToSq(move.move)][getPiece(move) - 1];
+    return historyHeuristic[getFromSq(move.move)][getToSq(move.move)];
 }
 
 void clearHistoryHeuristic()
@@ -69,8 +69,8 @@ void initKillerMoves()
 {
     for (int i = 0; i < currentDepth; i++)
     {
-        killerMoves[i][0] = (Move){0, 0, 0};
-        killerMoves[i][1] = (Move){0, 0, 0};
+        killerMoves[i][0] = (Move){0, 0};
+        killerMoves[i][1] = (Move){0, 0};
     }
 }
 
@@ -125,9 +125,9 @@ void setBestMoveFirst(MoveList* moveList, int moveCount)
     moveList->moves[moveInd] = tmp;
 }
 
-int isValidQSearchMove(Move move)
+int isTacticalMove(Move move, ChessBoard* chessBoard)
 {    
-    return getCapturedPiece(move)  || getPromotionPiece(move);
+    return getPieceFromSquare(getToSq(move.move), chessBoard) || getPromotionPiece(move);
 }
 
 int isBetaValid(int beta)
@@ -148,7 +148,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     MoveScore bestMove;
     bestMove.eval = MIN_INT;
-    bestMove.move = (Move){0, 0, 0};
+    bestMove.move = (Move){0, 0};
 
     int mateValue = -MATED - mateDistance;
 
@@ -256,7 +256,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
         setBestMoveFirst(&moveList, i);
 
-        if (!gotChecked && !isValidQSearchMove(moveList.moves[i]))
+        if (!gotChecked && !isTacticalMove(moveList.moves[i], chessBoard))
         {
             continue;
         }
@@ -326,7 +326,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 {
     MoveScore bestMove;
     bestMove.eval = MIN_INT;
-    bestMove.move = (Move){0, 0, 0};
+    bestMove.move = (Move){0, 0};
     
     if (depthSearched > currentDepth)
     {
@@ -403,7 +403,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     if (!isNullMove && currentDepth - depthSearched >= 3 && !amChecked && depthSearched != 0 && hasNonPawnPieces(chessBoard, side) && isBetaValid(beta))
     {
-        Move nullMove = (Move){0, 0, 0};
+        Move nullMove = (Move){0, 0};
 
         MoveScore nullMoveScore;
         nullMoveScore.move = nullMove;
@@ -461,7 +461,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             int isEnemyChecked = isSquareAttacked(enemyKingSq, chessBoard, attackTables, !side);
             int moveReduction = 0;
 
-            if (i > 3 && !isEnemyChecked && !amChecked && currentDepth - depthSearched >= 3 && !getCapturedPiece(moveList.moves[i]) && !getPromotionPiece(moveList.moves[i]))
+            if (i > 3 && !isEnemyChecked && !amChecked && currentDepth - depthSearched >= 3 && !isTacticalMove(moveList.moves[i], chessBoard))
             {
                 moveReduction = (int)(0.75 * log(currentDepth - depthSearched) * log(i) / 2.25);
             }
@@ -515,7 +515,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
             if (alpha >= beta)
             {
-                if (!getPromotionPiece(moveList.moves[i]) && !getCapturedPiece(moveList.moves[i]))
+                if (!isTacticalMove(moveList.moves[i], chessBoard))
                 {
                     setKillerMove(moveList.moves[i], depthSearched);
                     updateHistoryHeuristic(moveList.moves[i], currentDepth - depthSearched);

@@ -11,8 +11,9 @@
 #define MATED_TRESHOLD (-MATED - 1000)
 #define DRAW 0 
 
-enum Piece
+enum GenericPiece
 {
+    emptyGeneric = 0,
     pawn = 1,
     knight = 2,
     bishop = 3,
@@ -21,7 +22,7 @@ enum Piece
     king = 6
 };
 
-enum PieceColored
+enum ColoredPiece
 {
     whitePawn = 0,
     whiteKnight = 1,
@@ -51,3 +52,4 @@ void sendError(char errorMsg[]);
 uint64_t getTimeMs();
 uint8_t getSqInd(uint64_t sq);
 int countPieces(uint64_t bitboard);
+uint8_t coloredPieceToGeneric(uint8_t coloredPiece);

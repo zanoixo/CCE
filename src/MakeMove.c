@@ -6,13 +6,14 @@
 void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
-    uint8_t capture = getCapturedPiece(*move);
 
     uint64_t from = getFromBitboard(move->move);
     uint64_t to = getToBitboard(move->move);
 
     uint8_t fromSq = getSqInd(from);
     uint8_t toSq = getSqInd(to);
+
+    uint8_t capture = getPieceFromSquare(toSq, chessBoard);
 
     moveData->capturedPiece = capture;
 
@@ -133,13 +134,14 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
 void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
-    uint8_t capture = getCapturedPiece(*move);
 
     uint64_t from = getFromBitboard(move->move);
     uint64_t to = getToBitboard(move->move);
 
     uint8_t fromSq = getSqInd(from);
     uint8_t toSq = getSqInd(to);
+
+    uint8_t capture = getPieceFromSquare(toSq, chessBoard);
 
     moveData->capturedPiece = capture;
 
@@ -259,13 +261,14 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
 void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
-    uint8_t capture = getCapturedPiece(*move);
 
     uint64_t from = getFromBitboard(move->move);
     uint64_t to = getToBitboard(move->move);
 
     uint8_t fromSq = getSqInd(from);
     uint8_t toSq = getSqInd(to);
+
+    uint8_t capture = getPieceFromSquare(toSq, chessBoard);
 
     moveData->capturedPiece = capture;
 
@@ -409,13 +412,14 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
-    uint8_t capture = getCapturedPiece(*move);
 
     uint64_t from = getFromBitboard(move->move);
     uint64_t to = getToBitboard(move->move);
 
     uint8_t fromSq = getSqInd(from);
     uint8_t toSq = getSqInd(to);
+
+    uint8_t capture = getPieceFromSquare(toSq, chessBoard);
 
     moveData->capturedPiece = capture;
 
@@ -536,13 +540,14 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
 void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
-    uint8_t capture = getCapturedPiece(*move);
 
     uint64_t from = getFromBitboard(move->move);
     uint64_t to = getToBitboard(move->move);
 
     uint8_t fromSq = getSqInd(from);
     uint8_t toSq = getSqInd(to);
+
+    uint8_t capture = getPieceFromSquare(toSq, chessBoard);
 
     moveData->capturedPiece = capture;
 
@@ -754,7 +759,6 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
-    uint8_t capture = getCapturedPiece(*move);
     uint8_t promotion = getPromotionPiece(*move);
 
     uint64_t from = getFromBitboard(move->move);
@@ -767,7 +771,7 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
     uint8_t moveToSq = getSqInd(moveTo);
 
-    moveData->capturedPiece = capture;
+    uint8_t capture = getPieceFromSquare(toSq, chessBoard);
 
     if (isBlacksMove)
     {
@@ -782,12 +786,13 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         chessBoard->pieceLookup[fromSq] = empty;
         chessBoard->pieceLookup[toSq] = blackPawn;
 
-        if (move->flags & enPassantMask)
+        if (move->move & enPassantMask)
         {
             moveTo = to << 8;
             moveToSq = getSqInd(moveTo);
             chessBoard->allPieces &= ~moveTo;
             chessBoard->pieceLookup[moveToSq] = empty;
+            capture = pawn;
         }
 
         switch (capture)
@@ -886,12 +891,13 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         chessBoard->pieceLookup[fromSq] = empty;
         chessBoard->pieceLookup[toSq] = whitePawn;
 
-        if (move->flags & enPassantMask)
+        if (move->move & enPassantMask)
         {
             moveTo = to >> 8;
             moveToSq = getSqInd(moveTo);
             chessBoard->allPieces &= ~moveTo;
             chessBoard->pieceLookup[moveToSq] = empty;
+            capture = pawn;
         }
 
         switch (capture)
@@ -976,11 +982,13 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
             chessBoard->enPassantSq = from << 8;
         }
     }
+
+    moveData->capturedPiece = capture;
 }
 
 void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes)
 {
-    uint8_t piece = getPiece(*move);
+    uint8_t piece = getPieceFromSquare(getFromSq(move->move), chessBoard);
 
     MoveData* moveData = &chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size]; 
 
@@ -1018,7 +1026,7 @@ void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hash
     
     chessBoard->positionHash ^= hashes->colorHash;
 
-    addMoveToHistory(chessBoard, move);
+    addMoveToHistory(chessBoard, moveData, piece);
 }
 
 void makeNullMove(ChessBoard* chessBoard, TranspositionTableHashes* hashes)

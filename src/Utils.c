@@ -12,6 +12,22 @@ uint64_t getTimeMs()
 #else
 #include <time.h>
 
+const uint8_t coloredToGenericTable[13] = {
+    pawn,    
+    knight,  
+    bishop,  
+    rook,    
+    queen,   
+    king,    
+    pawn,    
+    knight,  
+    bishop,  
+    rook,    
+    queen,   
+    king,    
+    emptyGeneric        
+};
+
 uint64_t getTimeMs()
 {
     struct timespec ts;
@@ -62,4 +78,9 @@ int countPieces(uint64_t bitboard)
     }
 
     return count;
+}
+
+uint8_t coloredPieceToGeneric(uint8_t coloredPiece)
+{
+    return coloredToGenericTable[coloredPiece];
 }
