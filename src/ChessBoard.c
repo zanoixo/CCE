@@ -281,7 +281,8 @@ void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hash
     chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
 
     chessBoard->enPassantSq = 0;
-    chessBoard->flags = whiteShortCastleMask | whiteLongCastleMask | blackShortCastleMask | blackLongCastleMask;
+    chessBoard->flags = 0;
+    chessBoard->castleRights = whiteShortCastleMask | whiteLongCastleMask | blackShortCastleMask | blackLongCastleMask;
     
     chessBoard->history.size = 0;
     chessBoard->history.lastIrreversableIndex[0] = 0;
@@ -297,22 +298,22 @@ void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hash
 
 uint8_t canWhiteShortCastle(ChessBoard *chessBoard)
 {
-    return chessBoard->flags & whiteShortCastleMask;
+    return chessBoard->castleRights & whiteShortCastleMask;
 }
 
 uint8_t canWhiteLongCastle(ChessBoard *chessBoard)
 {
-    return chessBoard->flags & whiteLongCastleMask;
+    return chessBoard->castleRights & whiteLongCastleMask;
 }
 
 uint8_t canBlackShortCastle(ChessBoard *chessBoard)
 {
-    return chessBoard->flags & blackShortCastleMask;
+    return chessBoard->castleRights & blackShortCastleMask;
 }
 
 uint8_t canBlackLongCastle(ChessBoard *chessBoard)
 {
-    return chessBoard->flags & blackLongCastleMask;
+    return chessBoard->castleRights & blackLongCastleMask;
 }
 
 uint8_t isBlack(ChessBoard *chessBoard)
@@ -437,6 +438,7 @@ void addMoveData(ChessBoard *chessBoard)
     chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].enPassantSq = chessBoard->enPassantSq;
     chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].positionHash = chessBoard->positionHash;
     chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].boardFlags = chessBoard->flags;
+    chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].castleRights = chessBoard->castleRights;
     chessBoard->moveDataStack.size++;
 }
 
@@ -446,6 +448,7 @@ MoveData revertMoveData(ChessBoard *chessBoard)
     chessBoard->enPassantSq = chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].enPassantSq;
     chessBoard->positionHash = chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].positionHash;
     chessBoard->flags = chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].boardFlags;
+    chessBoard->castleRights = chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size].castleRights;
 
     return chessBoard->moveDataStack.moveData[chessBoard->moveDataStack.size];
 }

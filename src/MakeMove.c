@@ -3,6 +3,17 @@
 #include "TranspositionTables.h"
 #include "ChessBitboards.h"
 
+uint8_t castleRightLookup[BOARD_SIZE] = {
+    0b1101, 0b1111, 0b1111, 0b1111, 0b1100, 0b1111, 0b1111, 0b1110,
+    0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111,
+    0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111,
+    0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111,
+    0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111,
+    0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111,
+    0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111, 0b1111,
+    0b0111, 0b1111, 0b1111, 0b1111, 0b0011, 0b1111, 0b1111, 0b1011
+};
+
 void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
 {
     uint8_t isBlacksMove = isBlack(chessBoard);
@@ -16,6 +27,10 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
     uint8_t capture = getPieceFromSquare(toSq, chessBoard);
 
     moveData->capturedPiece = capture;
+
+    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
+    chessBoard->castleRights &= castleRightLookup[fromSq] & castleRightLookup[toSq];
+    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
 
     if (isBlacksMove)
     {
@@ -51,18 +66,6 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
                 chessBoard->pieceBoards[whiteRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
                 chessBoard->whitePieces &= ~to;
-
-                if (to == a1 && canWhiteLongCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~whiteLongCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-                }
-                if (to == h1 && canWhiteShortCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~whiteShortCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-                }
-
                 break;
             case queen:
                 chessBoard->pieceBoards[whiteQueen] &= ~to;
@@ -107,18 +110,6 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
                 chessBoard->pieceBoards[blackRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
                 chessBoard->blackPieces &= ~to;
-
-                if (to == a8 && canBlackLongCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~blackLongCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-                }
-                if (to == h8 && canBlackShortCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~blackShortCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-                }
-
                 break;
             case queen:
                 chessBoard->pieceBoards[blackQueen] &= ~to;
@@ -144,6 +135,10 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
     uint8_t capture = getPieceFromSquare(toSq, chessBoard);
 
     moveData->capturedPiece = capture;
+
+    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
+    chessBoard->castleRights &= castleRightLookup[fromSq] & castleRightLookup[toSq];
+    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
 
     if (isBlacksMove)
     {
@@ -179,18 +174,6 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
                 chessBoard->pieceBoards[whiteRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
                 chessBoard->whitePieces &= ~to;
-
-                if (to == a1 && canWhiteLongCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~whiteLongCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-                }
-                if (to == h1 && canWhiteShortCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~whiteShortCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-                }
-
                 break;
             case queen:
                 chessBoard->pieceBoards[whiteQueen] &= ~to;
@@ -234,18 +217,6 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
                 chessBoard->pieceBoards[blackRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
                 chessBoard->blackPieces &= ~to;
-
-                if (to == a8 && canBlackLongCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~blackLongCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-                }
-                if (to == h8 && canBlackShortCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~blackShortCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-                }
-
                 break;
             case queen:
                 chessBoard->pieceBoards[blackQueen] &= ~to;
@@ -272,6 +243,10 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
     moveData->capturedPiece = capture;
 
+    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
+    chessBoard->castleRights &= castleRightLookup[fromSq] & castleRightLookup[toSq];
+    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
+
     if (isBlacksMove)
     {
         chessBoard->pieceBoards[blackRook] &= ~from;
@@ -284,18 +259,6 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         chessBoard->allPieces |= to;
         chessBoard->pieceLookup[fromSq] = empty;
         chessBoard->pieceLookup[toSq] = blackRook;
-
-        if (from == h8 && canBlackShortCastle(chessBoard))
-        {
-            chessBoard->flags &= ~blackShortCastleMask;
-            chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-        }
-
-        if (from == a8 && canBlackLongCastle(chessBoard))
-        {
-            chessBoard->flags &= ~blackLongCastleMask;
-            chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-        }
 
         switch (capture)
         {
@@ -318,18 +281,6 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 chessBoard->pieceBoards[whiteRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
                 chessBoard->whitePieces &= ~to;
-
-                if (to == a1 && canWhiteLongCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~whiteLongCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-                }
-                if (to == h1 && canWhiteShortCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~whiteShortCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-                }
-
                 break;
             case queen:
                 chessBoard->pieceBoards[whiteQueen] &= ~to;
@@ -352,18 +303,6 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         chessBoard->pieceLookup[fromSq] = empty;
         chessBoard->pieceLookup[toSq] = whiteRook;
 
-        if (from == h1 && canWhiteShortCastle(chessBoard))
-        {
-            chessBoard->flags &= ~whiteShortCastleMask;
-            chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-        }
-
-        if (from == a1 && canWhiteLongCastle(chessBoard))
-        {
-            chessBoard->flags &= ~whiteLongCastleMask;
-            chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-        }
-
         switch (capture)
         {
             case pawn:
@@ -385,18 +324,6 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 chessBoard->pieceBoards[blackRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
                 chessBoard->blackPieces &= ~to;
-
-                if (to == a8 && canBlackLongCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~blackLongCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-                }
-                if (to == h8 && canBlackShortCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~blackShortCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-                }
-
                 break;
             case queen:
                 chessBoard->pieceBoards[blackQueen] &= ~to;
@@ -423,8 +350,9 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
 
     moveData->capturedPiece = capture;
 
-    chessBoard->pieceLookup[fromSq] = empty;
-    chessBoard->pieceLookup[toSq] = blackQueen;
+    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
+    chessBoard->castleRights &= castleRightLookup[fromSq] & castleRightLookup[toSq];
+    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
 
     if (isBlacksMove)
     {
@@ -436,6 +364,8 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
         chessBoard->blackPieces |= to;
         chessBoard->allPieces &= ~from;
         chessBoard->allPieces |= to;
+        chessBoard->pieceLookup[fromSq] = empty;
+        chessBoard->pieceLookup[toSq] = blackQueen;
 
         switch (capture)
         {
@@ -458,18 +388,6 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
                 chessBoard->pieceBoards[whiteRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
                 chessBoard->whitePieces &= ~to;
-
-                if (to == a1 && canWhiteLongCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~whiteLongCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-                }
-                if (to == h1 && canWhiteShortCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~whiteShortCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-                }
-
                 break;
             case queen:
                 chessBoard->pieceBoards[whiteQueen] &= ~to;
@@ -513,18 +431,6 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
                 chessBoard->pieceBoards[blackRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
                 chessBoard->blackPieces &= ~to;
-
-                if (to == a8 && canBlackLongCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~blackLongCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-                }
-                if (to == h8 && canBlackShortCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~blackShortCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-                }
-
                 break;
             case queen:
                 chessBoard->pieceBoards[blackQueen] &= ~to;
@@ -551,6 +457,10 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
     moveData->capturedPiece = capture;
 
+    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
+    chessBoard->castleRights &= castleRightLookup[fromSq] & castleRightLookup[toSq];
+    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
+
     if (isBlacksMove)
     {
         chessBoard->pieceBoards[blackKing] &= ~from;
@@ -561,21 +471,8 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         chessBoard->blackPieces |= to;
         chessBoard->allPieces &= ~from;
         chessBoard->allPieces |= to;
-
         chessBoard->pieceLookup[fromSq] = empty;
         chessBoard->pieceLookup[toSq] = blackKing;
-
-        if (from == e8 && canBlackShortCastle(chessBoard))
-        {
-            chessBoard->flags &= ~blackShortCastleMask;
-            chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-        }
-
-        if (from == e8 && canBlackLongCastle(chessBoard))
-        {
-            chessBoard->flags &= ~blackLongCastleMask;
-            chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-        }
 
         switch (capture)
         {
@@ -598,18 +495,6 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 chessBoard->pieceBoards[whiteRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
                 chessBoard->whitePieces &= ~to;
-
-                if (to == a1 && canWhiteLongCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~whiteLongCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-                }
-                if (to == h1 && canWhiteShortCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~whiteShortCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-                }
-
                 break;
             case queen:
                 chessBoard->pieceBoards[whiteQueen] &= ~to;
@@ -666,18 +551,6 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         chessBoard->pieceLookup[fromSq] = empty;
         chessBoard->pieceLookup[toSq] = whiteKing;
 
-        if (from == e1 && canWhiteShortCastle(chessBoard))
-        {
-            chessBoard->flags &= ~whiteShortCastleMask;
-            chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-        }
-
-        if (from == e1 && canWhiteLongCastle(chessBoard))
-        {
-            chessBoard->flags &= ~whiteLongCastleMask;
-            chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-        }
-
         switch (capture)
         {
             case pawn:
@@ -699,18 +572,6 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 chessBoard->pieceBoards[blackRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
                 chessBoard->blackPieces &= ~to;
-
-                if (to == a8 && canBlackLongCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~blackLongCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-                }
-                if (to == h8 && canBlackShortCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~blackShortCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-                }
-
                 break;
             case queen:
                 chessBoard->pieceBoards[blackQueen] &= ~to;
@@ -773,6 +634,10 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
     uint8_t capture = getPieceFromSquare(toSq, chessBoard);
 
+    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
+    chessBoard->castleRights &= castleRightLookup[fromSq] & castleRightLookup[toSq];
+    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
+
     if (isBlacksMove)
     {
         chessBoard->pieceBoards[blackPawn] &= ~from;
@@ -816,18 +681,6 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 chessBoard->pieceBoards[whiteRook] &= ~moveTo;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][moveToSq];
                 chessBoard->whitePieces &= ~moveTo;
-
-                if (to == a1 && canWhiteLongCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~whiteLongCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-                }
-                if (to == h1 && canWhiteShortCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~whiteShortCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-                }
-
                 break;
             case queen:
                 chessBoard->pieceBoards[whiteQueen] &= ~moveTo;
@@ -921,18 +774,6 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
                 chessBoard->pieceBoards[blackRook] &= ~moveTo;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][moveToSq];
                 chessBoard->blackPieces &= ~moveTo;
-
-                if (to == a8 && canBlackLongCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~blackLongCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
-                }
-                if (to == h8 && canBlackShortCastle(chessBoard))
-                {
-                    chessBoard->flags &= ~blackShortCastleMask;
-                    chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-                }
-
                 break;
             case queen:
                 chessBoard->pieceBoards[blackQueen] &= ~moveTo;

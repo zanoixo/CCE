@@ -15,6 +15,7 @@ typedef struct MoveData
     uint64_t positionHash;
     uint8_t capturedPiece;
     uint8_t boardFlags;
+    uint8_t castleRights;
 }MoveData;
 
 typedef struct MoveDataStack
@@ -32,6 +33,7 @@ typedef struct ChessBoard
     uint64_t allPieces;
     uint64_t enPassantSq;
     uint8_t flags;
+    uint8_t castleRights;
     uint64_t positionHash;
 
     MoveHistory history;
@@ -42,12 +44,16 @@ typedef struct ChessBoard
 enum boardFlags
 {
     colorMask            = 0b00000001,
-    whiteShortCastleMask = 0b00000010,
-    whiteLongCastleMask  = 0b00000100,
-    blackShortCastleMask = 0b00001000,
-    blackLongCastleMask  = 0b00010000,
-    hasWhiteCastledMask  = 0b00100000,
-    hasBlackCastledMask  = 0b01000000,
+    hasWhiteCastledMask  = 0b00000010,
+    hasBlackCastledMask  = 0b00000100,
+};
+
+enum castleRights 
+{
+    whiteShortCastleMask = 0b00000001,
+    whiteLongCastleMask  = 0b00000010,
+    blackShortCastleMask = 0b00000100,
+    blackLongCastleMask  = 0b00001000,
 };
 
 void showPosition(const ChessBoard* chessBoard);

@@ -201,6 +201,16 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified, Move move)
         isSame = 0;
     }
 
+    if (original->castleRights != modified->castleRights)
+    {
+        printf("CASTLE ASSERT FAILED\n");
+        printf("EXPECTED: \n");
+        showBitBoard(original->pieceBoards[whiteKing]);
+        printf("GOT: \n");
+        showBitBoard(modified->pieceBoards[whiteKing]);
+        isSame = 0;
+    }
+
     if (original->enPassantSq != modified->enPassantSq)
     {
         printf("ENPASSANTSQ ASSERT FAILED\n");
@@ -1879,7 +1889,7 @@ void runPseudeLegalMovesTests()
 
     ASSERT(moveList->nextIndex, 0);
 
-    chessBoard->flags = whiteShortCastleMask;
+    chessBoard->castleRights = whiteShortCastleMask;
 
     generateCastleMoves(chessBoard, attackTables, moveList);
 
@@ -1887,7 +1897,7 @@ void runPseudeLegalMovesTests()
 
     moveList->nextIndex = 0;
 
-    chessBoard->flags = whiteShortCastleMask + whiteLongCastleMask;
+    chessBoard->castleRights = whiteShortCastleMask | whiteLongCastleMask;
 
     generateCastleMoves(chessBoard, attackTables, moveList);
 
@@ -2020,7 +2030,7 @@ void runMakeMoveTests()
     AttackTables* attackTables = initAttackTables();
     TranspositionTableHashes* hashes = initTranpositionTableHashes();
     initStartingPosition(chessBoard, hashes);
-    chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
+    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
     generatePositions(chessBoard, attackTables, hashes, 1);
 
     ASSERT(positionsGenerated, 20);
@@ -2035,7 +2045,7 @@ void runMakeMoveTests()
     chessBoard = initChessBoard();
     attackTables = initAttackTables();
     initStartingPosition(chessBoard, hashes);
-    chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
+    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
     generatePositions(chessBoard, attackTables, hashes, 2);
 
     ASSERT(positionsGenerated, 400);
@@ -2050,7 +2060,7 @@ void runMakeMoveTests()
     chessBoard = initChessBoard();
     attackTables = initAttackTables();
     initStartingPosition(chessBoard, hashes);
-    chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
+    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
     generatePositions(chessBoard, attackTables, hashes, 3);
 
     ASSERT(positionsGenerated, 8902);
@@ -2065,7 +2075,7 @@ void runMakeMoveTests()
     chessBoard = initChessBoard();
     attackTables = initAttackTables();
     initStartingPosition(chessBoard, hashes);
-    chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
+    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
     generatePositions(chessBoard, attackTables, hashes, 4);
 
     ASSERT(positionsGenerated, 197281);
@@ -2080,7 +2090,7 @@ void runMakeMoveTests()
     chessBoard = initChessBoard();
     attackTables = initAttackTables();
     initStartingPosition(chessBoard, hashes);
-    chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
+    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
     generatePositions(chessBoard, attackTables, hashes, 5);
 
     ASSERT(positionsGenerated, 4865609);
@@ -2095,7 +2105,7 @@ void runMakeMoveTests()
     chessBoard = initChessBoard();
     attackTables = initAttackTables();
     initStartingPosition(chessBoard, hashes);
-    chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
+    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
     generatePositions(chessBoard, attackTables, hashes, 6);
 
     ASSERT(positionsGenerated, 119060324);
@@ -2112,7 +2122,7 @@ void runMakeMoveTests()
     chessBoard = initChessBoard();
     attackTables = initAttackTables();
     createPosition("castellingPosition.txt", chessBoard);
-    chessBoard->flags = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
+    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
 
     generatePositions(chessBoard, attackTables, hashes, 6);
 
