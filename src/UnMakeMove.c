@@ -16,8 +16,8 @@ void unMakeKnightMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 
     if (isBlacksMove)
     {
-        chessBoard->blackKnights &= ~to;
-        chessBoard->blackKnights |= from;
+        chessBoard->pieceBoards[blackKnight] &= ~to;
+        chessBoard->pieceBoards[blackKnight] |= from;
         chessBoard->blackPieces &= ~to;
         chessBoard->blackPieces |= from;
         chessBoard->allPieces &= ~to;
@@ -28,31 +28,31 @@ void unMakeKnightMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (capture)
         {
             case pawn:
-                chessBoard->whitePawns |= to;
+                chessBoard->pieceBoards[whitePawn] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whitePawn;
                 break;
             case knight:
-                chessBoard->whiteKnights |= to;
+                chessBoard->pieceBoards[whiteKnight] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteKnight;
                 break;
             case bishop:
-                chessBoard->whiteBishops |= to;
+                chessBoard->pieceBoards[whiteBishop] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteBishop;
                 break;
             case rook:
-                chessBoard->whiteRooks |= to;
+                chessBoard->pieceBoards[whiteRook] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteRook;
                 break;
             case queen:
-                chessBoard->whiteQueens |= to;
+                chessBoard->pieceBoards[whiteQueen] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteQueen;
@@ -63,8 +63,8 @@ void unMakeKnightMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
     }
     else
     {
-        chessBoard->whiteKnights &= ~to;
-        chessBoard->whiteKnights |= from;
+        chessBoard->pieceBoards[whiteKnight] &= ~to;
+        chessBoard->pieceBoards[whiteKnight] |= from;
         chessBoard->whitePieces &= ~to;
         chessBoard->whitePieces |= from;
         chessBoard->allPieces &= ~to;
@@ -75,31 +75,31 @@ void unMakeKnightMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (capture)
         {
             case pawn:
-                chessBoard->blackPawns |= to;
+                chessBoard->pieceBoards[blackPawn] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackPawn;
                 break;
             case knight:
-                chessBoard->blackKnights |= to;
+                chessBoard->pieceBoards[blackKnight] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackKnight;
                 break;
             case bishop:
-                chessBoard->blackBishops |= to;
+                chessBoard->pieceBoards[blackBishop] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackBishop;
                 break;
             case rook:
-                chessBoard->blackRooks |= to;
+                chessBoard->pieceBoards[blackRook] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackRook;
                 break;
             case queen:
-                chessBoard->blackQueens |= to;
+                chessBoard->pieceBoards[blackQueen] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackQueen;
@@ -123,8 +123,8 @@ void unMakeBishopMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 
     if (isBlacksMove)
     {
-        chessBoard->blackBishops &= ~to;
-        chessBoard->blackBishops |= from;
+        chessBoard->pieceBoards[blackBishop] &= ~to;
+        chessBoard->pieceBoards[blackBishop] |= from;
         chessBoard->blackPieces &= ~to;
         chessBoard->blackPieces |= from;
         chessBoard->allPieces &= ~to;
@@ -135,31 +135,31 @@ void unMakeBishopMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (capture)
         {
             case pawn:
-                chessBoard->whitePawns |= to;
+                chessBoard->pieceBoards[whitePawn] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whitePawn;
                 break;
             case knight:
-                chessBoard->whiteKnights |= to;
+                chessBoard->pieceBoards[whiteKnight] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteKnight;
                 break;
             case bishop:
-                chessBoard->whiteBishops |= to;
+                chessBoard->pieceBoards[whiteBishop] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteBishop;
                 break;
             case rook:
-                chessBoard->whiteRooks |= to;
+                chessBoard->pieceBoards[whiteRook] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteRook;
                 break;
             case queen:
-                chessBoard->whiteQueens |= to;
+                chessBoard->pieceBoards[whiteQueen] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteQueen;
@@ -170,8 +170,8 @@ void unMakeBishopMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
     }
     else
     {
-        chessBoard->whiteBishops &= ~to;
-        chessBoard->whiteBishops |= from;
+        chessBoard->pieceBoards[whiteBishop] &= ~to;
+        chessBoard->pieceBoards[whiteBishop] |= from;
         chessBoard->whitePieces &= ~to;
         chessBoard->whitePieces |= from;
         chessBoard->allPieces &= ~to;
@@ -182,31 +182,31 @@ void unMakeBishopMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (capture)
         {
             case pawn:
-                chessBoard->blackPawns |= to;
+                chessBoard->pieceBoards[blackPawn] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackPawn;
                 break;
             case knight:
-                chessBoard->blackKnights |= to;
+                chessBoard->pieceBoards[blackKnight] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackKnight;
                 break;
             case bishop:
-                chessBoard->blackBishops |= to;
+                chessBoard->pieceBoards[blackBishop] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackBishop;
                 break;
             case rook:
-                chessBoard->blackRooks |= to;
+                chessBoard->pieceBoards[blackRook] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackRook;
                 break;
             case queen:
-                chessBoard->blackQueens |= to;
+                chessBoard->pieceBoards[blackQueen] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackQueen;
@@ -230,8 +230,8 @@ void unMakeRookMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 
     if (isBlacksMove)
     {
-        chessBoard->blackRooks &= ~to;
-        chessBoard->blackRooks |= from;
+        chessBoard->pieceBoards[blackRook] &= ~to;
+        chessBoard->pieceBoards[blackRook] |= from;
         chessBoard->blackPieces &= ~to;
         chessBoard->blackPieces |= from;
         chessBoard->allPieces &= ~to;
@@ -242,31 +242,31 @@ void unMakeRookMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (capture)
         {
             case pawn:
-                chessBoard->whitePawns |= to;
+                chessBoard->pieceBoards[whitePawn] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whitePawn;
                 break;
             case knight:
-                chessBoard->whiteKnights |= to;
+                chessBoard->pieceBoards[whiteKnight] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteKnight;
                 break;
             case bishop:
-                chessBoard->whiteBishops |= to;
+                chessBoard->pieceBoards[whiteBishop] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteBishop;
                 break;
             case rook:
-                chessBoard->whiteRooks |= to;
+                chessBoard->pieceBoards[whiteRook] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteRook;
                 break;
             case queen:
-                chessBoard->whiteQueens |= to;
+                chessBoard->pieceBoards[whiteQueen] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteQueen;
@@ -277,8 +277,8 @@ void unMakeRookMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
     }
     else
     {
-        chessBoard->whiteRooks &= ~to;
-        chessBoard->whiteRooks |= from;
+        chessBoard->pieceBoards[whiteRook] &= ~to;
+        chessBoard->pieceBoards[whiteRook] |= from;
         chessBoard->whitePieces &= ~to;
         chessBoard->whitePieces |= from;
         chessBoard->allPieces &= ~to;
@@ -289,31 +289,31 @@ void unMakeRookMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (capture)
         {
             case pawn:
-                chessBoard->blackPawns |= to;
+                chessBoard->pieceBoards[blackPawn] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackPawn;
                 break;
             case knight:
-                chessBoard->blackKnights |= to;
+                chessBoard->pieceBoards[blackKnight] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackKnight;
                 break;
             case bishop:
-                chessBoard->blackBishops |= to;
+                chessBoard->pieceBoards[blackBishop] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackBishop;
                 break;
             case rook:
-                chessBoard->blackRooks |= to;
+                chessBoard->pieceBoards[blackRook] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackRook;
                 break;
             case queen:
-                chessBoard->blackQueens |= to;
+                chessBoard->pieceBoards[blackQueen] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackQueen;
@@ -337,8 +337,8 @@ void unMakeQueenMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 
     if (isBlacksMove)
     {
-        chessBoard->blackQueens &= ~to;
-        chessBoard->blackQueens |= from;
+        chessBoard->pieceBoards[blackQueen] &= ~to;
+        chessBoard->pieceBoards[blackQueen] |= from;
         chessBoard->blackPieces &= ~to;
         chessBoard->blackPieces |= from;
         chessBoard->allPieces &= ~to;
@@ -349,31 +349,31 @@ void unMakeQueenMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (capture)
         {
             case pawn:
-                chessBoard->whitePawns |= to;
+                chessBoard->pieceBoards[whitePawn] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whitePawn;
                 break;
             case knight:
-                chessBoard->whiteKnights |= to;
+                chessBoard->pieceBoards[whiteKnight] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteKnight;
                 break;
             case bishop:
-                chessBoard->whiteBishops |= to;
+                chessBoard->pieceBoards[whiteBishop] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteBishop;
                 break;
             case rook:
-                chessBoard->whiteRooks |= to;
+                chessBoard->pieceBoards[whiteRook] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteRook;
                 break;
             case queen:
-                chessBoard->whiteQueens |= to;
+                chessBoard->pieceBoards[whiteQueen] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteQueen;
@@ -384,8 +384,8 @@ void unMakeQueenMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
     }
     else
     {
-        chessBoard->whiteQueens &= ~to;
-        chessBoard->whiteQueens |= from;
+        chessBoard->pieceBoards[whiteQueen] &= ~to;
+        chessBoard->pieceBoards[whiteQueen] |= from;
         chessBoard->whitePieces &= ~to;
         chessBoard->whitePieces |= from;
         chessBoard->allPieces &= ~to;
@@ -396,31 +396,31 @@ void unMakeQueenMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (capture)
         {
             case pawn:
-                chessBoard->blackPawns |= to;
+                chessBoard->pieceBoards[blackPawn] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackPawn;
                 break;
             case knight:
-                chessBoard->blackKnights |= to;
+                chessBoard->pieceBoards[blackKnight] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackKnight;
                 break;
             case bishop:
-                chessBoard->blackBishops |= to;
+                chessBoard->pieceBoards[blackBishop] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackBishop;
                 break;
             case rook:
-                chessBoard->blackRooks |= to;
+                chessBoard->pieceBoards[blackRook] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackRook;
                 break;
             case queen:
-                chessBoard->blackQueens |= to;
+                chessBoard->pieceBoards[blackQueen] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackQueen;
@@ -444,8 +444,8 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 
     if (isBlacksMove)
     {
-        chessBoard->blackKing &= ~to;
-        chessBoard->blackKing |= from;
+        chessBoard->pieceBoards[blackKing] &= ~to;
+        chessBoard->pieceBoards[blackKing] |= from;
         chessBoard->blackPieces &= ~to;
         chessBoard->blackPieces |= from;
         chessBoard->allPieces &= ~to;
@@ -456,31 +456,31 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (capture)
         {
             case pawn:
-                chessBoard->whitePawns |= to;
+                chessBoard->pieceBoards[whitePawn] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whitePawn;
                 break;
             case knight:
-                chessBoard->whiteKnights |= to;
+                chessBoard->pieceBoards[whiteKnight] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteKnight;
                 break;
             case bishop:
-                chessBoard->whiteBishops |= to;
+                chessBoard->pieceBoards[whiteBishop] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteBishop;
                 break;
             case rook:
-                chessBoard->whiteRooks |= to;
+                chessBoard->pieceBoards[whiteRook] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteRook;
                 break;
             case queen:
-                chessBoard->whiteQueens |= to;
+                chessBoard->pieceBoards[whiteQueen] |= to;
                 chessBoard->whitePieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = whiteQueen;
@@ -493,8 +493,8 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         {
             if (to == g8)
             {
-                chessBoard->blackRooks &= ~f8;
-                chessBoard->blackRooks |= h8;
+                chessBoard->pieceBoards[blackRook] &= ~f8;
+                chessBoard->pieceBoards[blackRook] |= h8;
                 chessBoard->blackPieces &= ~f8;
                 chessBoard->blackPieces |= h8;
                 chessBoard->allPieces &= ~f8;
@@ -505,8 +505,8 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 
             if (to == c8)
             {
-                chessBoard->blackRooks &= ~d8;
-                chessBoard->blackRooks |= a8;
+                chessBoard->pieceBoards[blackRook] &= ~d8;
+                chessBoard->pieceBoards[blackRook] |= a8;
                 chessBoard->blackPieces &= ~d8;
                 chessBoard->blackPieces |= a8;
                 chessBoard->allPieces &= ~d8;
@@ -518,8 +518,8 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
     }
     else
     {
-        chessBoard->whiteKing &= ~to;
-        chessBoard->whiteKing |= from;
+        chessBoard->pieceBoards[whiteKing] &= ~to;
+        chessBoard->pieceBoards[whiteKing] |= from;
         chessBoard->whitePieces &= ~to;
         chessBoard->whitePieces |= from;
         chessBoard->allPieces &= ~to;
@@ -530,31 +530,31 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (capture)
         {
             case pawn:
-                chessBoard->blackPawns |= to;
+                chessBoard->pieceBoards[blackPawn] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackPawn;
                 break;
             case knight:
-                chessBoard->blackKnights |= to;
+                chessBoard->pieceBoards[blackKnight] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackKnight;
                 break;
             case bishop:
-                chessBoard->blackBishops |= to;
+                chessBoard->pieceBoards[blackBishop] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackBishop;
                 break;
             case rook:
-                chessBoard->blackRooks |= to;
+                chessBoard->pieceBoards[blackRook] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackRook;
                 break;
             case queen:
-                chessBoard->blackQueens |= to;
+                chessBoard->pieceBoards[blackQueen] |= to;
                 chessBoard->blackPieces |= to;
                 chessBoard->allPieces |= to;
                 chessBoard->pieceLookup[toSq] = blackQueen;
@@ -567,8 +567,8 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         {
             if (to == g1)
             {
-                chessBoard->whiteRooks &= ~f1;
-                chessBoard->whiteRooks |= h1;
+                chessBoard->pieceBoards[whiteRook] &= ~f1;
+                chessBoard->pieceBoards[whiteRook] |= h1;
                 chessBoard->whitePieces &= ~f1;
                 chessBoard->whitePieces |= h1;
                 chessBoard->allPieces &= ~f1;
@@ -579,8 +579,8 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 
             if (to == c1)
             {
-                chessBoard->whiteRooks &= ~d1;
-                chessBoard->whiteRooks |= a1;
+                chessBoard->pieceBoards[whiteRook] &= ~d1;
+                chessBoard->pieceBoards[whiteRook] |= a1;
                 chessBoard->whitePieces &= ~d1;
                 chessBoard->whitePieces |= a1;
                 chessBoard->allPieces &= ~d1;
@@ -612,27 +612,27 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (promotion)
         {
             case knightPromotion:
-                chessBoard->blackPawns |= to;
-                chessBoard->blackKnights &= ~to;
+                chessBoard->pieceBoards[blackPawn] |= to;
+                chessBoard->pieceBoards[blackKnight] &= ~to;
                 break;
             case bishopPromotion:
-                chessBoard->blackPawns |= to;
-                chessBoard->blackBishops &= ~to;
+                chessBoard->pieceBoards[blackPawn] |= to;
+                chessBoard->pieceBoards[blackBishop] &= ~to;
                 break;
             case rookPromotion:
-                chessBoard->blackPawns |= to;
-                chessBoard->blackRooks &= ~to;
+                chessBoard->pieceBoards[blackPawn] |= to;
+                chessBoard->pieceBoards[blackRook] &= ~to;
                 break;
             case queenPromotion:
-                chessBoard->blackPawns |= to;
-                chessBoard->blackQueens &= ~to;
+                chessBoard->pieceBoards[blackPawn] |= to;
+                chessBoard->pieceBoards[blackQueen] &= ~to;
                 break;
             case 0:
                 break;
         }
 
-        chessBoard->blackPawns &= ~to;
-        chessBoard->blackPawns |= from;
+        chessBoard->pieceBoards[blackPawn] &= ~to;
+        chessBoard->pieceBoards[blackPawn] |= from;
         chessBoard->blackPieces &= ~to;
         chessBoard->blackPieces |= from;
         chessBoard->allPieces &= ~to;
@@ -650,31 +650,31 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (capture)
         {
             case pawn:
-                chessBoard->whitePawns |= moveTo;
+                chessBoard->pieceBoards[whitePawn] |= moveTo;
                 chessBoard->whitePieces |= moveTo;
                 chessBoard->allPieces |= moveTo;
                 chessBoard->pieceLookup[moveToSq] = whitePawn;
                 break;
             case knight:
-                chessBoard->whiteKnights |= moveTo;
+                chessBoard->pieceBoards[whiteKnight] |= moveTo;
                 chessBoard->whitePieces |= moveTo;
                 chessBoard->allPieces |= moveTo;
                 chessBoard->pieceLookup[moveToSq] = whiteKnight;
                 break;
             case bishop:
-                chessBoard->whiteBishops |= moveTo;
+                chessBoard->pieceBoards[whiteBishop] |= moveTo;
                 chessBoard->whitePieces |= moveTo;
                 chessBoard->allPieces |= moveTo;
                 chessBoard->pieceLookup[moveToSq] = whiteBishop;
                 break;
             case rook:
-                chessBoard->whiteRooks |= moveTo;
+                chessBoard->pieceBoards[whiteRook] |= moveTo;
                 chessBoard->whitePieces |= moveTo;
                 chessBoard->allPieces |= moveTo;
                 chessBoard->pieceLookup[moveToSq] = whiteRook;
                 break;
             case queen:
-                chessBoard->whiteQueens |= moveTo;
+                chessBoard->pieceBoards[whiteQueen] |= moveTo;
                 chessBoard->whitePieces |= moveTo;
                 chessBoard->allPieces |= moveTo;
                 chessBoard->pieceLookup[moveToSq] = whiteQueen;
@@ -688,27 +688,27 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (promotion)
         {
             case knightPromotion:
-                chessBoard->whitePawns |= to;
-                chessBoard->whiteKnights &= ~to;
+                chessBoard->pieceBoards[whitePawn] |= to;
+                chessBoard->pieceBoards[whiteKnight] &= ~to;
                 break;
             case bishopPromotion:
-                chessBoard->whitePawns |= to;
-                chessBoard->whiteBishops &= ~to;
+                chessBoard->pieceBoards[whitePawn] |= to;
+                chessBoard->pieceBoards[whiteBishop] &= ~to;
                 break;
             case rookPromotion:
-                chessBoard->whitePawns |= to;
-                chessBoard->whiteRooks &= ~to;
+                chessBoard->pieceBoards[whitePawn] |= to;
+                chessBoard->pieceBoards[whiteRook] &= ~to;
                 break;
             case queenPromotion:
-                chessBoard->whitePawns |= to;
-                chessBoard->whiteQueens &= ~to;
+                chessBoard->pieceBoards[whitePawn] |= to;
+                chessBoard->pieceBoards[whiteQueen] &= ~to;
                 break;
             case 0:
                 break;
         }
 
-        chessBoard->whitePawns &= ~to;
-        chessBoard->whitePawns |= from;
+        chessBoard->pieceBoards[whitePawn] &= ~to;
+        chessBoard->pieceBoards[whitePawn] |= from;
         chessBoard->whitePieces &= ~to;
         chessBoard->whitePieces |= from;
         chessBoard->allPieces &= ~to;
@@ -726,31 +726,31 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
         switch (capture)
         {
             case pawn:
-                chessBoard->blackPawns |= moveTo;
+                chessBoard->pieceBoards[blackPawn] |= moveTo;
                 chessBoard->blackPieces |= moveTo;
                 chessBoard->allPieces |= moveTo;
                 chessBoard->pieceLookup[moveToSq] = blackPawn;
                 break;
             case knight:
-                chessBoard->blackKnights |= moveTo;
+                chessBoard->pieceBoards[blackKnight] |= moveTo;
                 chessBoard->blackPieces |= moveTo;
                 chessBoard->allPieces |= moveTo;
                 chessBoard->pieceLookup[moveToSq] = blackKnight;
                 break;
             case bishop:
-                chessBoard->blackBishops |= moveTo;
+                chessBoard->pieceBoards[blackBishop] |= moveTo;
                 chessBoard->blackPieces |= moveTo;
                 chessBoard->allPieces |= moveTo;
                 chessBoard->pieceLookup[moveToSq] = blackBishop;
                 break;
             case rook:
-                chessBoard->blackRooks |= moveTo;
+                chessBoard->pieceBoards[blackRook] |= moveTo;
                 chessBoard->blackPieces |= moveTo;
                 chessBoard->allPieces |= moveTo;
                 chessBoard->pieceLookup[moveToSq] = blackRook;
                 break;
             case queen:
-                chessBoard->blackQueens |= moveTo;
+                chessBoard->pieceBoards[blackQueen] |= moveTo;
                 chessBoard->blackPieces |= moveTo;
                 chessBoard->allPieces |= moveTo;
                 chessBoard->pieceLookup[moveToSq] = blackQueen;

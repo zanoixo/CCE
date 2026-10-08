@@ -19,8 +19,8 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
 
     if (isBlacksMove)
     {
-        chessBoard->blackKnights &= ~from;
-        chessBoard->blackKnights |= to;
+        chessBoard->pieceBoards[blackKnight] &= ~from;
+        chessBoard->pieceBoards[blackKnight] |= to;
         chessBoard->positionHash ^= hashes->pieceHashes[blackKnight][fromSq];
         chessBoard->positionHash ^= hashes->pieceHashes[blackKnight][toSq];
         chessBoard->blackPieces &= ~from;
@@ -33,22 +33,22 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
         switch (capture)
         {
             case pawn:
-                chessBoard->whitePawns &= ~to;
+                chessBoard->pieceBoards[whitePawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case knight:
-                chessBoard->whiteKnights &= ~to;
+                chessBoard->pieceBoards[whiteKnight] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteKnight][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case bishop:
-                chessBoard->whiteBishops &= ~to;
+                chessBoard->pieceBoards[whiteBishop] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case rook:
-                chessBoard->whiteRooks &= ~to;
+                chessBoard->pieceBoards[whiteRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
                 chessBoard->whitePieces &= ~to;
 
@@ -65,7 +65,7 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
 
                 break;
             case queen:
-                chessBoard->whiteQueens &= ~to;
+                chessBoard->pieceBoards[whiteQueen] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteQueen][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
@@ -75,8 +75,8 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
     }else
     {   
 
-        chessBoard->whiteKnights &= ~from;
-        chessBoard->whiteKnights |= to;
+        chessBoard->pieceBoards[whiteKnight] &= ~from;
+        chessBoard->pieceBoards[whiteKnight] |= to;
         chessBoard->positionHash ^= hashes->pieceHashes[whiteKnight][fromSq];
         chessBoard->positionHash ^= hashes->pieceHashes[whiteKnight][toSq];
         chessBoard->whitePieces &= ~from;
@@ -89,22 +89,22 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
         switch (capture)
         {
             case pawn:
-                chessBoard->blackPawns &= ~to;
+                chessBoard->pieceBoards[blackPawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case knight:
-                chessBoard->blackKnights &= ~to;
+                chessBoard->pieceBoards[blackKnight] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackKnight][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case bishop:
-                chessBoard->blackBishops &= ~to;
+                chessBoard->pieceBoards[blackBishop] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackBishop][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case rook:
-                chessBoard->blackRooks &= ~to;
+                chessBoard->pieceBoards[blackRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
                 chessBoard->blackPieces &= ~to;
 
@@ -121,7 +121,7 @@ void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
 
                 break;
             case queen:
-                chessBoard->blackQueens &= ~to;
+                chessBoard->pieceBoards[blackQueen] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackQueen][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
@@ -147,8 +147,8 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
 
     if (isBlacksMove)
     {
-        chessBoard->blackBishops &= ~from;
-        chessBoard->blackBishops |= to;
+        chessBoard->pieceBoards[blackBishop] &= ~from;
+        chessBoard->pieceBoards[blackBishop] |= to;
         chessBoard->positionHash ^= hashes->pieceHashes[blackBishop][fromSq];
         chessBoard->positionHash ^= hashes->pieceHashes[blackBishop][toSq];
         chessBoard->blackPieces &= ~from;
@@ -161,22 +161,22 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
         switch (capture)
         {
             case pawn:
-                chessBoard->whitePawns &= ~to;
+                chessBoard->pieceBoards[whitePawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case knight:
-                chessBoard->whiteKnights &= ~to;
+                chessBoard->pieceBoards[whiteKnight] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteKnight][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case bishop:
-                chessBoard->whiteBishops &= ~to;
+                chessBoard->pieceBoards[whiteBishop] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case rook:
-                chessBoard->whiteRooks &= ~to;
+                chessBoard->pieceBoards[whiteRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
                 chessBoard->whitePieces &= ~to;
 
@@ -193,7 +193,7 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
 
                 break;
             case queen:
-                chessBoard->whiteQueens &= ~to;
+                chessBoard->pieceBoards[whiteQueen] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteQueen][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
@@ -202,8 +202,8 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
         }
     }else
     {
-        chessBoard->whiteBishops &= ~from;
-        chessBoard->whiteBishops |= to;
+        chessBoard->pieceBoards[whiteBishop] &= ~from;
+        chessBoard->pieceBoards[whiteBishop] |= to;
         chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][fromSq];
         chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][toSq];
         chessBoard->whitePieces &= ~from;
@@ -216,22 +216,22 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
         switch (capture)
         {
             case pawn:
-                chessBoard->blackPawns &= ~to;
+                chessBoard->pieceBoards[blackPawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case knight:
-                chessBoard->blackKnights &= ~to;
+                chessBoard->pieceBoards[blackKnight] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackKnight][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case bishop:
-                chessBoard->blackBishops &= ~to;
+                chessBoard->pieceBoards[blackBishop] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackBishop][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case rook:
-                chessBoard->blackRooks &= ~to;
+                chessBoard->pieceBoards[blackRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
                 chessBoard->blackPieces &= ~to;
 
@@ -248,7 +248,7 @@ void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes
 
                 break;
             case queen:
-                chessBoard->blackQueens &= ~to;
+                chessBoard->pieceBoards[blackQueen] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackQueen][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
@@ -274,8 +274,8 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
     if (isBlacksMove)
     {
-        chessBoard->blackRooks &= ~from;
-        chessBoard->blackRooks |= to;
+        chessBoard->pieceBoards[blackRook] &= ~from;
+        chessBoard->pieceBoards[blackRook] |= to;
         chessBoard->positionHash ^= hashes->pieceHashes[blackRook][fromSq];
         chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
         chessBoard->blackPieces &= ~from;
@@ -300,22 +300,22 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         switch (capture)
         {
             case pawn:
-                chessBoard->whitePawns &= ~to;
+                chessBoard->pieceBoards[whitePawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case knight:
-                chessBoard->whiteKnights &= ~to;
+                chessBoard->pieceBoards[whiteKnight] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteKnight][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case bishop:
-                chessBoard->whiteBishops &= ~to;
+                chessBoard->pieceBoards[whiteBishop] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case rook:
-                chessBoard->whiteRooks &= ~to;
+                chessBoard->pieceBoards[whiteRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
                 chessBoard->whitePieces &= ~to;
 
@@ -332,7 +332,7 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
                 break;
             case queen:
-                chessBoard->whiteQueens &= ~to;
+                chessBoard->pieceBoards[whiteQueen] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteQueen][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
@@ -341,8 +341,8 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         }
     }else
     {
-        chessBoard->whiteRooks &= ~from;
-        chessBoard->whiteRooks |= to;
+        chessBoard->pieceBoards[whiteRook] &= ~from;
+        chessBoard->pieceBoards[whiteRook] |= to;
         chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][fromSq];
         chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
         chessBoard->whitePieces &= ~from;
@@ -367,22 +367,22 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         switch (capture)
         {
             case pawn:
-                chessBoard->blackPawns &= ~to;
+                chessBoard->pieceBoards[blackPawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case knight:
-                chessBoard->blackKnights &= ~to;
+                chessBoard->pieceBoards[blackKnight] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackKnight][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case bishop:
-                chessBoard->blackBishops &= ~to;
+                chessBoard->pieceBoards[blackBishop] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackBishop][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case rook:
-                chessBoard->blackRooks &= ~to;
+                chessBoard->pieceBoards[blackRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
                 chessBoard->blackPieces &= ~to;
 
@@ -399,7 +399,7 @@ void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
                 break;
             case queen:
-                chessBoard->blackQueens &= ~to;
+                chessBoard->pieceBoards[blackQueen] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackQueen][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
@@ -428,8 +428,8 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
 
     if (isBlacksMove)
     {
-        chessBoard->blackQueens &= ~from;
-        chessBoard->blackQueens |= to;
+        chessBoard->pieceBoards[blackQueen] &= ~from;
+        chessBoard->pieceBoards[blackQueen] |= to;
         chessBoard->positionHash ^= hashes->pieceHashes[blackQueen][fromSq];
         chessBoard->positionHash ^= hashes->pieceHashes[blackQueen][toSq];
         chessBoard->blackPieces &= ~from;
@@ -440,22 +440,22 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
         switch (capture)
         {
             case pawn:
-                chessBoard->whitePawns &= ~to;
+                chessBoard->pieceBoards[whitePawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case knight:
-                chessBoard->whiteKnights &= ~to;
+                chessBoard->pieceBoards[whiteKnight] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteKnight][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case bishop:
-                chessBoard->whiteBishops &= ~to;
+                chessBoard->pieceBoards[whiteBishop] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case rook:
-                chessBoard->whiteRooks &= ~to;
+                chessBoard->pieceBoards[whiteRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
                 chessBoard->whitePieces &= ~to;
 
@@ -472,7 +472,7 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
 
                 break;
             case queen:
-                chessBoard->whiteQueens &= ~to;
+                chessBoard->pieceBoards[whiteQueen] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteQueen][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
@@ -481,8 +481,8 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
         }
     }else
     {
-        chessBoard->whiteQueens &= ~from;
-        chessBoard->whiteQueens |= to;
+        chessBoard->pieceBoards[whiteQueen] &= ~from;
+        chessBoard->pieceBoards[whiteQueen] |= to;
         chessBoard->positionHash ^= hashes->pieceHashes[whiteQueen][fromSq];
         chessBoard->positionHash ^= hashes->pieceHashes[whiteQueen][toSq];
         chessBoard->whitePieces &= ~from;
@@ -495,22 +495,22 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
         switch (capture)
         {
             case pawn:
-                chessBoard->blackPawns &= ~to;
+                chessBoard->pieceBoards[blackPawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case knight:
-                chessBoard->blackKnights &= ~to;
+                chessBoard->pieceBoards[blackKnight] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackKnight][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case bishop:
-                chessBoard->blackBishops &= ~to;
+                chessBoard->pieceBoards[blackBishop] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackBishop][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case rook:
-                chessBoard->blackRooks &= ~to;
+                chessBoard->pieceBoards[blackRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
                 chessBoard->blackPieces &= ~to;
 
@@ -527,7 +527,7 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
 
                 break;
             case queen:
-                chessBoard->blackQueens &= ~to;
+                chessBoard->pieceBoards[blackQueen] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackQueen][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
@@ -553,8 +553,8 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
     if (isBlacksMove)
     {
-        chessBoard->blackKing &= ~from;
-        chessBoard->blackKing |= to;
+        chessBoard->pieceBoards[blackKing] &= ~from;
+        chessBoard->pieceBoards[blackKing] |= to;
         chessBoard->positionHash ^= hashes->pieceHashes[blackKing][fromSq];
         chessBoard->positionHash ^= hashes->pieceHashes[blackKing][toSq];
         chessBoard->blackPieces &= ~from;
@@ -580,22 +580,22 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         switch (capture)
         {
             case pawn:
-                chessBoard->whitePawns &= ~to;
+                chessBoard->pieceBoards[whitePawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case knight:
-                chessBoard->whiteKnights &= ~to;
+                chessBoard->pieceBoards[whiteKnight] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteKnight][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case bishop:
-                chessBoard->whiteBishops &= ~to;
+                chessBoard->pieceBoards[whiteBishop] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
             case rook:
-                chessBoard->whiteRooks &= ~to;
+                chessBoard->pieceBoards[whiteRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
                 chessBoard->whitePieces &= ~to;
 
@@ -612,7 +612,7 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
                 break;
             case queen:
-                chessBoard->whiteQueens &= ~to;
+                chessBoard->pieceBoards[whiteQueen] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteQueen][toSq];
                 chessBoard->whitePieces &= ~to;
                 break;
@@ -624,8 +624,8 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         {
             if (to == g8)
             {
-                chessBoard->blackRooks &= ~ h8;
-                chessBoard->blackRooks |= f8;
+                chessBoard->pieceBoards[blackRook] &= ~ h8;
+                chessBoard->pieceBoards[blackRook] |= f8;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][getSqInd(h8)];
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][getSqInd(f8)];
                 chessBoard->blackPieces &= ~h8;
@@ -639,8 +639,8 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
             if (to == c8)
             {
-                chessBoard->blackRooks &= ~ a8;
-                chessBoard->blackRooks |= d8;
+                chessBoard->pieceBoards[blackRook] &= ~ a8;
+                chessBoard->pieceBoards[blackRook] |= d8;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][getSqInd(a8)];
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][getSqInd(d8)];
                 chessBoard->blackPieces &= ~a8;
@@ -655,8 +655,8 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         
     }else
     {
-        chessBoard->whiteKing &= ~from;
-        chessBoard->whiteKing |= to;
+        chessBoard->pieceBoards[whiteKing] &= ~from;
+        chessBoard->pieceBoards[whiteKing] |= to;
         chessBoard->positionHash ^= hashes->pieceHashes[whiteKing][fromSq];
         chessBoard->positionHash ^= hashes->pieceHashes[whiteKing][toSq];
         chessBoard->whitePieces &= ~from;
@@ -681,22 +681,22 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         switch (capture)
         {
             case pawn:
-                chessBoard->blackPawns &= ~to;
+                chessBoard->pieceBoards[blackPawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case knight:
-                chessBoard->blackKnights &= ~to;
+                chessBoard->pieceBoards[blackKnight] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackKnight][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case bishop:
-                chessBoard->blackBishops &= ~to;
+                chessBoard->pieceBoards[blackBishop] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackBishop][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
             case rook:
-                chessBoard->blackRooks &= ~to;
+                chessBoard->pieceBoards[blackRook] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
                 chessBoard->blackPieces &= ~to;
 
@@ -713,7 +713,7 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
                 break;
             case queen:
-                chessBoard->blackQueens &= ~to;
+                chessBoard->pieceBoards[blackQueen] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackQueen][toSq];
                 chessBoard->blackPieces &= ~to;
                 break;
@@ -725,8 +725,8 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         {
             if (to == g1)
             {
-                chessBoard->whiteRooks &= ~ h1;
-                chessBoard->whiteRooks |= f1;
+                chessBoard->pieceBoards[whiteRook] &= ~ h1;
+                chessBoard->pieceBoards[whiteRook] |= f1;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][getSqInd(h1)];
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][getSqInd(f1)];
                 chessBoard->whitePieces &= ~h1;
@@ -740,8 +740,8 @@ void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
             if (to == c1)
             {
-                chessBoard->whiteRooks &= ~ a1;
-                chessBoard->whiteRooks |= d1;
+                chessBoard->pieceBoards[whiteRook] &= ~ a1;
+                chessBoard->pieceBoards[whiteRook] |= d1;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][getSqInd(a1)];
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][getSqInd(d1)];
                 chessBoard->whitePieces &= ~a1;
@@ -775,8 +775,8 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
     if (isBlacksMove)
     {
-        chessBoard->blackPawns &= ~from;
-        chessBoard->blackPawns |= to;
+        chessBoard->pieceBoards[blackPawn] &= ~from;
+        chessBoard->pieceBoards[blackPawn] |= to;
         chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][fromSq];
         chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][toSq];
         chessBoard->blackPieces &= ~from;
@@ -798,22 +798,22 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         switch (capture)
         {
             case pawn:
-                chessBoard->whitePawns &= ~moveTo;
+                chessBoard->pieceBoards[whitePawn] &= ~moveTo;
                 chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][moveToSq];
                 chessBoard->whitePieces &= ~moveTo;
                 break;
             case knight:
-                chessBoard->whiteKnights &= ~moveTo;
+                chessBoard->pieceBoards[whiteKnight] &= ~moveTo;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteKnight][moveToSq];
                 chessBoard->whitePieces &= ~moveTo;
                 break;
             case bishop:
-                chessBoard->whiteBishops &= ~moveTo;
+                chessBoard->pieceBoards[whiteBishop] &= ~moveTo;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][moveToSq];
                 chessBoard->whitePieces &= ~moveTo;
                 break;
             case rook:
-                chessBoard->whiteRooks &= ~moveTo;
+                chessBoard->pieceBoards[whiteRook] &= ~moveTo;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][moveToSq];
                 chessBoard->whitePieces &= ~moveTo;
 
@@ -830,7 +830,7 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
                 break;
             case queen:
-                chessBoard->whiteQueens &= ~moveTo;
+                chessBoard->pieceBoards[whiteQueen] &= ~moveTo;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteQueen][moveToSq];
                 chessBoard->whitePieces &= ~moveTo;
                 break;
@@ -841,30 +841,30 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         switch (promotion)
         {
             case knightPromotion:
-                chessBoard->blackPawns &= ~to;
+                chessBoard->pieceBoards[blackPawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][toSq];
-                chessBoard->blackKnights |= to;
+                chessBoard->pieceBoards[blackKnight] |= to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackKnight][toSq];
                 chessBoard->pieceLookup[toSq] = blackKnight;
                 break;
             case bishopPromotion:
-                chessBoard->blackPawns &= ~to;
+                chessBoard->pieceBoards[blackPawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][toSq];
-                chessBoard->blackBishops |= to;
+                chessBoard->pieceBoards[blackBishop] |= to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackBishop][toSq];
                 chessBoard->pieceLookup[toSq] = blackBishop;
                 break;
             case rookPromotion:
-                chessBoard->blackPawns &= ~to;
+                chessBoard->pieceBoards[blackPawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][toSq];
-                chessBoard->blackRooks |= to;
+                chessBoard->pieceBoards[blackRook] |= to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
                 chessBoard->pieceLookup[toSq] = blackRook;
                 break;
             case queenPromotion:
-                chessBoard->blackPawns &= ~to;
+                chessBoard->pieceBoards[blackPawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][toSq];
-                chessBoard->blackQueens |= to;
+                chessBoard->pieceBoards[blackQueen] |= to;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackQueen][toSq];
                 chessBoard->pieceLookup[toSq] = blackQueen;
                 break;
@@ -880,8 +880,8 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         
     }else
     {
-        chessBoard->whitePawns &= ~from;
-        chessBoard->whitePawns |= to;
+        chessBoard->pieceBoards[whitePawn] &= ~from;
+        chessBoard->pieceBoards[whitePawn] |= to;
         chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][fromSq];
         chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][toSq];
         chessBoard->whitePieces &= ~from;
@@ -903,22 +903,22 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         switch (capture)
         {
             case pawn:
-                chessBoard->blackPawns &= ~moveTo;
+                chessBoard->pieceBoards[blackPawn] &= ~moveTo;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][moveToSq];
                 chessBoard->blackPieces &= ~moveTo;
                 break;
             case knight:
-                chessBoard->blackKnights &= ~moveTo;
+                chessBoard->pieceBoards[blackKnight] &= ~moveTo;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackKnight][moveToSq];
                 chessBoard->blackPieces &= ~moveTo;
                 break;
             case bishop:
-                chessBoard->blackBishops &= ~moveTo;
+                chessBoard->pieceBoards[blackBishop] &= ~moveTo;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackBishop][moveToSq];
                 chessBoard->blackPieces &= ~moveTo;
                 break;
             case rook:
-                chessBoard->blackRooks &= ~moveTo;
+                chessBoard->pieceBoards[blackRook] &= ~moveTo;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackRook][moveToSq];
                 chessBoard->blackPieces &= ~moveTo;
 
@@ -935,7 +935,7 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
 
                 break;
             case queen:
-                chessBoard->blackQueens &= ~moveTo;
+                chessBoard->pieceBoards[blackQueen] &= ~moveTo;
                 chessBoard->positionHash ^= hashes->pieceHashes[blackQueen][moveToSq];
                 chessBoard->blackPieces &= ~moveTo;
                 break;
@@ -946,30 +946,30 @@ void makePawnMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* 
         switch (promotion)
         {
             case knightPromotion:
-                chessBoard->whitePawns &= ~to;
+                chessBoard->pieceBoards[whitePawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][toSq];
-                chessBoard->whiteKnights |= to;
+                chessBoard->pieceBoards[whiteKnight] |= to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteKnight][toSq];
                 chessBoard->pieceLookup[toSq] = whiteKnight;
                 break;
             case bishopPromotion:
-                chessBoard->whitePawns &= ~to;
+                chessBoard->pieceBoards[whitePawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][toSq];
-                chessBoard->whiteBishops |= to;
+                chessBoard->pieceBoards[whiteBishop] |= to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][toSq];
                 chessBoard->pieceLookup[toSq] = whiteBishop;
                 break;
             case rookPromotion:
-                chessBoard->whitePawns &= ~to;
+                chessBoard->pieceBoards[whitePawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][toSq];
-                chessBoard->whiteRooks |= to;
+                chessBoard->pieceBoards[whiteRook] |= to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
                 chessBoard->pieceLookup[toSq] = whiteRook;
                 break;
             case queenPromotion:
-                chessBoard->whitePawns &= ~to;
+                chessBoard->pieceBoards[whitePawn] &= ~to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][toSq];
-                chessBoard->whiteQueens |= to;
+                chessBoard->pieceBoards[whiteQueen] |= to;
                 chessBoard->positionHash ^= hashes->pieceHashes[whiteQueen][toSq];
                 chessBoard->pieceLookup[toSq] = whiteQueen;
                 break;

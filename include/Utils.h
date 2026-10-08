@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #define BOARD_SIZE 64
+#define PIECE_TYPES 12
 #define MAX_INT 1000000000
 #define MIN_INT -1000000000
 #define MATED -1000000

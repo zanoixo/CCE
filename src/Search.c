@@ -205,7 +205,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
         }
     }
     
-    int ownKingSq = getSqInd(side ? chessBoard->blackKing : chessBoard->whiteKing);
+    int ownKingSq = getSqInd(side ? chessBoard->pieceBoards[blackKing] : chessBoard->pieceBoards[whiteKing]);
     int gotChecked = isSquareAttacked(ownKingSq, chessBoard, attackTables, side);
 
     if (!gotChecked)
@@ -263,7 +263,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
         makeMove(chessBoard, &moveList.moves[i], hashes);
 
-        ownKingSq = getSqInd(side ? chessBoard->blackKing : chessBoard->whiteKing);
+        ownKingSq = getSqInd(side ? chessBoard->pieceBoards[blackKing] : chessBoard->pieceBoards[whiteKing]);
         int isNotLegalMove = isSquareAttacked(ownKingSq, chessBoard, attackTables, side);
 
         if (!isNotLegalMove)
@@ -398,7 +398,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
         }
     }
 
-    int ownKingSq = getSqInd(side ? chessBoard->blackKing : chessBoard->whiteKing);
+    int ownKingSq = getSqInd(side ? chessBoard->pieceBoards[blackKing] : chessBoard->pieceBoards[whiteKing]);
     int amChecked = isSquareAttacked(ownKingSq, chessBoard, attackTables, side);
 
     if (!isNullMove && currentDepth - depthSearched >= 3 && !amChecked && depthSearched != 0 && hasNonPawnPieces(chessBoard, side) && isBetaValid(beta))
@@ -449,7 +449,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
         makeMove(chessBoard, &moveList.moves[i], hashes);
 
-        ownKingSq = getSqInd(side ? chessBoard->blackKing : chessBoard->whiteKing);
+        ownKingSq = getSqInd(side ? chessBoard->pieceBoards[blackKing] : chessBoard->pieceBoards[whiteKing]);
 
         int isChecked = isSquareAttacked(ownKingSq, chessBoard, attackTables, side);
 
@@ -457,7 +457,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
         {
             legalMoves++;
 
-            int enemyKingSq = getSqInd(side ? chessBoard->whiteKing : chessBoard->blackKing);
+            int enemyKingSq = getSqInd(side ? chessBoard->pieceBoards[whiteKing] : chessBoard->pieceBoards[blackKing]);
             int isEnemyChecked = isSquareAttacked(enemyKingSq, chessBoard, attackTables, !side);
             int moveReduction = 0;
 
@@ -545,7 +545,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     if (legalMoves == 0)
     {
-        ownKingSq = getSqInd(side ? chessBoard->blackKing : chessBoard->whiteKing);
+        ownKingSq = getSqInd(side ? chessBoard->pieceBoards[blackKing] : chessBoard->pieceBoards[whiteKing]);
         if (isSquareAttacked(ownKingSq, chessBoard, attackTables, side))
             bestMove.eval = MATED + mateDistance;
         else
