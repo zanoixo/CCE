@@ -157,7 +157,7 @@ int evaluateMobility(ChessBoard* chessBoard, AttackTables* attackTables, int isB
     uint64_t bishops = chessBoard->pieceBoards[whiteBishop];
     uint64_t rooks = chessBoard->pieceBoards[whiteRook];
     uint64_t queens = chessBoard->pieceBoards[whiteQueen];
-    uint64_t friendlyPieces = chessBoard->whitePieces;
+    uint64_t friendlyPieces = chessBoard->coloredBoards[white];
     uint64_t enemyPawns = chessBoard->pieceBoards[blackPawn];
     uint64_t enemyKing = chessBoard->pieceBoards[blackKing];
 
@@ -168,7 +168,7 @@ int evaluateMobility(ChessBoard* chessBoard, AttackTables* attackTables, int isB
         bishops = chessBoard->pieceBoards[blackBishop];
         rooks = chessBoard->pieceBoards[blackRook];
         queens = chessBoard->pieceBoards[blackQueen];
-        friendlyPieces = chessBoard->blackPieces;
+        friendlyPieces = chessBoard->coloredBoards[black];
         enemyPawns = chessBoard->pieceBoards[whitePawn];
         enemyKing = chessBoard->pieceBoards[whiteKing];
     }

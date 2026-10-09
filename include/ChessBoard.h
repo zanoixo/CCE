@@ -27,9 +27,10 @@ typedef struct MoveDataStack
 typedef struct ChessBoard
 {
     uint64_t pieceBoards[PIECE_TYPES];
+    uint64_t coloredBoards[COLORS];
     
-    uint64_t blackPieces;
-    uint64_t whitePieces;
+    //uint64_t blackPieces;
+    //uint64_t whitePieces;
     uint64_t allPieces;
     uint64_t enPassantSq;
     uint8_t flags;

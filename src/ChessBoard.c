@@ -82,8 +82,8 @@ ChessBoard* initChessBoard()
     chessBoard->pieceBoards[blackQueen] = 0;
     chessBoard->pieceBoards[blackKing] = 0;
 
-    chessBoard->blackPieces = 0;
-    chessBoard->whitePieces = 0;
+    chessBoard->coloredBoards[black] = 0;
+    chessBoard->coloredBoards[white] = 0;
     chessBoard->allPieces = 0;
     chessBoard->enPassantSq = 0;
     chessBoard->flags = 0;
@@ -210,7 +210,7 @@ void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hash
                             0b00000000ULL << 8  |
                             0b00000000ULL;
 
-    chessBoard->blackPieces = 0b11111111ULL << 56 |
+    chessBoard->coloredBoards[black] = 0b11111111ULL << 56 |
                               0b11111111ULL << 48 |
                               0b00000000ULL << 40 |
                               0b00000000ULL << 32 |
@@ -219,7 +219,7 @@ void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hash
                               0b00000000ULL << 8  |
                               0b00000000ULL;
 
-    chessBoard->whitePieces = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[white] = 0b00000000ULL << 56 |
                               0b00000000ULL << 48 |
                               0b00000000ULL << 40 |
                               0b00000000ULL << 32 |
@@ -487,7 +487,7 @@ void createPosition(char fileName[], ChessBoard *chessBoard)
             case 'K': chessBoard->pieceBoards[whiteKing] |= square; chessBoard->pieceLookup[sqInd] = whiteKing; break;
             default: sendError("Wrong format in file");   
             }
-            chessBoard->whitePieces |= square;
+            chessBoard->coloredBoards[white] |= square;
         } else if (piece[0] == 'B')
         {
             switch (pieceName)
@@ -500,9 +500,9 @@ void createPosition(char fileName[], ChessBoard *chessBoard)
             case 'K': chessBoard->pieceBoards[blackKing] |= square; chessBoard->pieceLookup[sqInd] = blackKing; break;
             default: sendError("Wrong format in file");   
             }
-            chessBoard->blackPieces |= square;
+            chessBoard->coloredBoards[black] |= square;
         }
         squareIndex++;
     }
-    chessBoard->allPieces = chessBoard->whitePieces | chessBoard->blackPieces;
+    chessBoard->allPieces = chessBoard->coloredBoards[white] | chessBoard->coloredBoards[black];
 }

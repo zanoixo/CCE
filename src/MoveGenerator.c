@@ -42,14 +42,14 @@ void generatePawnPromotionMoves(uint64_t from, uint64_t to, MoveList* moveList)
 void generateKingMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
 {
     uint64_t kingPositions = chessBoard->pieceBoards[whiteKing];
-    uint64_t friendlyPieces = chessBoard->whitePieces;
-    uint64_t enemyPieces = chessBoard->blackPieces;
+    uint64_t friendlyPieces = chessBoard->coloredBoards[white];
+    uint64_t enemyPieces = chessBoard->coloredBoards[black];
 
     if (isBlack(chessBoard))
     {
         kingPositions = chessBoard->pieceBoards[blackKing];
-        friendlyPieces = chessBoard->blackPieces;
-        enemyPieces = chessBoard->whitePieces;
+        friendlyPieces = chessBoard->coloredBoards[black];
+        enemyPieces = chessBoard->coloredBoards[white];
     }  
     
     uint64_t fromSq = kingPositions & -kingPositions;
@@ -76,14 +76,14 @@ void generateKingMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
 void generateKnightMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
 {
     uint64_t knightPositions = chessBoard->pieceBoards[whiteKnight];
-    uint64_t friendlyPieces = chessBoard->whitePieces;
-    uint64_t enemyPieces = chessBoard->blackPieces;
+    uint64_t friendlyPieces = chessBoard->coloredBoards[white];
+    uint64_t enemyPieces = chessBoard->coloredBoards[black];
 
     if (isBlack(chessBoard))
     {
         knightPositions = chessBoard->pieceBoards[blackKnight];
-        friendlyPieces = chessBoard->blackPieces;
-        enemyPieces = chessBoard->whitePieces;
+        friendlyPieces = chessBoard->coloredBoards[black];
+        enemyPieces = chessBoard->coloredBoards[white];
     }  
     
     while (knightPositions != 0)
@@ -114,14 +114,14 @@ void generateKnightMoves(ChessBoard *chessBoard, AttackTables *attackTables, Mov
 void generateBishopMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
 {
     uint64_t bishopPositions = chessBoard->pieceBoards[whiteBishop];
-    uint64_t friendlyPieces = chessBoard->whitePieces;
-    uint64_t enemyPieces = chessBoard->blackPieces;
+    uint64_t friendlyPieces = chessBoard->coloredBoards[white];
+    uint64_t enemyPieces = chessBoard->coloredBoards[black];
 
     if (isBlack(chessBoard))
     {
         bishopPositions = chessBoard->pieceBoards[blackBishop];
-        friendlyPieces = chessBoard->blackPieces;
-        enemyPieces = chessBoard->whitePieces;
+        friendlyPieces = chessBoard->coloredBoards[black];
+        enemyPieces = chessBoard->coloredBoards[white];
     }  
     
     while (bishopPositions != 0)
@@ -152,14 +152,14 @@ void generateBishopMoves(ChessBoard *chessBoard, AttackTables *attackTables, Mov
 void generateQueenMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
 {
     uint64_t queenPositions = chessBoard->pieceBoards[whiteQueen];
-    uint64_t friendlyPieces = chessBoard->whitePieces;
-    uint64_t enemyPieces = chessBoard->blackPieces;
+    uint64_t friendlyPieces = chessBoard->coloredBoards[white];
+    uint64_t enemyPieces = chessBoard->coloredBoards[black];
 
     if (isBlack(chessBoard))
     {
         queenPositions = chessBoard->pieceBoards[blackQueen];
-        friendlyPieces = chessBoard->blackPieces;
-        enemyPieces = chessBoard->whitePieces;
+        friendlyPieces = chessBoard->coloredBoards[black];
+        enemyPieces = chessBoard->coloredBoards[white];
     }  
     
     while (queenPositions != 0)
@@ -190,7 +190,7 @@ void generateQueenMoves(ChessBoard *chessBoard, AttackTables *attackTables, Move
 void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
 {
     uint64_t pawnPositions = chessBoard->pieceBoards[whitePawn];
-    uint64_t enemyPieces = chessBoard->blackPieces;
+    uint64_t enemyPieces = chessBoard->coloredBoards[black];
     uint64_t *pawnAttackTable = attackTables->whitePanwsAttacks;
     uint64_t promotionLine = line8;
     uint64_t enpassantLine = line6;
@@ -198,7 +198,7 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
     if (isBlack(chessBoard))
     {
         pawnPositions = chessBoard->pieceBoards[blackPawn];
-        enemyPieces = chessBoard->whitePieces;
+        enemyPieces = chessBoard->coloredBoards[white];
         pawnAttackTable = attackTables->blackPanwsAttacks;
         promotionLine = line1;
         enpassantLine = line3;
@@ -281,14 +281,14 @@ void generatePawnMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveL
 void generateRookMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
 {
     uint64_t rookPositions = chessBoard->pieceBoards[whiteRook];
-    uint64_t friendlyPieces = chessBoard->whitePieces;
-    uint64_t enemyPieces = chessBoard->blackPieces;
+    uint64_t friendlyPieces = chessBoard->coloredBoards[white];
+    uint64_t enemyPieces = chessBoard->coloredBoards[black];
 
     if (isBlack(chessBoard))
     {
         rookPositions = chessBoard->pieceBoards[blackRook];
-        friendlyPieces = chessBoard->blackPieces;
-        enemyPieces = chessBoard->whitePieces;
+        friendlyPieces = chessBoard->coloredBoards[black];
+        enemyPieces = chessBoard->coloredBoards[white];
     }  
     
     while (rookPositions != 0)

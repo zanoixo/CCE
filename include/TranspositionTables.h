@@ -13,6 +13,8 @@ typedef struct ChessBoard ChessBoard;
 #define TRANSPOSITION_SCORE 10000000
 #define UNINITIALIZED -2
 #define QSEARCH -1
+#define EMPTY_PIECE 1
+#define EMPTY_PIECE_HASH_POS 12
 
 enum castellingHashes
 {
@@ -32,7 +34,7 @@ enum flags
 typedef struct TranspositionTableHashes
 {
     uint64_t colorHash;
-    uint64_t pieceHashes[DIFFERENT_PIECE_COUNT][BOARD_SIZE];
+    uint64_t pieceHashes[DIFFERENT_PIECE_COUNT + EMPTY_PIECE][BOARD_SIZE];
     uint64_t castellingHashes[CASTLE_RIGHT_COUNT];
     uint64_t enPassantHashes[ENPASSANT_FILES_COUNT];
 }TranspositionTableHashes;

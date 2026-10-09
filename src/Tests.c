@@ -51,13 +51,13 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified, Move move)
         isSame = 0;
     }
 
-    if (original->blackPieces != modified->blackPieces)
+    if (original->coloredBoards[black] != modified->coloredBoards[black])
     {
         printf("BLACK PIECES ASSERT FAILED\n");
         printf("EXPECTED: \n");
-        showBitBoard(original->blackPieces);
+        showBitBoard(original->coloredBoards[black]);
         printf("GOT: \n");
-        showBitBoard(modified->blackPieces);
+        showBitBoard(modified->coloredBoards[black]);
         isSame = 0;
     }
 
@@ -121,13 +121,13 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified, Move move)
         isSame = 0;
     }
 
-    if (original->whitePieces != modified->whitePieces)
+    if (original->coloredBoards[white] != modified->coloredBoards[white])
     {
         printf("WHITE PIECES ASSERT FAILED\n");
         printf("EXPECTED: \n");
-        showBitBoard(original->whitePieces);
+        showBitBoard(original->coloredBoards[white]);
         printf("GOT: \n");
-        showBitBoard(modified->whitePieces);
+        showBitBoard(modified->coloredBoards[white]);
         isSame = 0;
     }
 
@@ -257,8 +257,8 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified, Move move)
 
 void resetPiecePositions(ChessBoard* chessBoard)
 {
-    chessBoard->whitePieces = 0;
-    chessBoard->blackPieces = 0;
+    chessBoard->coloredBoards[white] = 0;
+    chessBoard->coloredBoards[black] = 0;
     chessBoard->allPieces = 0;
 }
 
@@ -1028,7 +1028,7 @@ void runPseudeLegalMovesTests()
     ASSERT(moveList->nextIndex, 8);
 
     moveList->nextIndex = 0;
-    chessBoard->whitePieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[white]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1050,7 +1050,7 @@ void runPseudeLegalMovesTests()
     ASSERT(moveList->nextIndex, 1);
 
     moveList->nextIndex = 0;
-    chessBoard->blackPieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[black]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1107,7 +1107,7 @@ void runPseudeLegalMovesTests()
     ASSERT(moveList->nextIndex, 5);
 
     moveList->nextIndex = 0;
-    chessBoard->whitePieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[white]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1129,7 +1129,7 @@ void runPseudeLegalMovesTests()
     ASSERT(moveList->nextIndex, 7);
 
     moveList->nextIndex = 0;
-    chessBoard->blackPieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[black]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1226,7 +1226,7 @@ void runPseudeLegalMovesTests()
     ASSERT(moveList->nextIndex, 14);
 
     moveList->nextIndex = 0;
-    chessBoard->whitePieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[white]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1235,7 +1235,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
 
-    chessBoard->allPieces |= chessBoard->whitePieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[white];
 
     chessBoard->pieceBoards[whiteBishop] = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
@@ -1250,7 +1250,7 @@ void runPseudeLegalMovesTests()
     ASSERT(moveList->nextIndex, 2);
 
     moveList->nextIndex = 0;
-    chessBoard->blackPieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[black]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1259,7 +1259,7 @@ void runPseudeLegalMovesTests()
                                0b01000000ULL << 8  |
                                0b00000000ULL;
     
-    chessBoard->allPieces |= chessBoard->blackPieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[black];
 
     generateBishopMoves(chessBoard, attackTables, moveList);
     ASSERT(moveList->nextIndex, 1);
@@ -1336,7 +1336,7 @@ void runPseudeLegalMovesTests()
     ASSERT(moveList->nextIndex, 28);
 
     moveList->nextIndex = 0;
-    chessBoard->whitePieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[white]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1345,7 +1345,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
 
-    chessBoard->allPieces |= chessBoard->whitePieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[white];
 
     chessBoard->pieceBoards[whiteRook] = 0b00000000ULL << 56 |
                              0b00000000ULL << 48 |
@@ -1360,7 +1360,7 @@ void runPseudeLegalMovesTests()
     ASSERT(moveList->nextIndex, 9);
 
     moveList->nextIndex = 0;
-    chessBoard->blackPieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[black]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1369,7 +1369,7 @@ void runPseudeLegalMovesTests()
                                0b00010000ULL << 8  |
                                0b00000000ULL;
     
-    chessBoard->allPieces |= chessBoard->blackPieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[black];
 
     generateRookMoves(chessBoard, attackTables, moveList);
     ASSERT(moveList->nextIndex, 8);
@@ -1446,7 +1446,7 @@ void runPseudeLegalMovesTests()
     ASSERT(moveList->nextIndex, 42);
 
     moveList->nextIndex = 0;
-    chessBoard->whitePieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[white]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1455,7 +1455,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
 
-    chessBoard->allPieces |= chessBoard->whitePieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[white];
 
     chessBoard->pieceBoards[whiteQueen] = 0b00000000ULL << 56 |
                               0b00000000ULL << 48 |
@@ -1470,7 +1470,7 @@ void runPseudeLegalMovesTests()
     ASSERT(moveList->nextIndex, 16);
 
     moveList->nextIndex = 0;
-    chessBoard->blackPieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[black]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1479,7 +1479,7 @@ void runPseudeLegalMovesTests()
                                0b00010000ULL << 8  |
                                0b00000000ULL;
     
-    chessBoard->allPieces |= chessBoard->blackPieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[black];
 
     generateQueenMoves(chessBoard, attackTables, moveList);
     ASSERT(moveList->nextIndex, 15);
@@ -1489,7 +1489,7 @@ void runPseudeLegalMovesTests()
     resetPiecePositions(chessBoard);
 
     moveList->nextIndex = 0;
-    chessBoard->whitePieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[white]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1498,7 +1498,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
 
-    chessBoard->allPieces |= chessBoard->whitePieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[white];
 
     chessBoard->pieceBoards[whitePawn] = 0b00000000ULL << 56 |
                              0b00000000ULL << 48 |
@@ -1513,7 +1513,7 @@ void runPseudeLegalMovesTests()
     ASSERT(moveList->nextIndex, 0);
 
     moveList->nextIndex = 0;
-    chessBoard->blackPieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[black]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1522,7 +1522,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
     
-    chessBoard->allPieces |= chessBoard->blackPieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[black];
 
     generatePawnMoves(chessBoard, attackTables, moveList);
 
@@ -1531,7 +1531,7 @@ void runPseudeLegalMovesTests()
     resetPiecePositions(chessBoard);
 
     moveList->nextIndex = 0;
-    chessBoard->whitePieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[white]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1540,7 +1540,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
 
-    chessBoard->allPieces |= chessBoard->whitePieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[white];
 
     chessBoard->pieceBoards[whitePawn] = 0b00000000ULL << 56 |
                              0b00000000ULL << 48 |
@@ -1551,7 +1551,7 @@ void runPseudeLegalMovesTests()
                              0b01000000ULL << 8  |
                              0b00000000ULL;
 
-    chessBoard->blackPieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[black]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1560,7 +1560,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
     
-    chessBoard->allPieces |= chessBoard->blackPieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[black];
 
     generatePawnMoves(chessBoard, attackTables, moveList);
 
@@ -1576,7 +1576,7 @@ void runPseudeLegalMovesTests()
                              0b11111111ULL << 8  |
                              0b00000000ULL;
 
-    chessBoard->blackPieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[black]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1585,7 +1585,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
     
-    chessBoard->allPieces |= chessBoard->blackPieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[black];
 
     generatePawnMoves(chessBoard, attackTables, moveList);
 
@@ -1594,7 +1594,7 @@ void runPseudeLegalMovesTests()
     resetPiecePositions(chessBoard);
 
     moveList->nextIndex = 0;
-    chessBoard->whitePieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[white]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1603,7 +1603,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
 
-    chessBoard->allPieces |= chessBoard->whitePieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[white];
 
     chessBoard->pieceBoards[whitePawn] = 0b00000000ULL << 56 |
                              0b00000000ULL << 48 |
@@ -1614,7 +1614,7 @@ void runPseudeLegalMovesTests()
                              0b01000000ULL << 8  |
                              0b00000000ULL;
 
-    chessBoard->blackPieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[black]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1623,7 +1623,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
     
-    chessBoard->allPieces |= chessBoard->blackPieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[black];
 
     generatePawnMoves(chessBoard, attackTables, moveList);
 
@@ -1632,7 +1632,7 @@ void runPseudeLegalMovesTests()
     resetPiecePositions(chessBoard);
 
     moveList->nextIndex = 0;
-    chessBoard->whitePieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[white]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1641,7 +1641,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
 
-    chessBoard->allPieces |= chessBoard->whitePieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[white];
 
     chessBoard->pieceBoards[whitePawn] = 0b00000000ULL << 56 |
                              0b00000000ULL << 48 |
@@ -1652,7 +1652,7 @@ void runPseudeLegalMovesTests()
                              0b01000000ULL << 8  |
                              0b00000000ULL;
 
-    chessBoard->blackPieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[black]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1661,7 +1661,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
     
-    chessBoard->allPieces |= chessBoard->blackPieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[black];
 
     generatePawnMoves(chessBoard, attackTables, moveList);
 
@@ -1670,7 +1670,7 @@ void runPseudeLegalMovesTests()
     resetPiecePositions(chessBoard);
 
     moveList->nextIndex = 0;
-    chessBoard->whitePieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[white]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1679,7 +1679,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
 
-    chessBoard->allPieces |= chessBoard->whitePieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[white];
 
     chessBoard->pieceBoards[whitePawn] = 0b00000000ULL << 56 |
                              0b00000000ULL << 48 |
@@ -1690,7 +1690,7 @@ void runPseudeLegalMovesTests()
                              0b01000000ULL << 8  |
                              0b00000000ULL;
 
-    chessBoard->blackPieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[black]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1699,7 +1699,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
     
-    chessBoard->allPieces |= chessBoard->blackPieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[black];
 
     generatePawnMoves(chessBoard, attackTables, moveList);
 
@@ -1708,7 +1708,7 @@ void runPseudeLegalMovesTests()
     resetPiecePositions(chessBoard);
 
     moveList->nextIndex = 0;
-    chessBoard->whitePieces  = 0b00000000ULL << 56 |
+    chessBoard->coloredBoards[white]  = 0b00000000ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1717,7 +1717,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
 
-    chessBoard->allPieces |= chessBoard->whitePieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[white];
 
     chessBoard->pieceBoards[whitePawn] = 0b00000000ULL << 56 |
                              0b00000000ULL << 48 |
@@ -1736,7 +1736,7 @@ void runPseudeLegalMovesTests()
 
     moveList->nextIndex = 0;
 
-    chessBoard->allPieces |= chessBoard->whitePieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[white];
 
     chessBoard->pieceBoards[whitePawn] = 0b00000000ULL << 56 |
                              0b00000000ULL << 48 |
@@ -1796,7 +1796,7 @@ void runPseudeLegalMovesTests()
                              0b00000000ULL << 8  |
                              0b00000000ULL;
 
-    chessBoard->blackPieces  = 0b00100111ULL << 56 |
+    chessBoard->coloredBoards[black]  = 0b00100111ULL << 56 |
                                0b00000000ULL << 48 |
                                0b00000000ULL << 40 |
                                0b00000000ULL << 32 |
@@ -1805,7 +1805,7 @@ void runPseudeLegalMovesTests()
                                0b00000000ULL << 8  |
                                0b00000000ULL;
     
-    chessBoard->allPieces |= chessBoard->blackPieces;
+    chessBoard->allPieces |= chessBoard->coloredBoards[black];
 
     generatePawnMoves(chessBoard, attackTables, moveList);
 

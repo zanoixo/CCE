@@ -32,6 +32,12 @@ TranspositionTableHashes* initTranpositionTableHashes()
         
     }
 
+    for (int sq = 0; sq < BOARD_SIZE; sq++)
+    {
+        hashes->pieceHashes[EMPTY_PIECE_HASH_POS][sq] = 0;
+    }
+    
+
     for (int right = 0; right < CASTLE_RIGHT_COUNT; right++)
     {
         hashes->castellingHashes[right] = getRandomHash();
