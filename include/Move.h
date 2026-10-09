@@ -51,8 +51,8 @@ enum MoveMasks
 };
 
 uint8_t getPromotionPiece(Move move);
-uint32_t constructMove(uint64_t from, uint64_t to, uint16_t promotionFlag, uint16_t enPassantFlag);
-uint8_t getFromSq(uint32_t move);
-uint8_t getToSq(uint32_t move);
-uint64_t getFromBitboard(uint32_t move);
-uint64_t getToBitboard(uint32_t move);
+uint16_t constructMove(uint64_t from, uint64_t to, uint16_t promotionFlag, uint16_t enPassantFlag);
+uint8_t getFromSq(uint16_t move);
+uint8_t getToSq(uint16_t move);
+uint64_t getFromBitboard(uint16_t move);
+uint64_t getToBitboard(uint16_t move);

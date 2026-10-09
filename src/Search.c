@@ -144,7 +144,7 @@ int isBetaValid(int beta)
 
 MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, int depthSearched, int mateDistance, int alpha, int beta, int side)
 {
-    //nodesSearched++;
+    nodesSearched++;
 
     MoveScore bestMove;
     bestMove.eval = MIN_INT;
@@ -324,6 +324,8 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
 MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, int depthSearched, int mateDistance, int alpha, int beta, int side)
 {
+    nodesSearched++;
+
     MoveScore bestMove;
     bestMove.eval = MIN_INT;
     bestMove.move = (Move){0, 0};
@@ -581,10 +583,11 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
 
     currentDepth = 1;
     qSearchDepthReached = 1;
+
+    nodesSearched = 0;
     while (!timeLimitReached)
     {
         /*
-        nodesSearched = 0;
         transpositionSearches = 0;
         transpositionHits = 0;
         transpositionCutoffs = 0;
@@ -608,6 +611,7 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
         
     }
 
+    printf("Nodes searched: %d \n", nodesSearched);
     printf("PVS checks: %llu, PVS reserches: %llu\n", (long long unsigned)pvsChecks, (long long unsigned)pvsResearches);
     printf("TT moves searched: %llu, TT moves found: %llu\n", (long long unsigned)getTTMovesSearched(), (long long unsigned)getTTMovesFound());
     return currentBestMove;
