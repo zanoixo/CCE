@@ -36,16 +36,16 @@ void userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
     switch (promotion)
     {
         case 'q':
-            promotionPiece |= queen;
+            promotionPiece |= queenPromotion;
             break;
         case 'r':
-            promotionPiece |= rook;
+            promotionPiece |= rookPromotion;
             break;
         case 'n':
-            promotionPiece |= knight;
+            promotionPiece |= knightPromotion;
             break;
         case 'b':
-            promotionPiece |= bishop;
+            promotionPiece |= bishopPromotion;
             break;
         default:
             break;
