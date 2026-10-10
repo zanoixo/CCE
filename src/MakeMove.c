@@ -14,112 +14,7 @@ uint8_t castleRightLookup[BOARD_SIZE] = {
     0b0111, 0b1111, 0b1111, 0b1111, 0b0011, 0b1111, 0b1111, 0b1011
 };
 
-void makeKnightMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
-{
-    uint8_t friendlyPieces = isBlack(chessBoard);
-    uint8_t enemyPieces = !friendlyPieces;
-
-    uint8_t fromSq = getFromSq(move->move);
-    uint8_t toSq = getToSq(move->move);
-
-    uint64_t from = 1ULL << fromSq;
-    uint64_t to = 1ULL << toSq;
-
-    uint8_t movedPiece = chessBoard->pieceLookup[fromSq];
-    uint8_t capturedPiece = chessBoard->pieceLookup[toSq];
-
-    moveData->movedPiece = movedPiece;
-    moveData->capturedPiece = capturedPiece;
-
-    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
-    chessBoard->castleRights &= castleRightLookup[fromSq] & castleRightLookup[toSq];
-    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
-    chessBoard->pieceBoards[movedPiece] &= ~from;
-    chessBoard->pieceBoards[movedPiece] |= to;
-    chessBoard->positionHash ^= hashes->pieceHashes[movedPiece][fromSq];
-    chessBoard->positionHash ^= hashes->pieceHashes[movedPiece][toSq];
-    chessBoard->coloredBoards[friendlyPieces] &= ~from;
-    chessBoard->coloredBoards[friendlyPieces] |= to;
-    chessBoard->allPieces &= ~from;
-    chessBoard->allPieces |= to;
-    chessBoard->pieceLookup[fromSq] = empty;
-    chessBoard->pieceLookup[toSq] = movedPiece;
-    chessBoard->positionHash ^= hashes->pieceHashes[capturedPiece][toSq];
-    chessBoard->pieceBoards[capturedPiece] &= ~to;
-    chessBoard->coloredBoards[enemyPieces] &= ~to;
-}
-
-void makeBishopMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
-{
-    uint8_t friendlyPieces = isBlack(chessBoard);
-    uint8_t enemyPieces = !friendlyPieces;
-
-    uint8_t fromSq = getFromSq(move->move);
-    uint8_t toSq = getToSq(move->move);
-
-    uint64_t from = 1ULL << fromSq;
-    uint64_t to = 1ULL << toSq;
-
-    uint8_t movedPiece = chessBoard->pieceLookup[fromSq];
-    uint8_t capturedPiece = chessBoard->pieceLookup[toSq];
-
-    moveData->movedPiece = movedPiece;
-    moveData->capturedPiece = capturedPiece;
-
-    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
-    chessBoard->castleRights &= castleRightLookup[fromSq] & castleRightLookup[toSq];
-    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
-    chessBoard->pieceBoards[movedPiece] &= ~from;
-    chessBoard->pieceBoards[movedPiece] |= to;
-    chessBoard->positionHash ^= hashes->pieceHashes[movedPiece][fromSq];
-    chessBoard->positionHash ^= hashes->pieceHashes[movedPiece][toSq];
-    chessBoard->coloredBoards[friendlyPieces] &= ~from;
-    chessBoard->coloredBoards[friendlyPieces] |= to;
-    chessBoard->allPieces &= ~from;
-    chessBoard->allPieces |= to;
-    chessBoard->pieceLookup[fromSq] = empty;
-    chessBoard->pieceLookup[toSq] = movedPiece;
-    chessBoard->positionHash ^= hashes->pieceHashes[capturedPiece][toSq];
-    chessBoard->pieceBoards[capturedPiece] &= ~to;
-    chessBoard->coloredBoards[enemyPieces] &= ~to;
-}
-
-void makeRookMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
-{
-    uint8_t friendlyPieces = isBlack(chessBoard);
-    uint8_t enemyPieces = !friendlyPieces;
-
-    uint8_t fromSq = getFromSq(move->move);
-    uint8_t toSq = getToSq(move->move);
-
-    uint64_t from = 1ULL << fromSq;
-    uint64_t to = 1ULL << toSq;
-
-    uint8_t movedPiece = chessBoard->pieceLookup[fromSq];
-    uint8_t capturedPiece = chessBoard->pieceLookup[toSq];
-
-    moveData->movedPiece = movedPiece;
-    moveData->capturedPiece = capturedPiece;
-
-    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
-    chessBoard->castleRights &= castleRightLookup[fromSq] & castleRightLookup[toSq];
-    chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
-    chessBoard->pieceBoards[movedPiece] &= ~from;
-    chessBoard->pieceBoards[movedPiece] |= to;
-    chessBoard->positionHash ^= hashes->pieceHashes[movedPiece][fromSq];
-    chessBoard->positionHash ^= hashes->pieceHashes[movedPiece][toSq];
-    chessBoard->coloredBoards[friendlyPieces] &= ~from;
-    chessBoard->coloredBoards[friendlyPieces] |= to;
-    chessBoard->allPieces &= ~from;
-    chessBoard->allPieces |= to;
-    chessBoard->pieceLookup[fromSq] = empty;
-    chessBoard->pieceLookup[toSq] = movedPiece;
-    chessBoard->positionHash ^= hashes->pieceHashes[capturedPiece][toSq];
-    chessBoard->pieceBoards[capturedPiece] &= ~to;
-    chessBoard->coloredBoards[enemyPieces] &= ~to;
-}
-
-void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
+void makeGenericMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
 {
     uint8_t friendlyPieces = isBlack(chessBoard);
     uint8_t enemyPieces = !friendlyPieces;
@@ -156,175 +51,96 @@ void makeQueenMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes*
 
 void makeKingMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
 {
-    uint8_t isBlacksMove = isBlack(chessBoard);
+    uint8_t friendlyPieces = isBlack(chessBoard);
+    uint8_t enemyPieces = !friendlyPieces;
 
-    uint64_t from = getFromBitboard(move->move);
-    uint64_t to = getToBitboard(move->move);
+    uint8_t fromSq = getFromSq(move->move);
+    uint8_t toSq = getToSq(move->move);
 
-    uint8_t fromSq = getSqInd(from);
-    uint8_t toSq = getSqInd(to);
+    uint64_t from = 1ULL << fromSq;
+    uint64_t to = 1ULL << toSq;
 
-    uint8_t capture = getPieceFromSquare(toSq, chessBoard);
+    uint8_t movedPiece = chessBoard->pieceLookup[fromSq];
+    uint8_t capturedPiece = chessBoard->pieceLookup[toSq];
 
-    moveData->capturedPiece = capture;
-    moveData->movedPiece = chessBoard->pieceLookup[fromSq];
+    moveData->movedPiece = movedPiece;
+    moveData->capturedPiece = capturedPiece;
 
     chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
     chessBoard->castleRights &= castleRightLookup[fromSq] & castleRightLookup[toSq];
     chessBoard->positionHash ^= hashes->castellingHashes[chessBoard->castleRights];
+    chessBoard->pieceBoards[movedPiece] &= ~from;
+    chessBoard->pieceBoards[movedPiece] |= to;
+    chessBoard->positionHash ^= hashes->pieceHashes[movedPiece][fromSq];
+    chessBoard->positionHash ^= hashes->pieceHashes[movedPiece][toSq];
+    chessBoard->coloredBoards[friendlyPieces] &= ~from;
+    chessBoard->coloredBoards[friendlyPieces] |= to;
+    chessBoard->allPieces &= ~from;
+    chessBoard->allPieces |= to;
+    chessBoard->pieceLookup[fromSq] = empty;
+    chessBoard->pieceLookup[toSq] = movedPiece;
+    chessBoard->positionHash ^= hashes->pieceHashes[capturedPiece][toSq];
+    chessBoard->pieceBoards[capturedPiece] &= ~to;
+    chessBoard->coloredBoards[enemyPieces] &= ~to;
 
-    if (isBlacksMove)
+    if (fromSq == e8Sq || fromSq == e1Sq)
     {
-        chessBoard->pieceBoards[blackKing] &= ~from;
-        chessBoard->pieceBoards[blackKing] |= to;
-        chessBoard->positionHash ^= hashes->pieceHashes[blackKing][fromSq];
-        chessBoard->positionHash ^= hashes->pieceHashes[blackKing][toSq];
-        chessBoard->coloredBoards[black] &= ~from;
-        chessBoard->coloredBoards[black] |= to;
-        chessBoard->allPieces &= ~from;
-        chessBoard->allPieces |= to;
-        chessBoard->pieceLookup[fromSq] = empty;
-        chessBoard->pieceLookup[toSq] = blackKing;
-
-        switch (capture)
+        switch (toSq)
         {
-            case pawn:
-                chessBoard->pieceBoards[whitePawn] &= ~to;
-                chessBoard->positionHash ^= hashes->pieceHashes[whitePawn][toSq];
-                chessBoard->coloredBoards[white] &= ~to;
-                break;
-            case knight:
-                chessBoard->pieceBoards[whiteKnight] &= ~to;
-                chessBoard->positionHash ^= hashes->pieceHashes[whiteKnight][toSq];
-                chessBoard->coloredBoards[white] &= ~to;
-                break;
-            case bishop:
-                chessBoard->pieceBoards[whiteBishop] &= ~to;
-                chessBoard->positionHash ^= hashes->pieceHashes[whiteBishop][toSq];
-                chessBoard->coloredBoards[white] &= ~to;
-                break;
-            case rook:
-                chessBoard->pieceBoards[whiteRook] &= ~to;
-                chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][toSq];
-                chessBoard->coloredBoards[white] &= ~to;
-                break;
-            case queen:
-                chessBoard->pieceBoards[whiteQueen] &= ~to;
-                chessBoard->positionHash ^= hashes->pieceHashes[whiteQueen][toSq];
-                chessBoard->coloredBoards[white] &= ~to;
-                break;
-            case 0:
-                break;
-        }
-
-        if (from == e8)
-        {
-            if (to == g8)
-            {
-                chessBoard->pieceBoards[blackRook] &= ~ h8;
-                chessBoard->pieceBoards[blackRook] |= f8;
-                chessBoard->positionHash ^= hashes->pieceHashes[blackRook][getSqInd(h8)];
-                chessBoard->positionHash ^= hashes->pieceHashes[blackRook][getSqInd(f8)];
-                chessBoard->coloredBoards[black] &= ~h8;
-                chessBoard->coloredBoards[black] |= f8;
-                chessBoard->allPieces &= ~h8;
-                chessBoard->allPieces |= f8;
-                chessBoard->pieceLookup[getSqInd(h8)] = empty;
-                chessBoard->pieceLookup[getSqInd(f8)] = blackRook;
-                chessBoard->flags |= hasBlackCastledMask;
-            }
-
-            if (to == c8)
-            {
-                chessBoard->pieceBoards[blackRook] &= ~ a8;
-                chessBoard->pieceBoards[blackRook] |= d8;
-                chessBoard->positionHash ^= hashes->pieceHashes[blackRook][getSqInd(a8)];
-                chessBoard->positionHash ^= hashes->pieceHashes[blackRook][getSqInd(d8)];
-                chessBoard->coloredBoards[black] &= ~a8;
-                chessBoard->coloredBoards[black] |= d8;
-                chessBoard->allPieces &= ~a8;
-                chessBoard->allPieces |= d8;
-                chessBoard->pieceLookup[getSqInd(a8)] = empty;
-                chessBoard->pieceLookup[getSqInd(d8)] = blackRook;
-                chessBoard->flags |= hasBlackCastledMask;
-            }
-        }
-        
-    }else
-    {
-        chessBoard->pieceBoards[whiteKing] &= ~from;
-        chessBoard->pieceBoards[whiteKing] |= to;
-        chessBoard->positionHash ^= hashes->pieceHashes[whiteKing][fromSq];
-        chessBoard->positionHash ^= hashes->pieceHashes[whiteKing][toSq];
-        chessBoard->coloredBoards[white] &= ~from;
-        chessBoard->coloredBoards[white] |= to;
-        chessBoard->allPieces &= ~from;
-        chessBoard->allPieces |= to;
-        chessBoard->pieceLookup[fromSq] = empty;
-        chessBoard->pieceLookup[toSq] = whiteKing;
-
-        switch (capture)
-        {
-            case pawn:
-                chessBoard->pieceBoards[blackPawn] &= ~to;
-                chessBoard->positionHash ^= hashes->pieceHashes[blackPawn][toSq];
-                chessBoard->coloredBoards[black] &= ~to;
-                break;
-            case knight:
-                chessBoard->pieceBoards[blackKnight] &= ~to;
-                chessBoard->positionHash ^= hashes->pieceHashes[blackKnight][toSq];
-                chessBoard->coloredBoards[black] &= ~to;
-                break;
-            case bishop:
-                chessBoard->pieceBoards[blackBishop] &= ~to;
-                chessBoard->positionHash ^= hashes->pieceHashes[blackBishop][toSq];
-                chessBoard->coloredBoards[black] &= ~to;
-                break;
-            case rook:
-                chessBoard->pieceBoards[blackRook] &= ~to;
-                chessBoard->positionHash ^= hashes->pieceHashes[blackRook][toSq];
-                chessBoard->coloredBoards[black] &= ~to;
-                break;
-            case queen:
-                chessBoard->pieceBoards[blackQueen] &= ~to;
-                chessBoard->positionHash ^= hashes->pieceHashes[blackQueen][toSq];
-                chessBoard->coloredBoards[black] &= ~to;
-                break;
-            case 0:
-                break;
-        }
-
-        if (from == e1)
-        {
-            if (to == g1)
-            {
-                chessBoard->pieceBoards[whiteRook] &= ~ h1;
-                chessBoard->pieceBoards[whiteRook] |= f1;
-                chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][getSqInd(h1)];
-                chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][getSqInd(f1)];
-                chessBoard->coloredBoards[white] &= ~h1;
-                chessBoard->coloredBoards[white] |= f1;
-                chessBoard->allPieces &= ~h1;
-                chessBoard->allPieces |= f1;
-                chessBoard->pieceLookup[getSqInd(h1)] = empty;
-                chessBoard->pieceLookup[getSqInd(f1)] = whiteRook;
-                chessBoard->flags |= hasWhiteCastledMask;
-            }
-
-            if (to == c1)
-            {
-                chessBoard->pieceBoards[whiteRook] &= ~ a1;
-                chessBoard->pieceBoards[whiteRook] |= d1;
-                chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][getSqInd(a1)];
-                chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][getSqInd(d1)];
-                chessBoard->coloredBoards[white] &= ~a1;
-                chessBoard->coloredBoards[white] |= d1;
-                chessBoard->allPieces &= ~a1;
-                chessBoard->allPieces |= d1;
-                chessBoard->pieceLookup[getSqInd(a1)] = empty;
-                chessBoard->pieceLookup[getSqInd(d1)] = whiteRook;
-                chessBoard->flags |= hasWhiteCastledMask;
-            }
+        case g8Sq:
+            chessBoard->pieceBoards[blackRook] &= ~h8;
+            chessBoard->pieceBoards[blackRook] |= f8;
+            chessBoard->positionHash ^= hashes->pieceHashes[blackRook][h8Sq];
+            chessBoard->positionHash ^= hashes->pieceHashes[blackRook][f8Sq];
+            chessBoard->coloredBoards[black] &= ~h8;
+            chessBoard->coloredBoards[black] |= f8;
+            chessBoard->allPieces &= ~h8;
+            chessBoard->allPieces |= f8;
+            chessBoard->pieceLookup[h8Sq] = empty;
+            chessBoard->pieceLookup[f8Sq] = blackRook;
+            chessBoard->flags |= hasBlackCastledMask;
+            break;
+        case c8Sq:
+            chessBoard->pieceBoards[blackRook] &= ~a8;
+            chessBoard->pieceBoards[blackRook] |= d8;
+            chessBoard->positionHash ^= hashes->pieceHashes[blackRook][a8Sq];
+            chessBoard->positionHash ^= hashes->pieceHashes[blackRook][d8Sq];
+            chessBoard->coloredBoards[black] &= ~a8;
+            chessBoard->coloredBoards[black] |= d8;
+            chessBoard->allPieces &= ~a8;
+            chessBoard->allPieces |= d8;
+            chessBoard->pieceLookup[a8Sq] = empty;
+            chessBoard->pieceLookup[d8Sq] = blackRook;
+            chessBoard->flags |= hasBlackCastledMask;
+            break;
+        case g1Sq:
+            chessBoard->pieceBoards[whiteRook] &= ~h1;
+            chessBoard->pieceBoards[whiteRook] |= f1;
+            chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][h1Sq];
+            chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][f1Sq];
+            chessBoard->coloredBoards[white] &= ~h1;
+            chessBoard->coloredBoards[white] |= f1;
+            chessBoard->allPieces &= ~h1;
+            chessBoard->allPieces |= f1;
+            chessBoard->pieceLookup[h1Sq] = empty;
+            chessBoard->pieceLookup[f1Sq] = whiteRook;
+            chessBoard->flags |= hasWhiteCastledMask;
+            break;
+        case c1Sq:
+            chessBoard->pieceBoards[whiteRook] &= ~a1;
+            chessBoard->pieceBoards[whiteRook] |= d1;
+            chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][a1Sq];
+            chessBoard->positionHash ^= hashes->pieceHashes[whiteRook][d1Sq];
+            chessBoard->coloredBoards[white] &= ~a1;
+            chessBoard->coloredBoards[white] |= d1;
+            chessBoard->allPieces &= ~a1;
+            chessBoard->allPieces |= d1;
+            chessBoard->pieceLookup[a1Sq] = empty;
+            chessBoard->pieceLookup[d1Sq] = whiteRook;
+            chessBoard->flags |= hasWhiteCastledMask;
+            break;
+        default:
+            break;
         }
     }
 }
@@ -559,25 +375,12 @@ void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hash
         case blackPawn:
             makePawnMove(chessBoard, move, hashes, moveData);
             break;
-        case whiteKnight:
-        case blackKnight:
-            makeKnightMove(chessBoard, move, hashes, moveData);
-            break;
-        case whiteBishop:
-        case blackBishop:
-            makeBishopMove(chessBoard, move, hashes, moveData);
-            break;
-        case whiteRook:
-        case blackRook:
-            makeRookMove(chessBoard, move, hashes, moveData);
-            break;
-        case whiteQueen:
-        case blackQueen:
-            makeQueenMove(chessBoard, move, hashes, moveData);
-            break;
         case whiteKing:
         case blackKing:
             makeKingMove(chessBoard, move, hashes, moveData);
+            break;
+        default:
+            makeGenericMove(chessBoard, move, hashes, moveData);
             break;
     }
 
