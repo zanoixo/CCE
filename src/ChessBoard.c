@@ -87,6 +87,7 @@ ChessBoard* initChessBoard()
     chessBoard->allPieces = 0;
     chessBoard->enPassantSq = 0;
     chessBoard->flags = 0;
+    chessBoard->castleRights = 0;
 
     chessBoard->history.size = 0;
     chessBoard->moveDataStack.size = 0;

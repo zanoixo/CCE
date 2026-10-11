@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include "Utils.h"
 
 #define EMPTY_PROMOTION_FLAG 0
 #define EMPTY_ENPASSANT_FLAG 0
@@ -48,6 +49,15 @@ enum MoveMasks
     toMask        = 0b0000111111000000,
     promotionMask = 0b0111000000000000,
     enPassantMask = 0b1000000000000000,
+};
+
+static const uint8_t promotionFlagToPiece[5] =
+{
+    [0]               = whitePawn,
+    [knightPromotion] = whiteKnight,
+    [bishopPromotion] = whiteBishop,
+    [rookPromotion]   = whiteRook,
+    [queenPromotion]  = whiteQueen
 };
 
 uint16_t constructMove(uint64_t from, uint64_t to, uint16_t promotionFlag, uint16_t enPassantFlag);

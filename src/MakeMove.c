@@ -14,15 +14,6 @@ static const uint8_t castleRightLookup[BOARD_SIZE] = {
     0b0111, 0b1111, 0b1111, 0b1111, 0b0011, 0b1111, 0b1111, 0b1011
 };
 
-static const uint8_t promotionFlagToPiece[5] =
-{
-    [0]               = whitePawn,
-    [knightPromotion] = whiteKnight,
-    [bishopPromotion] = whiteBishop,
-    [rookPromotion]   = whiteRook,
-    [queenPromotion]  = whiteQueen
-};
-
 static const uint8_t doublePawnPushOffset[2] = {8, -8};
 
 void makeGenericMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
