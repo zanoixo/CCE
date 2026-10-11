@@ -50,12 +50,7 @@ enum MoveMasks
     enPassantMask = 0b1000000000000000,
 };
 
-//uint8_t getPromotionPiece(Move move);
 uint16_t constructMove(uint64_t from, uint64_t to, uint16_t promotionFlag, uint16_t enPassantFlag);
-//uint8_t getFromSq(uint16_t move);
-//uint8_t getToSq(uint16_t move);
-//uint64_t getFromBitboard(uint16_t move);
-//uint64_t getToBitboard(uint16_t move);
 
 static inline uint8_t getPromotionPiece(Move move)
 {
