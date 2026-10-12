@@ -125,11 +125,6 @@ void setBestMoveFirst(MoveList* moveList, int moveCount)
     moveList->moves[moveInd] = tmp;
 }
 
-int isTacticalMove(Move move, ChessBoard* chessBoard)
-{    
-    return (chessBoard->pieceLookup[getToSq(move.move)] != empty) || getPromotionPiece(move);
-}
-
 int isBetaValid(int beta)
 {
     if (beta < 0)
@@ -256,7 +251,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
         setBestMoveFirst(&moveList, i);
 
-        if (!gotChecked && !isTacticalMove(moveList.moves[i], chessBoard))
+        if (!gotChecked && !isTacticalMove(chessBoard->pieceLookup[getToSq(moveList.moves[i].move)], moveList.moves[i]))
         {
             continue;
         }
@@ -463,7 +458,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             int isEnemyChecked = isSquareAttacked(enemyKingSq, chessBoard, attackTables, !side);
             int moveReduction = 0;
 
-            if (i > 3 && !isEnemyChecked && !amChecked && currentDepth - depthSearched >= 3 && !isTacticalMove(moveList.moves[i], chessBoard))
+            if (i > 3 && !isEnemyChecked && !amChecked && currentDepth - depthSearched >= 3 && !isTacticalMove(chessBoard->pieceLookup[getToSq(moveList.moves[i].move)], moveList.moves[i]))
             {
                 moveReduction = (int)(0.75 * log(currentDepth - depthSearched) * log(i) / 2.25);
             }
@@ -517,7 +512,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
             if (alpha >= beta)
             {
-                if (!isTacticalMove(moveList.moves[i], chessBoard))
+                if (!isTacticalMove(chessBoard->pieceLookup[getToSq(moveList.moves[i].move)], moveList.moves[i]))
                 {
                     setKillerMove(moveList.moves[i], depthSearched);
                     updateHistoryHeuristic(moveList.moves[i], currentDepth - depthSearched);

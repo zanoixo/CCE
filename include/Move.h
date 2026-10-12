@@ -60,8 +60,6 @@ static const uint8_t promotionFlagToPiece[5] =
     [queenPromotion]  = whiteQueen
 };
 
-uint16_t constructMove(uint64_t from, uint64_t to, uint16_t promotionFlag, uint16_t enPassantFlag);
-
 static inline uint8_t getPromotionPiece(Move move)
 {
     return (move.move & promotionMask) >> promotionPosition;
@@ -85,4 +83,20 @@ static inline uint64_t getFromBitboard(uint16_t move)
 static inline uint64_t getToBitboard(uint16_t move)
 {
     return 1ULL << ((move & toMask) >> toPosition);
+}
+
+static inline uint8_t isTacticalMove(uint8_t capturedPiece, Move move)
+{    
+    return (capturedPiece != empty) || getPromotionPiece(move);
+}
+
+static inline uint16_t constructMove(uint64_t from, uint64_t to, uint16_t promotionFlag, uint16_t enPassantFlag)
+{
+    uint16_t move = 0;
+    move |= getSqInd(from) << fromPosition;
+    move |= getSqInd(to) << toPosition;
+    move |= promotionFlag << promotionPosition;
+    move |= enPassantFlag << enPassantPosition;
+
+    return move; 
 }

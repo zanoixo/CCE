@@ -1,43 +1,4 @@
 #include "Utils.h"
-#include "time.h"
-
-#ifdef _WIN32
-#include <windows.h>
-
-uint64_t getTimeMs()
-{
-    return GetTickCount64();
-}
-
-#else
-#include <time.h>
-
-const uint8_t coloredToGenericTable[13] = {
-    pawn,    
-    knight,  
-    bishop,  
-    rook,    
-    queen,   
-    king,    
-    pawn,    
-    knight,  
-    bishop,  
-    rook,    
-    queen,   
-    king,    
-    emptyGeneric        
-};
-
-uint64_t getTimeMs()
-{
-    struct timespec ts;
-    clock_gettime(CLOCK_MONOTONIC, &ts);
-
-    return (uint64_t)ts.tv_sec * 1000ULL +
-           (uint64_t)ts.tv_nsec / 1000000ULL;
-}
-
-#endif
 
 void showBitBoard(uint64_t bitBoard)
 {
@@ -60,27 +21,4 @@ void sendError(char errorMsg[]){
 
     printf("[ERROR]: %s\n", errorMsg);
     exit(1);
-}
-
-uint8_t getSqInd(uint64_t sq)
-{
-    return __builtin_ctzll(sq);
-}
-
-int countPieces(uint64_t bitboard)
-{
-    int count = 0;
-
-    while (bitboard)
-    {
-        count++;
-        bitboard &= bitboard - 1;
-    }
-
-    return count;
-}
-
-uint8_t coloredPieceToGeneric(uint8_t coloredPiece)
-{
-    return coloredToGenericTable[coloredPiece];
 }

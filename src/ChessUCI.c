@@ -119,19 +119,19 @@ void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables,
     {
         switch (getPromotionPiece(best.move))
         {
-            case queen:
+            case queenPromotion:
                 moveStr[4] = 'q';
                 break;
 
-            case rook:
+            case rookPromotion:
                 moveStr[4] = 'r';
                 break;
 
-            case bishop:
+            case bishopPromotion:
                 moveStr[4] = 'b';
                 break;
 
-            case knight:
+            case knightPromotion:
                 moveStr[4] = 'n';
                 break;
 

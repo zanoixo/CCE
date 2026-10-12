@@ -60,14 +60,44 @@ void showPosition(const ChessBoard* chessBoard);
 ChessBoard* initChessBoard();
 void createPosition(char fileName[], ChessBoard *chessBoard);
 void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hashes);
-uint8_t hasCastled(ChessBoard* chessBoard, int isBlack);
-uint8_t canWhiteShortCastle(ChessBoard *chessBoard);
-uint8_t canWhiteLongCastle(ChessBoard *chessBoard);
-uint8_t canBlackShortCastle(ChessBoard *chessBoard);
-uint8_t canBlackLongCastle(ChessBoard *chessBoard);
-uint8_t isBlack(ChessBoard *chessBoard);
-uint8_t getPieceFromSquare(uint8_t sq, ChessBoard *chessBoard);
 int hasNonPawnPieces(ChessBoard* chessBoard, int side);
 int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attackTables, int isAttackedByWhite);
 void addMoveData(ChessBoard *chessBoard);
 MoveData revertMoveData(ChessBoard *chessBoard);
+
+static inline uint8_t canWhiteShortCastle(ChessBoard *chessBoard)
+{
+    return chessBoard->castleRights & whiteShortCastleMask;
+}
+
+static inline uint8_t canWhiteLongCastle(ChessBoard *chessBoard)
+{
+    return chessBoard->castleRights & whiteLongCastleMask;
+}
+
+static inline uint8_t canBlackShortCastle(ChessBoard *chessBoard)
+{
+    return chessBoard->castleRights & blackShortCastleMask;
+}
+
+static inline uint8_t canBlackLongCastle(ChessBoard *chessBoard)
+{
+    return chessBoard->castleRights & blackLongCastleMask;
+}
+
+static inline uint8_t isBlack(ChessBoard *chessBoard)
+{
+    return chessBoard->flags & colorMask;
+}
+
+static inline uint8_t hasCastled(ChessBoard* chessBoard, int isBlack)
+{
+    int isCastled = chessBoard->flags & hasWhiteCastledMask;
+
+    if (isBlack)
+    {
+        isCastled = chessBoard->flags & hasBlackCastledMask;
+    }
+    
+    return isCastled;
+}

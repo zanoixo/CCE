@@ -8,7 +8,7 @@
 uint64_t passedPawnMasks[64];
 uint64_t isolatedPawnMasks[64];
 
-int knightPosTable[64] =
+static const int knightPosTable[64] =
 {
     -50,-40,-30,-30,-30,-30,-40,-50,
     -40,-20,  0,  0,  0,  0,-20,-40,
@@ -20,7 +20,7 @@ int knightPosTable[64] =
     -50,-40,-30,-30,-30,-30,-40,-50
 };
 
-int bishopPosTable[64] =
+static const int bishopPosTable[64] =
 {
     -20,-10,-10,-10,-10,-10,-10,-20,
     -10,  5,  0,  0,  0,  0,  5,-10,
@@ -32,7 +32,7 @@ int bishopPosTable[64] =
     -20,-10,-10,-10,-10,-10,-10,-20
 };
 
-int rookPosTable[64] =
+static const int rookPosTable[64] =
 {
      0,  0,  5, 10, 10,  5,  0,  0,
     -5,  0,  0,  0,  0,  0,  0, -5,
@@ -44,7 +44,7 @@ int rookPosTable[64] =
      0,  0,  5, 10, 10,  5,  0,  0
 };
 
-int queenPosTable[64] =
+static const int queenPosTable[64] =
 {
     -20,-10,-10, -5, -5,-10,-10,-20,
     -10,  0,  0,  0,  0,  0,  0,-10,
@@ -56,7 +56,7 @@ int queenPosTable[64] =
     -20,-10,-10, -5, -5,-10,-10,-20
 };
 
-int whitePawnPosTable[64] =
+static const int whitePawnPosTable[64] =
 {
       0,  0,  0,  0,  0,  0,  0,  0,
       5, 10, 10,-20,-20, 10, 10,  5,
@@ -68,7 +68,7 @@ int whitePawnPosTable[64] =
       0,  0,  0,  0,  0,  0,  0,  0
 };
 
-int blackPawnPosTable[64] =
+static const int blackPawnPosTable[64] =
 {
      0,  0,  0,  0,  0,  0,  0,  0,
     50, 50, 50, 50, 50, 50, 50, 50,

@@ -14,17 +14,6 @@
 #define MATED_TRESHOLD (-MATED - 1000)
 #define DRAW 0 
 
-enum GenericPiece
-{
-    emptyGeneric = 0,
-    pawn = 1,
-    knight = 2,
-    bishop = 3,
-    rook = 4,
-    queen = 5,
-    king = 6
-};
-
 enum ColoredPiece
 {
     whitePawn = 0,
@@ -52,7 +41,43 @@ enum color
 
 void showBitBoard(uint64_t bitBoard);
 void sendError(char errorMsg[]);
-uint64_t getTimeMs();
-uint8_t getSqInd(uint64_t sq);
-int countPieces(uint64_t bitboard);
-uint8_t coloredPieceToGeneric(uint8_t coloredPiece);
+
+static inline uint8_t getSqInd(uint64_t sq)
+{
+    return __builtin_ctzll(sq);
+}
+
+static inline int countPieces(uint64_t bitboard)
+{
+    int count = 0;
+
+    while (bitboard)
+    {
+        count++;
+        bitboard &= bitboard - 1;
+    }
+
+    return count;
+}
+
+#ifdef _WIN32
+#include <windows.h>
+
+static inline uint64_t getTimeMs()
+{
+    return GetTickCount64();
+}
+
+#else
+#include <time.h>
+
+static inline uint64_t getTimeMs()
+{
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+
+    return (uint64_t)ts.tv_sec * 1000ULL +
+           (uint64_t)ts.tv_nsec / 1000000ULL;
+}
+
+#endif

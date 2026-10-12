@@ -52,18 +52,6 @@ void showPosition(const ChessBoard* chessBoard)
     printf("   a b c d e f g h\n\n");
 }
 
-uint8_t hasCastled(ChessBoard* chessBoard, int isBlack)
-{
-    int isCastled = chessBoard->flags & hasWhiteCastledMask;
-
-    if (isBlack)
-    {
-        isCastled = chessBoard->flags & hasBlackCastledMask;
-    }
-    
-    return isCastled;
-}
-
 ChessBoard* initChessBoard()
 {
     ChessBoard* chessBoard = malloc(sizeof(ChessBoard));
@@ -295,31 +283,6 @@ void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hash
         chessBoard->pieceLookup[sqInd] = startPos[sqInd];
     }
     
-}
-
-uint8_t canWhiteShortCastle(ChessBoard *chessBoard)
-{
-    return chessBoard->castleRights & whiteShortCastleMask;
-}
-
-uint8_t canWhiteLongCastle(ChessBoard *chessBoard)
-{
-    return chessBoard->castleRights & whiteLongCastleMask;
-}
-
-uint8_t canBlackShortCastle(ChessBoard *chessBoard)
-{
-    return chessBoard->castleRights & blackShortCastleMask;
-}
-
-uint8_t canBlackLongCastle(ChessBoard *chessBoard)
-{
-    return chessBoard->castleRights & blackLongCastleMask;
-}
-
-uint8_t isBlack(ChessBoard *chessBoard)
-{
-    return chessBoard->flags & colorMask;
 }
 
 int hasNonPawnPieces(ChessBoard* chessBoard, int side)
