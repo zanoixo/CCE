@@ -18,16 +18,44 @@ uint64_t getRandomHash()
     return randomHash;
 }
 
+void checkForDuplicates(uint64_t* generatedHashes, uint64_t newHash)
+{
+    for (int i = 0; i < 1024; i++)
+    {
+        if (generatedHashes[i] == newHash)
+        {
+            printf("Duplicate Hashes detected\n");
+            exit(0);
+        }
+        
+    }
+}
+
 TranspositionTableHashes* initTranpositionTableHashes()
 {
+    uint64_t* generatedHashes = malloc(sizeof(uint64_t) * 1024); 
     TranspositionTableHashes* hashes = malloc(sizeof(TranspositionTableHashes));
+
+    int hashCounter = 0;
+
+    for (int i = 0; i < 1024; i++)
+    {
+        generatedHashes[i] = 0;
+    }
+    
     hashes->colorHash = getRandomHash();
+    checkForDuplicates(generatedHashes, hashes->colorHash);
+    generatedHashes[hashCounter] = hashes->colorHash;
+    hashCounter++;
 
     for (int piece = 0; piece < DIFFERENT_PIECE_COUNT; piece++)
     {
         for (int sq = 0; sq < BOARD_SIZE; sq++)
         {
             hashes->pieceHashes[piece][sq] = getRandomHash();
+            checkForDuplicates(generatedHashes, hashes->pieceHashes[piece][sq]);
+            generatedHashes[hashCounter] = hashes->pieceHashes[piece][sq];
+            hashCounter++;
         }
         
     }
@@ -41,11 +69,17 @@ TranspositionTableHashes* initTranpositionTableHashes()
     for (int right = 0; right < CASTLE_RIGHT_COUNT; right++)
     {
         hashes->castellingHashes[right] = getRandomHash();
+        checkForDuplicates(generatedHashes, hashes->castellingHashes[right]);
+        generatedHashes[hashCounter] = hashes->castellingHashes[right];
+        hashCounter++;
     }
 
     for (int file = 0; file < ENPASSANT_FILES_COUNT; file++)
     {
         hashes->enPassantHashes[file] = getRandomHash();
+        checkForDuplicates(generatedHashes, hashes->enPassantHashes[file]);
+        generatedHashes[hashCounter] = hashes->enPassantHashes[file];
+        hashCounter++;
     }
     
     return hashes;
@@ -227,14 +261,4 @@ int getScoreFromTransposition(int eval, int depth)
     }
     
     return eval;
-}
-
-void hashEnPassant(ChessBoard* chessBoard, TranspositionTableHashes* hashes)
-{
-    if (chessBoard->enPassantSq != 0)
-    {
-        uint8_t enPassantSq = getSqInd(chessBoard->enPassantSq);
-        uint8_t enPassantFile = enPassantSq % 8;
-        chessBoard->positionHash ^= hashes->enPassantHashes[enPassantFile];
-    }
 }

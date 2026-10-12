@@ -2,8 +2,7 @@ import io
 import re
 import chess.pgn
 
-pgn = """1. e4 d5 2. exd5 Nf6 { B01 Scandinavian Defense: Modern Variation } 3. Bb5+ Nbd7 4. Nc3 a6 5. Be2 b5 6. Bf3 Rb8 7. d4 Bb7 8. a3 Nb6 9. Nge2 Nbxd5 10. Nxd5 Bxd5 11. Bxd5 Nxd5 12. Bg5 Qd7 13. O-O e6 14. Ng3 Be7 15. Bxe7 Nxe7 16. Qd3 Rd8 17. Rad1 Nc6 18. Qe3 O-O 19. Rd3 Qe7 20. Rb1 Rd5 21. f4 Rfd8 22. Rbd1 Na5 23. Ne4 Nc4 24. Qc1 Kf8 25. Nc5 e5 26. fxe5 Nxe5 27. R3d2 Ng4 28. g3 Qe3+ 29. Kg2 Qh6 30. Kg1 Rxd4 31. Nd3 c5 32. b3 c4 33. bxc4 bxc4 34. a4 Kg8 35. h3 Qxh3 36. Rg2 cxd3 37. Rxd3 Rxd3 38. cxd3 Re8 39. d4 Ne3 40. Rb2 Qxg3+ 41. Kh1 Nc4 42. Rc2 Re1+ 43. Qxe1 Qxe1+ 44. Kh2 Qh4+ 45. Kg1 Qe1+ 46. Kh2 Qh4+ 47. Kg1 Qe1+ 48. Kh2 { The game is a draw. } 1/2-1/2
-"""
+pgn = """position startpos moves g1f3 g8f6 d2d4 d7d5 b1c3 e7e6 d1d3 f8b4 a2a3 b4c3 d3c3 f6e4 c3b3 e8g8 e2e3 c7c5 f1e2 c5c4 b3a2 d8a5 c2c3 b8c6 e1g1 f8e8 f3d2 e4d2 c1d2 e6e5 f1e1 c8e6 a1d1 a5b6 a2b1 e5e4 e1f1 c6a5 d2e1 e6f5 b1c2 a5b3 g1h1 a8c8 f1g1 c8c7 g1f1 b6d6 h1g1 d6g6 g1h1 f5g4 e2g4 g6g4 f2f3 e4f3 f1f3 c7e7 e1f2 e7e4 d1e1 g4g5 c2e2 g5g6 f2g3 b3a5 e1f1 a5c6 f3f7 g6f7 f1f7 g8f7 e2h5 f7g8 h5d5 g8h8 g3f2 e4e7 d5c4 a7a6 c4e2 e7f7 h1g1 f7e7 e2d3 h7h6 c3c4 e7f7 h2h3 f7d7 f2h4 d7f7 c4c5 f7c7 d4d5 c6e5 d3d4 e5d7 h4e7 c7c8 e7d6 d7f6 d6e5 e8f8 d5d6 c8e8 e5f6 f8f6 d6d7 e8d8 d4d5 f6c6 d5e5 c6f6 e5c7 f6f8 c7b7 d8b8 b7b8 f8b8 c5c6 h8h7 c6c7 b8b2 c7c8q b2d2 d7d8q d2d8 c8d8 g7g6 d8d4 h6h5 d4h4 a6a5 h4e7 h7g8 g1f2 g6g5 f2f3 g8h8 f3e4 g5g4 """
 
 pgn = re.sub(r"\{[^}]*\}", "", pgn)
 
