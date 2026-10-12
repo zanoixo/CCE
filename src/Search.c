@@ -15,7 +15,7 @@
 #include "Eval.h"
 
 Move killerMoves[KILLER_MOVE_DEPTH][2];
-int historyHeuristic[BOARD_SIZE][BOARD_SIZE];
+int historyHeuristic[BOARD_SIZE][BOARD_SIZE][PIECE_TYPES];
 uint64_t stopTime = 0;
 int currentDepth;
 int qSearchDepthReached;
@@ -45,19 +45,19 @@ void updateTime()
     }
 }
 
-void penalizeHistoryHeuristic(Move move, int remeniningDepth)
+void penalizeHistoryHeuristic(Move move, uint8_t piece, int remeniningDepth)
 {
-    historyHeuristic[getFromSq(move.move)][getToSq(move.move)] -= remeniningDepth;     
+    historyHeuristic[getFromSq(move.move)][getToSq(move.move)][piece] -= remeniningDepth;     
 }
 
-void updateHistoryHeuristic(Move move, int remeniningDepth)
+void updateHistoryHeuristic(Move move, uint8_t piece, int remeniningDepth)
 {
-    historyHeuristic[getFromSq(move.move)][getToSq(move.move)] += remeniningDepth * remeniningDepth; 
+    historyHeuristic[getFromSq(move.move)][getToSq(move.move)][piece] += remeniningDepth * remeniningDepth; 
 }
 
-int getHistoryHeuristic(Move move)
+int getHistoryHeuristic(Move move, uint8_t piece)
 {
-    return historyHeuristic[getFromSq(move.move)][getToSq(move.move)];
+    return historyHeuristic[getFromSq(move.move)][getToSq(move.move)][piece];
 }
 
 void clearHistoryHeuristic()
@@ -102,19 +102,21 @@ void setKillerMove(Move killerMove, int depth)
     } 
 }
 
-void setBestMoveFirst(MoveList* moveList, int moveCount)
+void setBestMoveFirst(ChessBoard* chessBoard, MoveList* moveList, int moveCount)
 {
     int moveInd = moveCount;
+    uint8_t movedPiece = chessBoard->pieceLookup[getFromSq(moveList->moves[moveInd].move)];
 
     for (int i = moveCount + 1; i < moveList->nextIndex; i++)
     {   
         if (moveList->moves[i].score > moveList->moves[moveInd].score)
         {
             moveInd = i;
+            movedPiece = chessBoard->pieceLookup[getFromSq(moveList->moves[moveInd].move)];
             continue;
         }
         
-        if (moveList->moves[moveInd].score == 0 && getHistoryHeuristic(moveList->moves[i]) > getHistoryHeuristic(moveList->moves[moveInd]))
+        if (moveList->moves[moveInd].score == 0 && getHistoryHeuristic(moveList->moves[i], chessBoard->pieceLookup[getFromSq(moveList->moves[i].move)]) > getHistoryHeuristic(moveList->moves[moveInd], movedPiece))
         {
             moveInd = i;
         }
@@ -249,7 +251,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             return bestMove;
         }
 
-        setBestMoveFirst(&moveList, i);
+        setBestMoveFirst(chessBoard, &moveList, i);
 
         if (!gotChecked && !isTacticalMove(chessBoard->pieceLookup[getToSq(moveList.moves[i].move)], moveList.moves[i]))
         {
@@ -442,7 +444,9 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             return bestMove;
         }
 
-        setBestMoveFirst(&moveList, i);
+        setBestMoveFirst(chessBoard, &moveList, i);
+
+        uint8_t capturedPiece = chessBoard->pieceLookup[getToSq(moveList.moves[i].move)];
 
         makeMove(chessBoard, &moveList.moves[i], hashes);
 
@@ -458,7 +462,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             int isEnemyChecked = isSquareAttacked(enemyKingSq, chessBoard, attackTables, !side);
             int moveReduction = 0;
 
-            if (i > 3 && !isEnemyChecked && !amChecked && currentDepth - depthSearched >= 3 && !isTacticalMove(chessBoard->pieceLookup[getToSq(moveList.moves[i].move)], moveList.moves[i]))
+            if (i > 3 && !isEnemyChecked && !amChecked && currentDepth - depthSearched >= 3 && !isTacticalMove(capturedPiece, moveList.moves[i]))
             {
                 moveReduction = (int)(0.75 * log(currentDepth - depthSearched) * log(i) / 2.25);
             }
@@ -512,10 +516,15 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
             if (alpha >= beta)
             {
-                if (!isTacticalMove(chessBoard->pieceLookup[getToSq(moveList.moves[i].move)], moveList.moves[i]))
+                unMakeMove(chessBoard, &moveList.moves[i]);
+                //ASSERT_CHESS_BOARD(original, chessBoard);
+
+                if (!isTacticalMove(capturedPiece, moveList.moves[i]))
                 {
+                    uint8_t movedPiece = chessBoard->pieceLookup[getFromSq(moveList.moves[i].move)];
+
                     setKillerMove(moveList.moves[i], depthSearched);
-                    updateHistoryHeuristic(moveList.moves[i], currentDepth - depthSearched);
+                    updateHistoryHeuristic(moveList.moves[i], movedPiece, currentDepth - depthSearched);
 
                     for (int moveInd = i - 1; moveInd >= 0; moveInd--)
                     {
@@ -524,12 +533,11 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
                             break;
                         }
 
-                        penalizeHistoryHeuristic(moveList.moves[moveInd], currentDepth - depthSearched);
+                        penalizeHistoryHeuristic(moveList.moves[moveInd], movedPiece, currentDepth - depthSearched);
                     }
                 }
 
-                unMakeMove(chessBoard, &moveList.moves[i]);
-                //ASSERT_CHESS_BOARD(original, chessBoard);
+                
                 break;
             }
         }
