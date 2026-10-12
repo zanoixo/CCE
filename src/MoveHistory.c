@@ -31,7 +31,7 @@ void addMoveToHistory(ChessBoard* chessBoard, MoveData* moveData, uint8_t piece)
 
     chessBoard->history.positionHashes[index] = chessBoard->positionHash;
 
-    if (moveData->capturedPiece || piece == blackPawn || piece == whitePawn)
+    if (moveData->capturedPiece != empty || piece == blackPawn || piece == whitePawn)
     {
         chessBoard->history.lastIrreversableIndex[index] = index;
     }

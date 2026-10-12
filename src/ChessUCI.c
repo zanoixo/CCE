@@ -99,7 +99,6 @@ void userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
     }
 
     makeMove(chessBoard, playedMove, hashes);
-    printf("hash: %llu ThreeFold detected %d\n", chessBoard->positionHash, isThreeFoldRepetition(chessBoard));
 }
 
 void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, uint64_t timePerMove)
