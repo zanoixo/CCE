@@ -10,7 +10,7 @@ from pathlib import Path
 # ── Configuration ─────────────────────────────────────────────────────────────
 REPO        = Path(__file__).parent.resolve()
 OPENING_BOOK = REPO / "openings" / "50.pgn"
-ENGINE_NEW      = REPO / "PrevEngineVersion/engine"
+ENGINE_NEW      = REPO / "bin/engine"
 ENGINE_OLD   = REPO / "PrevEngineVersion/engine_old"
 CUTECHESS   = "cutechess-cli"
 

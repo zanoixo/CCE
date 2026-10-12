@@ -4,6 +4,7 @@
 #include "Search.h"
 #include "ChessBoard.h"
 #include "MoveGenerator.h"
+#include "TacticalMoveGenerator.h"
 #include "Utils.h"
 #include "Eval.h"
 #include "Tests.h"
@@ -239,7 +240,14 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     MoveScore moveScore;
 
-    generateMoves(chessBoard, attackTables, &moveList);
+    if (gotChecked)
+    {
+        generateMoves(chessBoard, attackTables, &moveList);
+    }
+    else
+    {
+        generateTactivalMoves(chessBoard, attackTables, &moveList);
+    }
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
@@ -252,11 +260,6 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
         }
 
         setBestMoveFirst(chessBoard, &moveList, i);
-
-        if (!gotChecked && !isTacticalMove(chessBoard->pieceLookup[getToSq(moveList.moves[i].move)], moveList.moves[i]))
-        {
-            continue;
-        }
 
         makeMove(chessBoard, &moveList.moves[i], hashes);
 

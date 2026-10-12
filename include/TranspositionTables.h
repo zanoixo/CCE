@@ -68,4 +68,3 @@ uint64_t getTTMovesSearched();
 uint64_t getTTMovesFound();
 int getScoreForTransposition(int eval, int depth);
 int getScoreFromTransposition(int eval, int depth);
-void hashEnPassant(ChessBoard* chessBoard, TranspositionTableHashes* hashes);

@@ -16,6 +16,16 @@ static const uint8_t castleRightLookup[BOARD_SIZE] = {
 
 static const uint8_t doublePawnPushOffset[2] = {8, -8};
 
+static inline void hashEnPassant(ChessBoard* chessBoard, TranspositionTableHashes* hashes)
+{
+    if (chessBoard->enPassantSq != 0)
+    {
+        uint8_t enPassantSq = getSqInd(chessBoard->enPassantSq);
+        uint8_t enPassantFile = enPassantSq % 8;
+        chessBoard->positionHash ^= hashes->enPassantHashes[enPassantFile];
+    }
+}
+
 void makeGenericMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes, MoveData* moveData)
 {
     uint8_t friendlyPieces = isBlack(chessBoard);
