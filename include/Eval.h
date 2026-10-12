@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include "Utils.h"
 
 typedef struct MoveScore MoveScore;
 typedef struct ChessBoard ChessBoard;
@@ -42,4 +43,26 @@ typedef struct TranspositionTable TranspositionTable;
 int evaluatePosition(ChessBoard* chessBoard, AttackTables* attackTables);
 void initPassedPawnMasks();
 void initIsolatedPawnMasks();
-int getPieceScore(uint8_t piece);
+
+static const int pieceValues[13] =
+{
+    [whitePawn]   = PAWN_VALUE,
+    [whiteKnight] = KNIGHT_VALUE,
+    [whiteBishop] = BISHOP_VALUE,
+    [whiteRook]   = ROOK_VALUE,
+    [whiteQueen]  = QUEEN_VALUE,
+    [whiteKing]   = KING_VALUE,
+    
+    [blackPawn]   = PAWN_VALUE,
+    [blackKnight] = KNIGHT_VALUE,
+    [blackBishop] = BISHOP_VALUE,
+    [blackRook]   = ROOK_VALUE,
+    [blackQueen]  = QUEEN_VALUE,
+    [blackKing]   = KING_VALUE,
+    [empty]       = 0
+};
+
+static inline int getPieceScore(uint8_t piece)
+{
+    return pieceValues[piece];
+}

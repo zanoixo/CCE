@@ -564,23 +564,3 @@ int evaluatePosition(ChessBoard* chessBoard, AttackTables* attackTables)
 
     return score;
 }
-
-int getPieceScore(uint8_t piece)
-{
-    switch (piece)
-    {
-        case pawn:
-            return PAWN_VALUE; 
-        case knight:
-            return KNIGHT_VALUE; 
-        case bishop:
-            return BISHOP_VALUE; 
-        case rook:
-            return ROOK_VALUE;
-        case queen:
-            return QUEEN_VALUE;  
-        case king:
-            return KING_VALUE; 
-    }
-    return 0;
-}

@@ -31,7 +31,7 @@ void userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
     uint64_t fromBitboard = 1ULL << fromSq;
     uint64_t toBitboard = 1ULL << toSq;
 
-    uint64_t piece = getPieceFromSquare(fromSq, chessBoard);
+    uint8_t piece = chessBoard->pieceLookup[fromSq];
 
     switch (promotion)
     {
@@ -60,22 +60,28 @@ void userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
 
     switch (piece)
     {
-        case pawn:
+        case whitePawn:
+        case blackPawn:
             generatePawnMoves(chessBoard, attackTables, &moveList);
             break;
-        case knight:
+        case whiteKnight:
+        case blackKnight:
             generateKnightMoves(chessBoard, attackTables, &moveList);
             break;
-        case bishop:
+        case whiteBishop:
+        case blackBishop:
             generateBishopMoves(chessBoard, attackTables, &moveList);
             break;
-        case rook:
+        case whiteRook:
+        case blackRook:
             generateRookMoves(chessBoard, attackTables, &moveList);
             break;
-        case queen:
+        case whiteQueen:
+        case blackQueen:
             generateQueenMoves(chessBoard, attackTables, &moveList);
             break;
-        case king:
+        case whiteKing:
+        case blackKing:
         {
             generateKingMoves(chessBoard, attackTables, &moveList);
             generateCastleMoves(chessBoard, attackTables, &moveList);

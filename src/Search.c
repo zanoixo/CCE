@@ -127,7 +127,7 @@ void setBestMoveFirst(MoveList* moveList, int moveCount)
 
 int isTacticalMove(Move move, ChessBoard* chessBoard)
 {    
-    return getPieceFromSquare(getToSq(move.move), chessBoard) || getPromotionPiece(move);
+    return (chessBoard->pieceLookup[getToSq(move.move)] != empty) || getPromotionPiece(move);
 }
 
 int isBetaValid(int beta)

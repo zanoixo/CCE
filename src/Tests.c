@@ -360,7 +360,7 @@ void runAttackTablesTests()
 
     printf("[PASS] ALL KING ATTACK TESTS PASSED\n");
 
-    ASSERT_BIT_TABLE(attackTables->whitePanwsAttacks[8],
+    ASSERT_BIT_TABLE(attackTables->whitePawnsAttacks[8],
     0b00000000ULL << 56 |
     0b00000000ULL << 48 |
     0b00000000ULL << 40 |
@@ -370,7 +370,7 @@ void runAttackTablesTests()
     0b00000000ULL << 8  |
     0b00000000ULL);
 
-    ASSERT_BIT_TABLE(attackTables->whitePanwsAttacks[15],
+    ASSERT_BIT_TABLE(attackTables->whitePawnsAttacks[15],
     0b00000000ULL << 56 |
     0b00000000ULL << 48 |
     0b00000000ULL << 40 |
@@ -380,7 +380,7 @@ void runAttackTablesTests()
     0b00000000ULL << 8  |
     0b00000000ULL);
 
-    ASSERT_BIT_TABLE(attackTables->whitePanwsAttacks[9],
+    ASSERT_BIT_TABLE(attackTables->whitePawnsAttacks[9],
     0b00000000ULL << 56 |
     0b00000000ULL << 48 |
     0b00000000ULL << 40 |
@@ -390,7 +390,7 @@ void runAttackTablesTests()
     0b00000000ULL << 8  |
     0b00000000ULL);
 
-    ASSERT_BIT_TABLE(attackTables->whitePanwsAttacks[56],
+    ASSERT_BIT_TABLE(attackTables->whitePawnsAttacks[56],
     0b00000000ULL << 56 |
     0b00000000ULL << 48 |
     0b00000000ULL << 40 |
@@ -400,7 +400,7 @@ void runAttackTablesTests()
     0b00000000ULL << 8  |
     0b00000000ULL);
 
-    ASSERT_BIT_TABLE(attackTables->whitePanwsAttacks[63],
+    ASSERT_BIT_TABLE(attackTables->whitePawnsAttacks[63],
     0b00000000ULL << 56 |
     0b00000000ULL << 48 |
     0b00000000ULL << 40 |
@@ -410,7 +410,7 @@ void runAttackTablesTests()
     0b00000000ULL << 8  |
     0b00000000ULL);
 
-    ASSERT_BIT_TABLE(attackTables->whitePanwsAttacks[57],
+    ASSERT_BIT_TABLE(attackTables->whitePawnsAttacks[57],
     0b00000000ULL << 56 |
     0b00000000ULL << 48 |
     0b00000000ULL << 40 |
@@ -422,7 +422,7 @@ void runAttackTablesTests()
 
     printf("[PASS] ALL WHITE PAWN ATTACK TESTS PASSED\n");
 
-    ASSERT_BIT_TABLE(attackTables->blackPanwsAttacks[48],
+    ASSERT_BIT_TABLE(attackTables->blackPawnsAttacks[48],
     0b00000000ULL << 56 |
     0b00000000ULL << 48 |
     0b00000010ULL << 40 |
@@ -432,7 +432,7 @@ void runAttackTablesTests()
     0b00000000ULL << 8  |
     0b00000000ULL);
 
-    ASSERT_BIT_TABLE(attackTables->blackPanwsAttacks[55],
+    ASSERT_BIT_TABLE(attackTables->blackPawnsAttacks[55],
     0b00000000ULL << 56 |
     0b00000000ULL << 48 |
     0b01000000ULL << 40 |
@@ -442,7 +442,7 @@ void runAttackTablesTests()
     0b00000000ULL << 8  |
     0b00000000ULL);
 
-    ASSERT_BIT_TABLE(attackTables->blackPanwsAttacks[49],
+    ASSERT_BIT_TABLE(attackTables->blackPawnsAttacks[49],
     0b00000000ULL << 56 |
     0b00000000ULL << 48 |
     0b00000101ULL << 40 |
@@ -452,7 +452,7 @@ void runAttackTablesTests()
     0b00000000ULL << 8  |
     0b00000000ULL);
 
-    ASSERT_BIT_TABLE(attackTables->blackPanwsAttacks[0],
+    ASSERT_BIT_TABLE(attackTables->blackPawnsAttacks[0],
     0b00000000ULL << 56 |
     0b00000000ULL << 48 |
     0b00000000ULL << 40 |
@@ -462,7 +462,7 @@ void runAttackTablesTests()
     0b00000000ULL << 8  |
     0b00000000ULL);
 
-    ASSERT_BIT_TABLE(attackTables->blackPanwsAttacks[7],
+    ASSERT_BIT_TABLE(attackTables->blackPawnsAttacks[7],
     0b00000000ULL << 56 |
     0b00000000ULL << 48 |
     0b00000000ULL << 40 |
@@ -472,7 +472,7 @@ void runAttackTablesTests()
     0b00000000ULL << 8  |
     0b00000000ULL);
 
-    ASSERT_BIT_TABLE(attackTables->blackPanwsAttacks[1],
+    ASSERT_BIT_TABLE(attackTables->blackPawnsAttacks[1],
     0b00000000ULL << 56 |
     0b00000000ULL << 48 |
     0b00000000ULL << 40 |

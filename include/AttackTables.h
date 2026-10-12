@@ -18,8 +18,8 @@ typedef struct BlockerAttackPattern
 
 typedef struct AttackTables
 {
-    uint64_t whitePanwsAttacks[BOARD_SIZE];
-    uint64_t blackPanwsAttacks[BOARD_SIZE];
+    uint64_t whitePawnsAttacks[BOARD_SIZE];
+    uint64_t blackPawnsAttacks[BOARD_SIZE];
     uint64_t knightAttacks[BOARD_SIZE];
     uint64_t kingAttacks[BOARD_SIZE];
     uint64_t* rookAttacks[BOARD_SIZE];

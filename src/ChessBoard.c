@@ -322,11 +322,6 @@ uint8_t isBlack(ChessBoard *chessBoard)
     return chessBoard->flags & colorMask;
 }
 
-uint8_t getPieceFromSquare(uint8_t sq, ChessBoard *chessBoard)
-{
-    return coloredPieceToGeneric(chessBoard->pieceLookup[sq]);
-}
-
 int hasNonPawnPieces(ChessBoard* chessBoard, int side)
 {
     if (side == black)
@@ -388,7 +383,7 @@ int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attack
     uint64_t enemyQueens = chessBoard->pieceBoards[blackQueen];
     uint64_t enemyPawns = chessBoard->pieceBoards[blackPawn];
     uint64_t enemyKing = chessBoard->pieceBoards[blackKing];
-    uint64_t *friendlyPawnAttacks = attackTables->whitePanwsAttacks;
+    uint64_t *friendlyPawnAttacks = attackTables->whitePawnsAttacks;
     
     if (isAttackedByWhite)
     {
@@ -398,7 +393,7 @@ int isSquareAttacked(uint8_t sqInd, ChessBoard *chessBoard, AttackTables *attack
         enemyQueens = chessBoard->pieceBoards[whiteQueen];
         enemyPawns = chessBoard->pieceBoards[whitePawn];
         enemyKing = chessBoard->pieceBoards[whiteKing];
-        friendlyPawnAttacks = attackTables->blackPanwsAttacks;
+        friendlyPawnAttacks = attackTables->blackPawnsAttacks;
 
     }
     

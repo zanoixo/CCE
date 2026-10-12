@@ -113,7 +113,7 @@ void initBlackPawnAttacks(AttackTables* attackTables)
         attackBitTable |= (pawnPosition >> 7) & ~aFile; //bottom left
         attackBitTable |= (pawnPosition >> 9) & ~hFile; //bottom right
 
-        attackTables->blackPanwsAttacks[sqInd] = attackBitTable;
+        attackTables->blackPawnsAttacks[sqInd] = attackBitTable;
     }
 }
 
@@ -128,7 +128,7 @@ void initWhitePawnAttacks(AttackTables* attackTables)
         attackBitTable |= (pawnPosition << 9) & ~aFile; //top left
         attackBitTable |= (pawnPosition << 7) & ~hFile; //top right
 
-        attackTables->whitePanwsAttacks[sqInd] = attackBitTable;
+        attackTables->whitePawnsAttacks[sqInd] = attackBitTable;
     }
 }
 
