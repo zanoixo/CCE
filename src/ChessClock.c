@@ -93,5 +93,5 @@ uint64_t CalculateTime(ChessClock* clock, int isBlack, int moveNumber)
         return GetTimeLimit(moveTime, MIN_MOVE_TIME_MS, maxTime);
     }
 
-    return 1000;
+    return 10000;
 }
