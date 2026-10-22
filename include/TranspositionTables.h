@@ -16,14 +16,6 @@ typedef struct ChessBoard ChessBoard;
 #define EMPTY_PIECE 1
 #define EMPTY_PIECE_HASH_POS 12
 
-enum castellingHashes
-{
-    whiteShortCastleHash = 0,
-    whiteLongCastleHash = 1,
-    blackShortCastleHash = 2,
-    blackLongCastleHash = 3
-};
-
 enum flags
 {
     alphaCutoff = 0,

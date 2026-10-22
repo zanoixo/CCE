@@ -264,10 +264,7 @@ void initStartingPosition(ChessBoard *chessBoard, TranspositionTableHashes* hash
 
     chessBoard->positionHash ^= hashes->pieceHashes[blackKing][59];
 
-    chessBoard->positionHash ^= hashes->castellingHashes[whiteShortCastleHash];
-    chessBoard->positionHash ^= hashes->castellingHashes[whiteLongCastleHash];
-    chessBoard->positionHash ^= hashes->castellingHashes[blackShortCastleHash];
-    chessBoard->positionHash ^= hashes->castellingHashes[blackLongCastleHash];
+    chessBoard->positionHash ^= hashes->castellingHashes[0b1111];
 
     chessBoard->enPassantSq = 0;
     chessBoard->flags = 0;

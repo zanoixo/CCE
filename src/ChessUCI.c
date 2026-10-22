@@ -106,46 +106,7 @@ void bestMove(char* moveStr, ChessBoard *ChessBoard, AttackTables *attackTables,
     
     MoveScore best = evaluate(ChessBoard, attackTables, hashes, transpositionTable, timePerMove);
 
-    int fromSq = getFromSq(best.move.move);
-    int toSq   = getToSq(best.move.move);
-
-    moveStr[0] = 'a' + (fromSq % 8);
-    moveStr[1] = '1' + (fromSq / 8);
-
-    moveStr[2] = 'a' + (toSq % 8);
-    moveStr[3] = '1' + (toSq / 8);
-
-    if (getPromotionPiece(best.move))
-    {
-        switch (getPromotionPiece(best.move))
-        {
-            case queenPromotion:
-                moveStr[4] = 'q';
-                break;
-
-            case rookPromotion:
-                moveStr[4] = 'r';
-                break;
-
-            case bishopPromotion:
-                moveStr[4] = 'b';
-                break;
-
-            case knightPromotion:
-                moveStr[4] = 'n';
-                break;
-
-            default:
-                moveStr[4] = 'q';
-                break;
-        }
-
-        moveStr[5] = '\0';
-    }
-    else
-    {
-        moveStr[4] = '\0';
-    }
+    moveToText(moveStr, best.move);
 
     int mateInNumberOfMoves = 0;
 
@@ -208,6 +169,7 @@ void applyUCIMoves(char *moves, ChessBoard *chessBoard, AttackTables *attackTabl
     {
         incrementAge();
         userMove(from[i], to[i], promotion[i], chessBoard, attackTables, hashes);
+        showPosition(chessBoard);
     }
 }
 

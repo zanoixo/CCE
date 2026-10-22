@@ -87,7 +87,7 @@ static inline uint64_t getToBitboard(uint16_t move)
 
 static inline uint8_t isTacticalMove(uint8_t capturedPiece, Move move)
 {    
-    return (capturedPiece != empty) || getPromotionPiece(move);
+    return (capturedPiece != empty) || getPromotionPiece(move) || move.move & enPassantMask;
 }
 
 static inline uint16_t constructMove(uint64_t from, uint64_t to, uint16_t promotionFlag, uint16_t enPassantFlag)
@@ -99,4 +99,48 @@ static inline uint16_t constructMove(uint64_t from, uint64_t to, uint16_t promot
     move |= enPassantFlag << enPassantPosition;
 
     return move; 
+}
+
+static inline void moveToText(char* moveStr, Move move)
+{
+    int fromSq = getFromSq(move.move);
+    int toSq   = getToSq(move.move);
+
+    moveStr[0] = 'a' + (fromSq % 8);
+    moveStr[1] = '1' + (fromSq / 8);
+
+    moveStr[2] = 'a' + (toSq % 8);
+    moveStr[3] = '1' + (toSq / 8);
+
+    if (getPromotionPiece(move))
+    {
+        switch (getPromotionPiece(move))
+        {
+            case queenPromotion:
+                moveStr[4] = 'q';
+                break;
+
+            case rookPromotion:
+                moveStr[4] = 'r';
+                break;
+
+            case bishopPromotion:
+                moveStr[4] = 'b';
+                break;
+
+            case knightPromotion:
+                moveStr[4] = 'n';
+                break;
+
+            default:
+                moveStr[4] = 'q';
+                break;
+        }
+
+        moveStr[5] = '\0';
+    }
+    else
+    {
+        moveStr[4] = '\0';
+    }
 }
