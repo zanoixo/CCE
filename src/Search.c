@@ -14,9 +14,9 @@
 #include "UnMakeMove.h"
 #include "AttackTables.h"
 #include "Eval.h"
+#include "HistoryHeuristic.h"
+#include "KillerHeuristic.h"
 
-Move killerMoves[KILLER_MOVE_DEPTH][2];
-int historyHeuristic[BOARD_SIZE][BOARD_SIZE][PIECE_TYPES];
 uint64_t stopTime = 0;
 int currentDepth;
 int qSearchDepthReached;
@@ -44,63 +44,6 @@ void updateTime()
         }
         
     }
-}
-
-void penalizeHistoryHeuristic(Move move, uint8_t piece, int remeniningDepth)
-{
-    historyHeuristic[getFromSq(move.move)][getToSq(move.move)][piece] -= remeniningDepth;     
-}
-
-void updateHistoryHeuristic(Move move, uint8_t piece, int remeniningDepth)
-{
-    historyHeuristic[getFromSq(move.move)][getToSq(move.move)][piece] += remeniningDepth * remeniningDepth; 
-}
-
-int getHistoryHeuristic(Move move, uint8_t piece)
-{
-    return historyHeuristic[getFromSq(move.move)][getToSq(move.move)][piece];
-}
-
-void clearHistoryHeuristic()
-{
-    memset(historyHeuristic, 0, sizeof(historyHeuristic));
-}
-
-void initKillerMoves()
-{
-    for (int i = 0; i < currentDepth; i++)
-    {
-        killerMoves[i][0] = (Move){0, 0};
-        killerMoves[i][1] = (Move){0, 0};
-    }
-}
-
-void findKillerMoves(MoveList *moveList, int depth)
-{
-    for (int i = 0; i < moveList->nextIndex; i++)
-    {
-        if (moveList->moves[i].move == killerMoves[depth][0].move)
-        {
-            moveList->moves[i].score = 200;
-        }
-
-        if (moveList->moves[i].move == killerMoves[depth][1].move)
-        {
-            moveList->moves[i].score = 100;
-        }
-        
-    }
-    
-}
-
-void setKillerMove(Move killerMove, int depth)
-{
-    if (!(killerMoves[depth][0].move == killerMove.move) &&
-        !(killerMoves[depth][1].move == killerMove.move))
-    {
-        killerMoves[depth][1] = killerMoves[depth][0];
-        killerMoves[depth][0] = killerMove;
-    } 
 }
 
 void setBestMoveFirst(ChessBoard* chessBoard, MoveList* moveList, int moveCount)
@@ -574,7 +517,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 MoveScore iterativeSearch(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTable* transpositionTable, TranspositionTableHashes* hashes)
 {
     MoveScore bestMove;
-    initKillerMoves();
+    initKillerMoves(currentDepth);
     bestMove = negamax(chessBoard, attackTables, hashes, transpositionTable, 1, 1, MIN_INT, MAX_INT, isBlack(chessBoard));
     return bestMove;
 }
@@ -605,6 +548,9 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
         //printf("Nodes: %d, Transposition searches: %d, hits: %d, Cutoffs: %d\n", nodesSearched, transpositionSearches, transpositionHits, transpositionCutoffs);
         if (!timeLimitReached || currentDepth == 1)
         {
+            char moveStr[6];
+            moveToText(moveStr, depthBestMove.move);
+            printf("Best move: %s\n", moveStr);
             currentBestMove = depthBestMove;
         }
         
