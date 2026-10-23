@@ -2,6 +2,8 @@
 #include "Move.h"
 #include "KillerHeuristic.h"
 
+static uint16_t killerMoves[KILLER_MOVE_DEPTH][2];
+
 void initKillerMoves(int currentDepth)
 {
     for (int i = 0; i < currentDepth; i++)
@@ -19,4 +21,9 @@ void setKillerMove(uint16_t killerMove, int depth)
         killerMoves[depth][1] = killerMoves[depth][0];
         killerMoves[depth][0] = killerMove;
     } 
+}
+
+uint16_t getKillerMove(int depth, int index)
+{
+    return killerMoves[depth][index];
 }

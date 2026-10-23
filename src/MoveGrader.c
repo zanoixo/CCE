@@ -29,11 +29,11 @@ void initCaptureScores()
 
             if (attackerPieceScore < capturedPieceScore + 30 )
             {
-                score = CAPTURE_SCORE + 10 * capturedPieceScore - attackerPieceScore;
+                score = CAPTURE_SCORE + capturedPieceScore - attackerPieceScore;
             }
             else
             {
-                score = -CAPTURE_SCORE + 10 * capturedPieceScore - attackerPieceScore;
+                score = -CAPTURE_SCORE + capturedPieceScore - attackerPieceScore;
             }
             
             captureScores[attackerPiece][capturedPiece] = score;
@@ -53,8 +53,8 @@ void gradeMoves(ChessBoard* chessBoard, TranspositionTable* transpositionTable, 
         TTMove = transpositionTableEntry->moveScore.move;
     }
     
-    uint16_t killerMove1 = killerMoves[depth][0];
-    uint16_t killerMove2 = killerMoves[depth][1];
+    uint16_t killerMove1 = getKillerMove(depth, 0);
+    uint16_t killerMove2 = getKillerMove(depth, 1);
 
     for (int moveInd = 0; moveInd < moveList->nextIndex; moveInd++)
     {

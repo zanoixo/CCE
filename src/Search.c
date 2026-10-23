@@ -477,7 +477,12 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
                     for (int moveInd = i - 1; moveInd >= 0; moveInd--)
                     {
-                        if (gradedMoveList.gradedMoves[moveInd].grade < MAX_HISTORY_SCORE && gradedMoveList.gradedMoves[moveInd].grade > MIN_HISOTRY_SCORE)
+                        if (gradedMoveList.gradedMoves[moveInd].grade > MAX_HISTORY_SCORE)
+                        {
+                            break;
+                        }
+                        
+                        if (gradedMoveList.gradedMoves[moveInd].grade > MIN_HISOTRY_SCORE)
                         {
                             penalizeHistoryHeuristic(gradedMoveList.gradedMoves[moveInd].move, movedPiece, currentDepth - depthSearched);
                         }
@@ -549,9 +554,6 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
         //printf("Nodes: %d, Transposition searches: %d, hits: %d, Cutoffs: %d\n", nodesSearched, transpositionSearches, transpositionHits, transpositionCutoffs);
         if (!timeLimitReached || currentDepth == 1)
         {
-            char moveStr[6];
-            moveToText(moveStr, depthBestMove.move);
-            printf("Best move: %s\n", moveStr);
             currentBestMove = depthBestMove;
         }
         
