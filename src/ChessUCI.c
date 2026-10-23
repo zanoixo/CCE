@@ -170,7 +170,6 @@ void applyUCIMoves(char *moves, ChessBoard *chessBoard, AttackTables *attackTabl
     {
         incrementAge();
         userMove(from[i], to[i], promotion[i], chessBoard, attackTables, hashes);
-        showPosition(chessBoard);
     }
 }
 
