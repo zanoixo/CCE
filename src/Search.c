@@ -171,6 +171,10 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     moveList.moves = moves;
     moveList.nextIndex = 0;
 
+    GradedMoveList gradedMoveList;
+    GradedMove gradedMoves[256];
+    gradedMoveList.gradedMoves = gradedMoves;
+
     int legalMoves = 0;
 
     MoveScore moveScore;
@@ -178,18 +182,15 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     if (gotChecked)
     {
         generateMoves(chessBoard, attackTables, &moveList);
+        gradeMoves(chessBoard, transpositionTable, &moveList, &gradedMoveList, depthSearched);
     }
     else
     {
         generateTactivalMoves(chessBoard, attackTables, &moveList);
+        gradeTacticalMoves(chessBoard, &moveList, &gradedMoveList);
     }
 
-    GradedMoveList gradedMoveList;
-    GradedMove gradedMoves[256];
-    gradedMoveList.gradedMoves = gradedMoves;
     gradedMoveList.nextIndex = moveList.nextIndex;
-
-    gradeMoves(chessBoard, transpositionTable, &moveList, &gradedMoveList, depthSearched);
 
     for (int i = 0; i < gradedMoveList.nextIndex; i++)
     {

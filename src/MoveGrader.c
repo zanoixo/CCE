@@ -84,6 +84,13 @@ void gradeMoves(ChessBoard* chessBoard, TranspositionTable* transpositionTable, 
             gradedMoveList->gradedMoves[moveInd].grade = captureScores[attackerPiece][capturedPiece];
             continue;
         }
+
+        if (selectedMove & enPassantMask)
+        {
+            gradedMoveList->gradedMoves[moveInd].grade = CAPTURE_SCORE;
+            continue;
+        }
+        
         
         if (selectedMove == killerMove1)
         {
@@ -94,6 +101,42 @@ void gradeMoves(ChessBoard* chessBoard, TranspositionTable* transpositionTable, 
         if (selectedMove == killerMove2)
         {
             gradedMoveList->gradedMoves[moveInd].grade = KILLER_MOVE2_SCORE;
+            continue;
+        }
+        
+        gradedMoveList->gradedMoves[moveInd].grade = getHistoryHeuristic(moveList->moves[moveInd], chessBoard->pieceLookup[getFromSq(selectedMove)]) >> 1;
+        
+    }
+    
+}
+
+void gradeTacticalMoves(ChessBoard* chessBoard, MoveList* moveList, GradedMoveList* gradedMoveList)
+{
+    for (int moveInd = 0; moveInd < moveList->nextIndex; moveInd++)
+    {
+        uint16_t selectedMove = moveList->moves[moveInd];
+
+        gradedMoveList->gradedMoves[moveInd].move = selectedMove;
+
+        if (selectedMove & promotionMask)
+        {
+            uint8_t promotion = (selectedMove & promotionMask) >> promotionPosition;
+            gradedMoveList->gradedMoves[moveInd].grade = promotionToScore[promotion];
+            continue;
+        }
+
+        uint8_t capturedPiece = chessBoard->pieceLookup[getToSq(selectedMove)];
+
+        if (capturedPiece != empty)
+        {
+            uint8_t attackerPiece = chessBoard->pieceLookup[getFromSq(selectedMove)];
+            gradedMoveList->gradedMoves[moveInd].grade = captureScores[attackerPiece][capturedPiece];
+            continue;
+        }
+
+        if (selectedMove & enPassantMask)
+        {
+            gradedMoveList->gradedMoves[moveInd].grade = CAPTURE_SCORE;
             continue;
         }
         

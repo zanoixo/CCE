@@ -30,5 +30,6 @@ typedef struct GradedMoveList
     uint16_t nextIndex; 
 }GradedMoveList;
 
-void gradeMoves(ChessBoard* chessBoard, TranspositionTable* transpositionTable, MoveList* moveList, GradedMoveList* gradedMoveList, int depth); 
+void gradeMoves(ChessBoard* chessBoard, TranspositionTable* transpositionTable, MoveList* moveList, GradedMoveList* gradedMoveList, int depth);
+void gradeTacticalMoves(ChessBoard* chessBoard, MoveList* moveList, GradedMoveList* gradedMoveList); 
 void initCaptureScores();
