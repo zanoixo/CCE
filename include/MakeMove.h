@@ -1,8 +1,9 @@
 #pragma once
 
+#include <stdint.h>
+
 typedef struct TranspositionTableHashes TranspositionTableHashes;
 typedef struct ChessBoard ChessBoard; 
-typedef struct Move Move;
 
-void makeMove(ChessBoard *chessBoard, Move *move, TranspositionTableHashes* hashes);
+void makeMove(ChessBoard *chessBoard, uint16_t move, TranspositionTableHashes* hashes);
 void makeNullMove(ChessBoard* chessBoard, TranspositionTableHashes* hashes);

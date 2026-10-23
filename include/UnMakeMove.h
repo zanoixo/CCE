@@ -2,7 +2,6 @@
 
 typedef struct TranspositionTableHashes TranspositionTableHashes;
 typedef struct ChessBoard ChessBoard; 
-typedef struct Move Move;
 
-void unMakeMove(ChessBoard *chessBoard, Move *move);
+void unMakeMove(ChessBoard *chessBoard, uint16_t move);
 void unMakeNullMove(ChessBoard* chessBoard);

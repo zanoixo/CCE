@@ -52,11 +52,11 @@ void userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
     }
 
     MoveList moveList;
-    Move moves[256];
+    uint16_t moves[256];
     moveList.moves = moves;
     moveList.nextIndex = 0;
 
-    Move *playedMove = NULL;
+    uint16_t playedMove = 0;
 
     switch (piece)
     {
@@ -91,9 +91,9 @@ void userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
 
     for (int i = 0; i < moveList.nextIndex; i++)
     {
-        if (fromBitboard == getFromBitboard(moveList.moves[i].move) && toBitboard == getToBitboard(moveList.moves[i].move) && promotionPiece == getPromotionPiece(moveList.moves[i]))
+        if (fromBitboard == getFromBitboard(moveList.moves[i]) && toBitboard == getToBitboard(moveList.moves[i]) && promotionPiece == getPromotionPiece(moveList.moves[i]))
         {
-            playedMove = &moveList.moves[i];
+            playedMove = moveList.moves[i];
             break;
         }   
     }

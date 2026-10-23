@@ -16,6 +16,7 @@
 #include "Eval.h"
 #include "HistoryHeuristic.h"
 #include "KillerHeuristic.h"
+#include "MoveGrader.h"
 
 uint64_t stopTime = 0;
 int currentDepth;
@@ -46,29 +47,20 @@ void updateTime()
     }
 }
 
-void setBestMoveFirst(ChessBoard* chessBoard, MoveList* moveList, int moveCount)
+void setBestMoveFirst(GradedMoveList* moveList, int moveCount)
 {
     int moveInd = moveCount;
-    uint8_t movedPiece = chessBoard->pieceLookup[getFromSq(moveList->moves[moveInd].move)];
 
     for (int i = moveCount + 1; i < moveList->nextIndex; i++)
     {   
-        if (moveList->moves[i].score > moveList->moves[moveInd].score)
-        {
-            moveInd = i;
-            movedPiece = chessBoard->pieceLookup[getFromSq(moveList->moves[moveInd].move)];
-            continue;
-        }
-        
-        if (moveList->moves[moveInd].score == 0 && getHistoryHeuristic(moveList->moves[i], chessBoard->pieceLookup[getFromSq(moveList->moves[i].move)]) > getHistoryHeuristic(moveList->moves[moveInd], movedPiece))
+        if (moveList->gradedMoves[i].grade > moveList->gradedMoves[moveInd].grade)
         {
             moveInd = i;
         }
-        
     }
-    Move tmp = moveList->moves[moveCount];
-    moveList->moves[moveCount] = moveList->moves[moveInd];
-    moveList->moves[moveInd] = tmp;
+    GradedMove tmp = moveList->gradedMoves[moveCount];
+    moveList->gradedMoves[moveCount] = moveList->gradedMoves[moveInd];
+    moveList->gradedMoves[moveInd] = tmp;
 }
 
 int isBetaValid(int beta)
@@ -89,7 +81,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     MoveScore bestMove;
     bestMove.eval = MIN_INT;
-    bestMove.move = (Move){0, 0};
+    bestMove.move = 0;
 
     int mateValue = -MATED - mateDistance;
 
@@ -128,16 +120,16 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     if (transpositionScore != NULL)
     {
-        makeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
+        makeMove(chessBoard, transpositionScore->moveScore.move, hashes);
 
         if (isThreeFoldRepetition(chessBoard))
         {
-            unMakeMove(chessBoard, &transpositionScore->moveScore.move);
+            unMakeMove(chessBoard, transpositionScore->moveScore.move);
             //ASSERT_CHESS_BOARD(original, chessBoard);
         }
         else
         {
-            unMakeMove(chessBoard, &transpositionScore->moveScore.move);
+            unMakeMove(chessBoard, transpositionScore->moveScore.move);
             //ASSERT_CHESS_BOARD(original, chessBoard);
             //free(original);
             MoveScore transpositionMove = transpositionScore->moveScore;
@@ -175,7 +167,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     }
 
     MoveList moveList;
-    Move moves[256];
+    uint16_t moves[256];
     moveList.moves = moves;
     moveList.nextIndex = 0;
 
@@ -192,6 +184,10 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
         generateTactivalMoves(chessBoard, attackTables, &moveList);
     }
 
+    GradedMoveList gradedMoveList[moveList.nextIndex];
+
+    gradeMoves(chessBoard, transpositionTable, &moveList, gradedMoveList, depthSearched);
+
     for (int i = 0; i < moveList.nextIndex; i++)
     {
         updateTime();
@@ -202,9 +198,9 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             return bestMove;
         }
 
-        setBestMoveFirst(chessBoard, &moveList, i);
+        setBestMoveFirst(gradedMoveList, i);
 
-        makeMove(chessBoard, &moveList.moves[i], hashes);
+        makeMove(chessBoard, moveList.moves[i], hashes);
 
         ownKingSq = getSqInd(side ? chessBoard->pieceBoards[blackKing] : chessBoard->pieceBoards[whiteKing]);
         int isNotLegalMove = isSquareAttacked(ownKingSq, chessBoard, attackTables, side);
@@ -237,13 +233,13 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
             if (alpha >= beta)
             {
-                unMakeMove(chessBoard, &moveList.moves[i]);
+                unMakeMove(chessBoard, moveList.moves[i]);
                 //ASSERT_CHESS_BOARD(original, chessBoard);
                 break;
             }
         }
 
-        unMakeMove(chessBoard, &moveList.moves[i]);
+        unMakeMove(chessBoard, moveList.moves[i]);
         //ASSERT_CHESS_BOARD(original, chessBoard);
     }
 
@@ -271,7 +267,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     MoveScore bestMove;
     bestMove.eval = MIN_INT;
-    bestMove.move = (Move){0, 0};
+    bestMove.move = 0;
     
     if (depthSearched > currentDepth)
     {
@@ -312,7 +308,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     int originalBeta = beta;
 
     MoveList moveList;
-    Move moves[256];
+    uint16_t moves[256];
     moveList.moves = moves;
     moveList.nextIndex = 0;
 
@@ -324,16 +320,16 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     if (transpositionScore != NULL)
     {
-        makeMove(chessBoard, &transpositionScore->moveScore.move, hashes);
+        makeMove(chessBoard, transpositionScore->moveScore.move, hashes);
 
         if (isThreeFoldRepetition(chessBoard))
         {
-            unMakeMove(chessBoard, &transpositionScore->moveScore.move);
+            unMakeMove(chessBoard, transpositionScore->moveScore.move);
             //ASSERT_CHESS_BOARD(original, chessBoard);
         }
         else
         {
-            unMakeMove(chessBoard, &transpositionScore->moveScore.move);
+            unMakeMove(chessBoard, transpositionScore->moveScore.move);
             //ASSERT_CHESS_BOARD(original, chessBoard);
             //free(original);
             MoveScore transpositionMove = transpositionScore->moveScore;
@@ -348,7 +344,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     if (!isNullMove && currentDepth - depthSearched >= 3 && !amChecked && depthSearched != 0 && hasNonPawnPieces(chessBoard, side) && isBetaValid(beta))
     {
-        Move nullMove = (Move){0, 0};
+        uint16_t nullMove = 0;
 
         MoveScore nullMoveScore;
         nullMoveScore.move = nullMove;
@@ -375,9 +371,13 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     generateMoves(chessBoard, attackTables, &moveList);
 
+    GradedMoveList gradedMoveList[moveList.nextIndex];
+
+    gradeMoves(chessBoard, transpositionTable, &moveList, gradedMoveList, depthSearched);
+
     int isFirstMove = 1;
 
-    for (int i = 0; i < moveList.nextIndex; i++)
+    for (int i = 0; i < gradedMoveList->nextIndex; i++)
     {
         updateTime();
 
@@ -387,11 +387,11 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             return bestMove;
         }
 
-        setBestMoveFirst(chessBoard, &moveList, i);
+        setBestMoveFirst(gradedMoveList, i);
 
-        uint8_t capturedPiece = chessBoard->pieceLookup[getToSq(moveList.moves[i].move)];
+        uint8_t capturedPiece = chessBoard->pieceLookup[getToSq(gradedMoveList->gradedMoves[i].move)];
 
-        makeMove(chessBoard, &moveList.moves[i], hashes);
+        makeMove(chessBoard, gradedMoveList->gradedMoves[i].move, hashes);
 
         ownKingSq = getSqInd(side ? chessBoard->pieceBoards[blackKing] : chessBoard->pieceBoards[whiteKing]);
 
@@ -405,14 +405,14 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             int isEnemyChecked = isSquareAttacked(enemyKingSq, chessBoard, attackTables, !side);
             int moveReduction = 0;
 
-            if (i > 3 && !isEnemyChecked && !amChecked && currentDepth - depthSearched >= 3 && !isTacticalMove(capturedPiece, moveList.moves[i]))
+            if (i > 3 && !isEnemyChecked && !amChecked && currentDepth - depthSearched >= 3 && !isTacticalMove(capturedPiece, gradedMoveList->gradedMoves[i].move))
             {
                 moveReduction = (int)(0.75 * log(currentDepth - depthSearched) * log(i) / 2.25);
             }
 
             if (isThreeFoldRepetition(chessBoard))
             {
-                moveScore.move = moveList.moves[i];
+                moveScore.move = gradedMoveList->gradedMoves[i].move;
                 moveScore.eval = DRAW;
             }
             else
@@ -459,24 +459,22 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
             if (alpha >= beta)
             {
-                unMakeMove(chessBoard, &moveList.moves[i]);
+                unMakeMove(chessBoard, moveList.moves[i]);
                 //ASSERT_CHESS_BOARD(original, chessBoard);
 
                 if (!isTacticalMove(capturedPiece, moveList.moves[i]))
                 {
-                    uint8_t movedPiece = chessBoard->pieceLookup[getFromSq(moveList.moves[i].move)];
+                    uint8_t movedPiece = chessBoard->pieceLookup[getFromSq(moveList.moves[i])];
 
                     setKillerMove(moveList.moves[i], depthSearched);
                     updateHistoryHeuristic(moveList.moves[i], movedPiece, currentDepth - depthSearched);
 
                     for (int moveInd = i - 1; moveInd >= 0; moveInd--)
                     {
-                        if (moveList.moves[moveInd].score > 0)
+                        if (gradedMoveList->gradedMoves[moveInd].grade < MAX_HISTORY_SCORE && gradedMoveList->gradedMoves[moveInd].grade > MIN_HISOTRY_SCORE)
                         {
-                            break;
+                            penalizeHistoryHeuristic(moveList.moves[moveInd], movedPiece, currentDepth - depthSearched);
                         }
-
-                        penalizeHistoryHeuristic(moveList.moves[moveInd], movedPiece, currentDepth - depthSearched);
                     }
                 }
 
@@ -485,7 +483,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
             }
         }
 
-        unMakeMove(chessBoard, &moveList.moves[i]);
+        unMakeMove(chessBoard, moveList.moves[i]);
         //ASSERT_CHESS_BOARD(original, chessBoard);
     }
 

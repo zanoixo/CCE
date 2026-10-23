@@ -52,15 +52,15 @@ void gradeMoves(ChessBoard* chessBoard, TranspositionTable* transpositionTable, 
 
     if (transpositionTableEntry != NULL)
     {
-        TTMove = transpositionTableEntry->moveScore.move.move;
+        TTMove = transpositionTableEntry->moveScore.move;
     }
     
-    uint16_t killerMove1 = killerMoves[depth][0].move;
-    uint16_t killerMove2 = killerMoves[depth][1].move;
+    uint16_t killerMove1 = killerMoves[depth][0];
+    uint16_t killerMove2 = killerMoves[depth][1];
 
     for (int moveInd = 0; moveInd < moveList->nextIndex; moveInd++)
     {
-        uint16_t selectedMove = moveList->moves[moveInd].move;
+        uint16_t selectedMove = moveList->moves[moveInd];
 
         gradedMoveList[moveInd].gradedMoves->move = selectedMove;
 

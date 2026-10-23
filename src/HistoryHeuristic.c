@@ -3,19 +3,19 @@
 
 int historyHeuristic[BOARD_SIZE][BOARD_SIZE][PIECE_TYPES];
 
-void penalizeHistoryHeuristic(Move move, uint8_t piece, int remeniningDepth)
+void penalizeHistoryHeuristic(uint16_t move, uint8_t piece, int remeniningDepth)
 {
-    historyHeuristic[getFromSq(move.move)][getToSq(move.move)][piece] -= remeniningDepth;     
+    historyHeuristic[getFromSq(move)][getToSq(move)][piece] -= remeniningDepth;     
 }
 
-void updateHistoryHeuristic(Move move, uint8_t piece, int remeniningDepth)
+void updateHistoryHeuristic(uint16_t move, uint8_t piece, int remeniningDepth)
 {
-    historyHeuristic[getFromSq(move.move)][getToSq(move.move)][piece] += remeniningDepth * remeniningDepth; 
+    historyHeuristic[getFromSq(move)][getToSq(move)][piece] += remeniningDepth * remeniningDepth; 
 }
 
-int getHistoryHeuristic(Move move, uint8_t piece)
+int getHistoryHeuristic(uint16_t move, uint8_t piece)
 {
-    return historyHeuristic[getFromSq(move.move)][getToSq(move.move)][piece];
+    return historyHeuristic[getFromSq(move)][getToSq(move)][piece];
 }
 
 void clearHistoryHeuristic()

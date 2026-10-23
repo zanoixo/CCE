@@ -38,7 +38,7 @@ void ASSERT(int acctual, int expected)
     
 }
 
-void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified, Move move)
+void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified, uint16_t move)
 {
     int isSame = 1;
     if (original->allPieces != modified->allPieces)
@@ -247,10 +247,10 @@ void ASSERT_CHESS_BOARD(ChessBoard *original, ChessBoard *modified, Move move)
     if (!isSame)
     {
         printf("FROM: \n");
-        showBitBoard(getFromBitboard(move.move));
+        showBitBoard(getFromBitboard(move));
         printf("TO: \n");
-        showBitBoard(getToBitboard(move.move));
-        printf("promotionFlags: %d enpassant flags: %d\n", getPromotionPiece(move), move.move & enPassantMask);
+        showBitBoard(getToBitboard(move));
+        printf("promotionFlags: %d enpassant flags: %d\n", getPromotionPiece(move), move & enPassantMask);
         exit(1);
     }
 }
@@ -946,7 +946,7 @@ void runPseudeLegalMovesTests()
     ChessBoard* chessBoard = initChessBoard();
     AttackTables* attackTables = initAttackTables();
     MoveList* moveList = malloc(sizeof(MoveList));
-    moveList->moves = malloc(sizeof(Move) * 64);
+    moveList->moves = malloc(sizeof(uint16_t) * 64);
     moveList->nextIndex = 0;
 
     chessBoard->pieceBoards[whiteKnight] = 0b00000000ULL << 56 |
@@ -1983,7 +1983,7 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, Trans
     }
     
     MoveList* moveList = malloc(sizeof(MoveList));
-    moveList->moves = malloc(sizeof(Move) * 256);
+    moveList->moves = malloc(sizeof(uint16_t) * 256);
     moveList->nextIndex = 0;
 
     uint8_t color = isBlack(chessBoard);
@@ -1998,7 +1998,7 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, Trans
     
     for (int i = 0; i < moveList->nextIndex; i++)
     {
-        makeMove(chessBoard, &moveList->moves[i], hashes);
+        makeMove(chessBoard, moveList->moves[i], hashes);
 
         uint64_t kingPosition = chessBoard->pieceBoards[whiteKing];
 
@@ -2013,7 +2013,7 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, Trans
         }
         
         
-        unMakeMove(chessBoard, &moveList->moves[i]);
+        unMakeMove(chessBoard, moveList->moves[i]);
 
         ASSERT_CHESS_BOARD(chessBoardOriginal, chessBoard, moveList->moves[i]);
 

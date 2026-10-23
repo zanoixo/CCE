@@ -156,7 +156,7 @@ TranspositionTableEntry* checkTranspositionHit(ChessBoard* chessBoard, Transposi
 
 void setTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, MoveScore* moveScore, int alpha, int beta)
 {
-    if (moveScore->move.move == 0)
+    if (moveScore->move == 0)
     {
         return;
     }

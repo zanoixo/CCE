@@ -5,8 +5,7 @@
 
 void addMove(uint64_t from, uint64_t to, uint16_t promotionFlag, uint16_t enPassantFlag, MoveList* moveList)
 {
-    uint16_t move = constructMove(from, to, promotionFlag, enPassantFlag);
-    moveList->moves[moveList->nextIndex] = (Move){ move, 0 };
+    moveList->moves[moveList->nextIndex] = constructMove(from, to, promotionFlag, enPassantFlag);
     moveList->nextIndex++;
 }
 

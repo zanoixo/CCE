@@ -3,7 +3,7 @@
 #include "TranspositionTables.h"
 #include "ChessBitboards.h"
 
-void unMakeGenericMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
+void unMakeGenericMove(ChessBoard *chessBoard, uint16_t move, MoveData moveData)
 {
     uint8_t friendlyPieces = isBlack(chessBoard);
     uint8_t enemyPieces = !friendlyPieces;
@@ -11,8 +11,8 @@ void unMakeGenericMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
     uint8_t capturedPiece = moveData.capturedPiece;
     uint8_t movedPiece = moveData.movedPiece;
 
-    uint8_t fromSq = getFromSq(move->move);
-    uint8_t toSq = getToSq(move->move);
+    uint8_t fromSq = getFromSq(move);
+    uint8_t toSq = getToSq(move);
 
     uint64_t from = 1ULL << fromSq;
     uint64_t to = 1ULL << toSq;
@@ -36,7 +36,7 @@ void unMakeGenericMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
     }
 }
 
-void unMakeKingMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
+void unMakeKingMove(ChessBoard *chessBoard, uint16_t move, MoveData moveData)
 {
     uint8_t friendlyPieces = isBlack(chessBoard);
     uint8_t enemyPieces = !friendlyPieces;
@@ -44,8 +44,8 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
     uint8_t capturedPiece = moveData.capturedPiece;
     uint8_t movedPiece = moveData.movedPiece;
 
-    uint8_t fromSq = getFromSq(move->move);
-    uint8_t toSq = getToSq(move->move);
+    uint8_t fromSq = getFromSq(move);
+    uint8_t toSq = getToSq(move);
 
     uint64_t from = 1ULL << fromSq;
     uint64_t to = 1ULL << toSq;
@@ -118,7 +118,7 @@ void unMakeKingMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
     }
 }
 
-void unMakePawnMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
+void unMakePawnMove(ChessBoard *chessBoard, uint16_t move, MoveData moveData)
 {
     uint8_t friendlyPieces = isBlack(chessBoard);
     uint8_t enemyPieces = !friendlyPieces;
@@ -126,17 +126,17 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
     uint8_t capturedPiece = moveData.capturedPiece;
     uint8_t movedPiece = moveData.movedPiece;
 
-    uint8_t fromSq = getFromSq(move->move);
-    uint8_t toSq = getToSq(move->move);
+    uint8_t fromSq = getFromSq(move);
+    uint8_t toSq = getToSq(move);
 
     uint64_t from = 1ULL << fromSq;
     uint64_t to = 1ULL << toSq;
 
-    uint8_t isEnPassant = (move->move & enPassantMask) != 0;
+    uint8_t isEnPassant = (move & enPassantMask) != 0;
     uint8_t captureSq = toSq + isEnPassant * (16 * friendlyPieces - 8);
     uint64_t capturedBitboard = 1ULL << captureSq;
 
-    uint8_t removedPiece = promotionFlagToPiece[getPromotionPiece(*move)] + GENERIC_PIECE_TYPES * friendlyPieces;
+    uint8_t removedPiece = promotionFlagToPiece[getPromotionPiece(move)] + GENERIC_PIECE_TYPES * friendlyPieces;
 
     chessBoard->pieceBoards[removedPiece] &= ~to;
     chessBoard->pieceBoards[movedPiece] |= from;
@@ -158,7 +158,7 @@ void unMakePawnMove(ChessBoard *chessBoard, Move *move, MoveData moveData)
 
 }
 
-void unMakeMove(ChessBoard* chessBoard, Move* move)
+void unMakeMove(ChessBoard* chessBoard, uint16_t move)
 {
     MoveData moveData = revertMoveData(chessBoard);
     

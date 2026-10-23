@@ -8,22 +8,16 @@
 
 #define ENPASSANT_PRESENT_FLAG 1
 
-typedef struct Move
-{
-    uint16_t move;
-    int score;
-}Move;
-
 typedef struct MoveList
 {
-    Move* moves;
+    uint16_t* moves;
     int nextIndex;
 }MoveList;
 
 typedef struct MoveScore
 {
     int eval;
-    Move move;
+    uint16_t move;
 }MoveScore;
 
 enum PromotionPieces
@@ -60,9 +54,9 @@ static const uint8_t promotionFlagToPiece[5] =
     [queenPromotion]  = whiteQueen
 };
 
-static inline uint8_t getPromotionPiece(Move move)
+static inline uint8_t getPromotionPiece(uint16_t move)
 {
-    return (move.move & promotionMask) >> promotionPosition;
+    return (move & promotionMask) >> promotionPosition;
 }
 
 static inline uint8_t getFromSq(uint16_t move)
@@ -85,9 +79,9 @@ static inline uint64_t getToBitboard(uint16_t move)
     return 1ULL << ((move & toMask) >> toPosition);
 }
 
-static inline uint8_t isTacticalMove(uint8_t capturedPiece, Move move)
+static inline uint8_t isTacticalMove(uint8_t capturedPiece, uint16_t move)
 {    
-    return (capturedPiece != empty) || getPromotionPiece(move) || move.move & enPassantMask;
+    return (capturedPiece != empty) || getPromotionPiece(move) || move & enPassantMask;
 }
 
 static inline uint16_t constructMove(uint64_t from, uint64_t to, uint16_t promotionFlag, uint16_t enPassantFlag)
@@ -101,10 +95,10 @@ static inline uint16_t constructMove(uint64_t from, uint64_t to, uint16_t promot
     return move; 
 }
 
-static inline void moveToText(char* moveStr, Move move)
+static inline void moveToText(char* moveStr, uint16_t move)
 {
-    int fromSq = getFromSq(move.move);
-    int toSq   = getToSq(move.move);
+    int fromSq = getFromSq(move);
+    int toSq   = getToSq(move);
 
     moveStr[0] = 'a' + (fromSq % 8);
     moveStr[1] = '1' + (fromSq / 8);

@@ -2,9 +2,7 @@
 
 #define KILLER_MOVE_DEPTH 256
 
-typedef struct Move Move;
-
-static Move killerMoves[KILLER_MOVE_DEPTH][2];
+static uint16_t killerMoves[KILLER_MOVE_DEPTH][2];
 
 void initKillerMoves(int currentDepth);
-void setKillerMove(Move killerMove, int depth);
+void setKillerMove(uint16_t killerMove, int depth);

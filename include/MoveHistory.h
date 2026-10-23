@@ -3,7 +3,6 @@
 
 typedef struct ChessBoard ChessBoard;
 typedef struct MoveData MoveData;
-typedef struct Move Move;
 
 #define HISTORY_SIZE 1024
 
