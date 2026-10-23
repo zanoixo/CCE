@@ -10,7 +10,6 @@ typedef struct ChessBoard ChessBoard;
 #define CASTLE_RIGHT_COUNT 16
 #define ENPASSANT_FILES_COUNT 8
 #define TRANSPOSITION_TABLE_NUM_OF_BITS 23
-#define TRANSPOSITION_SCORE 10000000
 #define UNINITIALIZED -2
 #define QSEARCH -1
 #define EMPTY_PIECE 1
@@ -52,7 +51,6 @@ void clearTranspositionTable(TranspositionTable* transpositionTable);
 TranspositionTableEntry* getTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, int isEvalOnly);
 void setTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, MoveScore* moveScore, int alpha, int beta);
 TranspositionTableEntry* checkTranspositionHit(ChessBoard* chessBoard, TranspositionTable* transpositionTable, int remainingDepth, int alpha, int beta);
-void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, TranspositionTable* transpositionTable);
 void initAge();
 void incrementAge();
 uint16_t getCurrentAge();

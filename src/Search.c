@@ -375,9 +375,6 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
     generateMoves(chessBoard, attackTables, &moveList);
 
-    setScoreToTranspositionMove(chessBoard, &moveList, transpositionTable);
-    findKillerMoves(&moveList, depthSearched);
-
     int isFirstMove = 1;
 
     for (int i = 0; i < moveList.nextIndex; i++)

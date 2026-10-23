@@ -21,9 +21,8 @@ void generateTacticalKingMoves(ChessBoard *chessBoard, AttackTables *attackTable
     while (kingAttacks != 0)
     {
         uint64_t to = kingAttacks & -kingAttacks;
-        uint8_t toSq = getSqInd(to);
 
-        addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList, calculateCaptureMoveScore(chessBoard, fromSq, toSq));    
+        addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList);    
         
         kingAttacks &= kingAttacks - 1;
     }
@@ -46,9 +45,8 @@ void generateTacticalKnightMoves(ChessBoard *chessBoard, AttackTables *attackTab
         while (knightAttacks != 0)
         {
             uint64_t to = knightAttacks & -knightAttacks;
-            uint8_t toSq = getSqInd(to);
 
-            addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList, calculateCaptureMoveScore(chessBoard, fromSq, toSq));    
+            addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList);    
 
             knightAttacks &= knightAttacks - 1;
         }
@@ -72,10 +70,9 @@ void generateTacticalBishopMoves(ChessBoard *chessBoard, AttackTables *attackTab
 
         while (bishopAttacks != 0)
         {
-            uint64_t to = bishopAttacks & -bishopAttacks;
-            uint8_t toSq = getSqInd(to); 
+            uint64_t to = bishopAttacks & -bishopAttacks; 
 
-            addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList, calculateCaptureMoveScore(chessBoard, fromSq, toSq));    
+            addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList);    
             
             bishopAttacks &= bishopAttacks - 1;
         }
@@ -101,9 +98,8 @@ void generateTacticalQueenMoves(ChessBoard *chessBoard, AttackTables *attackTabl
         while (queenAttacks != 0)
         {
             uint64_t to = queenAttacks & -queenAttacks;
-            uint8_t toSq = getSqInd(to);
 
-            addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList, calculateCaptureMoveScore(chessBoard, fromSq, toSq));    
+            addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList);    
             
             queenAttacks &= queenAttacks - 1;
         }
@@ -162,19 +158,18 @@ void generateTacticalPawnMoves(ChessBoard *chessBoard, AttackTables *attackTable
         while (pawnAttacks != 0)
         {   
             uint64_t to = pawnAttacks & -pawnAttacks;
-            uint8_t toSq = getSqInd(to);
 
             if (to & promotionLine)
             {
                 generatePawnPromotionMoves(from, to, moveList);
             }else
             {
-                addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList, calculateCaptureMoveScore(chessBoard, fromSq, toSq));
+                addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList);
             }
 
             if ((chessBoard->enPassantSq & to) && (chessBoard->enPassantSq & enpassantLine))
             {
-                addMove(from, to, EMPTY_PROMOTION_FLAG, ENPASSANT_PRESENT_FLAG, moveList, calculateCaptureMoveScore(chessBoard, fromSq, getSqInd(chessBoard->enPassantSq)));
+                addMove(from, to, EMPTY_PROMOTION_FLAG, ENPASSANT_PRESENT_FLAG, moveList);
             }
             
             pawnAttacks &= pawnAttacks - 1;
@@ -201,9 +196,8 @@ void generateTacticalRookMoves(ChessBoard *chessBoard, AttackTables *attackTable
         while (rookAttacks != 0)
         {
             uint64_t to = rookAttacks & -rookAttacks;
-            uint8_t toSq = getSqInd(to);
 
-            addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList, calculateCaptureMoveScore(chessBoard, fromSq, toSq));
+            addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList);
 
             rookAttacks &= rookAttacks - 1;
         }

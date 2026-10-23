@@ -190,23 +190,6 @@ void setTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionT
     }
 }
 
-void setScoreToTranspositionMove(ChessBoard* chessBoard, MoveList* moveList, TranspositionTable* transpositionTable)
-{
-
-    TTMoveSearched++;
-    TranspositionTableEntry* transposition = getTransposition(chessBoard, transpositionTable, 0, 1);
-
-    for (int i = 0; i < moveList->nextIndex; i++)
-    {
-        if (transposition != NULL && transposition->moveScore.move.move == moveList->moves[i].move)
-        {
-            moveList->moves[i].score = TRANSPOSITION_SCORE;
-            TTMoveFound++;
-            break;
-        }    
-    }
-}
-
 uint64_t getTTMovesFound()
 {
     return TTMoveFound;
