@@ -11,6 +11,7 @@
 #include "MakeMove.h"
 #include "AttackTables.h"
 #include "MoveGenerator.h"
+#include "MoveGrader.h"
 #include "Eval.h"
 
 #define MAX_LINE 2048
@@ -184,6 +185,7 @@ void uci_loop()
     TranspositionTable* transpositionTable = initTranpositionTable();
     initPassedPawnMasks();
     initIsolatedPawnMasks();
+    initCaptureScores();
 
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);

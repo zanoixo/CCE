@@ -1,7 +1,7 @@
 #include "Move.h"
 #include <string.h>
 
-int historyHeuristic[BOARD_SIZE][BOARD_SIZE][PIECE_TYPES];
+int historyHeuristic[BOARD_SIZE][BOARD_SIZE][PIECE_TYPES]; //clamp and change to int16_t
 
 void penalizeHistoryHeuristic(uint16_t move, uint8_t piece, int remeniningDepth)
 {

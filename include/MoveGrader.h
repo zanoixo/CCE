@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Utils.h"
+#include "HistoryHeuristic.h"
 
 #define TRANSPOSITION_SCORE 30000
 #define QUEEN_PROMOTION_SCORE 20000
@@ -25,8 +26,9 @@ typedef struct GradedMove
 
 typedef struct GradedMoveList
 {
-    GradedMove gradedMoves[256];
+    GradedMove* gradedMoves;
     uint16_t nextIndex; 
 }GradedMoveList;
 
 void gradeMoves(ChessBoard* chessBoard, TranspositionTable* transpositionTable, MoveList* moveList, GradedMoveList* gradedMoveList, int depth); 
+void initCaptureScores();
