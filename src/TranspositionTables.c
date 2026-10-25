@@ -217,12 +217,12 @@ uint16_t getCurrentAge()
 
 int getScoreForTransposition(int eval, int depth)
 {
-    if (eval > MATED_TRESHOLD && eval != MAX_INT)
+    if (eval > MATED_TRESHOLD && eval != MAX_EVAL)
     {
         return eval + depth;
     }
     
-    if (eval < -MATED_TRESHOLD && eval != MIN_INT)
+    if (eval < -MATED_TRESHOLD && eval != MIN_EVAL)
     {
         return eval - depth;
     }
@@ -233,12 +233,12 @@ int getScoreForTransposition(int eval, int depth)
 int getScoreFromTransposition(int eval, int depth)
 {
     
-    if (eval > MATED_TRESHOLD && eval != MAX_INT)
+    if (eval > MATED_TRESHOLD && eval != MAX_EVAL)
     {
         return eval - depth;
     }
     
-    if (eval < -MATED_TRESHOLD && eval != MIN_INT)
+    if (eval < -MATED_TRESHOLD && eval != MIN_EVAL)
     {
         return eval + depth;
     }

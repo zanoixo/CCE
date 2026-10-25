@@ -80,7 +80,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     nodesSearched++;
 
     MoveScore bestMove;
-    bestMove.eval = MIN_INT;
+    bestMove.eval = MIN_EVAL;
     bestMove.move = 0;
 
     int mateValue = -MATED - mateDistance;
@@ -270,7 +270,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     nodesSearched++;
 
     MoveScore bestMove;
-    bestMove.eval = MIN_INT;
+    bestMove.eval = MIN_EVAL;
     bestMove.move = 0;
     
     if (depthSearched > currentDepth)
@@ -525,7 +525,7 @@ MoveScore iterativeSearch(ChessBoard *chessBoard, AttackTables *attackTables, Tr
 {
     MoveScore bestMove;
     initKillerMoves(currentDepth);
-    bestMove = negamax(chessBoard, attackTables, hashes, transpositionTable, 1, 1, MIN_INT, MAX_INT, isBlack(chessBoard));
+    bestMove = negamax(chessBoard, attackTables, hashes, transpositionTable, 1, 1, MIN_EVAL, MAX_EVAL, isBlack(chessBoard));
     return bestMove;
 }
 
@@ -560,7 +560,7 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
         
         currentDepth++; 
     
-        if (currentDepth > 255)
+        if (currentDepth > 100)
         {
             break;
         }
@@ -570,5 +570,6 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
     printf("Nodes searched: %d \n", nodesSearched);
     printf("PVS checks: %llu, PVS reserches: %llu\n", (long long unsigned)pvsChecks, (long long unsigned)pvsResearches);
     printf("TT moves searched: %llu, TT moves found: %llu\n", (long long unsigned)getTTMovesSearched(), (long long unsigned)getTTMovesFound());
+
     return currentBestMove;
 }

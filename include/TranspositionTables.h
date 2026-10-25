@@ -33,11 +33,10 @@ typedef struct TranspositionTableHashes
 typedef struct TranspositionTableEntry
 {
     uint64_t hash;
-    int16_t depth;
-    uint8_t flag;
-    uint16_t age;
     MoveScore moveScore;
-    
+    uint16_t age;
+    int8_t depth;
+    uint8_t flag;
 }TranspositionTableEntry;
 
 typedef struct TranspositionTable

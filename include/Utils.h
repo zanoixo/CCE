@@ -8,9 +8,9 @@
 #define GENERIC_PIECE_TYPES 6
 #define PIECE_TYPES 12
 #define COLORS 2
-#define MAX_INT 1000000000
-#define MIN_INT -1000000000
-#define MATED -1000000
+#define MAX_EVAL 30000
+#define MIN_EVAL -30000
+#define MATED -25000
 #define MATED_TRESHOLD (-MATED - 1000)
 #define DRAW 0 
 

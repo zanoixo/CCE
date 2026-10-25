@@ -16,7 +16,7 @@ typedef struct MoveList
 
 typedef struct MoveScore
 {
-    int eval;
+    int16_t eval;
     uint16_t move;
 }MoveScore;
 
