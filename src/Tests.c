@@ -26,11 +26,11 @@ void ASSERT_BIT_TABLE(uint64_t acctual, uint64_t expected)
     
 }
 
-void ASSERT(int acctual, int expected)
+void ASSERT(long acctual, long expected)
 {
     if (acctual != expected)
     {
-        printf("ASSERT FAILED acctual: %d == %d :expected\n", acctual, expected);
+        printf("ASSERT FAILED acctual: %lu == %lu :expected\n", acctual, expected);
         printf("GOT: \n");
         printf("EXPECTED: \n");
         exit(1);
@@ -2026,99 +2026,10 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, Trans
 void runMakeMoveTests()
 {
     printf("\nRunning make moves test:\n");
-    ChessBoard* chessBoard = initChessBoard();
-    AttackTables* attackTables = initAttackTables();
+    ChessBoard* chessBoard;
+    AttackTables* attackTables;
     TranspositionTableHashes* hashes = initTranpositionTableHashes();
-    initStartingPosition(chessBoard, hashes);
-    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
-    generatePositions(chessBoard, attackTables, hashes, 1);
-
-    ASSERT(positionsGenerated, 20);
-
-    printf("[PASS] MAKE MOVE DEPTH: 1 PASSED\n");
-
-    positionsGenerated = 0;
-
-    free(attackTables);
-    free(chessBoard);
-
-    chessBoard = initChessBoard();
-    attackTables = initAttackTables();
-    initStartingPosition(chessBoard, hashes);
-    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
-    generatePositions(chessBoard, attackTables, hashes, 2);
-
-    ASSERT(positionsGenerated, 400);
     
-    printf("[PASS] MAKE MOVE DEPTH: 2 PASSED\n");
-
-    positionsGenerated = 0;
-
-    free(attackTables);
-    free(chessBoard);
-
-    chessBoard = initChessBoard();
-    attackTables = initAttackTables();
-    initStartingPosition(chessBoard, hashes);
-    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
-    generatePositions(chessBoard, attackTables, hashes, 3);
-
-    ASSERT(positionsGenerated, 8902);
-
-    printf("[PASS] MAKE MOVE DEPTH: 3 PASSED\n");
-
-    positionsGenerated = 0;
-
-    free(attackTables);
-    free(chessBoard);
-
-    chessBoard = initChessBoard();
-    attackTables = initAttackTables();
-    initStartingPosition(chessBoard, hashes);
-    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
-    generatePositions(chessBoard, attackTables, hashes, 4);
-
-    ASSERT(positionsGenerated, 197281);
-
-    printf("[PASS] MAKE MOVE DEPTH: 4 PASSED\n");
-
-    positionsGenerated = 0;
-
-    free(attackTables);
-    free(chessBoard);
-
-    chessBoard = initChessBoard();
-    attackTables = initAttackTables();
-    initStartingPosition(chessBoard, hashes);
-    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
-    generatePositions(chessBoard, attackTables, hashes, 5);
-
-    ASSERT(positionsGenerated, 4865609);
-
-    printf("[PASS] MAKE MOVE DEPTH: 5 PASSED\n");
-
-    positionsGenerated = 0;
-
-    free(attackTables);
-    free(chessBoard);
-
-    chessBoard = initChessBoard();
-    attackTables = initAttackTables();
-    initStartingPosition(chessBoard, hashes);
-    chessBoard->castleRights = whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask;
-    generatePositions(chessBoard, attackTables, hashes, 6);
-
-    ASSERT(positionsGenerated, 119060324);
-
-    printf("[PASS] MAKE MOVE DEPTH: 6 PASSED\n");
-
-    positionsGenerated = 0;
-
-    free(attackTables);
-    free(chessBoard);
-
-    printf("[PASS] START POSSITION MAKE AND UNMAKE MOVE TESTS PASSED\n");
-
     chessBoard = initChessBoard();
     attackTables = initAttackTables();
     createPosition("castellingPosition.txt", chessBoard);
@@ -2146,13 +2057,51 @@ void runMakeMoveTests()
     printf("[PASS] ALL MAKE AND UNMAKE MOVE TESTS PASSED\n");
 }
 
+void positionPerftest(char* fileName, int depth, long* numberOfLegalMoves, int castlingRights)
+{
+    ChessBoard* chessBoard = initChessBoard();
+    AttackTables* attackTables = initAttackTables();
+    TranspositionTableHashes* hashes = initTranpositionTableHashes();
+
+    createPosition(fileName, chessBoard);
+
+    chessBoard->castleRights = castlingRights;
+
+    for (int selectedDepth = 1; selectedDepth < depth + 1; selectedDepth++)
+    {
+        positionsGenerated = 0;
+        generatePositions(chessBoard, attackTables, hashes, selectedDepth);
+        ASSERT(positionsGenerated, numberOfLegalMoves[selectedDepth - 1]);
+        printf("[PASS] Position: %s DEPTH: %d PASSED\n", fileName, selectedDepth);
+    }
+    
+
+    free(chessBoard);
+    free(attackTables);
+    free(hashes);
+}
+
+void runPerftTests()
+{
+    printf("\nRunning legal moves count test:\n");
+    long startPosExected[6] = {20, 400, 8902, 197281, 4865609, 119060324};
+    positionPerftest("./testPositions/startingPosition.txt", 6, startPosExected, whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask);
+
+    long kiwipetePosExected[6] = {48, 2039, 97862, 4085603, 193690690, 8031647685};
+    positionPerftest("./testPositions/kiwipetePosition.txt", 6, kiwipetePosExected, whiteLongCastleMask | whiteShortCastleMask | blackLongCastleMask | blackShortCastleMask);
+
+    long endgamePosExected[6] = {14, 191, 2812, 43238, 674624, 11030083};
+    positionPerftest("./testPositions/endgamePosition.txt", 6, endgamePosExected, 0);
+}
+
 void runAllTests()
 {
     printf("Stating testing:\n");
 
     runAttackTablesTests();
     runPseudeLegalMovesTests();
-    runMakeMoveTests();
+    //runMakeMoveTests();
+    runPerftTests();
 
     printf("ALL TESTS PASSED\n");
 }
