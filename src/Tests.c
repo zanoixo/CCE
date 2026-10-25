@@ -1983,7 +1983,7 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, Trans
     }
     
     MoveList* moveList = malloc(sizeof(MoveList));
-    moveList->moves = malloc(sizeof(uint16_t) * 256);
+    moveList->moves = malloc(sizeof(uint16_t) * MAX_MOVE_COUNT);
     moveList->nextIndex = 0;
 
     uint8_t color = isBlack(chessBoard);
@@ -1991,7 +1991,6 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, Trans
     ChessBoard* chessBoardOriginal = malloc(sizeof(ChessBoard));
 
     memcpy(chessBoardOriginal, chessBoard, sizeof(ChessBoard));
-
 
     generateMoves(chessBoard, attackTables, moveList);
     //printf("Moves generated: %d\n", moveList->nextIndex);

@@ -3,6 +3,8 @@
 #include "Utils.h"
 #include "Move.h"
 
+#define MAX_MOVE_COUNT 256
+
 typedef struct TranspositionTableHashes TranspositionTableHashes;
 typedef struct ChessBoard ChessBoard;
 typedef struct AttackTables AttackTables; 

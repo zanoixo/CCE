@@ -53,7 +53,7 @@ void userMove(char* from, char* to, char promotion, ChessBoard* chessBoard, Atta
     }
 
     MoveList moveList;
-    uint16_t moves[256];
+    uint16_t moves[MAX_MOVE_COUNT];
     moveList.moves = moves;
     moveList.nextIndex = 0;
 

@@ -9,6 +9,7 @@ typedef struct TranspositionTable TranspositionTable;
 typedef struct TranspositionTableEntry TranspositionTableEntry;
 
 #define KILLER_MOVE_DEPTH 256
+#define MAX_DEPTH 100
 #define TIME_CHECK 2047
 
 #define NULL_MOVE_SKIP 2

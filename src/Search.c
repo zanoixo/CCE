@@ -18,6 +18,7 @@
 #include "KillerHeuristic.h"
 #include "MoveGrader.h"
 
+int lateMoveReductionTable[MAX_MOVE_COUNT][MAX_DEPTH];
 uint64_t stopTime = 0;
 int currentDepth;
 int qSearchDepthReached;
@@ -61,6 +62,17 @@ void setBestMoveFirst(GradedMoveList* moveList, int moveCount)
     GradedMove tmp = moveList->gradedMoves[moveCount];
     moveList->gradedMoves[moveCount] = moveList->gradedMoves[moveInd];
     moveList->gradedMoves[moveInd] = tmp;
+}
+
+void initLateMoveReductionTable()
+{
+    for (int moveInd = 0; moveInd < MAX_MOVE_COUNT; moveInd++)
+    {
+        for (int depth = 0; depth < MAX_DEPTH; depth++)
+        {
+            lateMoveReductionTable[moveInd][depth] = (int)(0.75 + log(depth) * log(moveInd) / 2.25);
+        }  
+    }
 }
 
 int isBetaValid(int beta)
@@ -167,12 +179,12 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     }
 
     MoveList moveList;
-    uint16_t moves[256];
+    uint16_t moves[MAX_MOVE_COUNT];
     moveList.moves = moves;
     moveList.nextIndex = 0;
 
     GradedMoveList gradedMoveList;
-    GradedMove gradedMoves[256];
+    GradedMove gradedMoves[MAX_MOVE_COUNT];
     gradedMoveList.gradedMoves = gradedMoves;
 
     int legalMoves = 0;
@@ -312,7 +324,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     int originalBeta = beta;
 
     MoveList moveList;
-    uint16_t moves[256];
+    uint16_t moves[MAX_MOVE_COUNT];
     moveList.moves = moves;
     moveList.nextIndex = 0;
 
@@ -376,7 +388,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     generateMoves(chessBoard, attackTables, &moveList);
 
     GradedMoveList gradedMoveList;
-    GradedMove gradedMoves[256];
+    GradedMove gradedMoves[MAX_MOVE_COUNT];
     gradedMoveList.gradedMoves = gradedMoves;
     gradedMoveList.nextIndex = moveList.nextIndex;
 
@@ -414,7 +426,7 @@ MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
             if (i > 3 && !isEnemyChecked && !amChecked && currentDepth - depthSearched >= 3 && !isTacticalMove(capturedPiece, gradedMoveList.gradedMoves[i].move))
             {
-                moveReduction = (int)(0.75 * log(currentDepth - depthSearched) * log(i) / 2.25);
+                moveReduction = lateMoveReductionTable[i][currentDepth - depthSearched];
             }
 
             if (isThreeFoldRepetition(chessBoard))
@@ -533,6 +545,9 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
 {
     MoveScore currentBestMove;
     MoveScore depthBestMove;
+
+    initLateMoveReductionTable();
+
     timeLimitReached = 0;
     timeCheckCounter = 1;
     stopTime = getTimeMs() + timePerMove;
@@ -560,7 +575,7 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
         
         currentDepth++; 
     
-        if (currentDepth > 100)
+        if (currentDepth > MAX_DEPTH)
         {
             break;
         }
