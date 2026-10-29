@@ -152,19 +152,23 @@ void generateTacticalPawnMoves(ChessBoard *chessBoard, AttackTables *attackTable
                 }
             } 
         }
-        
-        uint64_t pawnAttacks = pawnAttackTable[fromSq] & enemyPieces;
+
+        uint64_t pawnAttacks = pawnAttackTable[fromSq];
 
         while (pawnAttacks != 0)
         {   
             uint64_t to = pawnAttacks & -pawnAttacks;
 
-            if (to & promotionLine)
+            if (to & enemyPieces)
             {
-                generatePawnPromotionMoves(from, to, moveList);
-            }else
-            {
-                addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList);
+                if (to & promotionLine)
+                {
+                    generatePawnPromotionMoves(from, to, moveList);
+                }else
+                {
+                    addMove(from, to, EMPTY_PROMOTION_FLAG, EMPTY_ENPASSANT_FLAG, moveList);
+                }
+                 
             }
 
             if ((chessBoard->enPassantSq & to) && (chessBoard->enPassantSq & enpassantLine))
@@ -206,7 +210,7 @@ void generateTacticalRookMoves(ChessBoard *chessBoard, AttackTables *attackTable
     }
 }
 
-void generateTactivalMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
+void generateTacticalMoves(ChessBoard *chessBoard, AttackTables *attackTables, MoveList *moveList)
 {
     generateTacticalKnightMoves(chessBoard, attackTables, moveList);
     generateTacticalKingMoves(chessBoard, attackTables, moveList);

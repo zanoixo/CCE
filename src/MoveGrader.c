@@ -139,9 +139,6 @@ void gradeTacticalMoves(ChessBoard* chessBoard, MoveList* moveList, GradedMoveLi
             gradedMoveList->gradedMoves[moveInd].grade = CAPTURE_SCORE;
             continue;
         }
-        
-        gradedMoveList->gradedMoves[moveInd].grade = getHistoryHeuristic(moveList->moves[moveInd], chessBoard->pieceLookup[getFromSq(selectedMove)]) >> 1;
-        
     }
     
 } 

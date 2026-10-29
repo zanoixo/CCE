@@ -4,6 +4,7 @@
 
 #include "TranspositionTables.h"
 #include "MoveGenerator.h"
+#include "TacticalMoveGenerator.h"
 #include "Utils.h"
 #include "ChessBoard.h"
 #include "MakeMove.h"
@@ -1974,6 +1975,63 @@ void runPseudeLegalMovesTests()
     free(chessBoard);
 }
 
+void testTacticalMoveGen(ChessBoard* chessBoard, AttackTables* attackTables)
+{
+    MoveList moveTestList;
+    uint16_t movesNormal[MAX_MOVE_COUNT];
+    moveTestList.moves = movesNormal;
+    moveTestList.nextIndex = 0;
+
+    uint16_t normalTacticalMoves[MAX_MOVE_COUNT];
+
+    MoveList moveTestTacticalList;
+    uint16_t movesTactical[MAX_MOVE_COUNT];
+    moveTestTacticalList.moves = movesTactical;
+    moveTestTacticalList.nextIndex = 0;
+
+    generateMoves(chessBoard, attackTables, &moveTestList);
+    generateTacticalMoves(chessBoard, attackTables, &moveTestTacticalList);
+
+    int normalCount = 0;
+    int tacticalCount = 0;
+
+    for (int i = 0; i < moveTestList.nextIndex; i++)
+    {
+        if (isTacticalMove(chessBoard->pieceLookup[getToSq(moveTestList.moves[i])], moveTestList.moves[i]))
+        {
+            normalTacticalMoves[normalCount] = moveTestList.moves[i];
+            normalCount++;
+        }
+        
+    }
+
+    for (int i = 0; i < moveTestTacticalList.nextIndex; i++)
+    {
+        if (isTacticalMove(chessBoard->pieceLookup[getToSq(moveTestTacticalList.moves[i])], moveTestTacticalList.moves[i]))
+        {
+            tacticalCount++;
+        }
+        
+    }
+    
+    if (tacticalCount != normalCount)
+    {
+        printf("TACTICAL MOVE GEN ERROR Normal: %d Tactical: %d\n", normalCount, tacticalCount);
+        printf("Normal gen tactical moves");
+        for (int i = 0; i < normalCount; i++)
+        {
+            printf("From: %d, To: %d EnPassant %d\n", getFromSq(normalTacticalMoves[i]), getToSq(normalTacticalMoves[i]), normalTacticalMoves[i] & enPassantMask);
+        }
+        printf("Tactical gen tactical moves");
+        for (int i = 0; i < tacticalCount; i++)
+        {
+            printf("From: %d, To: %d EnPassant %d\n", getFromSq(moveTestTacticalList.moves[i]), getToSq(moveTestTacticalList.moves[i]), moveTestTacticalList.moves[i] & enPassantMask);
+        }
+        
+        exit(1);
+    }
+}
+
 void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, int depth)
 {
     if (depth == 0)
@@ -1991,6 +2049,8 @@ void generatePositions(ChessBoard *chessBoard, AttackTables *attackTables, Trans
     ChessBoard* chessBoardOriginal = malloc(sizeof(ChessBoard));
 
     memcpy(chessBoardOriginal, chessBoard, sizeof(ChessBoard));
+
+    testTacticalMoveGen(chessBoard, attackTables);
 
     generateMoves(chessBoard, attackTables, moveList);
     //printf("Moves generated: %d\n", moveList->nextIndex);

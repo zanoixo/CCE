@@ -198,7 +198,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
     }
     else
     {
-        generateTactivalMoves(chessBoard, attackTables, &moveList);
+        generateTacticalMoves(chessBoard, attackTables, &moveList);
         gradeTacticalMoves(chessBoard, &moveList, &gradedMoveList);
     }
 
