@@ -236,7 +236,7 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
                 moveScore.eval = -moveScore.eval;
             }
 
-            if (moveScore.eval > bestMove.eval || legalMoves == 1)
+            if (moveScore.eval > bestMove.eval || (gotChecked && legalMoves == 1))
             {
                 bestMove.eval = moveScore.eval;
                 bestMove.move = gradedMoveList.gradedMoves[i].move;
