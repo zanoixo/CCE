@@ -18,6 +18,8 @@
 #include "KillerHeuristic.h"
 #include "MoveGrader.h"
 
+int maxNodesSearched = 3000000;
+
 int lateMoveReductionTable[MAX_MOVE_COUNT][MAX_DEPTH];
 uint64_t stopTime = 0;
 int currentDepth;
@@ -70,7 +72,7 @@ void initLateMoveReductionTable()
     {
         for (int depth = 0; depth < MAX_DEPTH; depth++)
         {
-            lateMoveReductionTable[moveInd][depth] = (int)(0.75 + log(depth) * log(moveInd) / 2.25);
+            lateMoveReductionTable[moveInd][depth] = (int)(0.75 * log(depth) * log(moveInd) / 2.25);
         }  
     }
 }
@@ -89,11 +91,16 @@ int isBetaValid(int beta)
 
 MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, int depthSearched, int mateDistance, int alpha, int beta, int side)
 {
-    nodesSearched++;
-
     MoveScore bestMove;
     bestMove.eval = MIN_EVAL;
     bestMove.move = 0;
+
+    if (nodesSearched >= maxNodesSearched)
+    {
+        return bestMove;
+    }
+    
+    nodesSearched++;
 
     int mateValue = -MATED - mateDistance;
 
@@ -279,11 +286,17 @@ MoveScore qsearch(ChessBoard *chessBoard, AttackTables *attackTables, Transposit
 
 MoveScore negamax(ChessBoard *chessBoard, AttackTables *attackTables, TranspositionTableHashes* hashes, TranspositionTable* transpositionTable, int depthSearched, int mateDistance, int alpha, int beta, int side)
 {
-    nodesSearched++;
 
     MoveScore bestMove;
     bestMove.eval = MIN_EVAL;
     bestMove.move = 0;
+
+    if (nodesSearched >= maxNodesSearched)
+    {
+        return bestMove;
+    }
+
+    nodesSearched++;
     
     if (depthSearched > currentDepth)
     {
@@ -567,7 +580,17 @@ MoveScore evaluate(ChessBoard *chessBoard, AttackTables *attackTables, Transposi
         printf("Current search depth: %d\n", currentDepth);
         depthBestMove = iterativeSearch(chessBoard, attackTables, transpositionTable, hashes);
         
+        char moveText[6];
+        moveToText(moveText, depthBestMove.move);
+        printf("Best move: %s\n", moveText);
         //printf("Nodes: %d, Transposition searches: %d, hits: %d, Cutoffs: %d\n", nodesSearched, transpositionSearches, transpositionHits, transpositionCutoffs);
+
+        if (nodesSearched >= maxNodesSearched)
+        {
+            break;
+        }
+        
+
         if (!timeLimitReached || currentDepth == 1)
         {
             currentBestMove = depthBestMove;

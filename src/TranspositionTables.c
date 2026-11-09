@@ -161,6 +161,11 @@ void setTransposition(ChessBoard* chessBoard, TranspositionTable* transpositionT
         return;
     }
 
+    if (moveScore->eval == MAX_EVAL || moveScore->eval == -MAX_EVAL)
+    {
+        printf("BAD ENTRY: %d Depth: %d\n", moveScore->eval, remainingDepth);
+    }
+
     uint8_t transpositionFlag;
 
     if (moveScore->eval >= beta)

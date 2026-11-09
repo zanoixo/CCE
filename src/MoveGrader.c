@@ -105,7 +105,6 @@ void gradeMoves(ChessBoard* chessBoard, TranspositionTable* transpositionTable, 
         }
         
         gradedMoveList->gradedMoves[moveInd].grade = getHistoryHeuristic(moveList->moves[moveInd], chessBoard->pieceLookup[getFromSq(selectedMove)]) >> 1;
-        
     }
     
 }
